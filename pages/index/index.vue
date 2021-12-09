@@ -40,12 +40,12 @@
 					<view>用户管理</view>
 				</navigator>
 			</view> 
-			<view class="jiu_01">
+			<!-- <view class="jiu_01">
 				<navigator url="/pages/edit/pro_manage/pro_manage">
 					<view><img src="../../imgs/product.png" /></view>
 					<view>商品管理</view>
 				</navigator>
-			</view>
+			</view> -->
 			<view class="jiu_01">
 				<navigator url="/pages/order/order">
 					<view><img src="../../imgs/order.png" /></view>
@@ -53,7 +53,7 @@
 				</navigator>
 			</view>
 			<view class="jiu_01">
-				<navigator url="/pages/order/order">
+				<navigator url="/pages/buyer/buyer">
 					<view><img src="../../imgs/buyer.png" /></view>
 					<view>采购管理</view>
 				</navigator>

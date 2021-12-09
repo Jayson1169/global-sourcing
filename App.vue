@@ -18,4 +18,5 @@
     @import "colorui/main.css";
     @import "colorui/icon.css";
     @import "./common/uni.css";
+	@import "colorui/iconfont.css"
 </style>

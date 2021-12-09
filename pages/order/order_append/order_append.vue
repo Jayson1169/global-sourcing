@@ -1,7 +1,25 @@
 <template>
 	<view class="product">
-		<view class="top"></view>
-		<view class="cu-form-group">
+		<view class="order">订单明细</view>
+		<view class='tag-e'>
+			<view class="goods " v-for="(item,index) of order_pro" :key="index">
+				<!-- <view><img :src="item.pic"></img></view> -->
+				<view class='goods_02'>
+				  <view class='goods_title'>{{item.title}}</view>
+				  <view class="goods_des">{{item.guige[0].name}}：{{item.guige[0].value}}</view>
+				  <view class='good_p'>
+					<view class="good_price">¥ {{item.price}}</view>
+					<view class='i'>x {{item.num}}</view>
+				  </view>
+				</view>
+			</view>
+			<view class="goods goods_add" @click="jump_to_product">
+				<text class="iconfont icon-jiahao"></text>
+				<text>点击添加商品</text>
+				<!-- <button class="p_btn" @click="sub()"></button> -->
+			</view>
+		</view>
+		<!-- <view class="cu-form-group">
 			<view class="title">商品名称：</view>
 			<input placeholder="请输入商品名称" v-model="order_form.product" focus></input>
 		</view>
@@ -16,7 +34,8 @@
 		<view class="cu-form-group">
 			<view class="title">成交价格：</view>
 			<input placeholder="请输入成交价格" v-model="order_form.transaction_price"></input>
-		</view>
+		</view> -->
+		<view class="order">收货信息</view>
 		<view class="cu-form-group">
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
 			<input placeholder="请输入姓名" v-model="order_form.name"></input>
@@ -34,9 +53,9 @@
 			<input placeholder="请输入收货地址" v-model="order_form.address"></input>
 		</view>
 		<view class="H50"></view>
-		<view class="p_btn">
+		<view class="o_btn">
 			<view class="flex flex-direction">
-				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">添加</button>
+				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">添加订单</button>
 			</view>
 		</view>
 	</view>
@@ -60,6 +79,9 @@
 				}
 			};
 		},
+		onLoad() {
+			this.order_pro = this.$api.json.order_pro
+		},
 		methods: {
 			sub() { 
 				this.$api.http.post('/user/insert', this.user_form).then(res => {
@@ -69,6 +91,9 @@
 					})
 					this.init()
 				})
+			},
+			jump_to_product() {
+				
 			}
 		}
 	}
@@ -78,17 +103,68 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.p_btn {
+	.order {
+		padding: 10px 10px 10px 10px;
+	}
+	.o_btn {
 		background: #F7F6FB;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-		
 	}
-	.u_input {
-		font-size: 15px;
-		background: #FFFFFF;
-	} 
+	.p_btn {
+		// background: #F7F6FB;
+		// padding: 0 10px 0px;
+		// position: fixed;
+		// bottom: 0;
+		width: 100%;
+		font-size: 13px;
+	}
+	.goods_add {
+		font-size: 13px;
+		justify-content: center;
+		align-items: center;
+	}
+	.tag-e {
+		background-color:#fff;
+		margin-bottom: 0px;
+		font-size: 13px;
+		.goods {
+			display: flex;
+			width: 100%;
+			background-color: #ffffff;
+			padding: 10px;
+			box-sizing: border-box;
+			border-bottom: 1px solid #EEF0EF;
+			.goods_02 {
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
+				height: 160rpx;
+				flex-grow: 1;
+				justify-content: space-between;
+				padding-top: 10rpx;
+				padding-left: 25rpx;
+			}
+			.goods_title {
+				max-height: 40px;
+				overflow: hidden;
+				line-height: 20px;
+				font-weight: 600;
+			}
+			.goods_des {
+				color: #979797;
+			}
+			.good_p { 
+				display: flex;
+				justify-content: space-between;
+				.good_price {
+					color: #F04E42;
+					font-weight: 600;
+				}
+			}
+		}
+	}
 </style>
