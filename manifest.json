@@ -66,5 +66,21 @@
                 "desc" : "位置授权"
             }
         }
+    },
+    "h5" : {
+        "devServer" : {
+            "https" : false,
+            "disableHostCheck" : true,
+            "proxy" : {
+                "/api" : {
+                    "target" : "http://106.55.30.20:8181",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/api" : ""
+                    }
+                }
+            }
+        }
     }
 }

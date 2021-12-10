@@ -13,7 +13,7 @@
 				  </view>
 				</view>
 			</view>
-			<view class="goods goods_add" @click="jump_to_product">
+			<view class="goods goods_add" @click="jump_product_append">
 				<text class="iconfont icon-jiahao"></text>
 				<text>点击添加商品</text>
 				<!-- <button class="p_btn" @click="sub()"></button> -->
@@ -92,8 +92,10 @@
 					this.init()
 				})
 			},
-			jump_to_product() {
-				
+			jump_product_append() {
+				uni.navigateTo({
+					url: '../product_append/product_append'
+				});
 			}
 		}
 	}

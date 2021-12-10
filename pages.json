@@ -96,6 +96,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/order/product_append/product_append",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加商品",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",
