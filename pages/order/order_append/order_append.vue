@@ -3,7 +3,6 @@
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
 			<view class="goods " v-for="(item,index) of order_pro" :key="index">
-				<!-- <view><img :src="item.pic"></img></view> -->
 				<view class='goods_02'>
 				  <view class='goods_title'>{{item.title}}</view>
 				  <view class="goods_des">{{item.guige[0].name}}：{{item.guige[0].value}}</view>
@@ -16,41 +15,24 @@
 			<view class="goods goods_add" @click="jump_product_append">
 				<text class="iconfont icon-jiahao"></text>
 				<text>点击添加商品</text>
-				<!-- <button class="p_btn" @click="sub()"></button> -->
 			</view>
 		</view>
-		<!-- <view class="cu-form-group">
-			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="order_form.product" focus></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">订&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</view>
-			<input placeholder="请输入订金" v-model="order_form.deposit"></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">销售价格：</view>
-			<input placeholder="请输入销售价格" v-model="order_form.sale_price"></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">成交价格：</view>
-			<input placeholder="请输入成交价格" v-model="order_form.transaction_price"></input>
-		</view> -->
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
-			<input placeholder="请输入姓名" v-model="order_form.name"></input>
+			<input placeholder="请输入姓名" v-model="user_form.name"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">身份证号：</view>
-			<input placeholder="请输入身份证号" v-model="order_form.id" maxlength="18"></input>
+			<input placeholder="请输入身份证号" v-model="user_form.id" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">手机号码：</view>
-			<input placeholder="请输入手机号码" v-model="order_form.phone"></input>
+			<input placeholder="请输入手机号码" v-model="user_form.phone"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">收货地址：</view>
-			<input placeholder="请输入收货地址" v-model="order_form.address"></input>
+			<input placeholder="请输入收货地址" v-model="user_form.address"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="o_btn">
@@ -65,22 +47,18 @@
 	export default {
 		data() {
 			return {
-				order_form: {
-					product: '',
-					deposit: '',
-					sale_price: '',
-					transaction_price: ''
-				},
 				user_form: {
 					name: '',
 					id: '',
 					phone: '',
 					address: ''
-				}
+				},
+				order_pro: [{"title": '这里是商品标题', "price":"99", "guige":[{"name":'产品颜色',"value":'黑色'}],"num":2},
+							{"title": '这里是商品标题', "price":"299", "guige":[{"name":'产品颜色',"value":'红色'}],"num":1},
+				]
 			};
 		},
 		onLoad() {
-			this.order_pro = this.$api.json.order_pro
 		},
 		methods: {
 			sub() { 
@@ -115,14 +93,6 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-	}
-	.p_btn {
-		// background: #F7F6FB;
-		// padding: 0 10px 0px;
-		// position: fixed;
-		// bottom: 0;
-		width: 100%;
-		font-size: 13px;
 	}
 	.goods_add {
 		font-size: 13px;
