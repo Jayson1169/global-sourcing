@@ -2,12 +2,14 @@
 	<view class="product">
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
-			<view class="goods " v-for="(item,index) of order_pro" :key="index">
+			<view class="goods" v-for="(item, index) of order_pro" :key="index">
 				<view class='goods_02'>
 				  <view class='goods_title'>{{item.title}}</view>
-				  <view class="goods_des">{{item.guige[0].name}}：{{item.guige[0].value}}</view>
+				  <!-- 可以循环显示多个属性 此处修改为显示单独描述 -->
+				  <!-- <view class="goods_des">{{item.guige[0].name}}：{{item.guige[0].value}}</view> -->
+				  <view class="goods_des">商品描述：{{item.description}}</view>
 				  <view class='good_p'>
-					<view class="good_price">¥ {{item.price}}</view>
+					<view class="good_price">¥ {{item.transaction_price}}</view>
 					<view class='i'>x {{item.num}}</view>
 				  </view>
 				</view>
@@ -53,12 +55,16 @@
 					phone: '',
 					address: ''
 				},
-				order_pro: [{"title": '这里是商品标题', "price":"99", "guige":[{"name":'产品颜色',"value":'黑色'}],"num":2},
-							{"title": '这里是商品标题', "price":"299", "guige":[{"name":'产品颜色',"value":'红色'}],"num":1},
-				]
+				// order_pro: [{"title": '这里是商品标题', "transaction_price":"99", "guige":[{"name":'产品颜色',"value":'黑色'}],"num":2},
+				// 			{"title": '这里是商品标题', "transaction_price":"299", "guige":[{"name":'产品颜色',"value":'红色'}],"num":1},
+				// ]
+				order_pro: []
 			};
 		},
 		onLoad() {
+			uni.$on('product_form', (e) => {
+				this.order_pro = this.order_pro.concat(e)
+			})
 		},
 		methods: {
 			sub() { 
