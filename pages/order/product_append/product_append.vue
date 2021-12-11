@@ -2,7 +2,7 @@
 	<view class="product">		
 		<view class="cu-form-group">
 			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="product_form.product" focus></input>
+			<input placeholder="请输入商品名称" v-model="product_form.title" focus></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品描述：</view>
@@ -38,22 +38,28 @@
 		data() {
 			return {
 				product_form: {
-					product: '',
-					description: '',
-					num: '',
-					deposit: '',
-					sale_price: '',
-					transaction_price: ''
+					title: '1',
+					description: '2',
+					num: '2',
+					deposit: '2',
+					sale_price: '2',
+					transaction_price: '2'
 				},
 			}
 		},
 		methods: {
-			
+			sub() {
+				uni.navigateBack()
+				uni.$emit('product_form', this.product_form)
+			}
 		}
 	}
 </script>
 
 <style lang="less">
+	page {
+		background-color: #F7F6FB;
+	}
 	.o_btn {
 		background: #F7F6FB;
 		padding: 0 10px 0px;
