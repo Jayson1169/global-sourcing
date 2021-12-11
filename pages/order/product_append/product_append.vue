@@ -5,6 +5,14 @@
 			<input placeholder="请输入商品名称" v-model="product_form.product" focus></input>
 		</view>
 		<view class="cu-form-group">
+			<view class="title">商品描述：</view>
+			<input placeholder="请输入商品描述" v-model="product_form.description"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">商品数量：</view>
+			<input placeholder="请输入商品数量" v-model="product_form.num"></input>
+		</view>
+		<view class="cu-form-group">
 			<view class="title">订&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</view>
 			<input placeholder="请输入订金" v-model="product_form.deposit"></input>
 		</view>
@@ -31,6 +39,8 @@
 			return {
 				product_form: {
 					product: '',
+					description: '',
+					num: '',
 					deposit: '',
 					sale_price: '',
 					transaction_price: ''
