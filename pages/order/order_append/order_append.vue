@@ -2,15 +2,15 @@
 	<view class="product">
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
-			<view class="goods" v-for="(item, index) of order_pro" :key="index">
+			<view class="goods" v-for="(item, index) of saleOrder.items" :key="index">
 				<view class='goods_02'>
-				  <view class='goods_title'>{{item.title}}</view>
+				  <view class='goods_title'>{{item.product.name}}</view>
 				  <!-- 可以循环显示多个属性 此处修改为显示单独描述 -->
 				  <!-- <view class="goods_des">{{item.guige[0].name}}：{{item.guige[0].value}}</view> -->
-				  <view class="goods_des">商品描述：{{item.description}}</view>
+				  <view class="goods_des">商品型号：{{item.product.brand}}</view>
 				  <view class='good_p'>
-					<view class="good_price">¥ {{item.transaction_price}}</view>
-					<view class='i'>x {{item.num}}</view>
+					<view class="good_price">¥ {{item.salePrice}}</view>
+					<view class='i'>x {{item.quantity}}</view>
 				  </view>
 				</view>
 			</view>
@@ -22,19 +22,19 @@
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
-			<input placeholder="请输入姓名" v-model="user_form.name"></input>
+			<input placeholder="请输入姓名" v-model="saleOrder.address.name"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">身份证号：</view>
-			<input placeholder="请输入身份证号" v-model="user_form.id" maxlength="18"></input>
+			<input placeholder="请输入身份证号" v-model="saleOrder.address.idNumber" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">手机号码：</view>
-			<input placeholder="请输入手机号码" v-model="user_form.phone"></input>
+			<input placeholder="请输入手机号码" v-model="saleOrder.address.phoneNumber"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">收货地址：</view>
-			<input placeholder="请输入收货地址" v-model="user_form.address"></input>
+			<input placeholder="请输入收货地址" v-model="saleOrder.address.shipAddress"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="o_btn">
@@ -49,21 +49,21 @@
 	export default {
 		data() {
 			return {
-				user_form: {
-					name: '',
-					id: '',
-					phone: '',
-					address: ''
-				},
-				// order_pro: [{"title": '这里是商品标题', "transaction_price":"99", "guige":[{"name":'产品颜色',"value":'黑色'}],"num":2},
-				// 			{"title": '这里是商品标题', "transaction_price":"299", "guige":[{"name":'产品颜色',"value":'红色'}],"num":1},
-				// ]
-				order_pro: []
+				saleOrder: {
+					salesperson: '1',
+					address: {
+						name: '1',
+						idNumber: '2',
+						phoneNumber: '3',
+						shipAddress: '4'
+					},
+					items: []
+				}
 			};
 		},
 		onLoad() {
-			uni.$on('product_form', (e) => {
-				this.order_pro = this.order_pro.concat(e)
+			uni.$on('item', (e) => {
+				this.saleOrder.items = this.saleOrder.items.concat(e)
 			})
 		},
 		methods: {

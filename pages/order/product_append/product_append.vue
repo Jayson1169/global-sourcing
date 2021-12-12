@@ -2,28 +2,44 @@
 	<view class="product">		
 		<view class="cu-form-group">
 			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="product_form.title" focus></input>
+			<input placeholder="请输入商品名称" v-model="item.product.name" focus></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品描述：</view>
-			<input placeholder="请输入商品描述" v-model="product_form.description"></input>
+			<view class="title">商品品牌：</view>
+			<input placeholder="请输入商品品牌" v-model="item.product.brand" focus></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品数量：</view>
-			<input placeholder="请输入商品数量" v-model="product_form.num"></input>
+			<view class="title">商品型号：</view>
+			<input placeholder="请输入商品型号" v-model="item.product.specification"></input>
 		</view>
 		<view class="cu-form-group">
+			<view class="title">生产商家：</view>
+			<input placeholder="请输入生产商家" v-model="item.product.manufacturer"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">生产地区：</view>
+			<input placeholder="请输入生产地区" v-model="item.product.origin"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">备注信息：</view>
+			<input placeholder="请输入备注信息" v-model="item.product.remark"></input>
+		</view>
+	<!-- 	<view class="cu-form-group">
 			<view class="title">订&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</view>
 			<input placeholder="请输入订金" v-model="product_form.deposit"></input>
-		</view>
+		</view> -->
 		<view class="cu-form-group">
 			<view class="title">销售价格：</view>
-			<input placeholder="请输入销售价格" v-model="product_form.sale_price"></input>
+			<input placeholder="请输入销售价格" v-model="item.salePrice"></input>
 		</view>
 		<view class="cu-form-group">
+			<view class="title">销售数量：</view>
+			<input placeholder="请输入销售数量" v-model="item.quantity"></input>
+		</view>
+		<!-- <view class="cu-form-group">
 			<view class="title">成交价格：</view>
 			<input placeholder="请输入成交价格" v-model="product_form.transaction_price"></input>
-		</view>
+		</view> -->
 		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
@@ -37,20 +53,24 @@
 	export default {
 		data() {
 			return {
-				product_form: {
-					title: '1',
-					description: '2',
-					num: '2',
-					deposit: '2',
-					sale_price: '2',
-					transaction_price: '2'
-				},
+				item: {
+					product: {
+						name: '1',
+						brand: '2',
+						specification: '2',
+						manufacturer: '2',
+						origin: '2',
+						remark: '2',
+					},
+					salePrice: '2',
+					quantity: '2'
+				}
 			}
 		},
 		methods: {
 			sub() {
 				uni.navigateBack()
-				uni.$emit('product_form', this.product_form)
+				uni.$emit('item', this.item)
 			}
 		}
 	}
