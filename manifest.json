@@ -43,7 +43,8 @@
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ]
+                ],
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ]
             },
             "ios" : {},
             /* ios打包配置 */
@@ -70,17 +71,18 @@
     "h5" : {
         "devServer" : {
             "https" : false
-            // "disableHostCheck" : true,
-            // "proxy" : {
-            //     "/api" : {
-            //         "target" : "http://106.55.30.20:8181",
-            //         "changeOrigin" : true,
-            //         "secure" : false,
-            //         "pathRewrite" : {
-            //             "^/api" : ""
-            //         }
-            //     }
-            // }
         }
     }
 }
+// "disableHostCheck" : true,
+// "proxy" : {
+//     "/api" : {
+//         "target" : "http://106.55.30.20:8181",
+//         "changeOrigin" : true,
+//         "secure" : false,
+//         "pathRewrite" : {
+//             "^/api" : ""
+//         }
+//     }
+// }
+

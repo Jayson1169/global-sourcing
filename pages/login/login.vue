@@ -24,15 +24,16 @@ export default {
 	data() {
 		return {
 			account: {
-				username: '',
-				password: ''
+				username: '18390818785',
+				password: 'abc123456'
 			},
 		};
 	},
 	onLoad() {},
 	methods: {
 		submit(){
-			this.$api.http.post("/login", this.account).then(res => {
+			this.$api.http.login("/login", this.account).then(res => {
+				uni.setStorageSync('user', res)
 				uni.redirectTo({
 					url: '/pages/index/index',
 				})

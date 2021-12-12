@@ -6,7 +6,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品品牌：</view>
-			<input placeholder="请输入商品品牌" v-model="item.product.brand" focus></input>
+			<input placeholder="请输入商品品牌" v-model="item.product.brand"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品型号：</view>

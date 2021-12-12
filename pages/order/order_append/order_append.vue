@@ -50,14 +50,15 @@
 		data() {
 			return {
 				saleOrder: {
-					salesperson: '1',
+					// 登录鉴权后要设置销售员
+					salesperson: '',
+					items: [],
 					address: {
-						name: '1',
-						idNumber: '2',
-						phoneNumber: '3',
-						shipAddress: '4'
-					},
-					items: []
+						name: 'test',
+						idNumber: '111111111111111111',
+						phoneNumber: '11111111111',
+						shipAddress: 'test'
+					}
 				}
 			};
 		},
@@ -68,12 +69,13 @@
 		},
 		methods: {
 			sub() { 
-				this.$api.http.post('/user/insert', this.user_form).then(res => {
+				this.saleOrder.salesperson = uni.getStorageSync('user')
+				this.$api.http.post('/saleOrder/insert', this.saleOrder).then(res => {
 					uni.showToast({
 						title: '添加成功',
 						icon: 'none'
 					})
-					this.init()
+					this.uni.navigateBack()
 				})
 			},
 			jump_product_append() {
