@@ -8,13 +8,13 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path" : "pages/login/login",
+			"path" : "pages/Login",
 			"style" : {
 				"navigationStyle":"custom"
 			}
 		},
 		{
-			"path" : "pages/index/index",
+			"path" : "pages/Home",
 			"style" : {
 				"navigationStyle":"custom"
 			}
@@ -35,7 +35,23 @@
 			"style" : {}
 		},
 		{
-			"path" : "pages/order/detail/detail",
+			"path" : "pages/order/order_append",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "添加订单",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+		    "path" : "pages/order/product_append",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "添加商品",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+			"path" : "pages/order/detail",
 			"style" : {}
 		},
 		{
@@ -63,7 +79,7 @@
 			}
 		},
 		{
-			"path" : "pages/user/buyer_assign/buyer_assign",
+			"path" : "pages/purchaseOrder/buyer_assign/buyer_assign",
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "分配采购员",
@@ -79,28 +95,29 @@
 				"enablePullDownRefresh": false
 			}  
 		}
-		,{
-			"path" : "pages/order/order_append/order_append",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "添加订单",
-				"enablePullDownRefresh": false
-			}
-		}	
+		
         ,{
-            "path" : "pages/buyer/buyer",
+            "path" : "pages/purchaseOrder/purchaseOrder",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "采购管理",
                 "enablePullDownRefresh": false
-            } 
+            }
+        }
+        ,{
+            "path" : "pages/purchaseOrder/buyer/buyer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "采购管理",
+                "enablePullDownRefresh": false
+            }
             
         }
         ,{
-            "path" : "pages/order/product_append/product_append",
+            "path" : "pages/purchaseOrder/buyer/purchase_append/purchase_append",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "添加商品",
+                "navigationBarTitleText": "采购信息",
                 "enablePullDownRefresh": false
             }
             

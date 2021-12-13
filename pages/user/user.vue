@@ -63,7 +63,7 @@
 			},
 			jump_password_change(item) {
 				uni.navigateTo({
-					url: './password_change/password_change?id='+item.id+'&username='+item.username
+					url: './password_change/password_change?id='+item.id+'&username='+item.username+'&name='+item.name
 				});
 			},
 			jump_user_append() {
