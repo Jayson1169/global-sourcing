@@ -34,44 +34,32 @@
 		</view>
 		<view class="BH"></view>
 		<view class="six">
-			<view class="jiu_01" v-if="role==='ADMIN'">
-				<navigator url="/pages/user/user" >
+			<view class="jiu_01">
+				<navigator url="/pages/user/User" >
 					<view><img src="@/imgs/user.png" /></view>
 					<view>用户管理</view>
 				</navigator>
 			</view> 
-			<!-- <view class="jiu_01">
-				<navigator url="/pages/edit/pro_manage/pro_manage">
-					<view><img src="../../imgs/product.png" /></view>
-					<view>商品管理</view>
-				</navigator>
-			</view> -->
-			<view class="jiu_01" v-if="role==='ADMIN' || role==='SALESPERSON'">
-				<navigator url="/pages/order/order">
+			<view class="jiu_01">
+				<navigator url="/pages/order/Order">
 					<view><img src="@/imgs/order.png" /></view>
 					<view>订单管理</view>
 				</navigator>
 			</view>
-			<view class="jiu_01" v-if="role==='ADMIN'">
-				<navigator url="/pages/purchaseOrder/purchaseOrder">
+			<view class="jiu_01">
+				<navigator url="/pages/purchase/Purchase">
 					<view><img src="@/imgs/buyer.png" /></view>
 					<view>采购管理</view>
 				</navigator>
 			</view>
-			<view class="jiu_01" v-if="role==='BUYER'">
-				<navigator url="/pages/purchaseOrder/buyer/buyer">
-					<view><img src="@/imgs/buyer.png" /></view>
-					<view>采购管理</view>
-				</navigator>
-			</view>
-			<view class="jiu_01" v-if="role==='ADMIN'">
+			<view class="jiu_01">
 				<navigator url="/pages/user/tongji/tongji"> 
 					<view><img src="@/imgs/treasure.png" /></view>
 					<view>财务分析</view>
 				</navigator>
 			</view>
 		</view>
-		<view class="BH"></view>
+	<!-- 	<view class="BH"></view>
 		<view class="more">
 			<view class='mo'>
 				<view class='mo_01'>拓展
@@ -82,7 +70,7 @@
 		<view class="list">
 			<view class="list_01">拓展</view>
 		</view>
-		<view class="H50"></view>
+		<view class="H50"></view> -->
 	</view>
 </template>
 

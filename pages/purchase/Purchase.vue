@@ -1,5 +1,7 @@
 <template>
+	<!-- 显示采购员信息，按住复制号码 -->
 	<view class="content">
+		
 		<view class="navbar">
 			<view 
 				v-for="(item, index) in navList" :key="index" 
@@ -10,7 +12,7 @@
 				{{item}}
 			</view>
 		</view>
-		<!-- <empty v-if="tabItem.loaded === true && tabItem.orderList.length === 0"></empty> -->
+		<empty v-if="purchaseOrder.length === 0"></empty>
 		
 		<!-- 订单列表 -->
 		<view 
@@ -18,38 +20,34 @@
 			class="order-item"
 		>
 			<view class="i-top b-b">
-				<text class="time">{{item.createDate}}</text>
+				<text class="time">{{item.createTime}}</text>
 				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
 				<!-- <text class="state" style="color: '#909399'">{{status_to_state2[item.status]}}</text> -->
 				<text 
-					v-if="status_to_state[item.status]===4" 
+					v-if="status_to_state[item.status]===5" 
 					class="del-btn yticon icon-iconfontshanchu1"
 					@click="deleteOrder(index)"
 				></text>
 			</view>
-			<view 
-				@click="jump_detail"
-				class="goods-box-single"
-			>
-				<image class="goods-img" src='../../../imgs/order2.jpg' mode="aspectFill"></image>
-				
-				<!-- <image class="goods-img" src='https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1713396441,1487163637&fm=26&gp=0.jpg' mode="aspectFill"></image> -->
+			<view class="goods-box-single" @click="jumpDetail(item)">
+				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
+				<image class="goods-img" src='@/imgs/order2.jpg' mode="aspectFill" v-if="item.photo === null"></image>	
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
-					<text class="attr-box">{{item.product.brand}}  x {{item.quantity}}</text>
+					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
 					<text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.quantity * item.purchasePrice}}</text>
 				</view>
 			</view>
 			
 			<view class="price-box" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">
 				共
-				<text class="num">7</text>
+				<text class="num">{{item.quantity}}</text>
 				件商品 实付款
-				<text class="price">143.7</text>
+				<text class="price">{{item.quantity * item.purchasePrice}}</text>
 			</view>
-			<view class="action-box b-t" v-if="status_to_state[item.status] != 3">
-				<!-- <button class="action-btn" @click="cancelOrder(item)">取消订单</button> -->
-				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="jump_to_purchase(item)">上传信息</button>
+			<view class="action-box b-t" v-if="status_to_state[item.status] != 4">
+				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="PurchaserAssign(item)">立即分配</button>
+				<button class="action-btn recom" v-if="status_to_state[item.status] == 3">立即核验</button>							
 			</view>
 		</view>
 	</view>
@@ -57,7 +55,6 @@
 
 <script>
 	import empty from "@/components/empty";
-	import Json from '@/Json';
 	export default {
 		components: {
 			empty
@@ -65,38 +62,37 @@
 		data() {
 			return {
 				request: {
-					buyerId: '',
 					page: '0',
 					size: '999'
 				},
 				purchaseOrder: [],
 				tabCurrentIndex: 0,
-				status_to_state: {"READY": 1, "PENDING": 2, "REJECTED": 1, "CONFIRMED": 3},
-				status_to_state2: {"READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "已完成"},
-				navList: ['全部', '待采购', '待核验', '已完成']
+				status_to_state: {"CREATED": 1, "READY": 2, "PENDING": 3, "REJECTED": 2, "CONFIRMED": 4},
+				status_to_state2: {"CREATED": "待分配", "READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "已完成"},
+				navList: ['全部', '待分配', '待采购', '待核验', '已完成']
 			};
 		},
 		onLoad(){
-			this.request.buyerId = uni.getStorageSync('user').id
-			this.$api.http.get('/purchaseOrder/findAllByBuyer', this.request).then(res => {
+			this.$api.http.get('/purchaseOrder/purchaseOrder', this.request).then(res => {
 				this.purchaseOrder = res.content
 			})
 		},
 		 
 		methods: {
-			// jump_detail(){
-			// 	uni.navigateTo({
-			// 		url: '/pages/order/detail/detail'
-			// 	});
-			// },
+			jumpDetail(purchaseOrder){
+				uni.navigateTo({
+					url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+				});
+			},
+			PurchaserAssign(item) {
+				uni.navigateTo({
+					url: './PurchaserAssign?purchaseOrderId='+item.id+'&quantity='+item.quantity
+				});
+			},
 			//顶部tab点击
 			tabClick(index){
 				this.tabCurrentIndex = index;
-			},
-			jump_to_purchase(item) {
-				uni.navigateTo({
-					url: 'purchase_append/purchase_append?purchaseOrder='+encodeURIComponent(JSON.stringify(item))
-				})
+				console.log(index)
 			}
 		},
 	}
@@ -225,7 +221,7 @@
 					&:before{
 						content: '￥';
 						font-size: $font-sm;
-						margin: 0 2upx 0 6upx;
+						margin: 0 2upx 0 0upx;
 					}
 				}
 			}

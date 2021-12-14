@@ -55,7 +55,7 @@
 				this.$api.http.put('/purchaseOrder/assign?purchaseOrderId='
 						+this.purchaseOrderId+'&buyerId='+this.buyerId+'&quantity='+this.quantity, '').then(res => {
 					uni.navigateTo({
-						url: '../purchaseOrder'
+						url: './Purchase'
 					});
 				})
 			}

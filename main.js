@@ -6,11 +6,13 @@ import tabBar from "@/components/my-tabbar/my-tabbar.vue"
 import './assets/style/border.css'
 import './assets/style/main.css'
 import uView from 'uview-ui';
+import validate from '@/common/ys-validate.js'
 
 Vue.use(uView);
 Vue.component('tabBar', tabBar)
 Vue.config.productionTip = false
 Vue.prototype.$api = {msg, json, http};
+Vue.prototype.$validate = validate
 
 App.mpType = 'app'
 

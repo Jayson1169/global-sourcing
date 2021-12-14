@@ -2,7 +2,7 @@
 	<view class="product">
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
-			<view class="goods" v-for="(item, index) of saleOrder.items" :key="index" @click="jump_product_edit(item)">
+			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
 				<view class='goods_02'>
 				  <view class='goods_title'>{{item.product.name}}</view>
 				  <!-- 可以循环显示多个属性 此处修改为显示单独描述 -->
@@ -14,7 +14,7 @@
 				  </view>
 				</view>
 			</view>
-			<view class="goods goods_add" @click="jump_product_append">
+			<view class="goods goods_add" @click="jumpProductAppend">
 				<text class="iconfont icon-jiahao"></text>
 				<text>点击添加商品</text>
 			</view>
@@ -22,19 +22,19 @@
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
-			<input placeholder="请输入姓名" v-model="saleOrder.address.name"></input>
+			<input placeholder="请输入姓名" v-model="order.address.name"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">身份证号：</view>
-			<input placeholder="请输入身份证号" v-model="saleOrder.address.idNumber" maxlength="18"></input>
+			<input placeholder="请输入身份证号" v-model="order.address.idNumber" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">手机号码：</view>
-			<input placeholder="请输入手机号码" v-model="saleOrder.address.phoneNumber"></input>
+			<input placeholder="请输入手机号码" v-model="order.address.phoneNumber"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">收货地址：</view>
-			<input placeholder="请输入收货地址" v-model="saleOrder.address.shipAddress"></input>
+			<input placeholder="请输入收货地址" v-model="order.address.shipAddress"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="o_btn">
@@ -49,9 +49,7 @@
 	export default {
 		data() {
 			return {
-				saleOrder: {
-					// 登录鉴权后要设置销售员
-					// salesperson: '',
+				order: {
 					items: [],
 					address: {
 						name: 'test',
@@ -64,28 +62,29 @@
 		},
 		onLoad() {
 			uni.$on('item', (e) => {
-				this.saleOrder.items = this.saleOrder.items.concat(e)
+				this.order.items = this.order.items.concat(e)
 			})
 		},
 		methods: {
 			sub() { 
-				// this.saleOrder.salesperson = uni.getStorageSync('user')
-				this.$api.http.post('/saleOrder/insert', this.saleOrder).then(res => {
+				this.$api.http.post('/saleOrder/insert', this.order).then(res => {
 					uni.showToast({
 						title: '添加成功',
 						icon: 'none'
 					})
-					uni.navigateBack()
+					uni.navigateTo({
+						url: './Order'
+					});
 				})
 			},
-			jump_product_append() {
+			jumpProductAppend() {
 				uni.navigateTo({
-					url: '../product_append/product_append'
+					url: './ProductAppend'
 				});
 			},
-			jump_product_edit(item) {
+			jummProductEdit(item) {
 				uni.navigateTo({
-					url: '../product_append/product_append?product='+item
+					url: './ProductAppend?product='+item
 				});
 			}
 		}

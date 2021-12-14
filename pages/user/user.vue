@@ -20,6 +20,7 @@
 				</view>
 			</view>
 		</block>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jump_user_append" class="cu-btn bg-red margin-tb-sm lg">新增用户</button>

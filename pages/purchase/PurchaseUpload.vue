@@ -4,15 +4,8 @@
 		<view class="order">采购明细</view>
 		<view class="cu-form-group">
 			<view class="title">采购照片：</view>
-			<!-- <view class="image" @click="image"> -->
-				<!-- <image src="@/imgs/8.jpg" mode="" class="image"></image> -->
-			<!-- </view> -->
 			<upimg @photo="getPhoto"></upimg>
 		</view>
-		<!-- <view class="cu-form-group">
-			<view class="title">采购地点：</view>
-			<input placeholder="请输入采购地点" v-model="purchaseOrder.purchasePlace"></input>
-		</view> -->
 		<view class="cu-form-group">
 			<view class="title">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</view>
 			<upimg @photo="getInvoice"></upimg>
@@ -30,15 +23,15 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品型号：</view>
-			<input v-model="purchaseOrder.product.brand" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">采购价格：</view>
-			<input placeholder="请输入采购价格" v-model="purchaseOrder.purchasePrice"></input>
+			<input v-model="purchaseOrder.product.specification" disabled></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">采购数量：</view>
-			<input placeholder="请输入采购数量" v-model="saleOrder.quantity"></input>
+			<input placeholder="请输入采购数量" v-model="purchaseOrder.quantity" disabled></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">采购单价：</view>
+			<input placeholder="请输入采购单价" v-model="purchaseOrder.purchasePrice" @input="checkPrice"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="o_btn">
@@ -56,25 +49,8 @@
 			upimg
 		},
 		data() {
-			
 			return {
-				purchaseOrder: {
-					product: {
-						name: '123'
-					}
-				},
-				photo_list: [],
-				saleOrder: {
-					// 登录鉴权后要设置销售员
-					salesperson: '',
-					items: [],
-					address: {
-						name: 'test',
-						idNumber: '111111111111111111',
-						phoneNumber: '11111111111',
-						shipAddress: 'test'
-					}
-				},
+				purchaseOrder: {},
 				date: '请选择日期',
 			};
 		},
@@ -91,15 +67,25 @@
 			getInvoice(val) {
 				this.purchaseOrder.invoice = val
 			},
-			sub() { 				
-				// this.saleOrder.salesperson = uni.getStorageSync('user')
-				// this.$api.http.post('/saleOrder/insert', this.saleOrder).then(res => {
-				// 	uni.showToast({
-				// 		title: '添加成功',
-				// 		icon: 'none'
-				// 	})
-				// 	uni.navigateBack()
-				// })
+			checkPrice: function(e) {
+				//正则表达式
+				e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null
+				//重新赋值给input				
+				this.$nextTick(() => {
+					this.purchaseOrder.purchasePrice = e.target.value
+				})
+			},
+			sub() { 			
+				this.purchaseOrder.invoiceDate = this.date
+				this.$api.http.put('/purchaseOrder/uploadPurchaseInfo', this.purchaseOrder).then(res => {
+					uni.showToast({
+						title: '添加成功',
+						icon: 'none'
+					})
+					uni.navigateTo({
+						url: './Purchaser'
+					});
+				})
 			},
 			bindDateChange: function(e) {
 				this.date = e.target.value

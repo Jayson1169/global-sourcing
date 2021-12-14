@@ -24,17 +24,18 @@ export default {
 	data() {
 		return {
 			userForm: {
-				username: '18390818785',
-				password: 'abc123456'
-			},
+				username: 'admin',
+				password: 'admin'
+			}
 		};
 	},
 	methods: {
 		login(){
 			this.$api.http.login("/login", this.userForm).then(res => {
 				uni.setStorageSync('user', res)
+				let roleList = this.$api.json.roleList
 				uni.redirectTo({
-					url: '/pages/Home',
+					url: roleList[res.role]
 				})
 			})
 		}

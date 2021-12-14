@@ -4,69 +4,59 @@
 			<uni-easyinput suffixIcon="search" v-model="tabCurrentIndex" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
 		</view>
 		<view 
-			v-for="(item, index) in saleOrder" :key="index"
+			v-for="(item, index) in orderList" :key="index"
 			class="order-item"
-		>
-			<view class="i-top b-b">
-				<text class="time">{{item.createDate}}</text>
-				<text class="state" :style="{color: item.stateTipColor}">{{item.stateTip}}</text>
-				<text
-					v-if="item.state===9" 
-					class="del-btn yticon icon-iconfontshanchu1"
-					@click="deleteOrder(index)"
-				></text>
-			</view>
-			
-			<scroll-view v-if="item.items.length > 1" class="goods-box-single" scroll-x>
+		>	
+			<view @click="jumpDetail(item)"> 
+				<view class="i-top b-b">
+					<text class="time">{{item.updateTime}}</text>
+				</view>
+				<scroll-view v-if="item.items.length > 1" class="goods-box-single" scroll-x>
+					<view 
+						v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex"
+						class="right"
+					>
+						<text class="title">{{goodsItem.product.name}}</text>
+						<text class="attr-box">{{goodsItem.quantity}}</text>
+						<text class="price">{{goodsItem.salePrice * goodsItem.quantity}}</text>
+					</view>
+				</scroll-view>
 				<view 
+					v-if="item.items.length === 1"
+					class="goods-box-single"
 					v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex"
-					class="right" @click="jump_detail"
 				>
-					<text class="title">{{goodsItem.product.name}}</text>
-					<text class="attr-box">{{goodsItem.quantity}}</text>
-					<text class="price">{{goodsItem.salePrice * goodsItem.quantity}}</text>
-					<!-- <image class="goods-img" :src="goodsItem.image" mode="aspectFill"></image> -->
+					<view class="right">
+						<text class="title">{{goodsItem.product.name}}</text>
+						<text class="attr-box">{{goodsItem.quantity}}</text>
+						<text class="price">{{goodsItem.salePrice * goodsItem.quantity / 100}}</text>
+					</view>
 				</view>
-			</scroll-view>
-			<view 
-				v-if="item.items.length === 1"  @click="jump_detail"
-				class="goods-box-single"
-				v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex"
-			>
-				<!-- <image class="goods-img" :src="goodsItem.image" mode="aspectFill"></image> -->
-				<view class="right">
-					<text class="title">{{goodsItem.product.name}}</text>
-					<text class="attr-box">{{goodsItem.quantity}}</text>
-					<text class="price">{{goodsItem.salePrice * goodsItem.quantity}}</text>
+					<view class="price-box">
+					共
+					<text class="num">{{item.items.length}}</text>
+					类商品 <!-- 实付款
+					<text class="price"> --></text>
 				</view>
-			</view>
-			
-			<view class="price-box">
-				共
-				<text class="num">{{item.items.length}}</text>
-				件商品 实付款
-				<text class="price"></text>
 			</view>
 			<view class="action-box b-t" v-if="item.state != 9">
 				<button class="action-btn" @click="cancelOrder(item)">取消订单</button>
-				<button class="action-btn recom">修改订单</button>
+				<button class="action-btn recom" @click="deleteOrder(item)">修改订单</button>
 			</view>
 		</view>	
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
-				<button @click="jump_order_append" class="cu-btn bg-red margin-tb-sm lg">新增订单</button>
+				<button @click="jumpOrderAppend" class="cu-btn bg-red margin-tb-sm lg">新增订单</button>
 			</view>
 		</view>
 	</view>
 </template> 
 
 <script>
-	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import empty from "@/components/empty";
-	// import Json from '@/Json';
 	export default {
 		components: {
-			uniLoadMore,
 			empty
 		},
 		data() {
@@ -95,19 +85,20 @@
 						orderList: []
 					}
 				],
-				saleOrder: []
+				orderList: []
 			};
 		},
 		onLoad() {
 			this.$api.http.get('/saleOrder/findAll', this.request).then(res => {
-				this.saleOrder = res.content
+				this.orderList = res.content
 			})
 		},
 		methods: {
-			jump_detail(){
+			jumpDetail(it){
 				// uni.navigateTo({
 				// 	url: '/pages/order/detail/detail'
 				// });
+				console.log(123)
 			},
 			//删除订单
 			deleteOrder(index){
@@ -155,9 +146,9 @@
 				}
 				return {stateTip, stateTipColor};
 			},
-			jump_order_append() {
+			jumpOrderAppend() {
 				uni.navigateTo({
-					url: '/pages/order/order_append/order_append'
+					url: './OrderAppend'
 				});
 			}
 		},
@@ -182,7 +173,6 @@
 	.list-scroll-content{
 		height: 100%;
 	}
-	
 	.navbar{
 		display: flex;
 		height: 40px;
@@ -257,21 +247,13 @@
 				}
 			}
 		}
-		/* 多条商品 */
-		.goods-box{
-			height: 160upx;
-			padding: 20upx 0;
-			white-space: nowrap;
-			
-		}
+	
 		/* 单条商品 */
 		.goods-box-single{
 			display: flex;
-			padding: 20upx 0;
+			padding: 0upx 0;
 			.right{
 				flex: 1;
-				// display: flex;
-				// flex-direction: column;
 				padding: 0 30upx 0 0upx;
 				overflow: hidden;
 				.title{

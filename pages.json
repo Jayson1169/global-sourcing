@@ -19,23 +19,44 @@
 				"navigationStyle":"custom"
 			}
 		},
+		
+		{
+			"path" : "pages/user/User",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "用户管理",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path" : "pages/user/UserAppend",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "新增用户",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/user/PasswordReset",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "修改密码",
+				"enablePullDownRefresh": false
+			}  
+		},
 		{
 			"path" : "pages/statistics/statistics",
 			"style" : {}
 		},
 		{
-			"path" : "pages/order/order",
+			"path" : "pages/order/Order",
 			"style" : {
 				"navigationBarTitleText": "订单管理",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/order/detail",
-			"style" : {}
-		},
-		{
-			"path" : "pages/order/order_append",
+			"path" : "pages/order/OrderAppend",
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "添加订单",
@@ -43,7 +64,7 @@
 			}
 		},
 		{
-		    "path" : "pages/order/product_append",
+		    "path" : "pages/order/ProductAppend",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "添加商品",
@@ -62,24 +83,9 @@
 				"enablePullDownRefresh": false
 			} 
 		},
+		
 		{
-			"path" : "pages/user/user_append/user_append",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "新增用户",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path" : "pages/user/user",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "用户管理",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path" : "pages/purchaseOrder/buyer_assign/buyer_assign",
+			"path" : "pages/purchase/PurchaserAssign",
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "分配采购员",
@@ -87,17 +93,8 @@
 				
 			} 
 		}
-		,{
-			"path" : "pages/user/password_change/password_change",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "修改密码",
-				"enablePullDownRefresh": false
-			}  
-		}
-		
         ,{
-            "path" : "pages/purchaseOrder/purchaseOrder",
+            "path" : "pages/purchase/Purchase",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "采购管理",
@@ -105,23 +102,28 @@
             }
         }
         ,{
-            "path" : "pages/purchaseOrder/buyer/buyer",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "采购管理",
-                "enablePullDownRefresh": false
+            "path" : "pages/purchase/Purchaser",
+            "style" : {
+            	"navigationStyle":"custom"
             }
             
         }
         ,{
-            "path" : "pages/purchaseOrder/buyer/purchase_append/purchase_append",
+            "path" : "pages/purchase/PurchaseUpload",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "采购信息",
                 "enablePullDownRefresh": false
-            }
-            
-        }
+            }  
+        },
+		{
+		    "path" : "pages/purchase/PurchaseDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "采购信息",
+		        "enablePullDownRefresh": false
+		    }
+		}
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",
