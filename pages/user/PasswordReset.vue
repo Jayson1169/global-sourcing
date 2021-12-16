@@ -4,25 +4,20 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</view>
-			<input v-model="username" disabled="true"></input>
+			<input v-model="username" disabled></input>
 		</view>
-	
 		<view class="cu-form-group">
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
-			<input placeholder="请输入姓名"  v-model="name" disabled=""></input>
+			<input v-model="name" disabled></input>
 		</view>
-		<!-- <view class="cu-form-group" @click="useOutClickSide">
-			<view class="title">身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份：</view>
-	        <easy-select ref="easySelect" size="medium" @selectOne="selectOne" v-model="role"></easy-select>
-	    </view>	 -->
 		<view class="cu-form-group">
 			<view class="title">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</view>
-			<input password="true" placeholder="包含数字和字母,长度在6～18位之间"  v-model="user_form.password" maxlength="16" @focus="Listeningfocus"></input>
+			<input password="true" placeholder="长度在6～18位之间,包含数字和字母" v-model="userForm.password" maxlength="16" @focus="Listeningfocus"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="p_btn">
 			<view class=" flex flex-direction">
-				<button class="cu-btn bg-red margin-tb-sm lg" @click="update()">修改</button>
+				<button class="cu-btn bg-red margin-tb-sm lg" @click="update()">重置密码</button>
 			</view>
 		</view>
 	</view>
@@ -33,7 +28,7 @@
 		data() {
 			return {
 				username: '',
-				user_form: {
+				userForm: {
 					id: '',
 					password: '',
 				}
@@ -41,22 +36,33 @@
 		},
 		methods: {
 			Listeningfocus() {
-				this.user_form.password = ''
+				this.userForm.password = ''
 			},
 			update() {  
-				this.$api.http.put('/user/updatePassword', this.user_form).then(res => {
+				let rules = [
+					{name: 'password', type: 'required', errmsg: '请输入密码'},
+					{name: 'password', type: 'pwd', errmsg: '密码长度在6～18位之间,包含数字和字母'},
+				]
+				let valLoginRes = this.$validate.validate(this.userForm, rules)
+				if (!valLoginRes.isOk) {
 					uni.showToast({
-						title: '修改成功',
-						icon: 'none'
+						icon: 'none',
+						title: valLoginRes.errmsg
 					})
-					uni.navigateBack()
-				})
+				} else {
+					this.$api.http.put('/user/updatePassword?id='+this.userForm.id+'&password='+this.userForm.password, null).then(res => {
+						this.$api.msg.successToast("修改成功")						
+						setTimeout(function() {
+							uni.navigateBack({delta:2})
+						}, 500)
+					})
+				}
 			}
 		},
 		onLoad: function (option) {
 			this.username = option.username
 			this.name = option.name
-			this.user_form.id = option.id
+			this.userForm.id = option.id
 		}
 	}
 </script>

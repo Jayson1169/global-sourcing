@@ -7,7 +7,7 @@
 				  <view class='goods_title'>{{item.product.name}}</view>
 				  <!-- 可以循环显示多个属性 此处修改为显示单独描述 -->
 				  <!-- <view class="goods_des">{{item.guige[0].name}}：{{item.guige[0].value}}</view> -->
-				  <view class="goods_des">商品型号：{{item.product.brand}}</view>
+				  <view class="goods_des">商品型号：{{item.product.specification}}</view>
 				  <view class='good_p'>
 					<view class="good_price">¥ {{item.salePrice}}</view>
 					<view class='i'>x {{item.quantity}}</view>
@@ -21,19 +21,19 @@
 		</view>
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
-			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
+			<view class="title"><text :style="{color:'red'}">*</text>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
 			<input placeholder="请输入姓名" v-model="order.address.name"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">身份证号：</view>
-			<input placeholder="请输入身份证号" v-model="order.address.idNumber" maxlength="18"></input>
+			<view class="title"><text :style="{color:'red'}">*</text>身份证号：</view>
+			<input type="idcard" placeholder="请输入身份证号" v-model="order.address.idNumber" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">手机号码：</view>
-			<input placeholder="请输入手机号码" v-model="order.address.phoneNumber"></input>
+			<view class="title"><text :style="{color:'red'}">*</text>手机号码：</view>
+			<input type="number" placeholder="请输入手机号码" v-model="order.address.phoneNumber" maxlength="11"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">收货地址：</view>
+			<view class="title"><text :style="{color:'red'}">*</text>收货地址：</view>
 			<input placeholder="请输入收货地址" v-model="order.address.shipAddress"></input>
 		</view>
 		<view class="H50"></view>
@@ -60,22 +60,40 @@
 				}
 			};
 		},
-		onLoad() {
+		onLoad(option) {
 			uni.$on('item', (e) => {
 				this.order.items = this.order.items.concat(e)
 			})
+			if (option.order != null) {
+				this.order = JSON.parse(decodeURIComponent(option.order));
+			}
 		},
 		methods: {
 			sub() { 
-				this.$api.http.post('/saleOrder/insert', this.order).then(res => {
+				let rules = [
+					{name: 'name', type: 'required', errmsg: '请输入姓名'},
+					{name: 'idNumber', type: 'required', errmsg: '请输入身份证号'},
+					{name: 'idNumber', type: 'idNumber', errmsg: '请正确输入身份证号'},
+					{name: 'shipAddress', type: 'required', errmsg: '请输入收货地址'}
+				]
+				let valLoginRes = this.$validate.validate(this.order.address, rules)
+				if (!valLoginRes.isOk) {
 					uni.showToast({
-						title: '添加成功',
-						icon: 'none'
+						icon: 'none',
+						title: valLoginRes.errmsg
 					})
-					uni.navigateTo({
-						url: './Order'
-					});
-				})
+				} else {
+					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
+						uni.showToast({
+							title: '添加成功',
+							icon: 'none'
+						})
+						uni.navigateTo({
+							url: './Order'
+						});
+					})
+				}	
+				
 			},
 			jumpProductAppend() {
 				uni.navigateTo({

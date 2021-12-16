@@ -3,13 +3,13 @@
 		<view class="login">
 			<view class="login-top">登录</view>
 			<view class="login-center clearfix">
-				<view class="login-center-img"><image src="@/imgs/name.png" /></view>
+				<view class="login-center-img"><image src="../imgs/name.png"/></view>
 				<view class="login-center-input">
 					<input type="text" placeholder="请输入您的用户名" v-model="userForm.username"/>
 				</view>
 			</view>
 			<view class="login-center clearfix">
-				<view class="login-center-img"><image src="@/imgs/password.png" /></view>
+				<view class="login-center-img"><image src="../imgs/password.png"/></view>
 				<view class="login-center-input">
 					<input type="password" placeholder="请输入您的密码" v-model="userForm.password"/>
 				</view>
@@ -31,12 +31,16 @@ export default {
 	},
 	methods: {
 		login(){
-			this.$api.http.login("/login", this.userForm).then(res => {
-				uni.setStorageSync('user', res)
-				let roleList = this.$api.json.roleList
-				uni.redirectTo({
-					url: roleList[res.role]
-				})
+			let _this = this
+			_this.$api.http.login("/login", _this.userForm).then(res => {
+				_this.$api.msg.successToast("登录成功")
+				setTimeout(function() {
+					uni.setStorageSync('user', res)
+					let roleList = _this.$api.json.roleList
+					uni.redirectTo({
+						url: roleList[res.role]
+					})
+				}, 500)
 			})
 		}
 	}

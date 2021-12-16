@@ -1,84 +1,118 @@
 <template>
 	<view class="user_list">
 		<view class="search">
-			<uni-easyinput suffixIcon="search" v-model="request.keyword" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
+			<uni-easyinput suffixIcon="search" v-model="searchRequest.keyword" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
 		</view>
 		<scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
 			<view class='tab'>
 				<view :class="c_index==0?'tab_focus':'tab_normal'" @click="num(0)">全部</view>
-				<block v-for="(item, index) of role_list">
+				<block v-for="(item, index) of roleList">
 					<view :class="c_index==(index+1)?'tab_focus':'tab_normal'" @click="num(index+1)">{{item}}</view>
 				</block>
 			</view>
 		</scroll-view>
-		<block v-for="(item, index) of user_list" v-if="c_index==0||role_map[item.role][1]==c_index - 1">
-			<view class="list" @click="jump_password_change(item)">
+		<block v-for="(item, index) of userList" v-if="c_index==0||roleMap[item.role][1]==c_index - 1">
+			<view class="list" @click="jumpPasswordReset(item)">
 				<view class="list_l"><!-- <img :src="item.pic"></img> --></view>
 				<view class="list_r">
-					<view class="list_r_01">{{item.username}}<span class="hui">{{role_map[item.role][0]}}</span></view>
+					<view class="list_r_01">{{item.username}}<span class="hui">{{roleMap[item.role][0]}}</span></view>
 					<view class="list_r_02">{{item.name}}</view>
+					<view class="list_r_02">{{item.phoneNumber}}</view>
 				</view>
 			</view>
 		</block>
+		<view v-show="isLoadMore">
+			<uni-load-more :status="loadStatus" ></uni-load-more>
+		</view>
 		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
-				<button @click="jump_user_append" class="cu-btn bg-red margin-tb-sm lg">新增用户</button>
+				<button @click="jumpUserAppend" class="cu-btn bg-red margin-tb-sm lg">新增用户</button>
 			</view>
 		</view>
 	</view>
-	
 </template>
 
 <script>	
 	export default {
 		data() {
 			return {
-				request: {
+				userRequest: {
+					page: 0,
+					size: 10,
+				},
+				searchRequest: {
 					keyword: '',
-					page: '0',
-					size: '1000000',
+					page: 0,
+					size: 9999,
 				},
 				c_index: 0,
-				user_list: '',
-				role_list: '',
-				role_map: '',
+				userList: [],
+				roleList: '',
+				roleMap: '',
+				isLoadMore: false,
+				loadStatus: 'loading',
+				haveSearch: false
 			};
 		},
 		onLoad() {
-			this.init()
+			this.getUserList()
+			this.roleList = this.$api.json.role_list;
+			this.roleMap = this.$api.json.role_map;
 		},
 		onPullDownRefresh(){
 			this.init()
+			this.haveSearch = false
 			setTimeout(function () {
 				uni.stopPullDownRefresh();
 			}, 1000);
 		},
 		methods: {
 			init() {
-				this.$api.http.get('/user/findAll', this.request).then(res => {
-					this.user_list = res.content
-				})
-				this.role_list=this.$api.json.role_list
-				this.role_map = this.$api.json.role_map
+				this.userRequest.page = 0
+				this.userRequest.size = 10
+				this.userList = []
+				this.getUserList()
 			},
-			jump_password_change(item) {
+			jumpPasswordReset(item) {
 				uni.navigateTo({
-					url: './password_change/password_change?id='+item.id+'&username='+item.username+'&name='+item.name
+					url: './PasswordReset?id='+item.id+'&username='+item.username+'&name='+item.name+'&phoneNumber='+item.phoneNumber
 				});
 			},
-			jump_user_append() {
+			jumpUserAppend() {
 				uni.navigateTo({
-					url: './user_append/user_append'
+					url: './UserAppend'
 				});
 			},
 			num(index) {
 				this.c_index = index
 			},
 			search() {
-				this.$api.http.get('/user/search', this.request).then(res => {
-					this.user_list = res.content
+				this.$api.http.get('/user/search', this.searchRequest).then(res => {
+					this.userList = res.content
 				})
+			},
+			getUserList() {
+				this.$api.http.get('/user/findAll', this.userRequest).then(res => {
+					this.userList = this.userList.concat(res.content);
+					if (res.numberOfElements < this.userRequest.size) {
+						this.isLoadMore = true
+						this.loadStatus = 'nomore'
+					} else {
+						this.isLoadMore = false
+					}
+				}).catch(err => {
+					this.isLoadMore = true
+					if (this.userRequest.page > 1) this.userRequest.page -= 1
+				})	
+			}
+		},
+		onReachBottom() {
+			// 此处判断，上锁，防止重复请求
+			if (!this.isLoadMore) { 
+				this.isLoadMore = true
+				this.userRequest.page += 1
+				this.getUserList()
 			}
 		}
 	}

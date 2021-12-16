@@ -4,16 +4,16 @@
 		<view class="order">采购明细</view>
 		<view class="cu-form-group">
 			<view class="title">采购照片：</view>
-			<upimg @photo="getPhoto"></upimg>
+			<upimg @photo="getPhoto" :photo="purchaseOrder.photo"></upimg>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</view>
-			<upimg @photo="getInvoice"></upimg>
+			<upimg @photo="getInvoice" :photo="purchaseOrder.invoice"></upimg>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">发票日期：</view>
-			<picker mode="date" :value="date" @change="bindDateChange">
-				<view class="title">{{date}}</view>
+			<picker mode="date" :value="purchaseOrder.invoiceDate" @change="bindDateChange">
+				<view class="title">{{purchaseOrder.invoiceDate==null?"请选择发票日期":purchaseOrder.invoiceDate}}</view>
 			</picker>
 		</view>
 		<view class="order">商品信息</view>
@@ -76,7 +76,6 @@
 				})
 			},
 			sub() { 			
-				this.purchaseOrder.invoiceDate = this.date
 				this.$api.http.put('/purchaseOrder/uploadPurchaseInfo', this.purchaseOrder).then(res => {
 					uni.showToast({
 						title: '添加成功',
@@ -88,7 +87,7 @@
 				})
 			},
 			bindDateChange: function(e) {
-				this.date = e.target.value
+				this.purchaseOrder.invoiceDate = e.target.value
 			}
 		}
 	}
@@ -108,6 +107,11 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
+	}
+	.p_image {
+		width: 162rpx;
+		height: 162rpx;
+		padding: 10rpx;
 	}
 	// 去掉 picker 右边的箭头
 	.cu-form-group picker::after {  

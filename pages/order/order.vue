@@ -7,7 +7,7 @@
 			v-for="(item, index) in orderList" :key="index"
 			class="order-item"
 		>	
-			<view @click="jumpDetail(item)"> 
+			<view @click="jumpOrderModify(item)"> 
 				<view class="i-top b-b">
 					<text class="time">{{item.updateTime}}</text>
 				</view>
@@ -41,7 +41,7 @@
 			</view>
 			<view class="action-box b-t" v-if="item.state != 9">
 				<button class="action-btn" @click="cancelOrder(item)">取消订单</button>
-				<button class="action-btn recom" @click="deleteOrder(item)">修改订单</button>
+				<button class="action-btn recom" @click="jumpOrderModify(item)">修改订单</button>
 			</view>
 		</view>	
 		<view class="H50"></view>
@@ -94,11 +94,15 @@
 			})
 		},
 		methods: {
-			jumpDetail(it){
-				// uni.navigateTo({
-				// 	url: '/pages/order/detail/detail'
-				// });
-				console.log(123)
+			jumpOrderDetail(order){
+				uni.navigateTo({
+					url: './OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
+				});
+			},
+			jumpOrderModify(order) {
+				uni.navigateTo({
+					url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
+				})
 			},
 			//删除订单
 			deleteOrder(index){

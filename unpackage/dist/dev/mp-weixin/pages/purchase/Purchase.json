@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "采购管理",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "empty": "/components/empty"
+  }
+}

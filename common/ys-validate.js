@@ -1,12 +1,16 @@
-
 const numberReg = /^-?[1-9][0-9]?.?[0-9]*$/
 const intReg = /^-?[1-9][0-9]*$/
+const usernameReg = /^[\w-]{6,18}$/
+const idNumberReg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/
 const phoneReg = /^1[0-9]{10,10}$/
 const emailReg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-const pwdReg = /^.{6,16}$/
-const inviteCodeReg = /^[a-zA-Z0-9]{6,16}$/
+const pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z\W]{6,18}$/
+const inviteCodeReg = /^[a-zA-Z0-9]{6,18}$/
 
 export default {
+	isUsername: function(val) {
+		return usernameReg.test(val)
+	},
 	isNumber: function(val) {
 		return numberReg.test(val)
 	},
@@ -24,6 +28,9 @@ export default {
 	},
 	isInviteCode: function(val) {
 		return inviteCodeReg.test(val)
+	},
+	isIdNumber: function(val) {
+		return idNumberReg.test(val)
 	},
 	validate: function(data, rules) {
 		let res = { isOk: true, errmsg: '' }
@@ -57,6 +64,10 @@ export default {
 						res = { isOk: false, errmsg: rule.errmsg }
 					}
 				break
+				case 'username':
+					if (!usernameReg.test(data[rule.name])) {
+						res = { isOk: false, errmsg: rule.errmsg }
+					}
 				case 'number':
 					if (!numberReg.test(data[rule.name])) {
 						res = { isOk: false, errmsg: rule.errmsg }
@@ -114,6 +125,11 @@ export default {
 				case 'regex': // 自定义正则表达式
 					// {name: 'xxx', type: 'regex', regex: /^1[0-9]{10,10}$/, errmsg: 'xxx'}
 					if (rule.regex && !rule.regex.test(data[rule.name])) {
+						res = { isOk: false, errmsg: rule.errmsg }
+					}
+				break
+				case 'idNumber':
+					if (!idNumberReg.test(data[rule.name])) {
 						res = { isOk: false, errmsg: rule.errmsg }
 					}
 				break

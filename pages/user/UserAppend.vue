@@ -3,19 +3,23 @@
 		<view class="top">
 		</view>
 		<view class="cu-form-group">
-			<view class="title">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</view>
-			<input placeholder="请输入账号"  v-model="user_form.username" focus maxlength="16"></input>
+			<view class="title"><text :style="{color:'red'}">*</text>账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</view>
+			<input placeholder="长度在6～18位之间,不包含特殊字符" v-model="userForm.username" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</view>
-			<input password="true" placeholder="包含数字和字母,长度在6～18位之间"  v-model="user_form.password" maxlength="18"></input>
+			<view class="title"><text :style="{color:'red'}">*</text>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</view>
+			<input password="true" placeholder="长度在6～18位之间,包含数字和字母" v-model="userForm.password" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
-			<input placeholder="请输入姓名"  v-model="user_form.name"></input>
+			<view class="title"><text :style="{color:'red'}">*</text>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
+			<input placeholder="长度在2～10位之间" v-model="userForm.name"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title"><text :style="{color:'white'}">*</text>手机号码：</view>
+			<input type="number" placeholder="请输入手机号码"  v-model="userForm.phoneNumber" maxlength="11"></input>
 		</view>
 		<view class="cu-form-group" @click="useOutClickSide">
-			<view class="title">身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份：</view>
+			<view class="title"><text :style="{color:'red'}">*</text>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份：</view>
 	        <easy-select ref="easySelect" size="medium" @selectOne="selectOne" v-model="role"></easy-select>
 	    </view>	
 		<view class="H50"></view>
@@ -32,8 +36,7 @@
 		data() {
 			return {
 				role: '',
-				// role: ['管理员', '销售员', '采购员', '仓管人员', '转运人员', '财务员'],
-				user_form: {
+				userForm: {
 					username: '',
 					name: '',
 					password: '',
@@ -43,39 +46,45 @@
 		},
 		methods: {
 			init() {
-				this.user_form.username = '',
-				this.user_form.name = '',
-				this.user_form.password = '',
-				this.user_form.role = '',
+				this.userForm.username = '',
+				this.userForm.name = '',
+				this.userForm.password = '',
+				this.userForm.role = '',
+				this.userForm.phoneNumber = '',
 				this.role = ''
 			},
 			selectOne(options) {
 				this.role = options.label
-				this.user_form.role = options.value
+				this.userForm.role = options.value
 			},
 			useOutClickSide() {
 				this.$refs.easySelect.hideOptions && this.$refs.easySelect.hideOptions()
 			},
 			sub() {  
-				//this.$api.http.post('shop_cms/add_shop_coupon', {
-				//	username: this.user_form.stock_type,
-				//	password: this.user_form.full,
-				//	name: this.user_form.name,
-				//	sign: this.user_form.reduce,
-				//}).then(res => {
-				//	
-				
-				//	uni.redirectTo({
-				//		url:'../couponlist/couponlist'
-				//	})
-				//})
-				this.$api.http.post('/user/insert', this.user_form).then(res => {
+				let rules = [
+					{name: 'username', type: 'required', errmsg: '请输入账号'},
+					{name: 'username', type: 'username', errmsg: '账号长度在6～18位之间,不包含特殊字符'},
+					{name: 'password', type: 'required', errmsg: '请输入密码'},
+					{name: 'password', type: 'pwd', errmsg: '密码长度在6～18位之间,包含数字和字母'},
+					{name: 'name', type: 'required', errmsg: '请输入姓名'},
+					{name: 'name', type: 'lengthRange', min: 2, max: 10, errmsg: '姓名长度在2～10位之间'},
+					{name: 'role', type: 'required', errmsg: '请选择身份'}
+				]
+				let valLoginRes = this.$validate.validate(this.userForm, rules)
+				if (!valLoginRes.isOk) {
 					uni.showToast({
-						title: '添加成功',
-						icon: 'none'
+						icon: 'none',
+						title: valLoginRes.errmsg
 					})
-					this.init()
-				})
+				} else {
+					this.$api.http.post('/user/insert', this.userForm).then(res => {
+						uni.showToast({
+							title: '添加成功',
+							icon: 'none'
+						})
+						this.init()
+					})
+				}
 			}
 		}
 	}

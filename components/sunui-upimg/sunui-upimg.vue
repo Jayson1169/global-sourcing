@@ -3,11 +3,11 @@
 		<view class="sunui-uploader-files">
 			<block v-for="(item, index) in upload_before_list" :key="index">
 				<view class="sunui-uploader-file" :class="[item.upload_percent < 100 ? 'sunui-uploader-file-status' : '']" @click="previewImage(index)">
-					<image class="sunui-uploader-img" :style="upload_img_wh" :src="item.path" mode="aspectFill" />
+					<image class="sunui-uploader-img" :style="upload_img_wh" :src="item" mode="aspectFill" />
 					<view class="sunui-img-removeicon right" @click.stop="removeImage(index)" v-show="upimg_move">×</view>
 				</view>
 			</block>
-			<view v-show="upload_len < upload_count" hover-class="sunui-uploader-hover" class="sunui-uploader-inputbox" @click="chooseImage" :style="upload_img_wh">
+			<view v-show="upload_before_list.length < upload_count" hover-class="sunui-uploader-hover" class="sunui-uploader-inputbox" @click="chooseImage" :style="upload_img_wh">
 				<view><text class="iconfont icon-mn_shangchuantupian" style="color: #666;"></text></view>
 			</view>
 		</view>
@@ -18,10 +18,7 @@
 import { pathToBase64, base64ToPath } from './index.js'
 export default {
 	data() {
-		return {
-			upload_len: 0,
-			upload_cache: [],
-			upload_cache_list: [],
+		return {	
 			upload_before_list: [],
 		};
 	},
@@ -39,22 +36,29 @@ export default {
 		upimg_move: {
 			type: Boolean,
 			default: true
+		},
+		photo: ''
+	},
+	mounted() {
+		if (this.photo != null) {
+			this.upload_before_list.push(this.photo)
 		}
 	},
 	methods: {
 		chooseImage() {
 			let _self = this;
 			uni.chooseImage({
-				count: _self.upload_count - _self.upload_before_list.length,
+				count: 1,
+				// count: _self.upload_count - _self.upload_before_list.length,
 				sizeType: ['compressed', 'original'],
 				sourceType: ['album', 'camera'],
 				success: function(res) {
-					_self.upload_len = 1
 					for (let i = 0, len = res.tempFiles.length; i < len; i++) {
 						res.tempFiles[i]['upload_percent'] = 0;
-						_self.upload_before_list.push(res.tempFiles[i]);
+						// _self.upload_before_list.push(res.tempFiles[i]);
 					}
 					pathToBase64(res.tempFilePaths[0]).then(base64 => {
+						_self.upload_before_list.push(base64);
 						_self.$emit("photo", base64)
 					}).catch(error => {
 						console.error(error)
@@ -68,8 +72,6 @@ export default {
 		removeImage(idx) {
 			let _self = this;
 			_self.upload_before_list.splice(idx, 1);
-			_self.upload_cache_list.splice(idx, 1);
-			_self.upload_len = _self.upload_before_list.length;
 			_self.$emit("photo", null)
 		},
 		previewImage(idx) {
@@ -77,7 +79,7 @@ export default {
 			let preview = [];
 			for (let i = 0, len = _self.upload_before_list.length; i < len; i++) {
 				// step3.这里修改服务器返回字段 ！！！
-				preview.push(_self.upload_before_list[i].path);
+				preview.push(_self.upload_before_list[i]);
 			}
 			uni.previewImage({
 				current: idx,

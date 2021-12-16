@@ -1,7 +1,6 @@
 <template>
 	<!-- 显示采购员信息，按住复制号码 -->
 	<view class="content">
-		
 		<view class="navbar">
 			<view 
 				v-for="(item, index) in navList" :key="index" 
@@ -13,8 +12,6 @@
 			</view>
 		</view>
 		<empty v-if="purchaseOrder.length === 0"></empty>
-		
-		<!-- 订单列表 -->
 		<view 
 			v-for="(item, index) in purchaseOrder" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || tabCurrentIndex === 0"
 			class="order-item"
@@ -35,7 +32,7 @@
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
 					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
-					<text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.quantity * item.purchasePrice}}</text>
+					<text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.purchasePrice}}</text>
 				</view>
 			</view>
 			
@@ -46,8 +43,8 @@
 				<text class="price">{{item.quantity * item.purchasePrice}}</text>
 			</view>
 			<view class="action-box b-t" v-if="status_to_state[item.status] != 4">
-				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="PurchaserAssign(item)">立即分配</button>
-				<button class="action-btn recom" v-if="status_to_state[item.status] == 3">立即核验</button>							
+				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="purchaserAssign(item)">立即分配</button>
+				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpDetail(item)">立即核验</button>							
 			</view>
 		</view>
 	</view>
@@ -84,7 +81,7 @@
 					url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
 				});
 			},
-			PurchaserAssign(item) {
+			purchaserAssign(item) {
 				uni.navigateTo({
 					url: './PurchaserAssign?purchaseOrderId='+item.id+'&quantity='+item.quantity
 				});

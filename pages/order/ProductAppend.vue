@@ -4,42 +4,34 @@
 			<view class="title"><text :style="{color:'red'}">*</text>商品名称：</view>
 			<input placeholder="请输入商品名称" v-model="item.product.name"></input>
 		</view>
-		<view class="cu-form-group">
+	<!-- 	<view class="cu-form-group">
 			<view class="title"><text :style="{color:'red'}">*</text>商品品牌：</view>
 			<input placeholder="请输入商品品牌" v-model="item.product.brand"></input>
-		</view>
+		</view> -->
 		<view class="cu-form-group">
 			<view class="title"><text :style="{color:'red'}">*</text>商品型号：</view>
 			<input placeholder="请输入商品型号" v-model="item.product.specification"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>生产商家：</view>
-			<input placeholder="请输入生产商家" v-model="item.product.manufacturer"></input>
+			<view class="title"><text :style="{color:'white'}">*</text>生产厂家：</view>
+			<input placeholder="请输入生产厂家" v-model="item.product.manufacturer"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">生产地区：</view>
+			<view class="title"><text :style="{color:'white'}">*</text>生产地区：</view>
 			<input placeholder="请输入生产地区" v-model="item.product.origin"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">备注信息：</view>
+			<view class="title"><text :style="{color:'white'}">*</text>备注信息：</view>
 			<input placeholder="请输入备注信息" v-model="item.product.remark"></input>
 		</view>
-	<!-- 	<view class="cu-form-group">
-			<view class="title">订&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</view>
-			<input placeholder="请输入订金" v-model="product_form.deposit"></input>
-		</view> -->
 		<view class="cu-form-group">
 			<view class="title"><text :style="{color:'red'}">*</text>销售价格：</view>
-			<input placeholder="请输入销售价格" v-model="item.salePrice" @input="checkPrice"></input>
+			<input type="digit" placeholder="请输入销售价格" v-model="item.salePrice" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title"><text :style="{color:'red'}">*</text>销售数量：</view>
-			<input placeholder="请输入销售数量" v-model="item.quantity"></input>
+			<input type="number" placeholder="请输入销售数量" v-model="item.quantity"></input>
 		</view>
-		<!-- <view class="cu-form-group">
-			<view class="title">成交价格：</view>
-			<input placeholder="请输入成交价格" v-model="product_form.transaction_price"></input>
-		</view> -->
 		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
@@ -56,7 +48,7 @@
 				item: {
 					product: {
 						name: 'iPhone 13 Pro',
-						brand: 'Apple',
+						// brand: 'Apple',
 						specification: 'MLT83CH/A',
 						manufacturer: '富士康',
 						origin: '中国',
@@ -82,9 +74,9 @@
 				productForm.quantity = this.item.quantity;
 				let rules = [
 					{name: 'name', required: true, type: 'required', errmsg: '请输入商品名称'},
-					{name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
+					// {name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
 					{name: 'specification', required: true, type: 'required', errmsg: '请输入商品型号'},
-					{name: 'manufacturer', required: true, type: 'required', errmsg: '请输入生产厂家'},
+					// {name: 'manufacturer', required: true, type: 'required', errmsg: '请输入生产厂家'},
 					{name: 'salePrice', required: true, type: 'required', errmsg: '请输入销售价格'},
 					{name: 'quantity', required: true, type: 'required', errmsg: '请输入销售数量'}
 				]
@@ -96,9 +88,8 @@
 					})
 				} else {
 					uni.navigateBack()
-					uni.$emit('item', this.item)
-				}
-				
+					uni.$emit('append', this.item)
+				}	
 			}
 		}
 	}

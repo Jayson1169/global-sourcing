@@ -18,12 +18,8 @@
 			<view class="i-top b-b">
 				<text class="time">{{item.createTime}}</text>
 				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
-				<!-- <text class="state" style="color: '#909399'">{{status_to_state2[item.status]}}</text> -->
-				<text 
-					v-if="status_to_state[item.status]===4" 
-					class="del-btn yticon icon-iconfontshanchu1"
-					@click="deleteOrder(index)"
-				></text>
+				<text v-if="item.status==='REJECTED'" class="del-btn yticon icon-iconfontshanchu1"></text>
+				<text v-if="item.status==='REJECTED'" class="state" style="color: '#909399'">核验未通过</text>
 			</view>
 			<view class="goods-box-single" @click="jumpPurcahseDetail(item)">
 				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
@@ -31,7 +27,7 @@
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
 					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
-					<text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.quantity * item.purchasePrice}}</text>
+					<text class="price" v-if="status_to_state[item.status] == 2 || status_to_state[item.status] == 3">{{item.purchasePrice}}</text>
 				</view>
 			</view>
 			<view class="price-box" v-if="status_to_state[item.status] != 1">
@@ -40,6 +36,7 @@
 				件商品 实付款
 				<text class="price">{{item.quantity * item.purchasePrice}}</text>
 			</view>
+			<text v-if="item.status==='REJECTED'" style="font-size: 12px;">拒绝理由：{{item.rejectReason}}</text>
 			<view class="action-box b-t" v-if="status_to_state[item.status] == 1">
 				<button class="action-btn recom" @click="jumpToPurchaseUpload(item)">上传信息</button>
 			</view>
@@ -237,7 +234,7 @@
 				&:before{
 					content: '￥';
 					font-size: $font-sm;
-					margin: 0 2upx 0 8upx;
+					margin: 0 upx 0 8upx;
 				}
 			}
 		}

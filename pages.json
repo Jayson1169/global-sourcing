@@ -11,15 +11,21 @@
 			"path" : "pages/Login",
 			"style" : {
 				"navigationStyle":"custom"
+			},
+			"app-plus": {
+				"bounce":"none"
 			}
 		},
 		{
 			"path" : "pages/Home",
 			"style" : {
-				"navigationStyle":"custom"
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce":"none"
+				}
 			}
 		},
-		
 		{
 			"path" : "pages/user/User",
 			"style" :                                                                                    
@@ -40,7 +46,7 @@
 			"path" : "pages/user/PasswordReset",
 			"style" :                                                                                    
 			{
-				"navigationBarTitleText": "修改密码",
+				"navigationBarTitleText": "密码重置",
 				"enablePullDownRefresh": false
 			}  
 		},
@@ -72,18 +78,25 @@
 		    }
 		},
 		{
-			"path" : "pages/order/detail",
-			"style" : {}
+		    "path" : "pages/order/ProductEdit",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "编辑商品",
+		        "enablePullDownRefresh": false
+		    }
 		},
 		{
-			"path" : "pages/statistics/statistics",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			} 
+			"path" : "pages/order/OrderDetail",
+			"style" : {
+				"navigationBarTitleText": "查看订单"
+			}
 		},
-		
+		{
+			"path" : "pages/order/ProductDetail",
+			"style" : {
+				"navigationBarTitleText": "查看商品"
+			}
+		},
 		{
 			"path" : "pages/purchase/PurchaserAssign",
 			"style" :                                                                                    
@@ -124,6 +137,15 @@
 		        "enablePullDownRefresh": false
 		    }
 		}
+        ,{
+            "path" : "pages/order/OrderModify",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",
@@ -150,6 +172,16 @@
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
 	}
 	
 }

@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/Login",
+    "pages/Home",
+    "pages/user/User",
+    "pages/user/UserAppend",
+    "pages/user/PasswordReset",
+    "pages/statistics/statistics",
+    "pages/order/Order",
+    "pages/order/OrderAppend",
+    "pages/order/ProductAppend",
+    "pages/order/detail",
+    "pages/statistics/statistics",
+    "pages/purchase/PurchaserAssign",
+    "pages/purchase/Purchase",
+    "pages/purchase/Purchaser",
+    "pages/purchase/PurchaseUpload",
+    "pages/purchase/PurchaseDetail"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "位置授权"
+    }
+  },
+  "usingComponents": {
+    "tab-bar": "/components/my-tabbar/my-tabbar"
+  }
+}

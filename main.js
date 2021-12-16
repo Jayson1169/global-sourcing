@@ -7,6 +7,7 @@ import './assets/style/border.css'
 import './assets/style/main.css'
 import uView from 'uview-ui';
 import validate from '@/common/ys-validate.js'
+import msg from '@/common/toast.js'
 
 Vue.use(uView);
 Vue.component('tabBar', tabBar)
@@ -15,19 +16,6 @@ Vue.prototype.$api = {msg, json, http};
 Vue.prototype.$validate = validate
 
 App.mpType = 'app'
-
-//统一提示方便全局修改
-const msg = (title,  icon='none',duration=2000, mask=false)=>{
-	if(Boolean(title) === false){
-		return;
-	}
-	uni.showToast({
-		title,
-		duration,
-		mask,
-		icon
-	});
-} 
 
 const app = new Vue({
     ...App

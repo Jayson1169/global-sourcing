@@ -16,11 +16,12 @@
 				</label>
 			</radio-group>
 		</view>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="sub" class="cu-btn bg-red margin-tb-sm lg">确定分配</button>
 			</view>
-		</view>
+		</view>	
 	</view>
 </template>
 

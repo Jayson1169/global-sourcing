@@ -4,7 +4,7 @@
 			<view class="more">
 				<view class='mo'>
 					<view class='mo_01'>财务分析</view>
-					<navigator url="/pages/user/tongji/tongji"> 
+					<navigator url="/pages/user/tongji/tongji" hover-class="none"> 
 						<view class='mo_02'>更多</view>
 					</navigator>
 				</view>
@@ -33,28 +33,33 @@
 			</view>
 		</view>
 		<view class="BH"></view>
+		<view class="more">
+			<view class='mo'>
+				<view class='mo_01'>管理模块</view>
+			</view>
+		</view>
 		<view class="six">
 			<view class="jiu_01">
-				<navigator url="/pages/user/User" >
-					<view><img src="@/imgs/user.png" /></view>
+				<navigator url="/pages/user/User" hover-class="none">
+					<view><image src="../imgs/user.png"/></view>
 					<view>用户管理</view>
 				</navigator>
 			</view> 
 			<view class="jiu_01">
-				<navigator url="/pages/order/Order">
-					<view><img src="@/imgs/order.png" /></view>
+				<navigator url="/pages/order/Order" hover-class="none">
+					<view><image src="../imgs/order.png"/></view>
 					<view>订单管理</view>
 				</navigator>
 			</view>
 			<view class="jiu_01">
-				<navigator url="/pages/purchase/Purchase">
-					<view><img src="@/imgs/buyer.png" /></view>
+				<navigator url="/pages/purchase/Purchase" hover-class="none">
+					<view><image src="../imgs/buyer.png"/></view>
 					<view>采购管理</view>
 				</navigator>
 			</view>
 			<view class="jiu_01">
-				<navigator url="/pages/user/tongji/tongji"> 
-					<view><img src="@/imgs/treasure.png" /></view>
+				<navigator url="/pages/user/tongji/tongji" hover-class="none"> 
+					<view><image src="../imgs/treasure.png"/></view>
 					<view>财务分析</view>
 				</navigator>
 			</view>
@@ -96,7 +101,6 @@
 	}
 </script>
 
-
 <style lang="scss">
 	.index {
 		background:#fff;
@@ -123,7 +127,7 @@
 			box-sizing: border-box;
 			font-size: 12px;
 		}
-		.jiu_01 img {
+		.jiu_01 image {
 			width: 32px;
 			height: 32px;
 			margin-bottom: 10px;
@@ -152,7 +156,10 @@
 			padding-left: 10px;
 		}
 		.mo_02 {
-			color: #D6D6D6;
+			// color: #D6D6D6;
+			color: black;
+			font-size: 14px;
+			font-weight: bold;
 		}
 		.shuju {
 			display: flex;

@@ -49,7 +49,7 @@
 			},
 			placeholder: {
 				type: String,
-				default: '请选择'
+				default: '请选择身份'
 			},
 			value: {
 				type: String,
