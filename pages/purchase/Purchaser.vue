@@ -21,7 +21,7 @@
 				<text v-if="item.status==='REJECTED'" class="del-btn yticon icon-iconfontshanchu1"></text>
 				<text v-if="item.status==='REJECTED'" class="state" style="color: '#909399'">核验未通过</text>
 			</view>
-			<view class="goods-box-single" @click="jumpPurcahseDetail(item)">
+			<view class="goods-box-single" @click="status_to_state[item.status] == 1?jumpToPurchaseUpload(item):jumpPurcahseDetail(item)">
 				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
 				<image class="goods-img" src='@/imgs/order2.jpg' mode="aspectFill" v-if="item.photo === null"></image>				
 				<view class="right">

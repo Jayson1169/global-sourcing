@@ -3,8 +3,6 @@
 		<view class="uni-list">
 			<radio-group @change="radioChange">
 				<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in buyer" :key="index">
-					<view>
-					</view>
 					<view class="list">
 						<radio class="radio" :value="item.id" :checked="index === current" />
 						<view class="list_l"></view>
@@ -73,15 +71,10 @@
 		.list {
 			display: flex;
 			padding: 10px;
+			width: 750rpx;
 			border-bottom: 1px solid #EAEAEA;
 			.list_l {
 				padding: 0 10px 0 0;
-
-				img {
-					width: 50px;
-					height: 50px;
-					border-radius: 5px;
-				}
 			}
 			.list_r {
 				line-height: 25px;

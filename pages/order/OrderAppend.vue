@@ -61,12 +61,24 @@
 			};
 		},
 		onLoad(option) {
-			uni.$on('item', (e) => {
+			uni.$on('append', (e) => {
 				this.order.items = this.order.items.concat(e)
 			})
-			if (option.order != null) {
-				this.order = JSON.parse(decodeURIComponent(option.order));
-			}
+			uni.$on('modify', (e) => {
+				this.order.items.some((item, i) => {
+					if (item.id == e.id) {
+						this.$set(this.order.items, i, e)  
+					}
+				})
+			})
+			uni.$on('delete', (e) => {
+				this.order.items.some((item, i) => {
+					if (item.id == e.id) {
+						this.order.items.splice(i, 1)
+					}
+				})
+			})
+			this.order = JSON.parse(decodeURIComponent(option.order));
 		},
 		methods: {
 			sub() { 
@@ -100,9 +112,9 @@
 					url: './ProductAppend'
 				});
 			},
-			jummProductEdit(item) {
+			jumpProductEdit(item) {
 				uni.navigateTo({
-					url: './ProductAppend?product='+item
+					url: './ProductEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});
 			}
 		}

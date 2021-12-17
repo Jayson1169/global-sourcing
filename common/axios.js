@@ -116,6 +116,35 @@ export default {
 			})
 		})
 	},
+	delete(url, param) {
+		return new Promise((cback, reject) => {
+			uni.request({
+				url: Api_url + url,
+				data: param,
+				method: 'delete',
+				header: {
+					'Content-Type': 'application/json',
+				},
+			}).then(data => {
+				var [error, res] = data; 
+				var res_code = res.data.status;
+				if (res_code == 200){
+					cback(res.data.data);
+				} else {
+					uni.showToast({
+						title: res.data.message,
+						icon: 'none'
+					})
+				}				
+			}).catch(err => { 
+				console.log('请求异常:',err); 	
+				uni.showToast({
+					title:'请求异常',
+					icon:'none'
+				})
+			})
+		})
+	},
 	login(url, param) {
 		return new Promise((cback, reject) => {
 			uni.request({

@@ -65,10 +65,18 @@
 				this.order.items = this.order.items.concat(e)
 			})
 			uni.$on('modify', (e) => {
-				this.order.items = this.order.items.concat(e)
+				this.order.items.some((item, i) => {
+					if (item.id == e.id) {
+						this.$set(this.order.items, i, e)  
+					}
+				})
 			})
 			uni.$on('delete', (e) => {
-				this.order.items = this.order.items.concat(e)
+				this.order.items.some((item, i) => {
+					if (item.id == e.id) {
+						this.order.items.splice(i, 1)
+					}
+				})
 			})
 			this.order = JSON.parse(decodeURIComponent(option.order));
 		},
@@ -91,9 +99,9 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
+					this.$api.http.put('/saleOrder/update', this.order).then(res => {
 						uni.showToast({
-							title: '添加成功',
+							title: '修改成功',
 							icon: 'none'
 						})
 						uni.navigateTo({

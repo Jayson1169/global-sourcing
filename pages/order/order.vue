@@ -40,7 +40,7 @@
 				</view>
 			</view>
 			<view class="action-box b-t" v-if="item.state != 9">
-				<button class="action-btn" @click="cancelOrder(item)">取消订单</button>
+				<button class="action-btn" @click="deleteOrder(item, index)">取消订单</button>
 				<button class="action-btn recom" @click="jumpOrderModify(item)">修改订单</button>
 			</view>
 		</view>	
@@ -105,14 +105,17 @@
 				})
 			},
 			//删除订单
-			deleteOrder(index){
-				uni.showLoading({
-					title: '请稍后'
+			deleteOrder(item, index) {
+				// uni.showLoading({
+				// 	title: '请稍后'
+				// })
+				// setTimeout(()=>{
+				// 	this.navList[this.tabCurrentIndex].orderList.splice(index, 1);
+				// 	uni.hideLoading();
+				// }, 600)
+				this.$api.http.delete('/saleOrder/delete?id='+item.id, null).then(res => {
+					this.orderList.splice(index, 1)
 				})
-				setTimeout(()=>{
-					this.navList[this.tabCurrentIndex].orderList.splice(index, 1);
-					uni.hideLoading();
-				}, 600)
 			},
 			//取消订单
 			cancelOrder(item){

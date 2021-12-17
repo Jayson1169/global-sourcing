@@ -43,6 +43,7 @@
 				<text class="price">{{item.quantity * item.purchasePrice}}</text>
 			</view>
 			<view class="action-box b-t" v-if="status_to_state[item.status] != 4">
+				<button class="action-btn" v-if="status_to_state[item.status] == 1" @click="purchaseNumberEdit(item, index)">修改数量</button>
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="purchaserAssign(item)">立即分配</button>
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpDetail(item)">立即核验</button>							
 			</view>
@@ -87,9 +88,29 @@
 				});
 			},
 			//顶部tab点击
-			tabClick(index){
+			tabClick(index) {
 				this.tabCurrentIndex = index;
 				console.log(index)
+			},
+			purchaseNumberEdit(item, index) {
+				let _this = this;
+				uni.showModal({
+					title: '修改采购数量',
+					cancelText: "取消",  
+					confirmText: "确定",
+					editable: true,
+					placeholderText: "请输入采购数量",
+					success: function(res) {
+						if (res.confirm) {
+							// _this.$api.http.put('/purchaseOrder/reject?id='+_this.purchaseOrder.id+'&rejectReason='+res.content, null).then(res => {
+							// 	uni.navigateTo({
+							// 		url: './Purchase'
+							// 	})
+							// })
+							console.log("修改采购数量为:", res.content)
+						}
+					}
+				});
 			}
 		},
 	}

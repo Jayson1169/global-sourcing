@@ -24,23 +24,31 @@ export default {
 	data() {
 		return {
 			userForm: {
-				username: 'admin',
-				password: 'admin'
+				username: '18390818785',
+				password: 'abc123456'
 			}
 		};
 	},
+	onLoad() {
+		this.login()
+	},
 	methods: {
-		login(){
+		login() {
 			let _this = this
 			_this.$api.http.login("/login", _this.userForm).then(res => {
 				_this.$api.msg.successToast("登录成功")
-				setTimeout(function() {
-					uni.setStorageSync('user', res)
-					let roleList = _this.$api.json.roleList
-					uni.redirectTo({
-						url: roleList[res.role]
-					})
-				}, 500)
+				// setTimeout(function() {
+				// 	uni.setStorageSync('user', res)
+				// 	let roleList = _this.$api.json.roleList
+				// 	uni.redirectTo({
+				// 		url: roleList[res.role]
+				// 	})
+				// }, 500)
+				uni.setStorageSync('user', res)
+				let roleList = _this.$api.json.roleList
+				uni.redirectTo({
+					url: roleList[res.role]
+				})
 			})
 		}
 	}
