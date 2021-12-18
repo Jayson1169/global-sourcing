@@ -24,7 +24,7 @@
 		},
 		created() {
 			var statusBarHeight = uni.getSystemInfoSync().statusBarHeight;//状态栏
-			var height = statusBarHeight + 44 +104+'px';
+			var height = statusBarHeight + 44 + 104 + 'px';
 			var pages = getCurrentPages();
 			var page = pages[pages.length - 1];
 			// #ifdef APP-PLUS
