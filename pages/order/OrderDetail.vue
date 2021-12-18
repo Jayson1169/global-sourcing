@@ -39,7 +39,7 @@
 	export default {
 		data() {
 			return {
-				order: {}
+				// order: {}
 			};
 		},
 		onLoad(option) {
