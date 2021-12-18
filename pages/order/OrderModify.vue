@@ -5,8 +5,6 @@
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
 				<view class='goods_02'>
 				  <view class='goods_title'>{{item.product.name}}</view>
-				  <!-- 可以循环显示多个属性 此处修改为显示单独描述 -->
-				  <!-- <view class="goods_des">{{item.guige[0].name}}：{{item.guige[0].value}}</view> -->
 				  <view class="goods_des">商品型号：{{item.product.specification}}</view>
 				  <view class='good_p'>
 					<view class="good_price">¥ {{item.salePrice}}</view>
@@ -66,27 +64,41 @@
 		},
 		onLoad(option) {
 			uni.$on('append', (e) => {
-				this.order.items = this.order.items.concat(e)
+				this.$api.http.post('/saleOrder/insertItem?saleOrderId='+this.order.id, e).then(res => {
+					this.$api.msg.successToast('添加成功')
+					this.order.items = this.order.items.concat(e)
+					uni.$emit('edit', null)
+				})
 			})
 			uni.$on('modify', (e) => {
-				this.order.items.some((item, i) => {
-					if (item.id == e.id) {
-						this.$set(this.order.items, i, e)  
-					}
+				this.$api.http.put('/saleOrder/updateItem', e).then(res => {
+					this.$api.msg.successToast('修改成功')
+					this.order.items.some((item, i) => {
+						if (item.id == e.id) {
+							this.$set(this.order.items, i, e)  
+						}
+					})
+					uni.$emit('edit', null)
 				})
 			})
 			uni.$on('delete', (e) => {
-				this.order.items.some((item, i) => {
-					if (item.id == e.id) {
-						this.order.items.splice(i, 1)
-					}
+				this.$api.http.delete('/saleOrder/deleteItem?saleOrderId='+this.order.id+'&itemId='+e.id, null).then(res => {
+					this.$api.msg.successToast('删除成功')
+					this.order.items.some((item, i) => {
+						if (item.id == e.id) {
+							this.order.items.splice(i, 1)
+						}
+					})
+					uni.$emit('edit', null)
 				})
 			})
 			this.order = JSON.parse(decodeURIComponent(option.order));
 		},
 		onUnload() {  
-		// 移除监听事件  
-			uni.$off('item');  
+			// 移除监听事件  
+			uni.$off('append');  
+			uni.$off('modify');
+			uni.$off('delete');
 		},
 		methods: {
 			sub() { 
@@ -113,7 +125,6 @@
 						});
 					})
 				}	
-				
 			},
 			jumpProductAppend() {
 				uni.navigateTo({

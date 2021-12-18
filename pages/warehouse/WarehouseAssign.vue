@@ -2,7 +2,7 @@
 	<view class="user_list">
 		<view class="uni-list">
 			<radio-group @change="radioChange">
-				<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in buyer" :key="index">
+				<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in warehouseKeeper" :key="index">
 					<view class="list">
 						<radio class="radio" :value="item.id" :checked="index === current" />
 						<view class="list_l"></view>
@@ -28,31 +28,29 @@
 		data() {
 			return {
 				current: '',
-				buyer: '',
+				warehouseKeeper: '',
 				request: {
-					role: 'BUYER',
+					role: 'WAREHOUSE_KEEPER',
 					page: 0,
 					size: 1000
 				},
 				purchaseOrderId: '',
-				buyerId: '',
-				quantity: ''
+				warehouseKeeperId: '',
 			};
 		},
 		onLoad(option) {
 			this.purchaseOrderId = option.purchaseOrderId
-			this.quantity = option.quantity
 			this.$api.http.get('/user/findAllByRole', this.request).then(res => {
-				this.buyer = res.content
+				this.warehouseKeeper = res.content
 			})
 		},
 		methods: {
 			radioChange: function(evt) {
-				this.buyerId = evt.detail.value
+				this.warehouseKeeperId = evt.detail.value
 			},
 			sub() {	
-				this.$api.http.put('/purchaseOrder/assign?purchaseOrderId='
-						+this.purchaseOrderId+'&buyerId='+this.buyerId+'&quantity='+this.quantity, '').then(res => {
+				this.$api.http.put('/purchaseOrder/putIntoWarehouse?purchaseOrderId='
+						+this.purchaseOrderId+'&warehouseKeeperId='+this.warehouseKeeperId+'&quantity='+this.quantity, '').then(res => {
 					uni.navigateTo({
 						url: './Purchase'
 					});

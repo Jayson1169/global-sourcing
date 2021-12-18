@@ -35,7 +35,7 @@
 		<view class="H50"></view>
 		<view class="p_btn_group" v-if="purchaseOrder.status === 'PENDING' && role === 'ADMIN'">
 			<button class="p_btn cu-btn bg-red margin-tb-sm lg" @click="rejectPurchase">核验不通过</button>
-			<button class="p_btn cu-btn bg-green margin-tb-sm lg" @click="acceptPurchase">分配仓管</button>
+			<button class="p_btn cu-btn bg-green margin-tb-sm lg" @click="warehouseAssign">分配仓管</button>
 		</view>
 	</view>
 </template>
@@ -85,22 +85,25 @@
 					}
 				});
 			},
-			acceptPurchase() {
-				let _this = this;
-				uni.showModal({
-					content: "核验通过",
-					cancelText: "取消",  
-					confirmText: "确认",
-					success: function(res) {
-						if (res.confirm) {
-							_this.$api.http.put('/purchaseOrder/confirm?id='+_this.purchaseOrder.id, null).then(res => {
-								uni.navigateTo({
-									url: './Purchase'
-								})
-							})
-						}
-					}
-				});
+			warehouseAssign() {
+				uni.navigateTo({
+					url: '../warehouse/WarehouseAssign'
+				})
+				// let _this = this;
+				// uni.showModal({
+				// 	content: "核验通过",
+				// 	cancelText: "取消",  
+				// 	confirmText: "确认",
+				// 	success: function(res) {
+				// 		if (res.confirm) {
+				// 			_this.$api.http.put('/purchaseOrder/confirm?id='+_this.purchaseOrder.id, null).then(res => {
+				// 				uni.navigateTo({
+				// 					url: './Purchase'
+				// 				})
+				// 			})
+				// 		}
+				// 	}
+				// });
 			}
 		}
 	}

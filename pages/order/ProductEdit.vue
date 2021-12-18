@@ -116,14 +116,16 @@
 		width: 100%;
 		z-index: 9999;
 	}
-	.p_btn {
-		width: 50%; 
-		margin: 5px;
-	}
 	.p_btn_group {
-		padding: 1upx 30upx;
-		display: flex;
-		align-items: center;
-		min-height: 100upx;
+		padding: 0rpx 20rpx 0rpx 20rpx;
+		display: flex;			
+		position: fixed;
+		bottom: 0;
+		z-index: 9999;
+		width: 100%;
+		justify-content: space-between;
+		.p_btn {
+			width: 345rpx; 
+		}
 	}
 </style>

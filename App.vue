@@ -15,5 +15,6 @@
 <style lang="scss">
 	/*每个页面公共css */
     @import "colorui/main.css";
+	@import "colorui/iconfont.css";
     @import "@/common/uni.css";
 </style>

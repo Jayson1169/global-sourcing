@@ -89,6 +89,11 @@
 			};
 		},
 		onLoad() {
+			uni.$on('edit', (e) => {
+				this.$api.http.get('/saleOrder/findAll', this.request).then(res => {
+					this.orderList = res.content
+				})
+			})
 			this.$api.http.get('/saleOrder/findAll', this.request).then(res => {
 				this.orderList = res.content
 			})
