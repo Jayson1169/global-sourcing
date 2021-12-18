@@ -1,7 +1,8 @@
 <template>
 	<view class="product">		
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>商品名称：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">商品名称：</view>
 			<input placeholder="请输入商品名称" v-model="item.product.name"></input>
 		</view>
 	<!-- 	<view class="cu-form-group">
@@ -9,27 +10,33 @@
 			<input placeholder="请输入商品品牌" v-model="item.product.brand"></input>
 		</view> -->
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>商品型号：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">商品型号：</view>
 			<input placeholder="请输入商品型号" v-model="item.product.specification"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'white'}">*</text>生产厂家：</view>
+			<text :style="{color:'white'}">*</text>
+			<view class="title">生产厂家：</view>
 			<input placeholder="请输入生产厂家" v-model="item.product.manufacturer"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'white'}">*</text>生产地区：</view>
+			<text :style="{color:'white'}">*</text>
+			<view class="title">生产地区：</view>
 			<input placeholder="请输入生产地区" v-model="item.product.origin"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'white'}">*</text>备注信息：</view>
+			<text :style="{color:'white'}">*</text>
+			<view class="title">备注信息：</view>
 			<input placeholder="请输入备注信息" v-model="item.product.remark"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>销售价格：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">销售价格：</view>
 			<input type="digit" placeholder="请输入销售价格" v-model="item.salePrice" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>销售数量：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">销售数量：</view>
 			<input type="number" placeholder="请输入销售数量" v-model="item.quantity"></input>
 		</view>
 		<view class="H50"></view>

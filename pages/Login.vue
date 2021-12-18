@@ -24,13 +24,13 @@ export default {
 	data() {
 		return {
 			userForm: {
-				username: '18390818785',
-				password: 'abc123456'
+				username: 'admin',
+				password: 'admin'
 			}
 		};
 	},
 	onLoad() {
-		this.login()
+		// this.login()
 	},
 	methods: {
 		login() {

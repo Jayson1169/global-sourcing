@@ -21,19 +21,23 @@
 		</view>
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
 			<input placeholder="请输入姓名" v-model="order.address.name"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>身份证号：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">身份证号：</view>
 			<input type="idcard" placeholder="请输入身份证号" v-model="order.address.idNumber" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>手机号码：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">手机号码：</view>
 			<input type="number" placeholder="请输入手机号码" v-model="order.address.phoneNumber" maxlength="11"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>收货地址：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">收货地址：</view>
 			<input placeholder="请输入收货地址" v-model="order.address.shipAddress"></input>
 		</view>
 		<view class="H50"></view>

@@ -1,6 +1,5 @@
 <template>
-	<!-- 驳回理由 -->
-	<view class="prudct">
+	<view>
 		<view class="p_order">采购明细</view>
 		<view class="cu-form-group">
 			<view class="title">采购照片：</view>
@@ -114,19 +113,27 @@
 	.p_order {
 		padding: 10px;
 	}
+
 	.p_image {
 		width: 162rpx;
 		height: 162rpx;
-		padding: 10rpx;
+		padding: 10rpx 10rpx 10rpx 0rpx;
 	}
-	.p_btn {
-		width: 50%; 
-		margin: 5px;
-	}
+
 	.p_btn_group {
-		padding: 1upx 30upx;
-		display: flex;
-		align-items: center;
-		min-height: 100upx;
+		padding: 0rpx 20rpx 0rpx 20rpx;
+		display: flex;			
+		position: fixed;
+		bottom: 0;
+		z-index: 9999;
+		width: 100%;
+		justify-content: space-between;
+		.p_btn {
+			width: 345rpx; 
+			// margin: 10px;
+			// padding: 10rpx;
+		}
 	}
+
+	
 </style>

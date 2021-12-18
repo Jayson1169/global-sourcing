@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "订单管理",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-easyinput": "/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput",
+    "empty": "/components/empty"
+  }
+}

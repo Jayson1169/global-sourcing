@@ -239,7 +239,7 @@
 					&:before{
 						content: '￥';
 						font-size: $font-sm;
-						margin: 0 2upx 0 0upx;
+						margin: 0 2upx 0 5upx;
 					}
 				}
 			}

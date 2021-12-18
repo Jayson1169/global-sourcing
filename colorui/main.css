@@ -2330,11 +2330,13 @@ button.cuIcon.lg {
 
 .cu-form-group .title {
 	text-align: justify;
-	padding-right: 30upx;
+	padding-right: 0upx;
 	font-size: 30upx;
 	position: relative;
 	height: 60upx;
 	line-height: 60upx;
+	/* add */
+	flex: 0 0 160rpx;	
 }
 
 .cu-form-group input {
