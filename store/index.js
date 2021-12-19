@@ -5,24 +5,24 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		uerInfo: {},
+		user: {},
 		hasLogin: false
 	},
 	mutations: {
 		login(state, provider) {
 			state.hasLogin = true
-			state.uerInfo.token = provider.token
-			state.uerInfo.userName = provider.user_name
+			state.user.token = provider.token
+			state.user.name = provider.name
 			uni.setStorage({
-				key: 'uerInfo',
+				key: 'user',
 				data: provider
 			})
 		},
 		logout(state) {
 			state.hasLogin = false
-			state.uerInfo = {}
+			state.user = {}
 			uni.removeStorage({
-				key: 'uerInfo'
+				key: 'user'
 			});
 		}
 	}

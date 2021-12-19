@@ -3,23 +3,28 @@
 		<view class="top">
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</view>
 			<input placeholder="长度在6～18位之间,不包含特殊字符" v-model="userForm.username" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</view>
 			<input password="true" placeholder="长度在6～18位之间,包含数字和字母" v-model="userForm.password" maxlength="18"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
 			<input placeholder="长度在2～10位之间" v-model="userForm.name"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title"><text :style="{color:'white'}">*</text>手机号码：</view>
+			<text :style="{color:'white'}">*</text>
+			<view class="title">手机号码：</view>
 			<input type="number" placeholder="请输入手机号码"  v-model="userForm.phoneNumber" maxlength="11"></input>
 		</view>
 		<view class="cu-form-group" @click="useOutClickSide">
-			<view class="title"><text :style="{color:'red'}">*</text>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份：</view>
+			<text :style="{color:'red'}">*</text>
+			<view class="title">身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份：</view>
 	        <easy-select ref="easySelect" size="medium" @selectOne="selectOne" v-model="role"></easy-select>
 	    </view>	
 		<view class="H50"></view>

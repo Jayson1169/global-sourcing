@@ -15,7 +15,7 @@
 			v-for="(item, index) in orderList" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || tabCurrentIndex === 0"
 			class="order-item"
 		>
-			<view @click="jumpOrderDetail(item)"> 
+			<view @click="jumpOrderTransport(item)"> 
 				<view class="i-top b-b">
 					<text class="time">{{item.updateTime}}</text>
 				</view>
@@ -48,7 +48,7 @@
 				</view>
 			</view>
 			<view class="action-box b-t" v-if="item.state != 9">
-				<button class="action-btn recom" @click="jumpOrderSend(item)">发送快递</button>
+				<button class="action-btn recom" @click="jumpOrderTransport(item)">发送快递</button>
 			</view>
 		</view>	
 	</view>
@@ -92,9 +92,9 @@
 					url: '../order/OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
 				});
 			},
-			jumpOrderSend(order) {
+			jumpOrderTransport(order) {
 				uni.navigateTo({
-					url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
+					url: './OrderTransport?order='+encodeURIComponent(JSON.stringify(order))
 				})
 			},
 			//顶部tab点击

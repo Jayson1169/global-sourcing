@@ -14,7 +14,7 @@
 					<input type="password" placeholder="请输入您的密码" v-model="userForm.password"/>
 				</view>
 			</view>
-			<view class="login-button" @click="login">登陆</view>
+			<view class="login-button" @click="sub">登陆</view>
 		</view>
 	</view>
 </template>
@@ -25,14 +25,14 @@
 		data() {
 			return {
 				userForm: {
-					username: '15526483150',
-					password: 'abc123456'
+					username: 'admin',
+					password: 'admin'
 				}
 			};
 		},
 		methods: {
-			login() {
-				let _this = this
+			...mapMutations(['logout']),
+			sub() {
 				this.$api.http.login("/login", this.userForm).then(res => {
 					this.$api.msg.successToast("登录成功")
 					// setTimeout(function() {
@@ -43,13 +43,14 @@
 					// 	})
 					// }, 500)
 					uni.setStorageSync('user', res)
-					// this.login(res);
+					this.login(res);
 					let roleList = this.$api.json.roleList
 					uni.redirectTo({
 						url: roleList[res.role]
 					})
 				})
-			}
+			},
+			...mapMutations(['login'])
 		}
 	};
 </script>

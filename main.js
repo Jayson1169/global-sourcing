@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import store from './store'
 import json from './static_data.js'
 import http from '@/common/axios.js'
 import validate from '@/common/ys-validate.js'
@@ -7,7 +8,7 @@ import msg from '@/common/toast.js'
 import scan from '@/components/p-scan/scan.vue'
 import './assets/style/border.css'
 import './assets/style/main.css'
-import store from './store'
+
 
 Vue.component('scan', scan)
 
