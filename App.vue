@@ -2,36 +2,36 @@
 	import {mapMutations} from 'vuex';
 	export default {
 		onLaunch: function() {
-			
-			console.log(plus.getStorage('user', res))
-			uni.getStorage({
-				key: 'user',
-				success:(res) => {
-					console.log(res.data)
-					this.login(res.data);
-					let roleList = this.$api.json.roleList
-					uni.navigateTo({
-						url: roleList[res.role]
-					})
-					// 如果还需要重新校验或是想要刷新token的有效时间 就再联网请求一次
-					// uni.request({
-					// 	url: `${this.$serverUrl}/auth.php`,
-					// 	header: {
-					// 		"Content-Type": "application/x-www-form-urlencoded",
-					// 		"Token":res.data.token
-					// 	},
-					// 	data: {
-					// 		"username":res.data.user_name
-					// 	},
-					// 	method: "POST",
-					// 	success: (e) => {
-					// 		if (e.statusCode === 200 && e.data.code === 0) {
-					// 			this.login(e.data);
-					// 		}
-					// 	}
-					// })
-				}
-			});
+			// uni.getStorage({
+			// 	key: 'user',
+			// 	success:(res) => {
+			// 		this.login(res.data);
+			// 		let roleList = this.$api.json.roleList
+			// 		uni.reLaunch({
+			// 			url: roleList[res.data.role],
+			// 			success() {
+			// 				plus.navigator.closeSplashscreen();
+			// 			}
+			// 		})
+			// 		如果还需要重新校验或是想要刷新token的有效时间 就再联网请求一次
+			// 		uni.request({
+			// 			url: `${this.$serverUrl}/auth.php`,
+			// 			header: {
+			// 				"Content-Type": "application/x-www-form-urlencoded",
+			// 				"Token":res.data.token
+			// 			},
+			// 			data: {
+			// 				"username":res.data.user_name
+			// 			},
+			// 			method: "POST",
+			// 			success: (e) => {
+			// 				if (e.statusCode === 200 && e.data.code === 0) {
+			// 					this.login(e.data);
+			// 				}
+			// 			}
+			// 		})
+			// 	}
+			// });
 		},
 		onShow: function() {
 			console.log('App Show')

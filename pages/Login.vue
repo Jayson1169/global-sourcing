@@ -30,9 +30,15 @@
 				}
 			};
 		},
+		onLoad() {
+			let user = uni.getStorageSync('user')
+			if (user != null) {
+				this.userForm.username = user.username;
+				this.userForm.password = user.password;
+			}
+		},
 		methods: {
 			sub() {
-				console.log(123)
 				this.$api.http.login("/login", this.userForm).then(res => {
 					this.$api.msg.successToast("登录成功")
 					// setTimeout(function() {
@@ -42,9 +48,9 @@
 					// 		url: roleList[res.role]
 					// 	})
 					// }, 500)
-					plus.storage('user', res)
+					res.password = this.userForm.password
 					uni.setStorageSync('user', res)
-					this.login(res);
+					// this.login(res);
 					let roleList = this.$api.json.roleList
 					uni.redirectTo({
 						url: roleList[res.role]

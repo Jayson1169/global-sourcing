@@ -3,12 +3,12 @@
 	<view class="product">
 		<view class="order">采购明细</view>
 		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
+			<text :style="{color:'white'}">*</text>
 			<view class="title">采购照片：</view>
 			<upimg @photo="getPhoto" :photo="purchaseOrder.photo"></upimg>
 		</view>
 		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
+			<text :style="{color:'white'}">*</text>
 			<view class="title">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</view>
 			<upimg @photo="getInvoice" :photo="purchaseOrder.invoice"></upimg>
 		</view>
@@ -39,7 +39,7 @@
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品条码：</view>
 			<input placeholder="请点击扫码或输入条形码" v-model="purchaseOrder.product.barcode"></input>
-			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
+			<image src="@/imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -85,7 +85,7 @@
 					this.purchaseOrder.purchasePrice = e.target.value
 				})
 			},
-			sub() {
+			sub() { 			
 				this.$api.http.put('/purchaseOrder/uploadPurchaseInfo', this.purchaseOrder).then(res => {
 					uni.showToast({
 						title: '添加成功',
@@ -100,16 +100,13 @@
 				this.purchaseOrder.invoiceDate = e.target.value;
 			},
 			getScanCode() {
+				let _this = this;
 				uni.scanCode({
 					scanType:['barCode'],
 					success: function (res) {
-						this.purchaseOrder.product.barcode = res.result;
-						uni.showToast({
-							title: '扫描成功',
-							icon: 'none'
-						})
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
+						_this.purchaseOrder.product.barcode = res.result;
 					}
 				})
 			}
