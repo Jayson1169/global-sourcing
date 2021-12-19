@@ -4,7 +4,7 @@
 			<view class="more">
 				<view class='mo'>
 					<view class='mo_01'>财务分析</view>
-					<navigator url="/pages/user/tongji/tongji" hover-class="none"> 
+					<navigator url="/pages/statistics/Statistics" hover-class="none"> 
 						<view class='mo_02'>更多</view>
 					</navigator>
 				</view>
@@ -84,19 +84,13 @@
 		data() {
 			return {
 				shop: {},
-				role: ''
 			}
-		},
-		components: {
 		},
 		onLoad() {  
 			this.role = uni.getStorageSync('user').role
-			this.load()
+			this.shop = this.$api.json.count_order
 		},
 		methods: {
-			load() {
-				this.shop = this.$api.json.count_order
-			}	
 		}
 	}
 </script>

@@ -31,7 +31,6 @@
 			};
 		},
 		methods: {
-			...mapMutations(['logout']),
 			sub() {
 				this.$api.http.login("/login", this.userForm).then(res => {
 					this.$api.msg.successToast("登录成功")
