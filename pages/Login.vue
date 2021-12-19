@@ -32,6 +32,7 @@
 		},
 		methods: {
 			sub() {
+				console.log(123)
 				this.$api.http.login("/login", this.userForm).then(res => {
 					this.$api.msg.successToast("登录成功")
 					// setTimeout(function() {
@@ -41,6 +42,7 @@
 					// 		url: roleList[res.role]
 					// 	})
 					// }, 500)
+					plus.storage('user', res)
 					uni.setStorageSync('user', res)
 					this.login(res);
 					let roleList = this.$api.json.roleList

@@ -2,9 +2,12 @@
 	import {mapMutations} from 'vuex';
 	export default {
 		onLaunch: function() {
+			
+			console.log(plus.getStorage('user', res))
 			uni.getStorage({
 				key: 'user',
 				success:(res) => {
+					console.log(res.data)
 					this.login(res.data);
 					let roleList = this.$api.json.roleList
 					uni.navigateTo({
