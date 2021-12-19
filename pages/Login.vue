@@ -20,39 +20,38 @@
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			userForm: {
-				username: 'admin',
-				password: 'admin'
-			}
-		};
-	},
-	onLoad() {
-		// this.login()
-	},
-	methods: {
-		login() {
-			let _this = this
-			_this.$api.http.login("/login", _this.userForm).then(res => {
-				_this.$api.msg.successToast("登录成功")
-				// setTimeout(function() {
-				// 	uni.setStorageSync('user', res)
-				// 	let roleList = _this.$api.json.roleList
-				// 	uni.redirectTo({
-				// 		url: roleList[res.role]
-				// 	})
-				// }, 500)
-				uni.setStorageSync('user', res)
-				let roleList = _this.$api.json.roleList
-				uni.redirectTo({
-					url: roleList[res.role]
+	import {mapMutations} from 'vuex';
+	export default {
+		data() {
+			return {
+				userForm: {
+					username: '15526483150',
+					password: 'abc123456'
+				}
+			};
+		},
+		methods: {
+			login() {
+				let _this = this
+				this.$api.http.login("/login", this.userForm).then(res => {
+					this.$api.msg.successToast("登录成功")
+					// setTimeout(function() {
+					// 	uni.setStorageSync('user', res)
+					// 	let roleList = _this.$api.json.roleList
+					// 	uni.redirectTo({
+					// 		url: roleList[res.role]
+					// 	})
+					// }, 500)
+					uni.setStorageSync('user', res)
+					// this.login(res);
+					let roleList = this.$api.json.roleList
+					uni.redirectTo({
+						url: roleList[res.role]
+					})
 				})
-			})
+			}
 		}
-	}
-};
+	};
 </script>
 
 <style lang="scss">

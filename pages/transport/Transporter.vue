@@ -89,7 +89,7 @@
 		methods: {
 			jumpOrderDetail(order){
 				uni.navigateTo({
-					url: './OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
+					url: '../order/OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
 				});
 			},
 			jumpOrderSend(order) {
@@ -108,7 +108,6 @@
 <style lang="scss">
 	page, .content{
 		background: $page-color-base;
-		height: 100%;
 	}
 	.search {
 		background: #FFFFFF;

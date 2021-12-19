@@ -186,7 +186,7 @@
             "path" : "pages/transport/Transporter",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationStyle":"custom",
                 "enablePullDownRefresh": false
             }
             

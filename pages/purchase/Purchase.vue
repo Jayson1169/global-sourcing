@@ -21,11 +21,6 @@
 				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
 				<text v-if="item.status==='REJECTED'" class="del-btn yticon icon-iconfontshanchu1"></text>
 				<text v-if="item.status==='REJECTED'" class="state" style="color: '#909399'">核验未通过</text>
-				<!-- <text 
-					v-if="status_to_state[item.status]===5" 
-					class="del-btn yticon icon-iconfontshanchu1"
-					@click="deleteOrder(index)"
-				></text> -->
 			</view>
 			<view class="goods-box-single" @click="jumpDetail(item)">
 				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
@@ -36,7 +31,6 @@
 					<text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.purchasePrice}}</text>
 				</view>
 			</view>
-			
 			<view class="price-box" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">
 				共
 				<text class="num">{{item.quantity}}</text>
@@ -104,11 +98,11 @@
 					placeholderText: "请输入采购数量",
 					success: function(res) {
 						if (res.confirm) {
-							// _this.$api.http.put('/purchaseOrder/reject?id='+_this.purchaseOrder.id+'&rejectReason='+res.content, null).then(res => {
-							// 	uni.navigateTo({
-							// 		url: './Purchase'
-							// 	})
-							// })
+							_this.$api.http.put('/purchaseOrder/reject?id='+_this.purchaseOrder.id+'&rejectReason='+res.content, null).then(res => {
+								uni.navigateTo({
+									url: './Purchase'
+								})
+							})
 							console.log("修改采购数量为:", res.content)
 						}
 					}
@@ -121,7 +115,6 @@
 <style lang="scss">
 	page, .content{
 		background: $page-color-base;
-		height: 100%;
 	}
 	.search {
 		background: #FFFFFF;

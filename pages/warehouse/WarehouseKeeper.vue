@@ -19,7 +19,7 @@
 				<text class="time">{{item.createTime}}</text>
 				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
 			</view>
-			<view class="goods-box-single" @click="status_to_state[item.status] == 1?jumpToPurchaseUpload(item):jumpPurcahseDetail(item)">
+			<view class="goods-box-single" @click="jumpPurcahseDetail(item)">
 				<image class="goods-img" :src="item.photo" mode="aspectFill"></image>
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
@@ -71,6 +71,11 @@
 			tabClick(index){
 				this.tabCurrentIndex = index;
 			},
+			jumpPurcahseDetail(purchaseOrder){
+				uni.navigateTo({
+					url: '../purchase/PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+				});
+			},
 			jumpToPurchaseReceive(purchaseOrder) {
 				uni.navigateTo({
 					url: '../purchase/PurchaseReceive?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
@@ -83,14 +88,6 @@
 <style lang="scss">
 	page, .content{
 		background: $page-color-base;
-		height: 100%;
-	}
-	.search {
-		background: #FFFFFF;
-		display: flex;
-		width: 100%;
-		box-sizing: border-box;
-		padding: 10px;
 	}
 	.swiper-box{
 		height: calc(100% - 40px);
@@ -261,8 +258,6 @@
 			}
 		}
 	}
-	
-	
 	/* load-more */
 	.uni-load-more {
 		display: flex;
@@ -271,22 +266,18 @@
 		align-items: center;
 		justify-content: center
 	}
-	
 	.uni-load-more__text {
 		font-size: 28upx;
 		color: #999
 	}
-	
 	.uni-load-more__img {
 		height: 24px;
 		width: 24px;
 		margin-right: 10px
 	}
-	
 	.uni-load-more__img>view {
 		position: absolute
 	}
-	
 	.uni-load-more__img>view view {
 		width: 6px;
 		height: 2px;
@@ -298,89 +289,70 @@
 		transform-origin: 50%;
 		animation: load 1.56s ease infinite
 	}
-	
 	.uni-load-more__img>view view:nth-child(1) {
 		transform: rotate(90deg);
 		top: 2px;
 		left: 9px
 	}
-	
 	.uni-load-more__img>view view:nth-child(2) {
 		transform: rotate(180deg);
 		top: 11px;
 		right: 0
 	}
-	
 	.uni-load-more__img>view view:nth-child(3) {
 		transform: rotate(270deg);
 		bottom: 2px;
 		left: 9px
 	}
-	
 	.uni-load-more__img>view view:nth-child(4) {
 		top: 11px;
 		left: 0
 	}
-	
 	.load1,
 	.load2,
 	.load3 {
 		height: 24px;
 		width: 24px
 	}
-	
 	.load2 {
 		transform: rotate(30deg)
 	}
-	
 	.load3 {
 		transform: rotate(60deg)
 	}
-	
 	.load1 view:nth-child(1) {
 		animation-delay: 0s
 	}
-	
 	.load2 view:nth-child(1) {
 		animation-delay: .13s
 	}
-	
 	.load3 view:nth-child(1) {
 		animation-delay: .26s
 	}
-	
 	.load1 view:nth-child(2) {
 		animation-delay: .39s
 	}
-	
 	.load2 view:nth-child(2) {
 		animation-delay: .52s
 	}
-	
 	.load3 view:nth-child(2) {
 		animation-delay: .65s
 	}
-	
 	.load1 view:nth-child(3) {
 		animation-delay: .78s
 	}
-	
 	.load2 view:nth-child(3) {
 		animation-delay: .91s
 	}
-	
 	.load3 view:nth-child(3) {
 		animation-delay: 1.04s
 	}
-	
 	.load1 view:nth-child(4) {
 		animation-delay: 1.17s
 	}
-	
 	.load2 view:nth-child(4) {
 		animation-delay: 1.3s
 	}
-	
 	.load3 view:nth-child(4) {
 		animation-delay: 1.43s
 	}
@@ -392,12 +364,10 @@
 		width: 100%;
 		z-index: 9999;
 	}
-	
 	@-webkit-keyframes load {
 		0% {
 			opacity: 1
 		}
-	
 		100% {
 			opacity: .2
 		}
