@@ -65,6 +65,7 @@ const roleList = {
 				"ADMIN": '/pages/Home', 
 				"BUYER": '/pages/purchase/Purchaser',
 				"SALESPERSON": '/pages/order/Order',
+				"WAREHOUSE_KEEPER": '/pages/warehouse/WarehouseKeeper'
 			}
 
 export default {

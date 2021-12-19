@@ -15,7 +15,6 @@
 				</view>
 			</view>
 			<view class="login-button" @click="login">登陆</view>
-			<view class="login-button" @click="scan">扫码</view>
 		</view>
 	</view>
 </template>
@@ -25,8 +24,8 @@ export default {
 	data() {
 		return {
 			userForm: {
-				username: '18390818785',
-				password: 'abc123456'
+				username: 'admin',
+				password: 'admin'
 			}
 		};
 	},
@@ -50,15 +49,6 @@ export default {
 				uni.redirectTo({
 					url: roleList[res.role]
 				})
-			})
-		},
-		scan() {
-			uni.scanCode({
-				scanType:['barCode'],
-				success: function (res) {
-					console.log('条码类型：' + res.scanType);
-					console.log('条码内容：' + res.result);
-				}
 			})
 		}
 	}

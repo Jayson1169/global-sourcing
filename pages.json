@@ -139,6 +139,14 @@
 		        "navigationBarTitleText": "采购信息",
 		        "enablePullDownRefresh": false
 		    }
+		},
+		{
+		    "path" : "pages/purchase/PurchaseReceive",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "接收商品",
+		        "enablePullDownRefresh": false
+		    }
 		}
         ,{
             "path" : "pages/order/OrderModify",
@@ -150,16 +158,14 @@
             
         }
         ,{
-            "path" : "pages/warehouse/Warehouse",
+            "path" : "pages/warehouse/WarehouseKeeper",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "navigationStyle":"custom"
             }
-            
         }
         ,{
-            "path" : "pages/warehouse/WarehouseAssign",
+            "path" : "pages/warehouse/WarehouseKeeperAssign",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "分配仓管",
@@ -169,6 +175,15 @@
         }
         ,{
             "path" : "pages/test/test",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/transport/Transporter",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

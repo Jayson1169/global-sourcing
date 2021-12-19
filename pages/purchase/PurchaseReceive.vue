@@ -3,17 +3,15 @@
 		<view class="p_order">采购明细</view>
 		<view class="cu-form-group">
 			<view class="title">采购照片：</view>
-			<image class="p_image" :src="purchaseOrder.photo" mode="aspectFill" @click="previewImage(purchaseOrder.photo)" v-if="purchaseOrder.invoice != null"></image>
-			<image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.invoice == null"></image>
+			<image class="p_image" :src="purchaseOrder.photo" mode="aspectFill" @click="previewImage(purchaseOrder.photo)"></image>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</view>
-			<image class="p_image" :src="purchaseOrder.invoice" mode="aspectFill" @click="previewImage(purchaseOrder.invoice)" v-if="purchaseOrder.invoice != null"></image>
-			<image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.invoice == null"></image>		
+			<image class="p_image" :src="purchaseOrder.invoice" mode="aspectFill" @click="previewImage(purchaseOrder.invoice)"></image>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">发票日期：</view>
-			<input placeholder="待采购输入发票日期" v-model="purchaseOrder.invoiceDate" disabled></input>
+			<input v-model="purchaseOrder.invoiceDate" disabled></input>
 		</view>
 		<view class="p_order">商品信息</view>
 		<view class="cu-form-group">
@@ -30,27 +28,23 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品条码：</view>
-			<input placeholder="待采购输入条形码" v-model="purchaseOrder.product.barcode" disabled></input>
+			<input v-model="purchaseOrder.product.barcode" disabled></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">采购单价：</view>
-			<input placeholder="待采购输入采购单价" v-model="purchaseOrder.purchasePrice" disabled></input>
+			<input v-model="purchaseOrder.purchasePrice" disabled></input>
 		</view>
-		<view v-if="purchaseOrder.status==='CONFIRMED'">
-			<view class="p_order">仓管信息</view>
-			<view class="cu-form-group">
-				<view class="title">仓管姓名：</view>
-				<input v-model="purchaseOrder.warehouseKeeper.name" disabled></input>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">仓管电话：</view>
-				<input v-model="purchaseOrder.warehouseKeeper.phoneNumber" disabled></input>
-			</view>
+		<view class="p_order">接收信息</view>
+		<view class="cu-form-group">
+			<view class="title">接收数量：</view>
+			<input placeholder="请扫码确定接收数量" v-model="number" disabled></input>
+			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 		</view>
 		<view class="H50"></view>
-		<view class="p_btn_group" v-if="purchaseOrder.status === 'PENDING' && role === 'ADMIN'">
-			<button class="p_btn cu-btn bg-red margin-tb-sm lg" @click="rejectPurchase">核验不通过</button>
-			<button class="p_btn cu-btn bg-green margin-tb-sm lg" @click="warehouseKeeperAssign">分配仓管</button>
+		<view class="o_btn">
+			<view class="flex flex-direction">
+				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">确定接收</button>
+			</view>
 		</view>
 	</view>
 </template>
@@ -64,7 +58,7 @@
 		data() {
 			return {
 				purchaseOrder: {"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},
-				date: '请选择日期'
+				number: null
 			};
 		},
 		onLoad(option) {
@@ -80,29 +74,43 @@
 					urls: preview
 				});
 			},
-			rejectPurchase() {
+			sub() {
 				let _this = this;
 				uni.showModal({
-					title: '采购核验',
+					title: '请确定接收数量',
 					cancelText: "取消",  
 					confirmText: "确定",
-					confirmColor:'#F54E40',
 					editable: true,
-					placeholderText: "请输入拒绝理由",
+					content: _this.number,
 					success: function(res) {
 						if (res.confirm) {
-							_this.$api.http.put('/purchaseOrder/reject?id='+_this.purchaseOrder.id+'&rejectReason='+res.content, null).then(res => {
+							_this.$api.http.put('/purchaseOrder/putIntoWarehouse?id='+_this.purchaseOrder.id+'&quantity='+res.content, null).then(res => {
 								uni.navigateTo({
-									url: './Purchase'
+									url: '../warehouse/WarehouseKeeper'
 								})
 							})
 						}
 					}
 				});
 			},
-			warehouseKeeperAssign() {
-				uni.navigateTo({
-					url: '../warehouse/WarehouseKeeperAssign?purchaseOrderId='+this.purchaseOrder.id
+			getScanCode() {
+				uni.scanCode({
+					scanType:['barCode'],
+					success: function (res) {
+						if (res.result == this.purchaseOrder.product.barcode) {
+							uni.showToast({
+								title: '扫描成功,商品为:'+this.purchaseOrder.product.name,
+								icon: 'none'
+							})
+							if (this.number == null) this.number = 1;
+							else this.number += 1;
+						} else {
+							uni.showToast({
+								title: '扫描失败,不是该商品',
+								icon: 'none'
+							})
+						}
+					}
 				})
 			}
 		}
@@ -116,25 +124,17 @@
 	.p_order {
 		padding: 10px;
 	}
-
 	.p_image {
 		width: 162rpx;
 		height: 162rpx;
 		padding: 10rpx 10rpx 10rpx 0rpx;
 	}
-
-	.p_btn_group {
-		padding: 0rpx 20rpx 0rpx 20rpx;
-		display: flex;			
+	.o_btn {
+		background: #F7F6FB;
+		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;
-		z-index: 9999;
 		width: 100%;
-		justify-content: space-between;
-		.p_btn {
-			width: 345rpx; 
-		}
+		z-index: 9999;
 	}
-
-	
 </style>
