@@ -100,12 +100,13 @@
 				this.purchaseOrder.invoiceDate = e.target.value;
 			},
 			getScanCode() {
+				let _this = this;
 				uni.scanCode({
 					scanType:['barCode'],
 					success: function (res) {
-						this.purchaseOrder.product.barcode = res.result;
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
+						_this.purchaseOrder.product.barcode = res.result;
 					}
 				})
 			}
