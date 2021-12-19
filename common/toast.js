@@ -4,11 +4,11 @@ const toast = str => {
 		uni.showToast({
 			title: str,
 			icon: "none",
-			duration: 2000,
+			duration: 500,
 			success: () => {
 				setTimeout(() => {
 					resolve
-				}, 2000)
+				}, 500)
 			}
 		})
 	})

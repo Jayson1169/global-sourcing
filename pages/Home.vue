@@ -58,7 +58,7 @@
 				</navigator>
 			</view>
 			<view class="jiu_01">
-				<navigator url="/pages/user/tongji/tongji" hover-class="none"> 
+				<navigator url="/pages/statistics/Statistics" hover-class="none"> 
 					<view><image src="../imgs/treasure.png"/></view>
 					<view>财务分析</view>
 				</navigator>

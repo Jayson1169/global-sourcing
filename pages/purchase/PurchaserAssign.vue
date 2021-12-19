@@ -51,12 +51,28 @@
 				this.buyerId = evt.detail.value
 			},
 			sub() {	
-				this.$api.http.put('/purchaseOrder/assign?purchaseOrderId='
-						+this.purchaseOrderId+'&buyerId='+this.buyerId+'&quantity='+this.quantity, '').then(res => {
-					uni.navigateTo({
-						url: './Purchase'
-					});
-				})
+				let _this = this;
+				uni.showModal({
+					title: '确定采购数量',
+					cancelText: "取消",  
+					confirmText: "确定",
+					editable: true,
+					content: _this.quantity,
+					placeholderText: "请输入采购数量",
+					success: function(res) {
+						if (res.confirm) {
+							_this.$api.http.put('/purchaseOrder/assign?purchaseOrderId='
+									+_this.purchaseOrderId+'&buyerId='+_this.buyerId+'&quantity='+res.content, '').then(res => {
+								_this.$api.msg.successToast("分配成功").then(res => {
+									uni.navigateTo({
+										url: './Purchase'
+									});
+								})
+							})
+						}
+					}
+				});
+				
 			}
 		}
 	}

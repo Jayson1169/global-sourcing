@@ -1,13 +1,9 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		// {
-		// 	"path" : "pages/test/test",
-		// 	"style" : {
-		// 		"navigationBarBackgroundColor": "#ffffff",
-		// 		"enablePullDownRefresh": false,
-		// 		"app-plus": {
-		// 			"bounce":"none"
-		// 		}
+		// 	"path": "pages/index/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "index"
 		// 	}
 		// },
 		{
@@ -54,7 +50,7 @@
 			}  
 		},
 		{
-			"path" : "pages/statistics/statistics",
+			"path" : "pages/statistics/Statistics",
 			"style" : {}
 		},
 		{
@@ -120,7 +116,11 @@
         ,{
             "path" : "pages/purchase/Purchaser",
             "style" : {
-            	"navigationStyle":"custom"
+            	"navigationBarBackgroundColor": "#ffffff",
+            	"enablePullDownRefresh": false,
+            	"app-plus": {
+            		"bounce":"none"
+            	}
             }
             
         }
@@ -139,6 +139,14 @@
 		        "navigationBarTitleText": "采购信息",
 		        "enablePullDownRefresh": false
 		    }
+		},
+		{
+		    "path" : "pages/purchase/PurchaseReceive",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "接收商品",
+		        "enablePullDownRefresh": false
+		    }
 		}
         ,{
             "path" : "pages/order/OrderModify",
@@ -150,16 +158,17 @@
             
         }
         ,{
-            "path" : "pages/warehouse/Warehouse",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+            "path" : "pages/warehouse/WarehouseKeeper",
+            "style" : {
+            	"navigationBarBackgroundColor": "#ffffff",
+            	"enablePullDownRefresh": false,
+            	"app-plus": {
+            		"bounce":"none"
+            	}
             }
-            
         }
         ,{
-            "path" : "pages/warehouse/WarehouseAssign",
+            "path" : "pages/warehouse/WarehouseKeeperAssign",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "分配仓管",
@@ -175,7 +184,34 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },{
+            "path" : "pages/transport/Transporter",
+            "style" : {
+            	"navigationBarBackgroundColor": "#ffffff",
+            	"enablePullDownRefresh": false,
+            	"app-plus": {
+            		"bounce":"none"
+            	}
+            }
+        },
+		{
+		    "path" : "pages/transport/OrderTransport",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "快递物流",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/transport/ProductTransport",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "快递物流",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",

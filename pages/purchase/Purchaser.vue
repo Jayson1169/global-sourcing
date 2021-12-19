@@ -23,7 +23,7 @@
 			</view>
 			<view class="goods-box-single" @click="status_to_state[item.status] == 1?jumpToPurchaseUpload(item):jumpPurcahseDetail(item)">
 				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
-				<image class="goods-img" src='@/imgs/order2.jpg' mode="aspectFill" v-if="item.photo === null"></image>				
+				<image class="goods-img" src='../../imgs/order2.jpg' mode="aspectFill" v-if="item.photo === null"></image>				
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
 					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
@@ -60,9 +60,9 @@
 				},
 				purchaseOrderList: [],
 				tabCurrentIndex: 0,
-				status_to_state: {"READY": 1, "PENDING": 2, "REJECTED": 1, "CONFIRMED": 3},
-				status_to_state2: {"READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "已完成"},
-				navList: ['全部', '待采购', '待核验', '已完成']
+				status_to_state: {"READY": 1, "PENDING": 2, "REJECTED": 1, "CONFIRMED": 3, "WAREHOUSED": 4},
+				status_to_state2: {"READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "待接收", "WAREHOUSED": "已完成"},
+				navList: ['全部', '待采购', '待核验', '待接收', '已完成']
 			};
 		},
 		onLoad(){

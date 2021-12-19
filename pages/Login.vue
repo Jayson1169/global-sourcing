@@ -14,55 +14,45 @@
 					<input type="password" placeholder="请输入您的密码" v-model="userForm.password"/>
 				</view>
 			</view>
-			<view class="login-button" @click="login">登陆</view>
-			<view class="login-button" @click="scan">扫码</view>
+			<view class="login-button" @click="sub">登陆</view>
 		</view>
 	</view>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			userForm: {
-				username: '18390818785',
-				password: 'abc123456'
-			}
-		};
-	},
-	onLoad() {
-		// this.login()
-	},
-	methods: {
-		login() {
-			let _this = this
-			_this.$api.http.login("/login", _this.userForm).then(res => {
-				_this.$api.msg.successToast("登录成功")
-				// setTimeout(function() {
-				// 	uni.setStorageSync('user', res)
-				// 	let roleList = _this.$api.json.roleList
-				// 	uni.redirectTo({
-				// 		url: roleList[res.role]
-				// 	})
-				// }, 500)
-				uni.setStorageSync('user', res)
-				let roleList = _this.$api.json.roleList
-				uni.redirectTo({
-					url: roleList[res.role]
-				})
-			})
-		},
-		scan() {
-			uni.scanCode({
-				scanType:['barCode'],
-				success: function (res) {
-					console.log('条码类型：' + res.scanType);
-					console.log('条码内容：' + res.result);
+	import {mapMutations} from 'vuex';
+	export default {
+		data() {
+			return {
+				userForm: {
+					username: 'admin',
+					password: 'admin'
 				}
-			})
+			};
+		},
+		methods: {
+			...mapMutations(['logout']),
+			sub() {
+				this.$api.http.login("/login", this.userForm).then(res => {
+					this.$api.msg.successToast("登录成功")
+					// setTimeout(function() {
+					// 	uni.setStorageSync('user', res)
+					// 	let roleList = _this.$api.json.roleList
+					// 	uni.redirectTo({
+					// 		url: roleList[res.role]
+					// 	})
+					// }, 500)
+					uni.setStorageSync('user', res)
+					this.login(res);
+					let roleList = this.$api.json.roleList
+					uni.redirectTo({
+						url: roleList[res.role]
+					})
+				})
+			},
+			...mapMutations(['login'])
 		}
-	}
-};
+	};
 </script>
 
 <style lang="scss">

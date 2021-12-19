@@ -17,14 +17,10 @@
 			class="order-item"
 		>
 			<view class="i-top b-b">
-				<text class="time">{{item.createTime}}</text>
+				<text class="time">{{item.updateTime}}</text>
 				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
-				<!-- <text class="state" style="color: '#909399'">{{status_to_state2[item.status]}}</text> -->
-				<text 
-					v-if="status_to_state[item.status]===5" 
-					class="del-btn yticon icon-iconfontshanchu1"
-					@click="deleteOrder(index)"
-				></text>
+				<text v-if="item.status==='REJECTED'" class="del-btn yticon icon-iconfontshanchu1"></text>
+				<text v-if="item.status==='REJECTED'" class="state" style="color: '#909399'">核验未通过</text>
 			</view>
 			<view class="goods-box-single" @click="jumpDetail(item)">
 				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
@@ -35,14 +31,14 @@
 					<text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.purchasePrice}}</text>
 				</view>
 			</view>
-			
 			<view class="price-box" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">
 				共
 				<text class="num">{{item.quantity}}</text>
 				件商品 实付款
 				<text class="price">{{item.quantity * item.purchasePrice}}</text>
 			</view>
-			<view class="action-box b-t" v-if="status_to_state[item.status] != 4">
+			<text v-if="item.status==='REJECTED'" style="font-size: 12px;">拒绝理由：{{item.rejectReason}}</text>
+			<view class="action-box b-t" v-if="status_to_state[item.status] != 4 && status_to_state[item.status] != 5">
 				<button class="action-btn" v-if="status_to_state[item.status] == 1" @click="purchaseNumberEdit(item, index)">修改数量</button>
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="purchaserAssign(item)">立即分配</button>
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpDetail(item)">立即核验</button>							
@@ -65,13 +61,13 @@
 				},
 				purchaseOrder: [],
 				tabCurrentIndex: 0,
-				status_to_state: {"CREATED": 1, "READY": 2, "PENDING": 3, "REJECTED": 2, "CONFIRMED": 4},
-				status_to_state2: {"CREATED": "待分配", "READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "已完成"},
-				navList: ['全部', '待分配', '待采购', '待核验', '已完成']
+				status_to_state: {"CREATED": 1, "READY": 2, "PENDING": 3, "REJECTED": 2, "CONFIRMED": 4, "WAREHOUSED": 5},
+				status_to_state2: {"CREATED": "待分配", "READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "待接收", "WAREHOUSED": "已完成"},
+				navList: ['全部', '待分配', '待采购', '待核验', '待接收', '已完成']
 			};
 		},
 		onLoad(){
-			this.$api.http.get('/purchaseOrder/purchaseOrder', this.request).then(res => {
+			this.$api.http.get('/purchaseOrder/findAll', this.request).then(res => {
 				this.purchaseOrder = res.content
 			})
 		},
@@ -102,11 +98,11 @@
 					placeholderText: "请输入采购数量",
 					success: function(res) {
 						if (res.confirm) {
-							// _this.$api.http.put('/purchaseOrder/reject?id='+_this.purchaseOrder.id+'&rejectReason='+res.content, null).then(res => {
-							// 	uni.navigateTo({
-							// 		url: './Purchase'
-							// 	})
-							// })
+							_this.$api.http.put('/purchaseOrder/reject?id='+_this.purchaseOrder.id+'&rejectReason='+res.content, null).then(res => {
+								uni.navigateTo({
+									url: './Purchase'
+								})
+							})
 							console.log("修改采购数量为:", res.content)
 						}
 					}
@@ -119,7 +115,6 @@
 <style lang="scss">
 	page, .content{
 		background: $page-color-base;
-		height: 100%;
 	}
 	.search {
 		background: #FFFFFF;
