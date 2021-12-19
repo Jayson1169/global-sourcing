@@ -30,8 +30,14 @@
 				}
 			};
 		},
+		onLoad() {
+			let user = uni.getStorageSync('user')
+			if (user != null) {
+				this.userForm.username = user.username;
+				this.userForm.password = user.password;
+			}
+		},
 		methods: {
-			...mapMutations(['logout']),
 			sub() {
 				this.$api.http.login("/login", this.userForm).then(res => {
 					this.$api.msg.successToast("登录成功")
@@ -42,8 +48,9 @@
 					// 		url: roleList[res.role]
 					// 	})
 					// }, 500)
+					res.password = this.userForm.password
 					uni.setStorageSync('user', res)
-					this.login(res);
+					// this.login(res);
 					let roleList = this.$api.json.roleList
 					uni.redirectTo({
 						url: roleList[res.role]
