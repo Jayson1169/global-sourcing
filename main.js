@@ -9,7 +9,6 @@ import scan from '@/components/p-scan/scan.vue'
 import './assets/style/border.css'
 import './assets/style/main.css'
 
-
 Vue.component('scan', scan)
 
 Vue.config.productionTip = false
