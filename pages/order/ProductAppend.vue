@@ -31,7 +31,7 @@
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">销售价格：</view>
+			<view class="title">成交价格：</view>
 			<input type="digit" placeholder="请输入销售价格" v-model="item.salePrice" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">

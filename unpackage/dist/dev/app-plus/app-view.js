@@ -5194,7 +5194,7 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
-            [_vm._v("销售价格：")]
+            [_vm._v("成交价格：")]
           ),
           _c("v-uni-input", {
             attrs: { type: "digit", placeholder: "请输入销售价格", _i: 24 },

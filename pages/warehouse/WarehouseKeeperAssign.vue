@@ -1,4 +1,4 @@
-<template>
+ <template>
 	<view class="user_list">
 		<view class="uni-list">
 			<radio-group @change="radioChange">
