@@ -60,33 +60,25 @@ export default {
 			uni.chooseImage({
 				count: 1,
 				// count: _self.upload_count - _self.upload_before_list.length,
-				sizeType: ['compressed', 'original'],
+				sizeType: ['compressed'],
 				sourceType: ['album', 'camera'],
 				success: function(res) {
 					for (let i = 0, len = res.tempFiles.length; i < len; i++) {
 						res.tempFiles[i]['upload_percent'] = 0;
 						// _self.upload_before_list.push(res.tempFiles[i]);
 					}
-					// pathToBase64(res.tempFilePaths[0]).then(base64 => {
-					// 	_self.upload_before_list.push(base64);
-					// 	_self.$emit("photo", base64)
-					// }).catch(error => {
-					// 	console.error(error)
-					// })
-					_self.compress(res.tempFilePaths).then(res => {
-						_self.upload_before_list.push(res);
-						_self.$emit("photo", res)
-						// _self.upload_before_list.push(res);
+					pathToBase64(res.tempFilePaths[0]).then(base64 => {
+						_self.upload_before_list.push(base64);
+						_self.$emit("photo", base64)
+					}).catch(error => {
+						console.error(error)
 					})
-					// _self.compress(res.tempFilePaths[0]).then(res => {
-					// 	pathToBase64(res.tempFilePaths[0]).then(base64 => {
-					// 		_self.upload_before_list.push(base64);
-					// 		_self.$emit("photo", base64)
-					// 	}).catch(error => {
-					// 		console.error(error)
-					// 	})
-					// })
 					
+					// 图片压缩
+					// _self.compress(res.tempFilePaths).then(res => {
+					// 	_self.upload_before_list.push(res);
+					// 	_self.$emit("photo", res)
+					// })
 				},
 				fail: function(err) {
 					console.log(err);
@@ -102,8 +94,13 @@ export default {
 			let _self = this;
 			let preview = [];
 			for (let i = 0, len = _self.upload_before_list.length; i < len; i++) {
-				// step3.这里修改服务器返回字段 ！！！
-				preview.push(_self.upload_before_list[i]);
+				base64ToPath(_self.upload_before_list[i]).then(path => {
+					console.log(path)
+					preview.push(path);
+				}).catch(error => {
+					console.error(error)
+				})
+				console.log(preview)
 			}
 			uni.previewImage({
 				current: idx,

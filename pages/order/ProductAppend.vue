@@ -2,17 +2,39 @@
 	<view class="product">		
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
+			<view class="title">商品照片：</view>
+			<upimg @photo="getPhoto" :photo="item.product.photo"></upimg>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
 			<view class="title">商品名称：</view>
 			<input placeholder="请输入商品名称" v-model="item.product.name"></input>
 		</view>
-	<!-- 	<view class="cu-form-group">
-			<view class="title"><text :style="{color:'red'}">*</text>商品品牌：</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">商品品牌：</view>
 			<input placeholder="请输入商品品牌" v-model="item.product.brand"></input>
-		</view> -->
+		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品型号：</view>
 			<input placeholder="请输入商品型号" v-model="item.product.specification"></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">商品条码：</view>
+			<input placeholder="请扫描或输入商品条码" v-model="item.product.barcode"></input>
+			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">成交价格：</view>
+			<input type="digit" placeholder="请输入成交价格" v-model="item.salePrice" @input="checkPrice"></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">销售数量：</view>
+			<input type="number" placeholder="请输入销售数量" v-model="item.quantity"></input>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'white'}">*</text>
@@ -29,16 +51,6 @@
 			<view class="title">备注信息：</view>
 			<input placeholder="请输入备注信息" v-model="item.product.remark"></input>
 		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">成交价格：</view>
-			<input type="digit" placeholder="请输入销售价格" v-model="item.salePrice" @input="checkPrice"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">销售数量：</view>
-			<input type="number" placeholder="请输入销售数量" v-model="item.quantity"></input>
-		</view>
 		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
@@ -54,9 +66,11 @@
 			return {
 				item: {
 					product: {
+						photo: null,
 						name: 'iPhone 13 Pro',
-						// brand: 'Apple',
+						brand: 'Apple',
 						specification: 'MLT83CH/A',
+						barcode: '1111111111111',
 						manufacturer: '富士康',
 						origin: '中国',
 						remark: 'iPhone',
@@ -67,6 +81,9 @@
 			}
 		},
 		methods: {
+			getPhoto(val) {
+				this.item.product.photo = val
+			},
 			checkPrice: function(e) {
 				//正则表达式
 				e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null
@@ -75,15 +92,25 @@
 					this.item.salePrice = e.target.value
 				})
 			},
+			getScanCode() {
+				let _this = this;
+				uni.scanCode({
+					scanType:['barCode'],
+					success: function (res) {
+						_this.item.product.barcode = res.result
+					}
+				})
+			},
 			sub() {
 				let productForm = this.item.product;
 				productForm.salePrice = this.item.salePrice;
 				productForm.quantity = this.item.quantity;
 				let rules = [
+					{name: 'photo', required: true, type: 'required', errmsg: '请上传商品图片'},
 					{name: 'name', required: true, type: 'required', errmsg: '请输入商品名称'},
-					// {name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
+					{name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
 					{name: 'specification', required: true, type: 'required', errmsg: '请输入商品型号'},
-					// {name: 'manufacturer', required: true, type: 'required', errmsg: '请输入生产厂家'},
+					{name: 'barcode', required: true, type: 'required', errmsg: '请输入商品条码'},
 					{name: 'salePrice', required: true, type: 'required', errmsg: '请输入销售价格'},
 					{name: 'quantity', required: true, type: 'required', errmsg: '请输入销售数量'}
 				]

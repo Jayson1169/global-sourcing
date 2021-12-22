@@ -31,7 +31,7 @@
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">快递物流：</view>
-			<input placeholder="请扫码或手动输入单号" v-model="item.number"></input>
+			<input placeholder="请扫描或输入物流单号" v-model="item.number"></input>
 			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 		</view>
 		<view class="H50"></view>

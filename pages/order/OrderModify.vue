@@ -3,13 +3,14 @@
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
+				<view><image :src='item.product.photo'></image></view>
 				<view class='goods_02'>
-				  <view class='goods_title'>{{item.product.name}}</view>
-				  <view class="goods_des">商品型号：{{item.product.specification}}</view>
-				  <view class='good_p'>
-					<view class="good_price">¥ {{item.salePrice}}</view>
-					<view class='i'>x {{item.quantity}}</view>
-				  </view>
+					<view class='goods_title'>{{item.product.name}}</view>
+					<view class="goods_des">商品型号：{{item.product.specification}}</view>
+					<view class='good_p'>
+						<view class="good_price">¥ {{item.salePrice}}</view>
+						<view class='i'>x {{item.quantity}}</view>
+					</view>
 				</view>
 			</view>
 			<view class="goods goods_add" @click="jumpProductAppend">
@@ -81,9 +82,9 @@
 					uni.$emit('edit', null)
 				})
 			})
-			uni.$on('delete', (e) => {
+			uni.$on('refund', (e) => {
 				this.$api.http.delete('/saleOrder/deleteItem?saleOrderId='+this.order.id+'&itemId='+e.id, null).then(res => {
-					this.$api.msg.successToast('删除成功')
+					this.$api.msg.successToast('退款成功')
 					this.order.items.some((item, i) => {
 						if (item.id == e.id) {
 							this.order.items.splice(i, 1)
@@ -98,7 +99,7 @@
 			// 移除监听事件  
 			uni.$off('append');  
 			uni.$off('modify');
-			uni.$off('delete');
+			uni.$off('refund');
 		},
 		methods: {
 			sub() { 
@@ -171,32 +172,36 @@
 			padding: 10px;
 			box-sizing: border-box;
 			border-bottom: 1px solid #EEF0EF;
-			.goods_02 {
-				box-sizing: border-box;
-				display: flex;
-				flex-direction: column;
-				height: 160rpx;
-				flex-grow: 1;
-				justify-content: space-between;
-				padding-top: 10rpx;
-				padding-left: 25rpx;
-			}
-			.goods_title {
-				max-height: 40px;
-				overflow: hidden;
-				line-height: 20px;
+		}
+		.goods image {
+			width: 162rpx;
+			height: 162rpx;
+		}
+		.goods_02 {
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			height: 160rpx;
+			flex-grow: 1;
+			justify-content: space-between;
+			padding-top: 10rpx;
+			padding-left: 25rpx;
+		}
+		.goods_title {
+			max-height: 40px;
+			overflow: hidden;
+			line-height: 20px;
+			font-weight: 600;
+		}
+		.goods_des {
+			color: #979797;
+		}
+		.good_p { 
+			display: flex;
+			justify-content: space-between;
+			.good_price {
+				color: #F04E42;
 				font-weight: 600;
-			}
-			.goods_des {
-				color: #979797;
-			}
-			.good_p { 
-				display: flex;
-				justify-content: space-between;
-				.good_price {
-					color: #F04E42;
-					font-weight: 600;
-				}
 			}
 		}
 	}

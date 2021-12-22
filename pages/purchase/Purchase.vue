@@ -1,11 +1,11 @@
 <template>
 	<!-- 显示采购员信息，按住复制号码 -->
 	<view class="content">
-		<view class="navbar">
+		<view class="navbar" v-if="purchaseOrder.length != 0">
 			<view 
-				v-for="(item, index) in navList" :key="index" 
-				class="nav-item" 
+				class="nav-item"
 				:class="{current: tabCurrentIndex === index}"
+				v-for="(item, index) in navList" :key="index" 
 				@click="tabClick(index)"
 			>
 				{{item}}
@@ -39,20 +39,21 @@
 			</view>
 			<text v-if="item.status==='REJECTED'" style="font-size: 12px;">拒绝理由：{{item.rejectReason}}</text>
 			<view class="action-box b-t" v-if="status_to_state[item.status] != 4 && status_to_state[item.status] != 5">
-				<button class="action-btn" v-if="status_to_state[item.status] == 1" @click="purchaseNumberEdit(item, index)">修改数量</button>
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="purchaserAssign(item)">立即分配</button>
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpDetail(item)">立即核验</button>							
+			</view>
+		</view>
+		<view class="H60"></view>
+		<view class="p_btn">
+			<view class="flex flex-direction" >
+				<button @click="jumpPurchaseAppend" class="cu-btn bg-red margin-tb-sm lg">新增采购单</button>
 			</view>
 		</view>
 	</view>
 </template> 
 
 <script>
-	import empty from "@/components/empty";
 	export default {
-		components: {
-			empty
-		},
 		data() {
 			return {
 				request: {
@@ -73,10 +74,13 @@
 		},
 		 
 		methods: {
-			jumpDetail(purchaseOrder){
+			jumpDetail(purchaseOrder) {
 				uni.navigateTo({
 					url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
 				});
+			},
+			jumpPurchaseAppend() {
+				
 			},
 			purchaserAssign(item) {
 				uni.navigateTo({
