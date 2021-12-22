@@ -3,15 +3,16 @@
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
+				<view>
+					<image :src='item.product.photo'></image>
+				</view>
 				<view class='goods_02'>
-				  <view class='goods_title'>{{item.product.name}}</view>
-				  <!-- 可以循环显示多个属性 此处修改为显示单独描述 -->
-				  <!-- <view class="goods_des">{{item.guige[0].name}}：{{item.guige[0].value}}</view> -->
-				  <view class="goods_des">商品型号：{{item.product.specification}}</view>
-				  <view class='good_p'>
-					<view class="good_price">¥ {{item.salePrice}}</view>
-					<view class='i'>x {{item.quantity}}</view>
-				  </view>
+					<view class='goods_title'>{{item.product.name}}</view>
+					<view class="goods_des">商品型号：{{item.product.specification}}</view>
+					<view class='good_p'>
+						<view class="good_price">¥ {{item.salePrice}}</view>
+						<view class='i'>x {{item.quantity}}</view>
+					</view>
 				</view>
 			</view>
 			<view class="goods goods_add" @click="jumpProductAppend">
@@ -40,7 +41,7 @@
 			<view class="title">收货地址：</view>
 			<input placeholder="请输入收货地址" v-model="order.address.shipAddress"></input>
 		</view>
-		<view class="H50"></view>
+		<view class="H60"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
 				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">添加订单</button>
@@ -156,32 +157,36 @@
 			padding: 10px;
 			box-sizing: border-box;
 			border-bottom: 1px solid #EEF0EF;
-			.goods_02 {
-				box-sizing: border-box;
-				display: flex;
-				flex-direction: column;
-				height: 160rpx;
-				flex-grow: 1;
-				justify-content: space-between;
-				padding-top: 10rpx;
-				padding-left: 25rpx;
-			}
-			.goods_title {
-				max-height: 40px;
-				overflow: hidden;
-				line-height: 20px;
+		}
+		.goods image {
+			width: 162rpx;
+			height: 162rpx;
+		}
+		.goods_02 {
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			height: 160rpx;
+			flex-grow: 1;
+			justify-content: space-between;
+			padding-top: 10rpx;
+			padding-left: 25rpx;
+		}
+		.goods_title {
+			max-height: 40px;
+			overflow: hidden;
+			line-height: 20px;
+			font-weight: 600;
+		}
+		.goods_des {
+			color: #979797;
+		}
+		.good_p { 
+			display: flex;
+			justify-content: space-between;
+			.good_price {
+				color: #F04E42;
 				font-weight: 600;
-			}
-			.goods_des {
-				color: #979797;
-			}
-			.good_p { 
-				display: flex;
-				justify-content: space-between;
-				.good_price {
-					color: #F04E42;
-					font-weight: 600;
-				}
 			}
 		}
 	}

@@ -8,8 +8,12 @@ import msg from '@/common/toast.js'
 import scan from '@/components/p-scan/scan.vue'
 import './assets/style/border.css'
 import './assets/style/main.css'
+import empty from "@/components/empty";
+import upimg from '@/components/sunui-upimg/sunui-upimg.vue'
 
 Vue.component('scan', scan)
+Vue.component('empty', empty)
+Vue.component('upimg', upimg)
 
 Vue.config.productionTip = false
 

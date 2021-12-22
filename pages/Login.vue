@@ -1,4 +1,4 @@
-<template>
+ <template>
 	<view class="content">
 		<view class="login">
 			<view class="login-top">登录</view>

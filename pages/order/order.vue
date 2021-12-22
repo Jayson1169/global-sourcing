@@ -1,31 +1,32 @@
 <template>
 	<view class="content">
-		<view class="search">
+		<!-- <view class="search">
 			<uni-easyinput suffixIcon="search" v-model="tabCurrentIndex" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
+		</view>	 -->
+		<view class="navbar" v-if="orderList.length != 0">
+			<view 
+				v-for="(item, index) in navList" :key="index" 
+				class="nav-item" 
+				:class="{current: tabCurrentIndex === index}"
+				@click="tabClick(index)"
+			>
+			{{item}}
+			</view>
 		</view>
-		<view 
-			v-for="(item, index) in orderList" :key="index"
-			class="order-item"
-		>	
-			<view @click="jumpOrderModify(item)"> 
+		<empty v-if="orderList.length === 0"></empty>
+		<view class="order-item" v-for="(item, index) in orderList" :key="index">
+			<view @click="jumpOrderDetail(item)"> 
 				<view class="i-top b-b">
 					<text class="time">{{item.updateTime}}</text>
 				</view>
 				<scroll-view v-if="item.items.length > 1" class="goods-box-single" scroll-x>
-					<view 
-						v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex"
-						class="right"
-					>
+					<view class="right" v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex">
 						<text class="title">{{goodsItem.product.name}}</text>
 						<text class="attr-box">{{goodsItem.quantity}}</text>
 						<text class="price">{{goodsItem.salePrice * goodsItem.quantity}}</text>
 					</view>
 				</scroll-view>
-				<view 
-					v-if="item.items.length === 1"
-					class="goods-box-single"
-					v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex"
-				>
+				<view class="goods-box-single" v-if="item.items.length === 1" v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex">
 					<view class="right">
 						<text class="title">{{goodsItem.product.name}}</text>
 						<text class="attr-box">{{goodsItem.quantity}}</text>
@@ -44,7 +45,7 @@
 				<button class="action-btn recom" @click="jumpOrderModify(item)">修改订单</button>
 			</view>
 		</view>	
-		<view class="H50"></view>
+		<view class="H60"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpOrderAppend" class="cu-btn bg-red margin-tb-sm lg">新增订单</button>
@@ -54,11 +55,7 @@
 </template> 
 
 <script>
-	import empty from "@/components/empty";
 	export default {
-		components: {
-			empty
-		},
 		data() {
 			return {
 				request: {
@@ -66,25 +63,7 @@
 					size: '999'
 				},
 				tabCurrentIndex: 0,
-				navList: [{
-						state: 0,
-						text: '全部',
-						loadingType: 'more',
-						orderList: []
-					},
-					{
-						state: 1,
-						text: '待分配',
-						loadingType: 'more',
-						orderList: []
-					},
-					{
-						state: 2,
-						text: '待核验',
-						loadingType: 'more',
-						orderList: []
-					}
-				],
+				navList: ['全部', '待发送', '已完成'],
 				orderList: []
 			};
 		},
