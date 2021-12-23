@@ -183,6 +183,15 @@
             }
             
         }
+		,{
+		    "path" : "pages/warehouse/WarehouseOutput",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "导出海关信息",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
             "path" : "pages/test/test",
             "style" :                                                                                    
@@ -219,6 +228,24 @@
 		    }
 		    
 		}
+        ,{
+            "path" : "pages/warehouse/test/test",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/product/Product",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品管理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",

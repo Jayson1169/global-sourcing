@@ -3,12 +3,12 @@
 		<view class="p_order">采购明细</view>
 		<view class="cu-form-group">
 			<view class="title">采购照片：</view>
-			<image class="p_image" :src="purchaseOrder.photo" mode="aspectFill" @click="previewImage(purchaseOrder.photo)" v-if="purchaseOrder.invoice != null"></image>
-			<image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.invoice == null"></image>
+			<myimg :photo="purchaseOrder.photo" :padding="true" v-if="purchaseOrder.photo != null"></myimg>
+			<image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.photo == null"></image>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</view>
-			<image class="p_image" :src="purchaseOrder.invoice" mode="aspectFill" @click="previewImage(purchaseOrder.invoice)" v-if="purchaseOrder.invoice != null"></image>
+			<myimg :photo="purchaseOrder.invoice" :padding="true" v-if="purchaseOrder.invoice != null"></myimg>
 			<image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.invoice == null"></image>		
 		</view>
 		<view class="cu-form-group">
@@ -18,11 +18,11 @@
 		<view class="p_order">商品信息</view>
 		<view class="cu-form-group">
 			<view class="title">商品图片：</view>
-			<image class="p_image" :src="purchaseOrder.product.photo" mode="aspectFill" @click="previewImage(purchaseOrder.product.photo)"></image>
+			<myimg :photo="purchaseOrder.product.photo" :padding="true"></myimg>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="purchaseOrder.product.name" disabled></input>
+			<input v-model="purchaseOrder.product.name" disabled></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品品牌：</view>
@@ -30,7 +30,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品型号：</view>
-			<input placeholder="请输入商品型号" v-model="purchaseOrder.product.specification" disabled></input>
+			<input v-model="purchaseOrder.product.specification" disabled></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品条码：</view>
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+	import { pathToBase64, base64ToPath } from '@/common/img-tool.js'
 	export default {
 		data() {
 			return {
@@ -87,14 +88,6 @@
 			this.purchaseOrder = JSON.parse(decodeURIComponent(option.purchaseOrder));
 		},
 		methods: {
-			previewImage(image) {
-				let preview = [];
-				preview.push(image)
-				uni.previewImage({
-					current: 0,
-					urls: preview
-				});
-			},
 			rejectPurchase() {
 				let _this = this;
 				uni.showModal({

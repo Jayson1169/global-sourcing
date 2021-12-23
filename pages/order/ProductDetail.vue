@@ -2,7 +2,7 @@
 	<view class="product">		
 		<view class="cu-form-group">
 			<view class="title">商品图片：</view>
-			<image class="p_image" :src="item.product.photo" mode="aspectFill" @click="previewImage(item.product.photo)"></image>
+			<myimg :photo="item.product.photo" :padding="true"></myimg>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品名称：</view>
@@ -90,10 +90,5 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-	}
-	.p_image {
-		width: 162rpx;
-		height: 162rpx;
-		padding: 10rpx 10rpx 10rpx 0rpx;
 	}
 </style>

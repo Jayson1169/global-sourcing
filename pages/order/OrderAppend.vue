@@ -4,7 +4,7 @@
 		<view class='tag-e'>
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
 				<view>
-					<image :src='item.product.photo'></image>
+					<myimg :photo="item.product.photo"></myimg>
 				</view>
 				<view class='goods_02'>
 					<view class='goods_title'>{{item.product.name}}</view>
@@ -157,10 +157,6 @@
 			padding: 10px;
 			box-sizing: border-box;
 			border-bottom: 1px solid #EEF0EF;
-		}
-		.goods image {
-			width: 162rpx;
-			height: 162rpx;
 		}
 		.goods_02 {
 			box-sizing: border-box;

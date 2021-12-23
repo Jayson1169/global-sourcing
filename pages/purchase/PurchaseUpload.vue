@@ -1,5 +1,4 @@
 <template>
-	<!-- 驳回理由 -->
 	<view class="product">
 		<view class="order">采购明细</view>
 		<view class="cu-form-group">
@@ -56,11 +55,7 @@
 </template>
 
 <script>
-	import upimg from '@/components/sunui-upimg/sunui-upimg.vue'
 	export default {
-		components: {
-			upimg
-		},
 		data() {
 			return {
 				purchaseOrder: {"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null},
@@ -141,58 +136,8 @@
 		width: 100%;
 		z-index: 9999;
 	}
-	.p_image {
-		width: 162rpx;
-		height: 162rpx;
-		padding: 10rpx;
-	}
 	// 去掉 picker 右边的箭头
 	.cu-form-group picker::after {  
 	    display: none;  
 	}  
-	.goods_add {
-		font-size: 13px;
-		justify-content: center;
-		align-items: center;
-	}
-	.tag-e {
-		background-color:#fff;
-		margin-bottom: 0px;
-		font-size: 13px;
-		.goods {
-			display: flex;
-			width: 100%;
-			background-color: #ffffff;
-			padding: 10px;
-			box-sizing: border-box;
-			border-bottom: 1px solid #EEF0EF;
-			.goods_02 {
-				box-sizing: border-box;
-				display: flex;
-				flex-direction: column;
-				height: 160rpx;
-				flex-grow: 1;
-				justify-content: space-between;
-				padding-top: 10rpx;
-				padding-left: 25rpx;
-			}
-			.goods_title {
-				max-height: 40px;
-				overflow: hidden;
-				line-height: 20px;
-				font-weight: 600;
-			}
-			.goods_des {
-				color: #979797;
-			}
-			.good_p { 
-				display: flex;
-				justify-content: space-between;
-				.good_price {
-					color: #F04E42;
-					font-weight: 600;
-				}
-			}
-		}
-	}
 </style>

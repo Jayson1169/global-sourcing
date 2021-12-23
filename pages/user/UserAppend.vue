@@ -87,7 +87,10 @@
 							title: '添加成功',
 							icon: 'none'
 						})
-						this.init()
+						uni.navigateTo({
+							url: '../Login'
+						})
+						// this.init()
 					})
 				}
 			}

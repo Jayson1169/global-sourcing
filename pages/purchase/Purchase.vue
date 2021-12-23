@@ -80,7 +80,9 @@
 				});
 			},
 			jumpPurchaseAppend() {
-				
+				uni.navigateTo({
+					url: './PurchaseAppend',
+				});
 			},
 			purchaserAssign(item) {
 				uni.navigateTo({

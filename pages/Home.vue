@@ -46,6 +46,12 @@
 				</navigator>
 			</view> 
 			<view class="jiu_01">
+				<navigator url="/pages/product/Product" hover-class="none"> 
+					<view><image src="../imgs/product.png"/></view>
+					<view>商品管理</view>
+				</navigator>
+			</view>
+			<view class="jiu_01">
 				<navigator url="/pages/order/Order" hover-class="none">
 					<view><image src="../imgs/order.png"/></view>
 					<view>订单管理</view>

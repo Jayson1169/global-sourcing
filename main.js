@@ -9,11 +9,13 @@ import scan from '@/components/p-scan/scan.vue'
 import './assets/style/border.css'
 import './assets/style/main.css'
 import empty from "@/components/empty";
-import upimg from '@/components/sunui-upimg/sunui-upimg.vue'
+import upimg from '@/components/sunui-upimg.vue'
+import myimg from '@/components/my-img.vue'
 
 Vue.component('scan', scan)
 Vue.component('empty', empty)
 Vue.component('upimg', upimg)
+Vue.component('myimg', myimg)
 
 Vue.config.productionTip = false
 

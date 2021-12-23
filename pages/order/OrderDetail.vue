@@ -3,7 +3,9 @@
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductDetail(item)">
-				<view><image :src='item.product.photo'></image></view>
+				<view>
+					<myimg :photo="item.product.photo"></myimg>
+				</view>
 				<view class='goods_02'>
 					<view class='goods_title'>{{item.product.name}}</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
@@ -93,10 +95,6 @@
 			padding: 10px;
 			box-sizing: border-box;
 			border-bottom: 1px solid #EEF0EF;
-		}
-		.goods image {
-			width: 162rpx;
-			height: 162rpx;
 		}
 		.goods_02 {
 			box-sizing: border-box;

@@ -3,11 +3,11 @@
 		<view class="p_order">采购明细</view>
 		<view class="cu-form-group">
 			<view class="title">采购照片：</view>
-			<image class="p_image" :src="purchaseOrder.photo" mode="aspectFill" @click="previewImage(purchaseOrder.photo)"></image>
+			<myimg :photo="purchaseOrder.photo" :padding="true"></myimg>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</view>
-			<image class="p_image" :src="purchaseOrder.invoice" mode="aspectFill" @click="previewImage(purchaseOrder.invoice)"></image>
+			<myimg :photo="purchaseOrder.invoice" :padding="true"></myimg>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">发票日期：</view>
@@ -16,7 +16,7 @@
 		<view class="p_order">商品信息</view>
 		<view class="cu-form-group">
 			<view class="title">商品图片：</view>
-			<image class="p_image" :src="purchaseOrder.product.photo" mode="aspectFill" @click="previewImage(purchaseOrder.product.photo)"></image>
+			<myimg :photo="purchaseOrder.product.photo" :padding="true"></myimg>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品名称：</view>
@@ -60,7 +60,7 @@
 			<input placeholder="请扫码确定接收数量" v-model="number" disabled></input>
 			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 		</view>
-		<view class="H50"></view>
+		<view class="H70"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
 				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">确定接收</button>
@@ -81,14 +81,6 @@
 			this.purchaseOrder = JSON.parse(decodeURIComponent(option.purchaseOrder));
 		},
 		methods: {
-			previewImage(image) {
-				let preview = [];
-				preview.push(image)
-				uni.previewImage({
-					current: 0,
-					urls: preview
-				});
-			},
 			sub() {
 				let _this = this;
 				uni.showModal({
@@ -137,11 +129,6 @@
 	}
 	.p_order {
 		padding: 10px;
-	}
-	.p_image {
-		width: 162rpx;
-		height: 162rpx;
-		padding: 10rpx 10rpx 10rpx 0rpx;
 	}
 	.o_btn {
 		background: #F7F6FB;
