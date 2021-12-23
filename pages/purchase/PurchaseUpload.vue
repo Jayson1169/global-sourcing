@@ -20,7 +20,7 @@
 			</picker>
 		</view>
 		<view class="order">商品信息</view>
-		<view class="cu-form-group">
+		<!-- <view class="cu-form-group">
 			<text :style="{color:'white'}">*</text>
 			<view class="title">商品名称：</view>
 			<input v-model="purchaseOrder.product.name" disabled></input>
@@ -33,14 +33,14 @@
 		<view class="cu-form-group">
 			<text :style="{color:'white'}">*</text>
 			<view class="title">采购数量：</view>
-			<input placeholder="请输入采购数量" v-model="purchaseOrder.quantity" disabled></input>
+			<input v-model="purchaseOrder.quantity" disabled></input>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品条码：</view>
 			<input placeholder="请点击扫码或输入条形码" v-model="purchaseOrder.product.barcode"></input>
 			<image src="@/imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
-		</view>
+		</view> -->
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">采购单价：</view>
@@ -85,16 +85,30 @@
 					this.purchaseOrder.purchasePrice = e.target.value
 				})
 			},
-			sub() { 			
-				this.$api.http.put('/purchaseOrder/uploadPurchaseInfo', this.purchaseOrder).then(res => {
+			sub() {
+				let rules = [
+					{name: 'photo', required: true, type: 'required', errmsg: '请上传商品图片'},
+					{name: 'invoice', required: true, type: 'required', errmsg: '请上传发票'},
+					{name: 'invoiceDate', required: true, type: 'required', errmsg: '请输入发票日期'},
+					{name: 'purchasePrice', required: true, type: 'required', errmsg: '请输入采购单价'}
+				]
+				let valLoginRes = this.$validate.validate(this.purchaseOrder, rules)
+				if (!valLoginRes.isOk) {
 					uni.showToast({
-						title: '添加成功',
-						icon: 'none'
+						icon: 'none',
+						title: valLoginRes.errmsg
 					})
-					uni.navigateTo({
-						url: './Purchaser'
-					});
-				})
+				} else {
+					this.$api.http.put('/purchaseOrder/uploadPurchaseInfo', this.purchaseOrder).then(res => {
+						uni.showToast({
+							title: '添加成功',
+							icon: 'none'
+						})
+						uni.navigateTo({
+							url: './Purchaser'
+						});
+					})
+				}	
 			},
 			bindDateChange: function(e) {
 				this.purchaseOrder.invoiceDate = e.target.value;
@@ -104,8 +118,6 @@
 				uni.scanCode({
 					scanType:['barCode'],
 					success: function (res) {
-						console.log('条码类型：' + res.scanType);
-						console.log('条码内容：' + res.result);
 						_this.purchaseOrder.product.barcode = res.result;
 					}
 				})

@@ -1,7 +1,7 @@
 <template>
 	<view class="product">		
 		<view class="cu-form-group">
-			<view class="title">商品照片：</view>
+			<view class="title">商品图片：</view>
 			<image class="p_image" :src="item.product.photo" mode="aspectFill" @click="previewImage(item.product.photo)"></image>
 		</view>
 		<view class="cu-form-group">

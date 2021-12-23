@@ -123,6 +123,14 @@
             }
             
         }
+		,{
+		    "path" : "pages/purchase/PurchaseAppend",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "添加采购单",
+		        "enablePullDownRefresh": false
+		    }
+		}
         ,{
             "path" : "pages/purchase/PurchaseUpload",
             "style" :                                                                                    

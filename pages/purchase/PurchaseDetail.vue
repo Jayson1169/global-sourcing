@@ -17,7 +17,7 @@
 		</view>
 		<view class="p_order">商品信息</view>
 		<view class="cu-form-group">
-			<view class="title">商品照片：</view>
+			<view class="title">商品图片：</view>
 			<image class="p_image" :src="purchaseOrder.product.photo" mode="aspectFill" @click="previewImage(purchaseOrder.product.photo)"></image>
 		</view>
 		<view class="cu-form-group">

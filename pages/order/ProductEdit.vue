@@ -2,7 +2,7 @@
 	<view class="product">		
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">商品照片：</view>
+			<view class="title">商品图片：</view>
 			<upimg @photo="getPhoto" :photo="item.product.photo"></upimg>
 		</view>
 		<view class="cu-form-group">
