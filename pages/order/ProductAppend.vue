@@ -1,9 +1,12 @@
 <template>
 	<view class="product">		
 		<view class="cu-form-group">
+			<select-lay class="title2" :value="tval" name="name" :options="datalist" @selectitem="selectitem"></select-lay>
+		</view>
+		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品图片：</view>
-			<upimg @photo="getPhoto" :photo="item.product.photo"></upimg>
+			<upimg @photo="getPhoto" :photo="item.product.image"></upimg>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -64,6 +67,21 @@
 	export default {
 		data() {
 			return {
+				datalist: [{
+                        label: "label1",
+                        value: "value1"
+                    },
+                    {
+                        label: "label2",
+                        value: "value2"
+                    },
+                    {
+                        label: "label3",
+                        value: "value3"
+                    }
+                ],
+				//模拟初始数据
+				tval: "value2",
 				item: {
 					product: {
 						photo: null,
@@ -74,6 +92,11 @@
 						manufacturer: '富士康',
 						origin: '中国',
 						remark: 'iPhone',
+						inventory: {
+							warehouseInventory: 0,
+							midwayInventory: 0,
+							hubInventory: 0
+						}
 					},
 					salePrice: '2',
 					quantity: '2'
@@ -100,6 +123,13 @@
 						_this.item.product.barcode = res.result
 					}
 				})
+			},
+			selectitem(index, item) {
+				if (index >= 0) {
+					this.tval = item.value;
+				} else {
+					this.tval = ""
+				}
 			},
 			sub() {
 				let productForm = this.item.product;
@@ -140,5 +170,16 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
+	}
+	.title2 {
+		background: #ffffff;
+		// text-align: justify;
+		// padding: 10upx 10upx 40upx 10upx;
+		// padding-right: 0upx;
+		// font-size: 30upx;
+		position: relative;
+		width: 100%;
+		// height: 60upx;
+		// line-height: 60upx;
 	}
 </style>

@@ -246,6 +246,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/warehouse/ProductTransport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发送快递",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/product/ProductAppend",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加商品",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",
