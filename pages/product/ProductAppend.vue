@@ -2,11 +2,6 @@
 	<view class="product">		
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">商品图片：</view>
-			<upimg @photo="getPhoto" :photo="product.image"></upimg>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
 			<view class="title">商品名称：</view>
 			<input placeholder="请输入商品名称" v-model="product.name"></input>
 		</view>
@@ -28,6 +23,11 @@
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
+			<view class="title">商品图片：</view>
+			<upimg @photo="getPhoto" :photo="product.image"></upimg>
+		</view>
+	<!-- 	<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
 			<view class="p_title">销售价格（优质客户）：</view>
 			<input type="digit" placeholder="请输入销售价格" v-model="product.salePrice" @input="checkPrice"></input>
 		</view>
@@ -40,7 +40,7 @@
 			<text :style="{color:'red'}">*</text>
 			<view class="p_title">销售价格（批量采购）：</view>
 			<input type="digit" placeholder="请输入销售价格" v-model="product.salePrice" @input="checkPrice"></input>
-		</view>
+		</view> -->
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">国外库存：</view>
@@ -94,13 +94,14 @@
 					origin: '中国',
 					remark: 'iPhone',
 					inventory: {
-						warehouseInventory: 0,
-						midwayInventory: 0,
-						hubInventory: 0
+						warehouseInventory: '0',
+						midwayInventory: '0',
+						hubInventory: '0'
 					}
 				}
 			}
 		},
+		
 		methods: {
 			getPhoto(val) {
 				this.product.image = val
@@ -133,7 +134,7 @@
 					{name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
 					{name: 'specification', required: true, type: 'required', errmsg: '请输入商品型号'},
 					{name: 'barcode', required: true, type: 'required', errmsg: '请输入商品条码'},
-					{name: 'salePrice', required: true, type: 'required', errmsg: '请输入销售价格'},
+					// {name: 'salePrice', required: true, type: 'required', errmsg: '请输入销售价格'},
 					{name: 'warehouseInventory', required: true, type: 'required', errmsg: '请输入国外库存'},
 					{name: 'midwayInventory', required: true, type: 'required', errmsg: '请输入在途库存'},
 					{name: 'hubInventory', required: true, type: 'required', errmsg: '请输入国内库存'}

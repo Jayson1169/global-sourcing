@@ -4758,7 +4758,9 @@ var render = function() {
                 staticClass: _vm._$g(13, "sc"),
                 attrs: { _i: 13 }
               }),
-              _c("v-uni-text", { attrs: { _i: 14 } }, [_vm._v("点击添加商品")])
+              _c("v-uni-text", { attrs: { _i: 14 } }, [
+                _vm._v("点击添加商品项")
+              ])
             ],
             1
           )
@@ -4998,7 +5000,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.order {\n  padding: 10px 10px 10px 10px;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.goods_add {\n  font-size: 13px;\n  justify-content: center;\n  align-items: center;\n}\n.tag-e {\n  background-color: #fff;\n  margin-bottom: 0px;\n  font-size: 13px;\n}\n.tag-e .goods {\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods_02 {\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  height: 160rpx;\n  flex-grow: 1;\n  justify-content: space-between;\n  padding-top: 10rpx;\n  padding-left: 25rpx;\n}\n.tag-e .goods_title {\n  max-height: 40px;\n  overflow: hidden;\n  line-height: 20px;\n  font-weight: 600;\n}\n.tag-e .goods_des {\n  color: #979797;\n}\n.tag-e .good_p {\n  display: flex;\n  justify-content: space-between;\n}\n.tag-e .good_p .good_price {\n  color: #F04E42;\n  font-weight: 600;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.detail {\n  padding: 10px 10px 10px 10px;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.goods_add {\n  font-size: 13px;\n  justify-content: center;\n  align-items: center;\n}\n.tag-e {\n  background-color: #fff;\n  margin-bottom: 0px;\n  font-size: 13px;\n}\n.tag-e .goods {\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods_02 {\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  height: 160rpx;\n  flex-grow: 1;\n  justify-content: space-between;\n  padding-top: 10rpx;\n  padding-left: 25rpx;\n}\n.tag-e .goods_title {\n  max-height: 40px;\n  overflow: hidden;\n  line-height: 20px;\n  font-weight: 600;\n}\n.tag-e .goods_des {\n  color: #979797;\n}\n.tag-e .good_p {\n  display: flex;\n  justify-content: space-between;\n}\n.tag-e .good_p .good_price {\n  color: #F04E42;\n  font-weight: 600;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -5109,13 +5111,23 @@ var render = function() {
     "v-uni-view",
     { staticClass: _vm._$g(0, "sc"), attrs: { _i: 0 } },
     [
+      _c("v-uni-view", { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } }, [
+        _vm._v("商品信息")
+      ]),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } },
+        { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
         [
+          _c("v-uni-text", { style: _vm._$g(3, "s"), attrs: { _i: 3 } }, [
+            _vm._v("*")
+          ]),
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
+            [_vm._v("商品名称：")]
+          ),
           _c("select-lay", {
-            staticClass: _vm._$g(2, "sc"),
-            attrs: { _i: 2 },
+            attrs: { _i: 5 },
             on: {
               selectitem: function($event) {
                 return _vm.$handleViewEvent($event)
@@ -5127,70 +5139,22 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
+        { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } },
         [
-          _c("v-uni-text", { style: _vm._$g(4, "s"), attrs: { _i: 4 } }, [
+          _c("v-uni-text", { style: _vm._$g(7, "s"), attrs: { _i: 7 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
-            [_vm._v("商品图片：")]
-          ),
-          _c("upimg", {
-            attrs: { _i: 6 },
-            on: {
-              photo: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(8, "s"), attrs: { _i: 8 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
-            [_vm._v("商品名称：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品名称", _i: 10 },
-            model: {
-              value: _vm._$g(10, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(10, $$v)
-              },
-              expression: "item.product.name"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(12, "s"), attrs: { _i: 12 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
+            { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
             [_vm._v("商品品牌：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品品牌", _i: 14 },
+            attrs: { placeholder: "请输入商品品牌", _i: 9 },
             model: {
-              value: _vm._$g(14, "v-model"),
+              value: _vm._$g(9, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(14, $$v)
+                _vm.$handleVModelEvent(9, $$v)
               },
               expression: "item.product.brand"
             }
@@ -5200,24 +5164,58 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
+        { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
         [
-          _c("v-uni-text", { style: _vm._$g(16, "s"), attrs: { _i: 16 } }, [
+          _c("v-uni-text", { style: _vm._$g(11, "s"), attrs: { _i: 11 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
+            { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
             [_vm._v("商品型号：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品型号", _i: 18 },
+            attrs: { placeholder: "请输入商品型号", _i: 13 },
             model: {
-              value: _vm._$g(18, "v-model"),
+              value: _vm._$g(13, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(18, $$v)
+                _vm.$handleVModelEvent(13, $$v)
               },
               expression: "item.product.specification"
+            }
+          })
+        ],
+        1
+      ),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
+        [
+          _c("v-uni-text", { style: _vm._$g(15, "s"), attrs: { _i: 15 } }, [
+            _vm._v("*")
+          ]),
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
+            [_vm._v("商品条码：")]
+          ),
+          _c("v-uni-input", {
+            attrs: { placeholder: "请扫描或输入商品条码", _i: 17 },
+            model: {
+              value: _vm._$g(17, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(17, $$v)
+              },
+              expression: "item.product.barcode"
+            }
+          }),
+          _c("v-uni-image", {
+            staticStyle: { width: "80rpx", height: "80rpx" },
+            attrs: { src: _vm._$g(18, "a-src"), _i: 18 },
+            on: {
+              click: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
             }
           })
         ],
@@ -5233,23 +5231,12 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
-            [_vm._v("商品条码：")]
+            [_vm._v("商品图片：")]
           ),
-          _c("v-uni-input", {
-            attrs: { placeholder: "请扫描或输入商品条码", _i: 22 },
-            model: {
-              value: _vm._$g(22, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(22, $$v)
-              },
-              expression: "item.product.barcode"
-            }
-          }),
-          _c("v-uni-image", {
-            staticStyle: { width: "80rpx", height: "80rpx" },
-            attrs: { src: _vm._$g(23, "a-src"), _i: 23 },
+          _c("upimg", {
+            attrs: { _i: 22 },
             on: {
-              click: function($event) {
+              photo: function($event) {
                 return _vm.$handleViewEvent($event)
               }
             }
@@ -5259,75 +5246,22 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
+        { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
         [
-          _c("v-uni-text", { style: _vm._$g(25, "s"), attrs: { _i: 25 } }, [
+          _c("v-uni-text", { style: _vm._$g(24, "s"), attrs: { _i: 24 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(26, "sc"), attrs: { _i: 26 } },
-            [_vm._v("成交价格：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { type: "digit", placeholder: "请输入成交价格", _i: 27 },
-            on: {
-              input: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
-            },
-            model: {
-              value: _vm._$g(27, "v-model"),
-              callback: function() {},
-              expression: "item.salePrice"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(29, "s"), attrs: { _i: 29 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(30, "sc"), attrs: { _i: 30 } },
-            [_vm._v("销售数量：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { type: "number", placeholder: "请输入销售数量", _i: 31 },
-            model: {
-              value: _vm._$g(31, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(31, $$v)
-              },
-              expression: "item.quantity"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(32, "sc"), attrs: { _i: 32 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(33, "s"), attrs: { _i: 33 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(34, "sc"), attrs: { _i: 34 } },
+            { staticClass: _vm._$g(25, "sc"), attrs: { _i: 25 } },
             [_vm._v("生产厂家：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入生产厂家", _i: 35 },
+            attrs: { placeholder: "请输入生产厂家", disabled: true, _i: 26 },
             model: {
-              value: _vm._$g(35, "v-model"),
+              value: _vm._$g(26, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(35, $$v)
+                _vm.$handleVModelEvent(26, $$v)
               },
               expression: "item.product.manufacturer"
             }
@@ -5335,6 +5269,59 @@ var render = function() {
         ],
         1
       ),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(27, "sc"), attrs: { _i: 27 } },
+        [
+          _c("v-uni-text", { style: _vm._$g(28, "s"), attrs: { _i: 28 } }, [
+            _vm._v("*")
+          ]),
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(29, "sc"), attrs: { _i: 29 } },
+            [_vm._v("生产地区：")]
+          ),
+          _c("v-uni-input", {
+            attrs: { placeholder: "请输入生产地区", disabled: true, _i: 30 },
+            model: {
+              value: _vm._$g(30, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(30, $$v)
+              },
+              expression: "item.product.origin"
+            }
+          })
+        ],
+        1
+      ),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(31, "sc"), attrs: { _i: 31 } },
+        [
+          _c("v-uni-text", { style: _vm._$g(32, "s"), attrs: { _i: 32 } }, [
+            _vm._v("*")
+          ]),
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(33, "sc"), attrs: { _i: 33 } },
+            [_vm._v("备注信息：")]
+          ),
+          _c("v-uni-input", {
+            attrs: { placeholder: "请输入备注信息", disabled: true, _i: 34 },
+            model: {
+              value: _vm._$g(34, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(34, $$v)
+              },
+              expression: "item.product.remark"
+            }
+          })
+        ],
+        1
+      ),
+      _c("v-uni-view", { staticClass: _vm._$g(35, "sc"), attrs: { _i: 35 } }, [
+        _vm._v("销售明细")
+      ]),
       _c(
         "v-uni-view",
         { staticClass: _vm._$g(36, "sc"), attrs: { _i: 36 } },
@@ -5345,16 +5332,19 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(38, "sc"), attrs: { _i: 38 } },
-            [_vm._v("生产地区：")]
+            [_vm._v("成交价格：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入生产地区", _i: 39 },
+            attrs: { type: "digit", placeholder: "请输入成交价格", _i: 39 },
+            on: {
+              input: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
+            },
             model: {
               value: _vm._$g(39, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(39, $$v)
-              },
-              expression: "item.product.origin"
+              callback: function() {},
+              expression: "item.salePrice"
             }
           })
         ],
@@ -5370,16 +5360,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } },
-            [_vm._v("备注信息：")]
+            [_vm._v("销售数量：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入备注信息", _i: 43 },
+            attrs: { type: "number", placeholder: "请输入销售数量", _i: 43 },
             model: {
               value: _vm._$g(43, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(43, $$v)
               },
-              expression: "item.product.remark"
+              expression: "item.quantity"
             }
           })
         ],
@@ -5505,7 +5495,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.title2 {\n  background: #ffffff;\n  position: relative;\n  width: 100%;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.detail {\n  padding: 10px 10px 10px 10px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -5586,6 +5576,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    selectLay: __webpack_require__(/*! @/uni_modules/select-lay/components/select-lay/select-lay.vue */ 314)
+      .default
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -5594,22 +5606,25 @@ var render = function() {
     "v-uni-view",
     { staticClass: _vm._$g(0, "sc"), attrs: { _i: 0 } },
     [
+      _c("v-uni-view", { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } }, [
+        _vm._v("商品信息")
+      ]),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } },
+        { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
         [
-          _c("v-uni-text", { style: _vm._$g(2, "s"), attrs: { _i: 2 } }, [
+          _c("v-uni-text", { style: _vm._$g(3, "s"), attrs: { _i: 3 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
-            [_vm._v("商品图片：")]
+            { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
+            [_vm._v("商品名称：")]
           ),
-          _c("upimg", {
-            attrs: { _i: 4 },
+          _c("select-lay", {
+            attrs: { _i: 5 },
             on: {
-              photo: function($event) {
+              selectitem: function($event) {
                 return _vm.$handleViewEvent($event)
               }
             }
@@ -5619,47 +5634,22 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
+        { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } },
         [
-          _c("v-uni-text", { style: _vm._$g(6, "s"), attrs: { _i: 6 } }, [
+          _c("v-uni-text", { style: _vm._$g(7, "s"), attrs: { _i: 7 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-            [_vm._v("商品名称：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品名称", _i: 8 },
-            model: {
-              value: _vm._$g(8, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(8, $$v)
-              },
-              expression: "item.product.name"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(10, "s"), attrs: { _i: 10 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
+            { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
             [_vm._v("商品品牌：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品品牌", _i: 12 },
+            attrs: { placeholder: "请输入商品品牌", _i: 9 },
             model: {
-              value: _vm._$g(12, "v-model"),
+              value: _vm._$g(9, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(12, $$v)
+                _vm.$handleVModelEvent(9, $$v)
               },
               expression: "item.product.brand"
             }
@@ -5669,22 +5659,22 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
+        { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
         [
-          _c("v-uni-text", { style: _vm._$g(14, "s"), attrs: { _i: 14 } }, [
+          _c("v-uni-text", { style: _vm._$g(11, "s"), attrs: { _i: 11 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
+            { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
             [_vm._v("商品型号：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品型号", _i: 16 },
+            attrs: { placeholder: "请输入商品型号", _i: 13 },
             model: {
-              value: _vm._$g(16, "v-model"),
+              value: _vm._$g(13, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(16, $$v)
+                _vm.$handleVModelEvent(13, $$v)
               },
               expression: "item.product.specification"
             }
@@ -5694,29 +5684,29 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
+        { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
         [
-          _c("v-uni-text", { style: _vm._$g(18, "s"), attrs: { _i: 18 } }, [
+          _c("v-uni-text", { style: _vm._$g(15, "s"), attrs: { _i: 15 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
+            { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
             [_vm._v("商品条码：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请扫描或输入商品条码", _i: 20 },
+            attrs: { placeholder: "请扫描或输入商品条码", _i: 17 },
             model: {
-              value: _vm._$g(20, "v-model"),
+              value: _vm._$g(17, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(20, $$v)
+                _vm.$handleVModelEvent(17, $$v)
               },
               expression: "item.product.barcode"
             }
           }),
           _c("v-uni-image", {
             staticStyle: { width: "80rpx", height: "80rpx" },
-            attrs: { src: _vm._$g(21, "a-src"), _i: 21 },
+            attrs: { src: _vm._$g(18, "a-src"), _i: 18 },
             on: {
               click: function($event) {
                 return _vm.$handleViewEvent($event)
@@ -5728,27 +5718,22 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(22, "sc"), attrs: { _i: 22 } },
+        { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
         [
-          _c("v-uni-text", { style: _vm._$g(23, "s"), attrs: { _i: 23 } }, [
+          _c("v-uni-text", { style: _vm._$g(20, "s"), attrs: { _i: 20 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
-            [_vm._v("成交价格：")]
+            { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
+            [_vm._v("商品图片：")]
           ),
-          _c("v-uni-input", {
-            attrs: { type: "digit", placeholder: "请输入成交价格", _i: 25 },
+          _c("upimg", {
+            attrs: { _i: 22 },
             on: {
-              input: function($event) {
+              photo: function($event) {
                 return _vm.$handleViewEvent($event)
               }
-            },
-            model: {
-              value: _vm._$g(25, "v-model"),
-              callback: function() {},
-              expression: "item.salePrice"
             }
           })
         ],
@@ -5756,47 +5741,22 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(26, "sc"), attrs: { _i: 26 } },
+        { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
         [
-          _c("v-uni-text", { style: _vm._$g(27, "s"), attrs: { _i: 27 } }, [
+          _c("v-uni-text", { style: _vm._$g(24, "s"), attrs: { _i: 24 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
-            [_vm._v("销售数量：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { type: "number", placeholder: "请输入销售数量", _i: 29 },
-            model: {
-              value: _vm._$g(29, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(29, $$v)
-              },
-              expression: "item.quantity"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(30, "sc"), attrs: { _i: 30 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(31, "s"), attrs: { _i: 31 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(32, "sc"), attrs: { _i: 32 } },
+            { staticClass: _vm._$g(25, "sc"), attrs: { _i: 25 } },
             [_vm._v("生产厂家：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入生产厂家", _i: 33 },
+            attrs: { placeholder: "请输入生产厂家", disabled: true, _i: 26 },
             model: {
-              value: _vm._$g(33, "v-model"),
+              value: _vm._$g(26, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(33, $$v)
+                _vm.$handleVModelEvent(26, $$v)
               },
               expression: "item.product.manufacturer"
             }
@@ -5806,22 +5766,22 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(34, "sc"), attrs: { _i: 34 } },
+        { staticClass: _vm._$g(27, "sc"), attrs: { _i: 27 } },
         [
-          _c("v-uni-text", { style: _vm._$g(35, "s"), attrs: { _i: 35 } }, [
+          _c("v-uni-text", { style: _vm._$g(28, "s"), attrs: { _i: 28 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(36, "sc"), attrs: { _i: 36 } },
+            { staticClass: _vm._$g(29, "sc"), attrs: { _i: 29 } },
             [_vm._v("生产地区：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入生产地区", _i: 37 },
+            attrs: { placeholder: "请输入生产地区", disabled: true, _i: 30 },
             model: {
-              value: _vm._$g(37, "v-model"),
+              value: _vm._$g(30, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(37, $$v)
+                _vm.$handleVModelEvent(30, $$v)
               },
               expression: "item.product.origin"
             }
@@ -5831,22 +5791,22 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(38, "sc"), attrs: { _i: 38 } },
+        { staticClass: _vm._$g(31, "sc"), attrs: { _i: 31 } },
         [
-          _c("v-uni-text", { style: _vm._$g(39, "s"), attrs: { _i: 39 } }, [
+          _c("v-uni-text", { style: _vm._$g(32, "s"), attrs: { _i: 32 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(40, "sc"), attrs: { _i: 40 } },
+            { staticClass: _vm._$g(33, "sc"), attrs: { _i: 33 } },
             [_vm._v("备注信息：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入备注信息", _i: 41 },
+            attrs: { placeholder: "请输入备注信息", disabled: true, _i: 34 },
             model: {
-              value: _vm._$g(41, "v-model"),
+              value: _vm._$g(34, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(41, $$v)
+                _vm.$handleVModelEvent(34, $$v)
               },
               expression: "item.product.remark"
             }
@@ -5854,16 +5814,72 @@ var render = function() {
         ],
         1
       ),
-      _c("v-uni-view", { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } }),
+      _c("v-uni-view", { staticClass: _vm._$g(35, "sc"), attrs: { _i: 35 } }, [
+        _vm._v("销售明细")
+      ]),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(43, "sc"), attrs: { _i: 43 } },
+        { staticClass: _vm._$g(36, "sc"), attrs: { _i: 36 } },
+        [
+          _c("v-uni-text", { style: _vm._$g(37, "s"), attrs: { _i: 37 } }, [
+            _vm._v("*")
+          ]),
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(38, "sc"), attrs: { _i: 38 } },
+            [_vm._v("成交价格：")]
+          ),
+          _c("v-uni-input", {
+            attrs: { type: "digit", placeholder: "请输入成交价格", _i: 39 },
+            on: {
+              input: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
+            },
+            model: {
+              value: _vm._$g(39, "v-model"),
+              callback: function() {},
+              expression: "item.salePrice"
+            }
+          })
+        ],
+        1
+      ),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(40, "sc"), attrs: { _i: 40 } },
+        [
+          _c("v-uni-text", { style: _vm._$g(41, "s"), attrs: { _i: 41 } }, [
+            _vm._v("*")
+          ]),
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } },
+            [_vm._v("销售数量：")]
+          ),
+          _c("v-uni-input", {
+            attrs: { type: "number", placeholder: "请输入销售数量", _i: 43 },
+            model: {
+              value: _vm._$g(43, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(43, $$v)
+              },
+              expression: "item.quantity"
+            }
+          })
+        ],
+        1
+      ),
+      _c("v-uni-view", { staticClass: _vm._$g(44, "sc"), attrs: { _i: 44 } }),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(45, "sc"), attrs: { _i: 45 } },
         [
           _c(
             "v-uni-button",
             {
-              staticClass: _vm._$g(44, "sc"),
-              attrs: { id: "1", _i: 44 },
+              staticClass: _vm._$g(46, "sc"),
+              attrs: { id: "1", _i: 46 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -5875,8 +5891,8 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              staticClass: _vm._$g(45, "sc"),
-              attrs: { id: "2", _i: 45 },
+              staticClass: _vm._$g(47, "sc"),
+              attrs: { id: "2", _i: 47 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -5980,7 +5996,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.p_btn_group {\n  padding: 0rpx 20rpx 0rpx 20rpx;\n  display: flex;\n  position: fixed;\n  bottom: 0;\n  z-index: 9999;\n  width: 100%;\n  justify-content: space-between;\n}\n.p_btn_group .p_btn {\n  width: 345rpx;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.p_btn_group {\n  padding: 0rpx 20rpx 0rpx 20rpx;\n  display: flex;\n  position: fixed;\n  bottom: 0;\n  z-index: 9999;\n  width: 100%;\n  justify-content: space-between;\n}\n.p_btn_group .p_btn {\n  width: 345rpx;\n}\n.detail {\n  padding: 10px 10px 10px 10px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -6425,34 +6441,24 @@ var render = function() {
     "v-uni-view",
     { staticClass: _vm._$g(0, "sc"), attrs: { _i: 0 } },
     [
+      _c("v-uni-view", { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } }, [
+        _vm._v("商品信息")
+      ]),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } },
+        { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
-            [_vm._v("商品图片：")]
-          ),
-          _c("myimg", { attrs: { _i: 3 } })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
-        [
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
+            { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
             [_vm._v("商品名称：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品名称", disabled: true, _i: 6 },
+            attrs: { placeholder: "请输入商品名称", disabled: true, _i: 4 },
             model: {
-              value: _vm._$g(6, "v-model"),
+              value: _vm._$g(4, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(6, $$v)
+                _vm.$handleVModelEvent(4, $$v)
               },
               expression: "item.product.name"
             }
@@ -6462,19 +6468,19 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
+        { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
+            { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } },
             [_vm._v("商品品牌：")]
           ),
           _c("v-uni-input", {
-            attrs: { disabled: true, _i: 9 },
+            attrs: { disabled: true, _i: 7 },
             model: {
-              value: _vm._$g(9, "v-model"),
+              value: _vm._$g(7, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(9, $$v)
+                _vm.$handleVModelEvent(7, $$v)
               },
               expression: "item.product.brand"
             }
@@ -6484,19 +6490,19 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
+        { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
+            { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
             [_vm._v("商品型号：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品型号", disabled: true, _i: 12 },
+            attrs: { placeholder: "请输入商品型号", disabled: true, _i: 10 },
             model: {
-              value: _vm._$g(12, "v-model"),
+              value: _vm._$g(10, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(12, $$v)
+                _vm.$handleVModelEvent(10, $$v)
               },
               expression: "item.product.specification"
             }
@@ -6506,19 +6512,19 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
+        { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
+            { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
             [_vm._v("商品条码：")]
           ),
           _c("v-uni-input", {
-            attrs: { disabled: true, _i: 15 },
+            attrs: { disabled: true, _i: 13 },
             model: {
-              value: _vm._$g(15, "v-model"),
+              value: _vm._$g(13, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(15, $$v)
+                _vm.$handleVModelEvent(13, $$v)
               },
               expression: "item.product.barcode"
             }
@@ -6528,63 +6534,32 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
+        { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
-            [_vm._v("成交价格：")]
+            { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
+            [_vm._v("商品图片：")]
           ),
-          _c("v-uni-input", {
-            attrs: { disabled: true, _i: 18 },
-            model: {
-              value: _vm._$g(18, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(18, $$v)
-              },
-              expression: "item.salePrice"
-            }
-          })
+          _c("myimg", { attrs: { _i: 16 } })
         ],
         1
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
+        { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
-            [_vm._v("销售数量：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { disabled: true, _i: 21 },
-            model: {
-              value: _vm._$g(21, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(21, $$v)
-              },
-              expression: "item.quantity"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(22, "sc"), attrs: { _i: 22 } },
-        [
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
+            { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
             [_vm._v("生产厂家：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "未输入生产厂家", disabled: true, _i: 24 },
+            attrs: { placeholder: "未输入生产厂家", disabled: true, _i: 19 },
             model: {
-              value: _vm._$g(24, "v-model"),
+              value: _vm._$g(19, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(24, $$v)
+                _vm.$handleVModelEvent(19, $$v)
               },
               expression: "item.product.manufacturer"
             }
@@ -6594,19 +6569,19 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(25, "sc"), attrs: { _i: 25 } },
+        { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(26, "sc"), attrs: { _i: 26 } },
+            { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
             [_vm._v("生产地区：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "未输入生产地区", disabled: true, _i: 27 },
+            attrs: { placeholder: "未输入生产地区", disabled: true, _i: 22 },
             model: {
-              value: _vm._$g(27, "v-model"),
+              value: _vm._$g(22, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(27, $$v)
+                _vm.$handleVModelEvent(22, $$v)
               },
               expression: "item.product.origin"
             }
@@ -6616,21 +6591,68 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
+        { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(29, "sc"), attrs: { _i: 29 } },
+            { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
             [_vm._v("备注信息：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "未输入备注信息", disabled: true, _i: 30 },
+            attrs: { placeholder: "未输入备注信息", disabled: true, _i: 25 },
             model: {
-              value: _vm._$g(30, "v-model"),
+              value: _vm._$g(25, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(30, $$v)
+                _vm.$handleVModelEvent(25, $$v)
               },
               expression: "item.product.remark"
+            }
+          })
+        ],
+        1
+      ),
+      _c("v-uni-view", { staticClass: _vm._$g(26, "sc"), attrs: { _i: 26 } }, [
+        _vm._v("销售明细")
+      ]),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(27, "sc"), attrs: { _i: 27 } },
+        [
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
+            [_vm._v("成交价格：")]
+          ),
+          _c("v-uni-input", {
+            attrs: { disabled: true, _i: 29 },
+            model: {
+              value: _vm._$g(29, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(29, $$v)
+              },
+              expression: "item.salePrice"
+            }
+          })
+        ],
+        1
+      ),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(30, "sc"), attrs: { _i: 30 } },
+        [
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(31, "sc"), attrs: { _i: 31 } },
+            [_vm._v("销售数量：")]
+          ),
+          _c("v-uni-input", {
+            attrs: { disabled: true, _i: 32 },
+            model: {
+              value: _vm._$g(32, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(32, $$v)
+              },
+              expression: "item.quantity"
             }
           })
         ],
@@ -6728,7 +6750,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.detail {\n  padding: 10px 10px 10px 10px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -9758,7 +9780,9 @@ var render = function() {
                 staticClass: _vm._$g(13, "sc"),
                 attrs: { _i: 13 }
               }),
-              _c("v-uni-text", { attrs: { _i: 14 } }, [_vm._v("点击添加商品")])
+              _c("v-uni-text", { attrs: { _i: 14 } }, [
+                _vm._v("点击添加商品项")
+              ])
             ],
             1
           )
@@ -12248,6 +12272,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    selectLay: __webpack_require__(/*! @/uni_modules/select-lay/components/select-lay/select-lay.vue */ 314)
+      .default
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12266,12 +12312,13 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
-            [_vm._v("商品图片：")]
+            [_vm._v("商品名称：")]
           ),
-          _c("upimg", {
+          _c("select-lay", {
+            staticClass: _vm._$g(4, "sc"),
             attrs: { _i: 4 },
             on: {
-              photo: function($event) {
+              selectitem: function($event) {
                 return _vm.$handleViewEvent($event)
               }
             }
@@ -12289,16 +12336,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-            [_vm._v("商品名称：")]
+            [_vm._v("商品品牌：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品名称", disabled: true, _i: 8 },
+            attrs: { placeholder: "请输入商品品牌", disabled: true, _i: 8 },
             model: {
               value: _vm._$g(8, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(8, $$v)
               },
-              expression: "purchaseOrder.product.name"
+              expression: "purchaseOrder.product.brand"
             }
           })
         ],
@@ -12314,16 +12361,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
-            [_vm._v("商品品牌：")]
+            [_vm._v("商品型号：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品品牌", disabled: true, _i: 12 },
+            attrs: { placeholder: "请输入商品型号", disabled: true, _i: 12 },
             model: {
               value: _vm._$g(12, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(12, $$v)
               },
-              expression: "purchaseOrder.product.brand"
+              expression: "purchaseOrder.product.specification"
             }
           })
         ],
@@ -12339,16 +12386,29 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
-            [_vm._v("商品型号：")]
+            [_vm._v("商品条码：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品型号", disabled: true, _i: 16 },
+            attrs: {
+              placeholder: "请扫描或输入商品条码",
+              disabled: true,
+              _i: 16
+            },
             model: {
               value: _vm._$g(16, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(16, $$v)
               },
-              expression: "purchaseOrder.product.specification"
+              expression: "purchaseOrder.product.barcode"
+            }
+          }),
+          _c("v-uni-image", {
+            staticStyle: { width: "80rpx", height: "80rpx" },
+            attrs: { src: _vm._$g(17, "a-src"), _i: 17 },
+            on: {
+              click: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
             }
           })
         ],
@@ -12356,35 +12416,20 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
+        { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
         [
-          _c("v-uni-text", { style: _vm._$g(18, "s"), attrs: { _i: 18 } }, [
+          _c("v-uni-text", { style: _vm._$g(19, "s"), attrs: { _i: 19 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
-            [_vm._v("商品条码：")]
+            { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
+            [_vm._v("商品图片：")]
           ),
-          _c("v-uni-input", {
-            attrs: {
-              placeholder: "请扫描或输入商品条码",
-              disabled: true,
-              _i: 20
-            },
-            model: {
-              value: _vm._$g(20, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(20, $$v)
-              },
-              expression: "purchaseOrder.product.barcode"
-            }
-          }),
-          _c("v-uni-image", {
-            staticStyle: { width: "80rpx", height: "80rpx" },
-            attrs: { src: _vm._$g(21, "a-src"), _i: 21 },
+          _c("upimg", {
+            attrs: { _i: 21 },
             on: {
-              click: function($event) {
+              photo: function($event) {
                 return _vm.$handleViewEvent($event)
               }
             }
@@ -14105,14 +14150,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
-            [_vm._v("商品图片：")]
+            [_vm._v("商品名称：")]
           ),
-          _c("upimg", {
-            attrs: { _i: 4 },
-            on: {
-              photo: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
+          _c("v-uni-input", {
+            attrs: { placeholder: "请输入商品名称", _i: 4 },
+            model: {
+              value: _vm._$g(4, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(4, $$v)
+              },
+              expression: "product.name"
             }
           })
         ],
@@ -14128,16 +14175,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-            [_vm._v("商品名称：")]
+            [_vm._v("商品品牌：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品名称", _i: 8 },
+            attrs: { placeholder: "请输入商品品牌", _i: 8 },
             model: {
               value: _vm._$g(8, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(8, $$v)
               },
-              expression: "product.name"
+              expression: "product.brand"
             }
           })
         ],
@@ -14153,16 +14200,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
-            [_vm._v("商品品牌：")]
+            [_vm._v("商品型号：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品品牌", _i: 12 },
+            attrs: { placeholder: "请输入商品型号", _i: 12 },
             model: {
               value: _vm._$g(12, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(12, $$v)
               },
-              expression: "product.brand"
+              expression: "product.specification"
             }
           })
         ],
@@ -14178,16 +14225,25 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
-            [_vm._v("商品型号：")]
+            [_vm._v("商品条码：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入商品型号", _i: 16 },
+            attrs: { placeholder: "请扫描或输入商品条码", _i: 16 },
             model: {
               value: _vm._$g(16, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(16, $$v)
               },
-              expression: "product.specification"
+              expression: "product.barcode"
+            }
+          }),
+          _c("v-uni-image", {
+            staticStyle: { width: "80rpx", height: "80rpx" },
+            attrs: { src: _vm._$g(17, "a-src"), _i: 17 },
+            on: {
+              click: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
             }
           })
         ],
@@ -14195,31 +14251,20 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
+        { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
         [
-          _c("v-uni-text", { style: _vm._$g(18, "s"), attrs: { _i: 18 } }, [
+          _c("v-uni-text", { style: _vm._$g(19, "s"), attrs: { _i: 19 } }, [
             _vm._v("*")
           ]),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
-            [_vm._v("商品条码：")]
+            { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
+            [_vm._v("商品图片：")]
           ),
-          _c("v-uni-input", {
-            attrs: { placeholder: "请扫描或输入商品条码", _i: 20 },
-            model: {
-              value: _vm._$g(20, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(20, $$v)
-              },
-              expression: "product.barcode"
-            }
-          }),
-          _c("v-uni-image", {
-            staticStyle: { width: "80rpx", height: "80rpx" },
-            attrs: { src: _vm._$g(21, "a-src"), _i: 21 },
+          _c("upimg", {
+            attrs: { _i: 21 },
             on: {
-              click: function($event) {
+              photo: function($event) {
                 return _vm.$handleViewEvent($event)
               }
             }
@@ -14237,19 +14282,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
-            [_vm._v("销售价格（优质客户）：")]
+            [_vm._v("国外库存：")]
           ),
           _c("v-uni-input", {
-            attrs: { type: "digit", placeholder: "请输入销售价格", _i: 25 },
-            on: {
-              input: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
-            },
+            attrs: { type: "number", placeholder: "请输入国外库存", _i: 25 },
             model: {
               value: _vm._$g(25, "v-model"),
-              callback: function() {},
-              expression: "product.salePrice"
+              callback: function($$v) {
+                _vm.$handleVModelEvent(25, $$v)
+              },
+              expression: "product.inventory.warehouseInventory"
             }
           })
         ],
@@ -14265,19 +14307,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
-            [_vm._v("销售价格（普通客户）：")]
+            [_vm._v("在途库存：")]
           ),
           _c("v-uni-input", {
-            attrs: { type: "digit", placeholder: "请输入销售价格", _i: 29 },
-            on: {
-              input: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
-            },
+            attrs: { type: "number", placeholder: "请输入在途库存", _i: 29 },
             model: {
               value: _vm._$g(29, "v-model"),
-              callback: function() {},
-              expression: "product.salePrice"
+              callback: function($$v) {
+                _vm.$handleVModelEvent(29, $$v)
+              },
+              expression: "product.inventory.midwayInventory"
             }
           })
         ],
@@ -14293,19 +14332,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(32, "sc"), attrs: { _i: 32 } },
-            [_vm._v("销售价格（批量采购）：")]
+            [_vm._v("国内库存：")]
           ),
           _c("v-uni-input", {
-            attrs: { type: "digit", placeholder: "请输入销售价格", _i: 33 },
-            on: {
-              input: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
-            },
+            attrs: { type: "number", placeholder: "请输入国内库存", _i: 33 },
             model: {
               value: _vm._$g(33, "v-model"),
-              callback: function() {},
-              expression: "product.salePrice"
+              callback: function($$v) {
+                _vm.$handleVModelEvent(33, $$v)
+              },
+              expression: "product.inventory.hubInventory"
             }
           })
         ],
@@ -14321,16 +14357,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(36, "sc"), attrs: { _i: 36 } },
-            [_vm._v("国外库存：")]
+            [_vm._v("生产厂家：")]
           ),
           _c("v-uni-input", {
-            attrs: { type: "number", placeholder: "请输入国外库存", _i: 37 },
+            attrs: { placeholder: "请输入生产厂家", _i: 37 },
             model: {
               value: _vm._$g(37, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(37, $$v)
               },
-              expression: "product.inventory.warehouseInventory"
+              expression: "product.manufacturer"
             }
           })
         ],
@@ -14346,16 +14382,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(40, "sc"), attrs: { _i: 40 } },
-            [_vm._v("在途库存：")]
+            [_vm._v("生产地区：")]
           ),
           _c("v-uni-input", {
-            attrs: { type: "number", placeholder: "请输入在途库存", _i: 41 },
+            attrs: { placeholder: "请输入生产地区", _i: 41 },
             model: {
               value: _vm._$g(41, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(41, $$v)
               },
-              expression: "product.inventory.midwayInventory"
+              expression: "product.origin"
             }
           })
         ],
@@ -14371,89 +14407,14 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(44, "sc"), attrs: { _i: 44 } },
-            [_vm._v("国内库存：")]
+            [_vm._v("备注信息：")]
           ),
           _c("v-uni-input", {
-            attrs: { type: "number", placeholder: "请输入国内库存", _i: 45 },
+            attrs: { placeholder: "请输入备注信息", _i: 45 },
             model: {
               value: _vm._$g(45, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(45, $$v)
-              },
-              expression: "product.inventory.hubInventory"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(46, "sc"), attrs: { _i: 46 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(47, "s"), attrs: { _i: 47 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(48, "sc"), attrs: { _i: 48 } },
-            [_vm._v("生产厂家：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { placeholder: "请输入生产厂家", _i: 49 },
-            model: {
-              value: _vm._$g(49, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(49, $$v)
-              },
-              expression: "product.manufacturer"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(50, "sc"), attrs: { _i: 50 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(51, "s"), attrs: { _i: 51 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(52, "sc"), attrs: { _i: 52 } },
-            [_vm._v("生产地区：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { placeholder: "请输入生产地区", _i: 53 },
-            model: {
-              value: _vm._$g(53, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(53, $$v)
-              },
-              expression: "product.origin"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(54, "sc"), attrs: { _i: 54 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(55, "s"), attrs: { _i: 55 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(56, "sc"), attrs: { _i: 56 } },
-            [_vm._v("备注信息：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { placeholder: "请输入备注信息", _i: 57 },
-            model: {
-              value: _vm._$g(57, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(57, $$v)
               },
               expression: "product.remark"
             }
@@ -14461,20 +14422,20 @@ var render = function() {
         ],
         1
       ),
-      _c("v-uni-view", { staticClass: _vm._$g(58, "sc"), attrs: { _i: 58 } }),
+      _c("v-uni-view", { staticClass: _vm._$g(46, "sc"), attrs: { _i: 46 } }),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(59, "sc"), attrs: { _i: 59 } },
+        { staticClass: _vm._$g(47, "sc"), attrs: { _i: 47 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(60, "sc"), attrs: { _i: 60 } },
+            { staticClass: _vm._$g(48, "sc"), attrs: { _i: 48 } },
             [
               _c(
                 "v-uni-button",
                 {
-                  staticClass: _vm._$g(61, "sc"),
-                  attrs: { _i: 61 },
+                  staticClass: _vm._$g(49, "sc"),
+                  attrs: { _i: 49 },
                   on: {
                     click: function($event) {
                       return _vm.$handleViewEvent($event)
@@ -14931,7 +14892,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\n/**\n * 这里是uni-app内置的常用样式变量\n *\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\n *\n */\n/**\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\n *\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\n */\n/* 颜色变量 */\n/* 行为相关颜色 */\n/* 文字基本颜色 */\n/* 背景颜色 */\n/* 边框颜色 */\n/* 尺寸变量 */\n/* 文字尺寸 */\n/* 图片尺寸 */\n/* Border Radius */\n/* 水平间距 */\n/* 垂直间距 */\n/* 透明度 */\n/* 文章场景相关 */\n/* 页面左右间距 */\n/* 文字尺寸 */\n/*文字颜色*/\n/* 边框颜色 */\n/* 图片加载中颜色 */\n/* 行为相关颜色 */\n.uni-select-lay[data-v-392314c6] {\n  position: relative;\n  z-index: 999;\n}\n.uni-select-lay .uni-select-input[data-v-392314c6] {\n  opacity: 0;\n  position: absolute;\n  z-index: -111;\n}\n.uni-select-lay .uni-select-lay-select[data-v-392314c6] {\n  -webkit-user-select: none;\n          user-select: none;\n  position: relative;\n  z-index: 3;\n  height: 36px;\n  padding: 0 30px 0 10px;\n  box-sizing: border-box;\n  border-radius: 4px;\n  border: 1px solid #e5e5e5;\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #999;\n}\n.uni-select-lay .uni-select-lay-select .uni-disabled[data-v-392314c6] {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 19;\n  cursor: no-drop;\n  background: rgba(255, 255, 255, 0.5);\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input-close[data-v-392314c6] {\n  position: absolute;\n  right: 35px;\n  top: 0;\n  height: 100%;\n  width: 15px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 3;\n  cursor: pointer;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input-close uni-text[data-v-392314c6] {\n  position: relative;\n  background: #fff;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  border: 1px solid #bbb;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input-close uni-text[data-v-392314c6]::before, .uni-select-lay .uni-select-lay-select .uni-select-lay-input-close uni-text[data-v-392314c6]::after {\n  content: \"\";\n  position: absolute;\n  left: 20%;\n  top: 50%;\n  height: 1px;\n  width: 60%;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n  background-color: #bbb;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input-close uni-text[data-v-392314c6]::after {\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input[data-v-392314c6] {\n  font-size: 14px;\n  color: #999;\n  display: block;\n  width: 98%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  line-height: 30px;\n  box-sizing: border-box;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input.active[data-v-392314c6] {\n  color: #333;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon[data-v-392314c6] {\n  cursor: pointer;\n  position: absolute;\n  right: 0;\n  top: 0;\n  height: 100%;\n  width: 30px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon[data-v-392314c6]::before {\n  content: \"\";\n  width: 1px;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  background-color: #e5e5e5;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon uni-text[data-v-392314c6] {\n  display: block;\n  width: 0;\n  height: 0;\n  border-width: 12rpx 12rpx 0;\n  border-style: solid;\n  border-color: #bbb transparent transparent;\n  transition: .3s;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon.disabled[data-v-392314c6] {\n  cursor: no-drop;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon.disabled uni-text[data-v-392314c6] {\n  width: 20rpx;\n  height: 20rpx;\n  border: 2px solid #ff0000;\n  border-radius: 50%;\n  transition: .3s;\n  position: relative;\n  z-index: 999;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon.disabled uni-text[data-v-392314c6]::after {\n  content: \"\";\n  position: absolute;\n  top: 50%;\n  left: 0;\n  width: 100%;\n  height: 2px;\n  margin-top: -1px;\n  background-color: #ff0000;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.uni-select-lay .uni-select-lay-select.active .uni-select-lay-icon uni-text[data-v-392314c6] {\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.uni-select-lay .uni-select-lay-options[data-v-392314c6] {\n  -webkit-user-select: none;\n          user-select: none;\n  position: absolute;\n  top: calc(100% + 5px);\n  left: 0;\n  width: 100%;\n  height: 500rpx;\n  border-radius: 4px;\n  border: 1px solid #e5e5e5;\n  background: #fff;\n  padding: 5px 0;\n  box-sizing: border-box;\n  z-index: 9;\n}\n.uni-select-lay .uni-select-lay-options .uni-select-lay-item[data-v-392314c6] {\n  padding: 0 10px;\n  box-sizing: border-box;\n  cursor: pointer;\n  line-height: 2.5;\n  transition: .3s;\n  font-size: 14px;\n}\n.uni-select-lay .uni-select-lay-options .uni-select-lay-item.active[data-v-392314c6] {\n  background: #007AFF;\n  color: #fff;\n}\n.uni-select-lay .uni-select-lay-options .uni-select-lay-item.active[data-v-392314c6]:hover {\n  background: #007AFF;\n  color: #fff;\n}\n.uni-select-lay .uni-select-lay-options .uni-select-lay-item[data-v-392314c6]:hover {\n  background-color: #f5f5f5;\n}\n.uni-select-lay .uni-select-lay-options .nosearch[data-v-392314c6] {\n  font-size: 16px;\n  line-height: 3;\n  text-align: center;\n  color: #666;\n}\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/**\n * 这里是uni-app内置的常用样式变量\n *\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\n *\n */\n/**\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\n *\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\n */\n/* 颜色变量 */\n/* 行为相关颜色 */\n/* 文字基本颜色 */\n/* 背景颜色 */\n/* 边框颜色 */\n/* 尺寸变量 */\n/* 文字尺寸 */\n/* 图片尺寸 */\n/* Border Radius */\n/* 水平间距 */\n/* 垂直间距 */\n/* 透明度 */\n/* 文章场景相关 */\n/* 页面左右间距 */\n/* 文字尺寸 */\n/*文字颜色*/\n/* 边框颜色 */\n/* 图片加载中颜色 */\n/* 行为相关颜色 */\n.uni-select-lay[data-v-392314c6] {\n  position: relative;\n  z-index: 999;\n  width: 100%;\n}\n.uni-select-lay .uni-select-input[data-v-392314c6] {\n  opacity: 0;\n  position: absolute;\n  z-index: -111;\n}\n.uni-select-lay .uni-select-lay-select[data-v-392314c6] {\n  -webkit-user-select: none;\n          user-select: none;\n  position: relative;\n  z-index: 3;\n  height: 36px;\n  padding: 0 30px 0 0px;\n  box-sizing: border-box;\n  border-radius: 4px;\n  display: flex;\n  align-items: center;\n  font-size: 13px;\n  color: #999;\n}\n.uni-select-lay .uni-select-lay-select .uni-disabled[data-v-392314c6] {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 19;\n  cursor: no-drop;\n  background: rgba(255, 255, 255, 0.5);\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input-close[data-v-392314c6] {\n  position: absolute;\n  right: 35px;\n  top: 0;\n  height: 100%;\n  width: 15px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 3;\n  cursor: pointer;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input-close uni-text[data-v-392314c6] {\n  position: relative;\n  background: #fff;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  border: 1px solid #bbb;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input-close uni-text[data-v-392314c6]::before, .uni-select-lay .uni-select-lay-select .uni-select-lay-input-close uni-text[data-v-392314c6]::after {\n  content: \"\";\n  position: absolute;\n  left: 20%;\n  top: 50%;\n  height: 1px;\n  width: 60%;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n  background-color: #bbb;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input-close uni-text[data-v-392314c6]::after {\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input[data-v-392314c6] {\n  font-size: 13px;\n  color: #999;\n  display: block;\n  width: 98%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  line-height: 30px;\n  box-sizing: border-box;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-input.active[data-v-392314c6] {\n  color: #555;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon[data-v-392314c6] {\n  cursor: pointer;\n  position: absolute;\n  right: 0;\n  top: 0;\n  height: 100%;\n  width: 30px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon[data-v-392314c6]::before {\n  content: \"\";\n  width: 1px;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  background-color: #e5e5e5;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon uni-text[data-v-392314c6] {\n  display: block;\n  width: 0;\n  height: 0;\n  border-width: 12rpx 12rpx 0;\n  border-style: solid;\n  border-color: #bbb transparent transparent;\n  transition: .3s;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon.disabled[data-v-392314c6] {\n  cursor: no-drop;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon.disabled uni-text[data-v-392314c6] {\n  width: 20rpx;\n  height: 20rpx;\n  border: 2px solid #ff0000;\n  border-radius: 50%;\n  transition: .3s;\n  position: relative;\n  z-index: 999;\n}\n.uni-select-lay .uni-select-lay-select .uni-select-lay-icon.disabled uni-text[data-v-392314c6]::after {\n  content: \"\";\n  position: absolute;\n  top: 50%;\n  left: 0;\n  width: 100%;\n  height: 2px;\n  margin-top: -1px;\n  background-color: #ff0000;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.uni-select-lay .uni-select-lay-select.active .uni-select-lay-icon uni-text[data-v-392314c6] {\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.uni-select-lay .uni-select-lay-options[data-v-392314c6] {\n  -webkit-user-select: none;\n          user-select: none;\n  position: absolute;\n  top: calc(100% + 5px);\n  left: 0;\n  width: 100%;\n  height: 500rpx;\n  border-radius: 4px;\n  border: 1px solid #e5e5e5;\n  background: #fff;\n  padding: 5px 0;\n  box-sizing: border-box;\n  z-index: 9;\n}\n.uni-select-lay .uni-select-lay-options .uni-select-lay-item[data-v-392314c6] {\n  padding: 0 10px;\n  box-sizing: border-box;\n  cursor: pointer;\n  line-height: 2.5;\n  transition: .3s;\n  font-size: 14px;\n}\n.uni-select-lay .uni-select-lay-options .uni-select-lay-item.active[data-v-392314c6] {\n  background: #007AFF;\n  color: #fff;\n}\n.uni-select-lay .uni-select-lay-options .uni-select-lay-item.active[data-v-392314c6]:hover {\n  background: #007AFF;\n  color: #fff;\n}\n.uni-select-lay .uni-select-lay-options .uni-select-lay-item[data-v-392314c6]:hover {\n  background-color: #f5f5f5;\n}\n.uni-select-lay .uni-select-lay-options .nosearch[data-v-392314c6] {\n  font-size: 16px;\n  line-height: 3;\n  text-align: center;\n  color: #666;\n}\n", ""]);
 // Exports
 module.exports = exports;
 

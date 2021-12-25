@@ -17,7 +17,7 @@
 			</view>
 			<view class="goods goods_add" @click="jumpProductAppend">
 				<text class="iconfont icon-jiahao"></text>
-				<text>点击添加商品</text>
+				<text>点击添加商品项</text>
 			</view>
 		</view>
 		<view class="order">收货信息</view>

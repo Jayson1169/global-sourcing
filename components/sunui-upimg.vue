@@ -55,6 +55,10 @@
 			}
 		},
 		methods: {
+			loadImage(image) {
+				this.upload_before_list = []
+				this.upload_before_list.push(image)
+			},
 			chooseImage() {
 				let _self = this;
 				uni.chooseImage({
@@ -431,7 +435,7 @@
 	width: 40upx;
 	height: 40upx;
 	line-height: 40upx;
-	z-index: 2;
+	// z-index: 10;
 	text-align: center;
 	background-color: #e54d42;
 

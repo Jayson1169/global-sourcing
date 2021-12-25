@@ -72,13 +72,19 @@
 			output() {
 				// 要导出的json数据
 				const jsonData = [{
-					name: '测试数据',
-					phone: '123456',
-					email: '123@456.com'
+					hsCode: '测试数据',
+					materialBeschaffenheit: '123456',
+					brandArticleNo: '123@456.com',
+					brand: 'test',
+					articleName: 'test',
+					unitPrice: 'test',
+					totalQuantity: 'test',
+					sum: 'test'
 				}]
 				// 列标题
 				let worksheet = 'sheet1'
-				let str = '<tr><td>姓名</td><td>电话</td><td>邮箱</td></tr>'
+				let str = '<tr><td>HS Code</td><td>Material Beschaffenheit</td><td>Brand Article no.</td>'
+						 +'<td>Brand</td><td>Article Name</td><td>unit Price €</td><td>Total Quantity</td><td>Sum</td></tr>'
 				// 循环遍历，每行加入tr标签，每个单元格加td标签
 				for (let i = 0; i < jsonData.length; i++) {
 					str += '<tr>'
@@ -104,66 +110,66 @@
 	}
 	// 导出文件到手机 fileData:要写入到文件的数据，返回参数为文档路径
 	function exportFile(fileData, documentName = '项目Excel文件') {
-	  /*
-	        PRIVATE_DOC: 应用私有文档目录常量
-	        PUBLIC_DOCUMENTS: 程序公用文档目录常量
-	        */
+		/*
+		PRIVATE_DOC: 应用私有文档目录常量
+		PUBLIC_DOCUMENTS: 程序公用文档目录常量
+		*/
 	  plus.io.requestFileSystem(plus.io.PUBLIC_DOCUMENTS, function(fs) {
-	    let rootObj = fs.root
-	    let fullPath = rootObj.fullPath
-	    // let reader = rootObj.createReader();
-	    // console.log(reader);
-	    // reader.readEntries((res)=>{
-	    //     console.log(res); //这里拿到了该目录下所有直接文件和目录
-	    // },(err)=>{console.log(err);})
+		let rootObj = fs.root
+		let fullPath = rootObj.fullPath
+		// let reader = rootObj.createReader();
+		// console.log(reader);
+		// reader.readEntries((res)=>{
+		//     console.log(res); //这里拿到了该目录下所有直接文件和目录
+		// },(err)=>{console.log(err);})
 	
-	    console.log('开始导出数据********')
-	    // 创建文件夹
-	    rootObj.getDirectory(documentName, {
-	      create: true
-	    }, function(dirEntry) {
-	      // 获取当前的年月继续创建文件夹
-	      let date = new Date()
-	      let year = date.getFullYear()
-	      let month = date.getMonth() + 1
-	      dirEntry.getDirectory(`${year}年${month}月`, {
-	        create: true
-	      }, function(dirEntry2) {
-	        // 创建文件,防止重名
-	        let fileName = 'excel' + getUnixTime(formatDateThis(new Date()))
-	        console.log(fileName)
-	        dirEntry2.getFile(`${fileName}.xlsx`, {
-	          create: true
-	        }, function(fileEntry) {
-	          fileEntry.createWriter(function(writer) {
-	            writer.onwritestart = (e) => {
-	              uni.showLoading({
-	                title: '正在导出',
-	                mask: true
-	              })
-	            }
-	            //  /storage/emulated/0指的就是系统路径
-	            let pathStr = fullPath.replace('/storage/emulated/0', '')
-	            writer.onwrite = (e) => {
-	              // 成功导出数据;
-	              uni.hideLoading()
-	              setTimeout(() => {
-	                uni.showToast({
-	                  title: '成功导出',
-	                  icon: 'success'
-	                })
+		console.log('开始导出数据********')
+		// 创建文件夹
+		rootObj.getDirectory(documentName, {
+		  create: true
+		}, function(dirEntry) {
+		  // 获取当前的年月继续创建文件夹
+		  let date = new Date()
+		  let year = date.getFullYear()
+		  let month = date.getMonth() + 1
+		  dirEntry.getDirectory(`${year}年${month}月`, {
+			create: true
+		  }, function(dirEntry2) {
+			// 创建文件,防止重名
+			let fileName = 'excel' + getUnixTime(formatDateThis(new Date()))
+			console.log(fileName)
+			dirEntry2.getFile(`${fileName}.xlsx`, {
+			  create: true
+			}, function(fileEntry) {
+			  fileEntry.createWriter(function(writer) {
+				writer.onwritestart = (e) => {
+				  uni.showLoading({
+					title: '正在导出',
+					mask: true
+				  })
+				}
+				//  /storage/emulated/0指的就是系统路径
+				let pathStr = fullPath.replace('/storage/emulated/0', '')
+				writer.onwrite = (e) => {
+				  // 成功导出数据;
+				  uni.hideLoading()
+				  setTimeout(() => {
+					uni.showToast({
+					  title: '成功导出',
+					  icon: 'success'
+					})
 					console.log(`文件位置：${pathStr}/${documentName}/${year}年${month}月`)
-	                that.successTip = `文件位置：${pathStr}/${documentName}/${year}年${month}月`
-	              }, 500)
-	            }
-	            // 写入内容;
-	            writer.write(fileData)
-	          }, function(e) {
-	            console.log(e.message)
-	          })
-	        })
-	      })
-	    })
+					that.successTip = `文件位置：${pathStr}/${documentName}/${year}年${month}月`
+				  }, 500)
+				}
+				// 写入内容;
+				writer.write(fileData)
+			  }, function(e) {
+				console.log(e.message)
+			  })
+			})
+		  })
+		})
 	  })
 	}
 </script>

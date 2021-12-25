@@ -2,14 +2,14 @@
 	<view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">商品图片：</view>
-			<upimg @photo="getPhoto" :photo="purchaseOrder.product.photo"></upimg>
+			<view class="title">商品名称：</view>
+			<select-lay class="title2" :value="tval" name="name" :options="datalist" :placeholder="请选择或搜索商品" @selectitem="selectitem"></select-lay>
 		</view>
-		<view class="cu-form-group">
+	<!-- 	<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品名称：</view>
 			<input placeholder="请输入商品名称" v-model="purchaseOrder.product.name" disabled></input>
-		</view>
+		</view> -->
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品品牌：</view>
@@ -25,6 +25,11 @@
 			<view class="title">商品条码：</view>
 			<input placeholder="请扫描或输入商品条码" v-model="purchaseOrder.product.barcode" disabled></input>
 			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">商品图片：</view>
+			<upimg @photo="getPhoto" :photo="purchaseOrder.product.photo"></upimg>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>

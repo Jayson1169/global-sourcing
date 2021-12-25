@@ -1,18 +1,16 @@
 <template>
 	<view class="product">		
-		<view class="cu-form-group">
-			<select-lay class="title2" :value="tval" name="name" :options="datalist" @selectitem="selectitem"></select-lay>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">商品图片：</view>
-			<upimg @photo="getPhoto" :photo="item.product.image"></upimg>
-		</view>
+		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="item.product.name"></input>
+			<select-lay :value="item.product.name" name="name" placeholder="请选择或搜索商品" :showplaceholder="false" slabel="name" svalue="id" @selectitem="selectitem"></select-lay>
 		</view>
+<!-- 		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">商品名称：</view>
+			<input placeholder="请输入商品名称" v-model="item.product.name"></input>
+		</view> -->
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品品牌：</view>
@@ -31,13 +29,8 @@
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">成交价格：</view>
-			<input type="digit" placeholder="请输入成交价格" v-model="item.salePrice" @input="checkPrice"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">销售数量：</view>
-			<input type="number" placeholder="请输入销售数量" v-model="item.quantity"></input>
+			<view class="title">商品图片：</view>
+			<upimg @photo="getPhoto" :photo="item.product.image" ref="upimg"></upimg>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'white'}">*</text>
@@ -54,6 +47,18 @@
 			<view class="title">备注信息：</view>
 			<input placeholder="请输入备注信息" v-model="item.product.remark"></input>
 		</view>
+		<view class="detail">销售明细</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">成交价格：</view>
+			<input type="digit" placeholder="请输入成交价格" v-model="item.price" @input="checkPrice"></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">销售数量：</view>
+			<input type="number" placeholder="请输入销售数量" v-model="item.quantity"></input>
+		</view>
+		
 		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
@@ -67,52 +72,37 @@
 	export default {
 		data() {
 			return {
-				datalist: [{
-                        label: "label1",
-                        value: "value1"
-                    },
-                    {
-                        label: "label2",
-                        value: "value2"
-                    },
-                    {
-                        label: "label3",
-                        value: "value3"
-                    }
-                ],
-				//模拟初始数据
-				tval: "value2",
 				item: {
 					product: {
-						photo: null,
-						name: 'iPhone 13 Pro',
-						brand: 'Apple',
-						specification: 'MLT83CH/A',
-						barcode: '1111111111111',
-						manufacturer: '富士康',
-						origin: '中国',
-						remark: 'iPhone',
+						image: null,
+						name: '',
+						brand: '',
+						specification: '',
+						barcode: '',
+						manufacturer: '',
+						origin: '',
+						remark: '',
 						inventory: {
-							warehouseInventory: 0,
-							midwayInventory: 0,
-							hubInventory: 0
+							warehouseInventory: '',
+							midwayInventory: '',
+							hubInventory: ''
 						}
 					},
-					salePrice: '2',
-					quantity: '2'
+					price: '',
+					quantity: ''
 				}
 			}
 		},
 		methods: {
 			getPhoto(val) {
-				this.item.product.photo = val
+				this.item.product.image = val
 			},
 			checkPrice: function(e) {
 				//正则表达式
 				e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null
 				//重新赋值给input				
 				this.$nextTick(() => {
-					this.item.salePrice = e.target.value
+					this.item.price = e.target.value
 				})
 			},
 			getScanCode() {
@@ -126,22 +116,23 @@
 			},
 			selectitem(index, item) {
 				if (index >= 0) {
-					this.tval = item.value;
+					this.item.product = item;
+					this.$refs.upimg.loadImage(this.item.product.image);
 				} else {
-					this.tval = ""
+					this.item.product = ""
 				}
 			},
 			sub() {
 				let productForm = this.item.product;
-				productForm.salePrice = this.item.salePrice;
+				productForm.price = this.item.price;
 				productForm.quantity = this.item.quantity;
 				let rules = [
-					{name: 'photo', required: true, type: 'required', errmsg: '请上传商品图片'},
+					{name: 'image', required: true, type: 'required', errmsg: '请上传商品图片'},
 					{name: 'name', required: true, type: 'required', errmsg: '请输入商品名称'},
 					{name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
 					{name: 'specification', required: true, type: 'required', errmsg: '请输入商品型号'},
 					{name: 'barcode', required: true, type: 'required', errmsg: '请输入商品条码'},
-					{name: 'salePrice', required: true, type: 'required', errmsg: '请输入销售价格'},
+					{name: 'price', required: true, type: 'required', errmsg: '请输入销售价格'},
 					{name: 'quantity', required: true, type: 'required', errmsg: '请输入销售数量'}
 				]
 				let valLoginRes = this.$validate.validate(productForm, rules)
@@ -171,15 +162,7 @@
 		width: 100%;
 		z-index: 9999;
 	}
-	.title2 {
-		background: #ffffff;
-		// text-align: justify;
-		// padding: 10upx 10upx 40upx 10upx;
-		// padding-right: 0upx;
-		// font-size: 30upx;
-		position: relative;
-		width: 100%;
-		// height: 60upx;
-		// line-height: 60upx;
+	.detail {
+		padding: 10px 10px 10px 10px;
 	}
 </style>

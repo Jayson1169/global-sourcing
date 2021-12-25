@@ -24,6 +24,7 @@ export default {
 					// })
 					cback(res.data.data);
 				} else {
+					reject(res.data.message)
 					uni.showToast({
 						title: res.data.message,
 						icon: 'none'
@@ -50,7 +51,7 @@ export default {
 				// 	})
 				}
 			}).catch(err => { 
-				console.log('请求异常:', err); 	
+				console.log('请求异常:', err);
 				uni.showToast({
 					title:'请求异常',
 					icon:'none'

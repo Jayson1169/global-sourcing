@@ -264,6 +264,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/product/ProductDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",

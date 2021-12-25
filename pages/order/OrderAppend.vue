@@ -1,26 +1,26 @@
 <template>
 	<view class="product">
-		<view class="order">订单明细</view>
+		<view class="detail">订单明细</view>
 		<view class='tag-e'>
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
 				<view>
-					<myimg :photo="item.product.photo"></myimg>
+					<myimg :photo="item.product.image"></myimg>
 				</view>
 				<view class='goods_02'>
 					<view class='goods_title'>{{item.product.name}}</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
 					<view class='good_p'>
-						<view class="good_price">¥ {{item.salePrice}}</view>
+						<view class="good_price">¥ {{item.price}}</view>
 						<view class='i'>x {{item.quantity}}</view>
 					</view>
 				</view>
 			</view>
 			<view class="goods goods_add" @click="jumpProductAppend">
 				<text class="iconfont icon-jiahao"></text>
-				<text>点击添加商品</text>
+				<text>点击添加商品项</text>
 			</view>
 		</view>
-		<view class="order">收货信息</view>
+		<view class="detail">收货信息</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
@@ -83,7 +83,6 @@
 					}
 				})
 			})
-			this.order = JSON.parse(decodeURIComponent(option.order));
 		},
 		methods: {
 			sub() { 
@@ -100,6 +99,9 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
+					this.order.items.some((item, i) => {
+						this.order.items[i].salePrice = this.order.items[i].price * 100
+					})
 					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
 						uni.showToast({
 							title: '添加成功',
@@ -110,7 +112,6 @@
 						});
 					})
 				}	
-				
 			},
 			jumpProductAppend() {
 				uni.navigateTo({
@@ -130,7 +131,7 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.order {
+	.detail {
 		padding: 10px 10px 10px 10px;
 	}
 	.o_btn {

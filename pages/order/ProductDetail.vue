@@ -1,9 +1,6 @@
 <template>
-	<view class="product">		
-		<view class="cu-form-group">
-			<view class="title">商品图片：</view>
-			<myimg :photo="item.product.photo" :padding="true"></myimg>
-		</view>
+	<view class="product">	
+		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
 			<view class="title">商品名称：</view>
 			<input placeholder="请输入商品名称" v-model="item.product.name" disabled></input>
@@ -21,12 +18,8 @@
 			<input v-model="item.product.barcode" disabled></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">成交价格：</view>
-			<input v-model="item.salePrice" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">销售数量：</view>
-			<input v-model="item.quantity" disabled></input>
+			<view class="title">商品图片：</view>
+			<myimg :photo="item.product.photo" :padding="true"></myimg>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">生产厂家：</view>
@@ -39,6 +32,15 @@
 		<view class="cu-form-group">
 			<view class="title">备注信息：</view>
 			<input placeholder="未输入备注信息" v-model="item.product.remark" disabled></input>
+		</view>
+		<view class="detail">销售明细</view>
+		<view class="cu-form-group">
+			<view class="title">成交价格：</view>
+			<input v-model="item.salePrice" disabled></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">销售数量：</view>
+			<input v-model="item.quantity" disabled></input>
 		</view>
 	</view>
 </template>
@@ -90,5 +92,8 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
+	}
+	.detail {
+		padding: 10px 10px 10px 10px;
 	}
 </style>

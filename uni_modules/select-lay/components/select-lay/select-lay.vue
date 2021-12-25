@@ -1,34 +1,44 @@
 <template>
 	<view class="uni-select-lay" :style="{'z-index':zindex}">
-		<input type="text" :name="name" v-model="value" class="uni-select-input">
+		<!-- <input type="text" :name="name" v-model="value" class="uni-select-input"> -->
 		<view class="uni-select-lay-select" :class="{'active':active}">
 			<!-- 禁用mask -->
 			<view class="uni-disabled" v-if="disabled"></view>
 			<!-- 禁用mask -->
 			<!-- 清空 -->
-			<view class="uni-select-lay-input-close" v-if="changevalue!=''&&this.active">
+			<view class="uni-select-lay-input-close" v-if="productRequest.keyword!=''&&this.active">
 				<text @click.stop="removevalue"></text>
 			</view>
 			<!-- 清空 -->
-			<input type="text" class="uni-select-lay-input" :class="{active:changevalue!=''&&changevalue!=placeholder}"
-				v-model="changevalue" :disabled="disabled" :placeholder="placeholder" @focus="unifocus"
+			<input type="text" class="uni-select-lay-input" :class="{active:productRequest.keyword!=''&&productRequest.keyword!=placeholder}"
+				v-model="productRequest.keyword" :disabled="disabled" :placeholder="placeholder" @focus="unifocus"
 				@input="intchange" @blur="uniblur">
 			<view class="uni-select-lay-icon" :class="{disabled:disabled}" @click.stop="select"><text></text></view>
 		</view>
 		<scroll-view class="uni-select-lay-options" :scroll-y="true" v-show="active">
-			<template v-if="!changes">
+			<!-- <template v-if="!changes">
 				<view class="uni-select-lay-item" v-if="showplaceholder" :class="{active:value==''}"
 					@click.stop="selectitem(-1,null)">
 					{{placeholder}}
 				</view>
 				<view class="uni-select-lay-item" :class="{active:value==item[svalue]}" v-for="(item,index) in options"
 					:key="index" @click.stop="selectitem(index,item)">{{item[slabel]}}</view>
-			</template>
+			</template> -->
 			<!-- 搜索 -->
-			<template v-else>
+			<!-- <template v-else>
 				<template v-if="vlist.length>0">
 					<view class="uni-select-lay-item" :class="{active:value==item[svalue]}"
 						v-for="(item,index) in vlist" :key="index" @click.stop="selectitem(index,item)">{{item[slabel]}}
+					</view>
+				</template>
+				<template v-else>
+					<view class="nosearch">{{changesValue}}</view>
+				</template>
+			</template> -->
+			<template>
+				<template v-if="vlist.length>0">
+					<view class="uni-select-lay-item" :class="{active:value==item[svalue]}"
+						v-for="(item, index) in vlist" :key="index" @click.stop="selectitem(index, item)">{{item[slabel]}}
 					</view>
 				</template>
 				<template v-else>
@@ -49,7 +59,7 @@
 			},
 			zindex: {
 				type: Number,
-				default: 999
+				default: 1
 			},
 			options: {
 				type: Array,
@@ -86,12 +96,17 @@
 			return {
 				active: false, //组件是否激活，
 				isremove: false, //是否是因为点击清空才导致的失去焦点
-				changevalue: "", //搜索框同步
+				// changevalue: "", 
 				oldvalue: "", //数据回滚
 				changes: false, //正在搜索
 				changesValue:"",
 				vlist: [], //搜索框查询的列表
-				settimer: null //value改变定时器
+				settimer: null ,//value改变定时器
+				productRequest: {
+					keyword: '', //搜索框同步
+					page: '0',
+					size: '4000'
+				}
 			};
 		},
 		mounted() {
@@ -118,13 +133,13 @@
 					if (this.options.length > 0) {
 						this.options.forEach(item => {
 							if (this.value == item[this.svalue]) {
-								this.oldvalue = this.changevalue = item[this.slabel];
+								this.oldvalue = this.productRequest.keyword = item[this.slabel];
 								return;
 							}
 						})
 					}
 				} else {
-					this.oldvalue = this.changevalue = "";
+					this.oldvalue = this.productRequest.keyword = "";
 				}
 			},
 			//点击组件
@@ -134,7 +149,7 @@
 				if (this.active) {
 					this.changes = false;
 				} else {
-					this.changevalue = this.oldvalue;
+					this.productRequest.keyword = this.oldvalue;
 				}
 			},
 			// 获得焦点
@@ -146,49 +161,57 @@
 			// 失去焦点
 			uniblur() {
 				// bug   点击组件列会先触发失去焦点，此时组件列事件不执行
-				setTimeout(() => {
-					if (this.isremove) {
-						this.isremove = false;
-					} else {
-						this.changevalue = this.oldvalue;
-						this.isremove = false;
-						this.active = false;
-					}
-				}, 153)
+				// setTimeout(() => {
+				// 	if (this.isremove) {
+				// 		this.isremove = false;
+				// 	} else {
+				// 		this.productRequest.keyword = this.oldvalue;
+				// 		this.isremove = false;
+				// 		this.active = false;
+				// 	}
+				// }, 153)
 			},
 			//移除数据
 			removevalue() {
 				this.isremove = true;
 				this.changes = false;
-				this.changevalue = "";
+				this.productRequest.keyword = "";
 			},
 			//value 改变
 			intchange() {
-				if (this.changevalue == '') {
+				if (this.productRequest.keyword == '') {
 					this.changes = false;
 					return;
 				};
 				this.vlist=[];
 				this.changes = true;
 				this.changesValue="正在搜索...";
-				if (this.settimer) {
-					clearTimeout(this.settimer)
-				}
-				this.settimer = setTimeout(() => {
-					this.vlist = this.options.filter(item => {
-						return item[this.slabel].includes(this.changevalue)
-					});
+				
+				this.$api.http.get('/product/search', this.productRequest).then(res => {
+					this.vlist = res.content
 					if(this.vlist.length===0){
 						this.changesValue="暂无匹配内容！";
 					}
-				}, 600)
-
+				})
+				
+				// if (this.settimer) {
+				// 	clearTimeout(this.settimer)
+				// }
+				// this.settimer = setTimeout(() => {
+				// 	this.vlist = this.options.filter(item => {
+				// 		return item[this.slabel].includes(this.productRequest.keyword)
+				// 	});
+				// 	if(this.vlist.length===0){
+				// 		this.changesValue="暂无匹配内容！";
+				// 	}
+				// }, 600)
 			},
 
 			//点击组件列
 			selectitem(index, item) {
-				this.changevalue = this.oldvalue;
+				this.productRequest.keyword = item['name'];
 				this.active = false;
+				// console.log(item['name'])
 				this.$emit("selectitem", index, item)
 			}
 		}
@@ -198,27 +221,28 @@
 <style lang="scss" scoped>
 	.uni-select-lay {
 		position: relative;
-		z-index: 999;
+		// z-index: 11;
+		width: 100%;
 
 		.uni-select-input {
 			opacity: 0;
 			position: absolute;
-			z-index: -111;
+			// z-index: 0;
 		}
 
 		// select部分 
 		.uni-select-lay-select {
 			user-select: none;
 			position: relative;
-			z-index: 3;
+			// z-index: 2;
 			height: 36px;
-			padding: 0 30px 0 10px;
+			padding: 0 30px 0 0px;
 			box-sizing: border-box;
 			border-radius: 4px;
-			border: 1px solid rgb(229, 229, 229);
+			// border: 1px solid rgb(229, 229, 229);
 			display: flex;
 			align-items: center;
-			font-size: 14px;
+			font-size: 30upx;
 			color: #999;
 
 			.uni-disabled {
@@ -271,7 +295,7 @@
 			}
 
 			.uni-select-lay-input {
-				font-size: 14px;
+				font-size: 30upx;
 				color: #999;
 				display: block;
 				width: 98%;
@@ -282,7 +306,7 @@
 				box-sizing: border-box;
 
 				&.active {
-					color: #333
+					color: #555
 				}
 			}
 
@@ -356,14 +380,14 @@
 			user-select: none;
 			position: absolute;
 			top: calc(100% + 5px);
-			left: 0;
+			left: -10px;
 			width: 100%;
 			height: 500rpx;
 			// overflow-y: auto;
 			border-radius: 4px;
 			border: 1px solid rgb(229, 229, 229);
 			background: #fff;
-			padding: 5px 0;
+			// padding: 5px 0;
 			box-sizing: border-box;
 			z-index: 9;
 
@@ -373,7 +397,7 @@
 				cursor: pointer;
 				line-height: 2.5;
 				transition: .3s;
-				font-size: 14px;
+				font-size: 30upx;
 
 				&.active {
 					background: #007AFF;
@@ -391,7 +415,7 @@
 			}
 
 			.nosearch {
-				font-size: 16px;
+				font-size: 30upx;
 				line-height: 3;
 				text-align: center;
 				color: #666;

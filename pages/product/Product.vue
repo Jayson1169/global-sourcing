@@ -3,14 +3,14 @@
 		<view class="search">
 			<uni-easyinput suffixIcon="search" v-model="searchRequest.keyword" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
 		</view>
-		<empty v-if="userList.length === 0"></empty>
-		<block v-for="(item, index) of userList" v-if="c_index==0||roleMap[item.role][1]==c_index - 1">
+		<!-- <empty v-if="userList.length === 0"></empty> -->
+		<block v-for="(item, index) of productList">
 			<view class="list" @click="jumpProductDetail(item)">
 				<view class="list_l"><image :src="item.image"></image></view>
 				<view class="list_r">
-					<view class="list_r_01">{{item.name}}</view>
-					<view class="list_r_02">{{item.brand}}</view>
-					<view class="list_r_03">{{item.specification}}</view>
+					<view>{{item.name}}</view>
+					<view class="list_r_01">{{item.brand}}</view>
+					<view class="list_r_01">{{item.specification}}</view>
 				</view>
 			</view>
 		</block>
@@ -40,18 +40,14 @@
 					size: 9999,
 				},
 				c_index: 0,
-				userList: [],
-				roleList: '',
-				roleMap: '',
+				productList: [],
 				isLoadMore: false,
 				loadStatus: 'loading',
 				haveSearch: false
 			};
 		},
 		onLoad() {
-			this.getUserList()
-			this.roleList = this.$api.json.role_list;
-			this.roleMap = this.$api.json.role_map;
+			// this.getProductList()
 		},
 		onPullDownRefresh(){
 			this.init()
@@ -65,24 +61,29 @@
 				this.userRequest.page = 0
 				this.userRequest.size = 10
 				this.userList = []
-				this.getUserList()
+				this.getProductList()
 			},
 			jumpProductAppend() {
 				uni.navigateTo({
 					url: './ProductAppend'
 				});
 			},
+			jumpProductDetail(product) {
+				uni.navigateTo({
+					url: './ProductDetail?product='+encodeURIComponent(JSON.stringify(product))
+				})
+			},
 			num(index) {
 				this.c_index = index
 			},
 			search() {
-				this.$api.http.get('/user/search', this.searchRequest).then(res => {
-					this.userList = res.content
+				this.$api.http.get('/product/search', this.searchRequest).then(res => {
+					this.productList = res.content
 				})
 			},
 			getProductList() {
-				this.$api.http.get('/product/findAll', this.userRequest).then(res => {
-					this.userList = this.userList.concat(res.content);
+				this.$api.http.get('/product/findByBarcode', this.userRequest).then(res => {
+					this.productList = this.productList.concat(res.content);
 					if (res.numberOfElements < this.userRequest.size) {
 						this.isLoadMore = true
 						this.loadStatus = 'nomore'
@@ -108,54 +109,29 @@
 
 <style lang="scss">
 	.user_list {
+		font-size: 30upx;
 		.search {
 			background: #FFFFFF;
 			display: flex;
 			width: 100%;
 			box-sizing: border-box;
-			padding: 10px;
-		}
-		.tab {
-			padding: 10px 10%;
-			display: flex;
-			width: 100%;
-			.tab_normal {
-				padding-bottom: 5px;
-				min-width: 80px;
-				text-align: center;
-			}
-			.tab_focus {
-				border-bottom: 2px solid red;
-				padding-bottom: 5px;
-				min-width: 80px;
-				text-align: center;
-			}
+			padding: 10px 10px 0px 10px;
 		}
 		.list {
 			display: flex;
-			padding: 10px;
+			padding: 10px 0px 5px 10px;
 			border-bottom: 1px solid #EAEAEA;
 			.list_l {
 				padding: 0 10px 0 0;
 				image {
-					width: 50px;
-					height: 50px;
-					border-radius: 5px;
+					width: 162upx;
+					height: 162upx;
+					// border-radius: 5px;
 				}
 			}
 			.list_r {
 				line-height: 25px;
 				.list_r_01 {
-					.hui {
-						border: 1px solid #FF6D6D;
-						border-radius: 3px;
-						color: #ff6d6d;
-						font-size: 12px;
-						padding: 0 5px;
-						margin-left: 8px;
-					}
-				}
-				.list_r_02 {
 					color: #ABABAB;
 				}
 			}

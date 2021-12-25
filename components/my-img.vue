@@ -11,7 +11,7 @@
 		props: {
 			style1: {
 				type: String,
-				default: 'width:162rpx;height:162rpx;padding:10rpx 10rpx 10rpx 0rpx;'
+				default: 'width:162rpx;height:162rpx;margin:10rpx 10rpx 10rpx 0rpx;'
 			},
 			style2: {
 				type: String,

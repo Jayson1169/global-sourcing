@@ -1,15 +1,16 @@
 <template>
 	<view class="product">		
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">商品图片：</view>
-			<upimg @photo="getPhoto" :photo="item.product.photo"></upimg>
-		</view>
+		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="item.product.name"></input>
+			<select-lay :value="item.product.name" name="name" :options="datalist" :placeholder="请选择或搜索商品" @selectitem="selectitem"></select-lay>
 		</view>
+<!-- 		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">商品名称：</view>
+			<input placeholder="请输入商品名称" v-model="item.product.name"></input>
+		</view> -->
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品品牌：</view>
@@ -28,6 +29,27 @@
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
+			<view class="title">商品图片：</view>
+			<upimg @photo="getPhoto" :photo="item.product.image"></upimg>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'white'}">*</text>
+			<view class="title">生产厂家：</view>
+			<input placeholder="请输入生产厂家" v-model="item.product.manufacturer" disabled></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'white'}">*</text>
+			<view class="title">生产地区：</view>
+			<input placeholder="请输入生产地区" v-model="item.product.origin" disabled></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'white'}">*</text>
+			<view class="title">备注信息：</view>
+			<input placeholder="请输入备注信息" v-model="item.product.remark" disabled></input>
+		</view>
+		<view class="detail">销售明细</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
 			<view class="title">成交价格：</view>
 			<input type="digit" placeholder="请输入成交价格" v-model="item.salePrice" @input="checkPrice"></input>
 		</view>
@@ -35,21 +57,6 @@
 			<text :style="{color:'red'}">*</text>
 			<view class="title">销售数量：</view>
 			<input type="number" placeholder="请输入销售数量" v-model="item.quantity"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'white'}">*</text>
-			<view class="title">生产厂家：</view>
-			<input placeholder="请输入生产厂家" v-model="item.product.manufacturer"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'white'}">*</text>
-			<view class="title">生产地区：</view>
-			<input placeholder="请输入生产地区" v-model="item.product.origin"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'white'}">*</text>
-			<view class="title">备注信息：</view>
-			<input placeholder="请输入备注信息" v-model="item.product.remark"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="p_btn_group">
@@ -135,6 +142,7 @@
 		z-index: 9999;
 	}
 	.p_btn_group {
+		background-color: #F7F6FB;
 		padding: 0rpx 20rpx 0rpx 20rpx;
 		display: flex;			
 		position: fixed;
@@ -145,5 +153,8 @@
 		.p_btn {
 			width: 345rpx; 
 		}
+	}
+	.detail {
+		padding: 10px 10px 10px 10px;
 	}
 </style>
