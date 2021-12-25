@@ -11,11 +11,13 @@ import './assets/style/main.css'
 import empty from "@/components/empty";
 import upimg from '@/components/sunui-upimg.vue'
 import myimg from '@/components/my-img.vue'
+import selectlay from '@/components/select-lay.vue'
 
 Vue.component('scan', scan)
 Vue.component('empty', empty)
 Vue.component('upimg', upimg)
 Vue.component('myimg', myimg)
+Vue.component('selectlay', selectlay)
 
 Vue.config.productionTip = false
 

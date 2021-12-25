@@ -2336,7 +2336,7 @@ button.cuIcon.lg {
 	height: 60upx;
 	line-height: 60upx;
 	/* add */
-	flex: 0 0 160rpx;	
+	/* flex: 0 0 160rpx;	 */
 }
 
 .cu-form-group input {
@@ -3920,3 +3920,12 @@ scroll-view.cu-steps .cu-item {
 .H70{height: 70px;}
 .H80{height: 80px;}
 .H90{height: 90px;}
+
+.cu-form-title {
+	text-align: justify;
+	padding-right: 0upx;
+	font-size: 30upx;
+	position: relative;
+	height: 60upx;
+	line-height: 60upx;
+}

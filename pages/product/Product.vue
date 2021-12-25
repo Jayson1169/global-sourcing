@@ -5,8 +5,8 @@
 		</view>
 		<!-- <empty v-if="userList.length === 0"></empty> -->
 		<block v-for="(item, index) of productList">
-			<view class="list" @click="jumpProductDetail(item)">
-				<view class="list_l"><image :src="item.image"></image></view>
+			<view class="list" @click="jumpProductModify(item)">
+				<view class="list_l"><!-- <image :src="item.image"></image> --></view>
 				<view class="list_r">
 					<view>{{item.name}}</view>
 					<view class="list_r_01">{{item.brand}}</view>
@@ -68,9 +68,12 @@
 					url: './ProductAppend'
 				});
 			},
-			jumpProductDetail(product) {
-				uni.navigateTo({
-					url: './ProductDetail?product='+encodeURIComponent(JSON.stringify(product))
+			jumpProductModify(product) {
+				this.$api.http.get('/product/getImage?id='+product.id, null).then(res => {
+					product.image = res
+					uni.navigateTo({
+						url: './ProductModify?product='+encodeURIComponent(JSON.stringify(product))
+					})
 				})
 			},
 			num(index) {
@@ -130,7 +133,7 @@
 				}
 			}
 			.list_r {
-				line-height: 25px;
+				line-height: 55upx;
 				.list_r_01 {
 					color: #ABABAB;
 				}

@@ -2,45 +2,38 @@
 	<view class="product">	
 		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
-			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="item.product.name" disabled></input>
+			<view class="cu-form-title">商品名称：{{item.product.name}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品品牌：</view>
-			<input v-model="item.product.brand" disabled></input>
+			<view class="cu-form-title">商品品牌：{{item.product.brand}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品型号：</view>
-			<input placeholder="请输入商品型号" v-model="item.product.specification" disabled></input>
+			<view class="cu-form-title">商品型号：{{item.product.specification}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品条码：</view>
-			<input v-model="item.product.barcode" disabled></input>
+			<view class="cu-form-title">商品条码：{{item.product.barcode}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品图片：</view>
-			<myimg :photo="item.product.photo" :padding="true"></myimg>
+			<view class="cu-form-title">商品图片：</view>
+			<myimg :photo="item.product.image" :padding="true"></myimg>
 		</view>
-		<view class="cu-form-group">
-			<view class="title">生产厂家：</view>
-			<input placeholder="未输入生产厂家" v-model="item.product.manufacturer" disabled></input>
+		<view class="cu-form-group" v-if="item.product.manufacturer">
+			<view class="cu-form-title">生产厂家：{{item.product.manufacturer}}</view>
 		</view>
-		<view class="cu-form-group">
-			<view class="title">生产地区：</view>
-			<input placeholder="未输入生产地区" v-model="item.product.origin" disabled></input>
+		<view class="cu-form-group" v-if="item.product.origin">
+			<view class="cu-form-title">生产地区：</view>
+			<input v-model="item.product.origin" disabled></input>
 		</view>
-		<view class="cu-form-group">
-			<view class="title">备注信息：</view>
-			<input placeholder="未输入备注信息" v-model="item.product.remark" disabled></input>
+		<view class="cu-form-group" v-if="item.product.remark">
+			<view class="cu-form-title">备注信息：</view>
+			<input v-model="item.product.remark" disabled></input>
 		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
-			<view class="title">成交价格：</view>
-			<input v-model="item.salePrice" disabled></input>
+			<view class="cu-form-title">成交价格：￥{{item.price}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">销售数量：</view>
-			<input v-model="item.quantity" disabled></input>
+			<view class="cu-form-title">销售数量：{{item.quantity}}</view>
 		</view>
 	</view>
 </template>
@@ -60,8 +53,9 @@
 						origin: '中国',
 						remark: 'iPhone',
 					},
-					salePrice: '2',
-					quantity: '2'
+					salePrice: '200',
+					quantity: '2',
+					price: '2'
 				}
 			}
 		},
@@ -77,6 +71,7 @@
 		},
 		onLoad(option) {
 			this.item = JSON.parse(decodeURIComponent(option.item));
+			this.item.price = this.item.salePrice / 100;
 		}
 	}
 </script>

@@ -273,6 +273,14 @@
             }
             
         }
+        ,{
+            "path" : "pages/product/ProductModify",
+            "style" :
+            {
+                "navigationBarTitleText": "修改商品",
+                "enablePullDownRefresh": false
+            }
+        }
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",

@@ -2,7 +2,7 @@
 	<view class="sunui-uploader-bd">
 		<view class="sunui-uploader-files">
 			<block v-for="(item, index) in upload_before_list" :key="index">
-				<view class="sunui-uploader-file" :class="[item.upload_percent < 100 ? 'sunui-uploader-file-status' : '']" @click="previewImage">
+				<view class="sunui-uploader-file" @click="previewImage">
 					<image class="sunui-uploader-img" :style="upload_img_wh" :src="item" mode="aspectFill" />
 					<view class="sunui-img-removeicon right" @click.stop="removeImage(index)" v-show="upimg_move">×</view>
 				</view>

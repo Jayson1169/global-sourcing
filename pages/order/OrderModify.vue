@@ -4,13 +4,13 @@
 		<view class='tag-e'>
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
 				<view>
-					<myimg :photo="item.product.photo"></myimg>
+					<myimg :photo="item.product.image"></myimg>
 				</view>
 				<view class='goods_02'>
 					<view class='goods_title'>{{item.product.name}}</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
 					<view class='good_p'>
-						<view class="good_price">¥ {{item.salePrice}}</view>
+						<view class="good_price">¥ {{item.salePrice / 100}}</view>
 						<view class='i'>x {{item.quantity}}</view>
 					</view>
 				</view>

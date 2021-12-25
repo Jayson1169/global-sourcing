@@ -4,13 +4,13 @@
 		<view class='tag-e'>
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductDetail(item)">
 				<view>
-					<myimg :photo="item.product.photo"></myimg>
+					<myimg :photo="item.product.image"></myimg>
 				</view>
 				<view class='goods_02'>
 					<view class='goods_title'>{{item.product.name}}</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
 					<view class='good_p'>
-						<view class="good_price">¥ {{item.salePrice}}</view>
+						<view class="good_price">¥ {{item.salePrice / 100}}</view>
 						<view class='i'>x {{item.quantity}}</view>
 					</view>
 				</view>
@@ -18,20 +18,16 @@
 		</view>
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
-			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
-			<input v-model="order.address.name" disabled></input>
+			<view class="cu-form-title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{order.address.name}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">身份证号：</view>
-			<input v-model="order.address.idNumber" disabled></input>
+			<view class="cu-form-title">身份证号：{{order.address.idNumber}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">手机号码：</view>
-			<input v-model="order.address.phoneNumber" disabled></input>
+			<view class="cu-form-title">手机号码：{{order.address.phoneNumber}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">收货地址：</view>
-			<input v-model="order.address.shipAddress" disabled></input>
+			<view class="cu-form-title">收货地址：{{order.address.shipAddress}}</view>
 		</view>
 	</view>
 </template>

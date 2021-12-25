@@ -4,7 +4,7 @@
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品名称：</view>
-			<select-lay :value="item.product.name" name="name" placeholder="请选择或搜索商品" :showplaceholder="false" slabel="name" svalue="id" @selectitem="selectitem"></select-lay>
+			<selectlay :value="item.product.name" name="name" placeholder="请选择或搜索商品" :showplaceholder="false" slabel="name" svalue="id" @selectitem="selectitem"></selectlay>
 		</view>
 <!-- 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -89,7 +89,8 @@
 						}
 					},
 					price: '',
-					quantity: ''
+					quantity: '',
+					salePrice: ''
 				}
 			}
 		},
@@ -103,6 +104,7 @@
 				//重新赋值给input				
 				this.$nextTick(() => {
 					this.item.price = e.target.value
+					this.item.salePrice = this.item.price * 100
 				})
 			},
 			getScanCode() {
@@ -164,5 +166,15 @@
 	}
 	.detail {
 		padding: 10px 10px 10px 10px;
+	}
+	.cu-form-group .title {
+		text-align: justify;
+		padding-right: 0upx;
+		font-size: 30upx;
+		position: relative;
+		height: 60upx;
+		line-height: 60upx;
+		/* add */
+		flex: 0 0 160rpx;
 	}
 </style>
