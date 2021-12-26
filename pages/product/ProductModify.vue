@@ -119,9 +119,9 @@
 					origin: '中国',
 					remark: 'iPhone',
 					inventory: {
-						warehouseInventory: '0',
-						midwayInventory: '0',
-						hubInventory: '0'
+						warehouseInventory: 0,
+						midwayInventory: 0,
+						hubInventory: 0
 					},
 					customsInfo: {
 						hsCode: '42022900',
@@ -129,7 +129,9 @@
 				}
 			}
 		},
-		
+		onLoad(option) {
+			this.product = JSON.parse(decodeURIComponent(option.product));
+		},
 		methods: {
 			getPhoto(val) {
 				this.product.image = val
@@ -174,8 +176,7 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					console.log(this.product.image)
-					this.$api.http.post('/product/insert', this.product).then(res => {
+					this.$api.http.put('/product/update', this.product).then(res => {
 						uni.navigateTo({
 							url: './Product'
 						})

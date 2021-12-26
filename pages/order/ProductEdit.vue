@@ -4,7 +4,7 @@
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品名称：</view>
-			<select-lay :value="item.product.name" name="name" :options="datalist" :placeholder="请选择或搜索商品" @selectitem="selectitem"></select-lay>
+			<selectlay :value="item.product.name" name="name" @selectitem="selectitem" slabel="name"></selectlay>
 		</view>
 <!-- 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -51,7 +51,7 @@
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">成交价格：</view>
-			<input type="digit" placeholder="请输入成交价格" v-model="item.salePrice" @input="checkPrice"></input>
+			<input type="digit" placeholder="请输入成交价格" v-model="item.price" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -81,13 +81,15 @@
 						origin: '中国',
 						remark: 'iPhone',
 					},
-					salePrice: '2',
-					quantity: '2'
+					salePrice: '200',
+					quantity: '2',
+					price: '2.00'
 				}
 			}
 		},
 		onLoad(option) {
 			this.item = JSON.parse(decodeURIComponent(option.item));
+			this.item.price = this.item.salePrice / 100;
 		},
 		methods: {
 			getPhoto(val) {
@@ -98,12 +100,13 @@
 				e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null
 				//重新赋值给input				
 				this.$nextTick(() => {
-					this.item.salePrice = e.target.value
+					this.item.price = e.target.value
+					this.item.salePrice = this.item.price * 100
 				})
 			},
 			sub: function(e) {
 				let productForm = this.item.product;
-				productForm.salePrice = this.item.salePrice;
+				productForm.price = this.item.price;
 				productForm.quantity = this.item.quantity;
 				let rules = [
 					{name: 'photo', required: true, type: 'required', errmsg: '请上传商品图片'},
@@ -111,7 +114,7 @@
 					{name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
 					{name: 'specification', required: true, type: 'required', errmsg: '请输入商品型号'},
 					{name: 'barcode', required: true, type: 'required', errmsg: '请输入商品条码'},
-					{name: 'salePrice', required: true, type: 'required', errmsg: '请输入销售价格'},
+					{name: 'price', required: true, type: 'required', errmsg: '请输入销售价格'},
 					{name: 'quantity', required: true, type: 'required', errmsg: '请输入销售数量'}
 				]
 				let valLoginRes = this.$validate.validate(productForm, rules)
@@ -156,5 +159,15 @@
 	}
 	.detail {
 		padding: 10px 10px 10px 10px;
+	}
+	.cu-form-group .title {
+		text-align: justify;
+		padding-right: 0upx;
+		font-size: 30upx;
+		position: relative;
+		height: 60upx;
+		line-height: 60upx;
+		/* add */
+		flex: 0 0 160rpx;
 	}
 </style>

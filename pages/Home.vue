@@ -112,7 +112,7 @@
 			text-align: center;
 			padding: 20px 0 10px;
 			color: #fff;
-			font-size: 14px;
+			font-size: 30upx;
 		}
 		.jiu {
 			padding: 10px;
@@ -125,7 +125,7 @@
 			text-align: center;
 			padding: 15px 10px 15px;
 			box-sizing: border-box;
-			font-size: 12px;
+			font-size: 30upx;
 		}
 		.jiu_01 image {
 			width: 32px;
@@ -146,19 +146,19 @@
 			height: 20px;
 			overflow: hidden;
 			border-left: 3px solid #EC521B;
-			font-size: 14px;
+			font-size: 30upx;
 			font-weight: bold;
 		}
 		.mo_01 span {
 			color: #8E8E8E;
 			font-weight: 100;
-			font-size: 12px;
+			font-size: 30upx;
 			padding-left: 10px;
 		}
 		.mo_02 {
 			// color: #D6D6D6;
 			color: black;
-			font-size: 14px;
+			font-size: 30upx;
 			font-weight: bold;
 		}
 		.shuju {
@@ -170,16 +170,15 @@
 			text-align: center;
 			padding: 18px 10px;
 			box-sizing: border-box;
-			font-size: 14px;
+			font-size: 30upx;
 			line-height: 25px;
-			font-size: 14px;
 			border-right: 1px solid #f0f0f0;
 			border-bottom: 1px solid #f0f0f0;
 		}
 		.shuju_01_s {
 			color: #EB511B;
 			font-weight: 800;
-			font-size: 16px;
+			font-size: 30upx;
 		}
 		.no {
 			border-right: none;

@@ -10,7 +10,7 @@
 					<view class='goods_title'>{{item.product.name}}</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
 					<view class='good_p'>
-						<view class="good_price">¥ {{item.price}}</view>
+						<view class="good_price">¥ {{item.salePrice / 100}}</view>
 						<view class='i'>x {{item.quantity}}</view>
 					</view>
 				</view>
@@ -99,9 +99,6 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					this.order.items.some((item, i) => {
-						this.order.items[i].salePrice == this.order.items[i].price * 100
-					})
 					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
 						uni.showToast({
 							title: '添加成功',

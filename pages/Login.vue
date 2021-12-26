@@ -142,7 +142,7 @@
 	height: 20px;
 	top: 50%;
 	margin-top: -10px;
-	font-size: 14px;
+	font-size: 30upx;
 	left: 5px;
 	color: dodgerblue;
 	line-height: 20px;

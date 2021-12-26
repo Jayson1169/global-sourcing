@@ -22,15 +22,15 @@
 				<scroll-view v-if="item.items.length > 1" class="goods-box-single" scroll-x>
 					<view class="right" v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex">
 						<text class="title">{{goodsItem.product.name}}</text>
+						<text class="price">{{goodsItem.salePrice / 100}}</text>
 						<text class="attr-box">{{goodsItem.quantity}}</text>
-						<text class="price">{{goodsItem.salePrice * goodsItem.quantity}}</text>
 					</view>
 				</scroll-view>
 				<view class="goods-box-single" v-if="item.items.length === 1" v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex">
 					<view class="right">
 						<text class="title">{{goodsItem.product.name}}</text>
+						<text class="price">{{goodsItem.salePrice / 100}}</text>
 						<text class="attr-box">{{goodsItem.quantity}}</text>
-						<text class="price">{{goodsItem.salePrice * goodsItem.quantity / 100}}</text>
 					</view>
 				</view>
 					<view class="price-box">

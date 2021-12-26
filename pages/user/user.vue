@@ -120,6 +120,7 @@
 
 <style lang="scss">
 	.user_list {
+		font-size: 30upx;
 		.search {
 			background: #FFFFFF;
 			display: flex;
@@ -163,7 +164,7 @@
 						border: 1px solid #FF6D6D;
 						border-radius: 3px;
 						color: #ff6d6d;
-						font-size: 12px;
+						font-size: 30upx;
 						padding: 0 5px;
 						margin-left: 8px;
 					}
