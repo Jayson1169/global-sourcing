@@ -100,7 +100,7 @@
 					})
 				} else {
 					this.order.items.some((item, i) => {
-						this.order.items[i].salePrice = this.order.items[i].price * 100
+						this.order.items[i].salePrice == this.order.items[i].price * 100
 					})
 					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
 						uni.showToast({

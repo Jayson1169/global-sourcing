@@ -25,10 +25,10 @@ export default {
 					cback(res.data.data);
 				} else {
 					reject(res.data.message)
-					uni.showToast({
-						title: res.data.message,
-						icon: 'none'
-					})
+					// uni.showToast({
+					// 	title: res.data.message,
+					// 	icon: 'none'
+					// })
 				// } else if(res_code == 201){
 				// 	console.log('201:', res.data.message)
 				// 	uni.showToast({
@@ -52,10 +52,10 @@ export default {
 				}
 			}).catch(err => { 
 				console.log('请求异常:', err);
-				uni.showToast({
-					title:'请求异常',
-					icon:'none'
-				})
+				// uni.showToast({
+				// 	title:'请求异常',
+				// 	icon:'none'
+				// })
 			})
 		})
 	},
@@ -74,17 +74,17 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
-					uni.showToast({
-						title: res.data.message,
-						icon: 'none'
-					})
+					// uni.showToast({
+					// 	title: res.data.message,
+					// 	icon: 'none'
+					// })
 				}				
 			}).catch(err => { 
 				console.log('请求异常:',err); 	
-				uni.showToast({
-					title:'请求异常',
-					icon:'none'
-				})
+				// uni.showToast({
+				// 	title:'请求异常',
+				// 	icon:'none'
+				// })
 			})
 		})
 	},
@@ -103,17 +103,17 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
-					uni.showToast({
-						title: res.data.message,
-						icon: 'none'
-					})
+					// uni.showToast({
+					// 	title: res.data.message,
+					// 	icon: 'none'
+					// })
 				}
 			}).catch(err => { 
 				console.log('请求异常:',err); 	
-				uni.showToast({
-					title:'请求异常',
-					icon:'none'
-				})
+				// uni.showToast({
+				// 	title:'请求异常',
+				// 	icon:'none'
+				// })
 			})
 		})
 	},
@@ -132,17 +132,17 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
-					uni.showToast({
-						title: res.data.message,
-						icon: 'none'
-					})
+					// uni.showToast({
+					// 	title: res.data.message,
+					// 	icon: 'none'
+					// })
 				}				
 			}).catch(err => { 
 				console.log('请求异常:',err); 	
-				uni.showToast({
-					title:'请求异常',
-					icon:'none'
-				})
+				// uni.showToast({
+				// 	title:'请求异常',
+				// 	icon:'none'
+				// })
 			})
 		})
 	},
@@ -162,17 +162,17 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
-					uni.showToast({
-						title: res.data.message,
-						icon: 'none'
-					})
+					// uni.showToast({
+					// 	title: res.data.message,
+					// 	icon: 'none'
+					// })
 				}
 			}).catch(err => { 
 				console.log('请求异常:', err); 	
-				uni.showToast({
-					title:'请求异常',
-					icon:'none'
-				})
+				// uni.showToast({
+				// 	title:'请求异常',
+				// 	icon:'none'
+				// })
 			})
 		})
 	}

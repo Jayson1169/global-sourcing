@@ -68,6 +68,7 @@ export default {
 					if (!usernameReg.test(data[rule.name])) {
 						res = { isOk: false, errmsg: rule.errmsg }
 					}
+				break
 				case 'number':
 					if (!numberReg.test(data[rule.name])) {
 						res = { isOk: false, errmsg: rule.errmsg }
