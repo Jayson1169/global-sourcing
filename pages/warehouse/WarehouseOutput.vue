@@ -20,6 +20,16 @@
 				<button @click="output" class="cu-btn bg-red margin-tb-sm lg">导出</button>
 			</view>
 		</view>	
+		<u-tabbar
+			:value="value"
+			:fixed="true"
+			:placeholder="true"
+			:safeAreaInsetBottom="true"
+		>
+			<u-tabbar-item text="采购管理" icon="shopping-cart" @click="click" ></u-tabbar-item>
+			<u-tabbar-item text="快递物流" icon="car" @click="click" ></u-tabbar-item>
+			<u-tabbar-item text="导出海关信息" icon="reload" @click="click" ></u-tabbar-item>
+		</u-tabbar>
 	</view>
 </template>
 
@@ -29,6 +39,7 @@
 	export default {
 		data() {
 			return {
+				value: 2,
 				items: [{
 						id: '1',
 						name: '曼秀雷敦男士控油抗痘洁面乳',
@@ -48,20 +59,44 @@
 						quantity: 2
 					}
 				],
+				request: {
+					warehouseKeeperId: '',
+					page: '0',
+					size: '999'
+				},
 				current: [],
 				purchaseOrderList: [{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}}],
 			};
 		},
 		onLoad(option) {
 			that = this
-			this.purchaseOrderList = JSON.parse(decodeURIComponent(option.purchaseOrderList));
+			// this.purchaseOrderList = JSON.parse(decodeURIComponent(option.purchaseOrderList));
 			// this.purchaseOrderList.some((purchaseOrder, i) => {
 			// 	if (purchaseOrder.status != "WAREHOUSED") {
 			// 		this.purchaseOrderList.splice(i, 1)
 			// 	}
 			// })
+			this.request.warehouseKeeperId = uni.getStorageSync('user').id
+			this.$api.http.get('/purchaseOrder/findAllByWarehouseKeeper', this.request).then(res => {
+				this.purchaseOrderList = res.content
+			})
 		},
 		methods: {
+			click(e) {
+				if (e == 0) {
+					uni.redirectTo({
+						url: './WarehouseKeeper'
+					})
+				} else if (e == 1) {
+					uni.redirectTo({
+						url: './ExpressOrder'
+					})
+				} else {
+					uni.redirectTo({
+						url: './WarehouseOutput?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
+					})
+				}
+			},
 			checkboxChange: function (e) {
 				// var items = this.purchaseOrderList;
 				this.current = e.detail.value;
@@ -91,11 +126,11 @@
 							totalQuantity: '',
 							sum: ''
 						}
-						data.hsCode = item.hsCode;
-						data.materialBeschaffenheit = item.materialBeschaffenheit;
-						data.brandArticleNo = item.brandArticleNo;
-						data.brand = item.brand;
-						data.articleName = item.articleName;
+						data.hsCode = item.product.customsInfo.hsCode;
+						data.materialBeschaffenheit = item.product.customsInfo.materialBeschaffenheit;
+						data.brandArticleNo = item.product.customsInfo.brandArticleNo;
+						data.brand = item.product.customsInfo.brand;
+						data.articleName = item.product.customsInfo.articleName;
 						data.unitPrice = item.purchasePrice / 100;
 						data.totalQuantity = item.quantity;
 						data.sum = data.unitPrice * data.totalQuantity;
@@ -140,7 +175,7 @@
 		}
 	}
 	// 导出文件到手机 fileData:要写入到文件的数据，返回参数为文档路径
-	function exportFile(fileData, documentName = '项目Excel文件') {
+	function exportFile(fileData, documentName = '导出海关信息') {
 		/*
 		PRIVATE_DOC: 应用私有文档目录常量
 		PUBLIC_DOCUMENTS: 程序公用文档目录常量
@@ -167,7 +202,8 @@
 			create: true
 		  }, function(dirEntry2) {
 			// 创建文件,防止重名
-			let fileName = 'excel' + getUnixTime(formatDateThis(new Date()))
+			let fileName = formatDateThis(new Date())
+			// let fileName = 'excel' + getUnixTime(formatDateThis(new Date()))
 			console.log(fileName)
 			dirEntry2.getFile(`${fileName}.xlsx`, {
 			  create: true
@@ -186,10 +222,11 @@
 				  uni.hideLoading()
 				  setTimeout(() => {
 					uni.showToast({
-					  title: '成功导出',
-					  icon: 'success'
+					  title: '成功导出至：'+`${pathStr}/${documentName}/${year}年${month}月`,
+					  icon: 'none'
 					})
 					console.log(`文件位置：${pathStr}/${documentName}/${year}年${month}月`)
+					this.$api.msg.toast(`文件位置：${pathStr}/${documentName}/${year}年${month}月`)
 					that.successTip = `文件位置：${pathStr}/${documentName}/${year}年${month}月`
 				  }, 500)
 				}
@@ -240,7 +277,7 @@
 			background: #FFFFFF;
 			padding: 0 10px 0px;
 			position: fixed;
-			bottom: 0;
+			bottom: 100upx;
 			width: 100%;
 			z-index: 9999;
 		}

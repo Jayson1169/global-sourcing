@@ -6,6 +6,7 @@ const phoneReg = /^1[0-9]{10,10}$/
 const emailReg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 const pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z\W]{6,18}$/
 const inviteCodeReg = /^[a-zA-Z0-9]{6,18}$/
+const expressNumberReg = /^\w\d{7,17}$/
 
 export default {
 	isUsername: function(val) {
@@ -131,6 +132,11 @@ export default {
 				break
 				case 'idNumber':
 					if (!idNumberReg.test(data[rule.name])) {
+						res = { isOk: false, errmsg: rule.errmsg }
+					}
+				break
+				case 'expressNumber':
+					if (!expressNumberReg.test(data[rule.name])) {
 						res = { isOk: false, errmsg: rule.errmsg }
 					}
 				break

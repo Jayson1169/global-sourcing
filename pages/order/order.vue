@@ -48,7 +48,7 @@
 		<view class="H60"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
-				<button @click="jumpOrderAppend" class="cu-btn bg-red margin-tb-sm lg">新增订单</button>
+				<button @click="jumpOrderAppend" class="cu-btn bg-red margin-tb-sm lg">添加订单</button>
 			</view>
 		</view>
 	</view>
@@ -97,18 +97,31 @@
 					})
 				}
 			},
-			jumpOrderModify(order) {
-				for (let i in order.items) {
-				    this.$api.http.get('/product/getImage?id='+order.items[i].product.id, null).then(res => {
-						order.items[i].product.image = res
-						// 加载完图片再跳转
-						if (i == order.items.length - 1) {
-							uni.navigateTo({
-								url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
-							})	
-						}
+			async jumpOrderModify(order) {
+				// console.log(JSON.stringify(order.items[0]))
+				
+				for (let i = 0; i < order.items.length; i++) {
+					// console.log(i)
+				    await this.$api.http.get('/saleOrder/isItemUpdatable?itemId='+order.items[i].id, null).then(res => {
+						// console.log(JSON.stringify(order.items[i]))
+						order.items[i].isItemUpdatable = res;
 					})
 				}
+				
+				for (let i in order.items) {
+				    await this.$api.http.get('/product/getImage?id='+order.items[i].product.id, null).then(res => {
+						order.items[i].product.image = res
+						// 加载完图片再跳转
+						// if (i == order.items.length - 1) {
+						// 	uni.navigateTo({
+						// 		url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
+						// 	})	
+						// }
+					})
+				}
+				uni.navigateTo({
+					url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
+				})	
 			},
 			//删除订单
 			deleteOrder(item, index) {
@@ -119,8 +132,10 @@
 					this.$api.http.delete('/saleOrder/delete?id='+item.id, null).then(res => {
 						this.orderList.splice(index, 1)
 						uni.hideLoading();
+					}).catch(err => {
+						this.$api.msg.toast("销售单中存在无法删除的销售单项目！");
 					})
-				}, 600)				
+				}, 600)
 			},
 			//取消订单
 			cancelOrder(item){

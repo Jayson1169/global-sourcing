@@ -12,6 +12,9 @@ import empty from "@/components/empty";
 import upimg from '@/components/sunui-upimg.vue'
 import myimg from '@/components/my-img.vue'
 import selectlay from '@/components/select-lay.vue'
+import uView from '@/uni_modules/uview-ui'
+
+Vue.use(uView)
 
 Vue.component('scan', scan)
 Vue.component('empty', empty)

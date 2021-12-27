@@ -30,7 +30,7 @@
 		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
-			<view class="cu-form-title">成交价格：￥{{item.price}}</view>
+			<view class="cu-form-title">成交价格：{{item.price}}</view>
 		</view>
 		<view class="cu-form-group">
 			<view class="cu-form-title">销售数量：{{item.quantity}}</view>

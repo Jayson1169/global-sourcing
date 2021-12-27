@@ -74,6 +74,7 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
+					reject(res.data.message)
 					// uni.showToast({
 					// 	title: res.data.message,
 					// 	icon: 'none'
@@ -103,6 +104,7 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
+					reject(res.data.message)
 					// uni.showToast({
 					// 	title: res.data.message,
 					// 	icon: 'none'
@@ -132,6 +134,7 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
+					reject(res.data.message)
 					// uni.showToast({
 					// 	title: res.data.message,
 					// 	icon: 'none'

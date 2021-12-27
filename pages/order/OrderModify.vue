@@ -2,7 +2,7 @@
 	<view class="product">
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
-			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductItemEdit(item)">
+			<view v-for="(item, index) of order.items" :key="index" :class="item.isItemUpdatable?'goods':'goods-gray'" @click="item.isItemUpdatable?jumpProductItemEdit(item):jumpProductItemDetail(item)">
 				<view>
 					<myimg :photo="item.product.image"></myimg>
 				</view>
@@ -15,7 +15,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="goods goods_add" @click="jumpProductItemAppend">
+			<view class="goods_add" @click="jumpProductItemAppend">
 				<text class="iconfont icon-jiahao"></text>
 				<text>点击添加商品项</text>
 			</view>
@@ -95,7 +95,12 @@
 					uni.$emit('edit', this.order)
 				})
 			})
-			this.order = JSON.parse(decodeURIComponent(option.order));			
+			this.order = JSON.parse(decodeURIComponent(option.order));		
+			for (let i in this.order.items) {
+			    this.$api.http.get('/product/getImage?id='+this.order.items[i].product.id, null).then(res => {
+					this.order.items[i].product.image = res
+				})
+			}
 		},
 		onUnload() {  
 			// 移除监听事件  
@@ -140,6 +145,11 @@
 				uni.navigateTo({
 					url: './ProductItemEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});
+			},
+			jumpProductItemDetail(item) {
+				uni.navigateTo({
+					url: './ProductItemDetail?item='+encodeURIComponent(JSON.stringify(item))
+				});
 			}
 		}
 	}
@@ -164,6 +174,12 @@
 		font-size: 13px;
 		justify-content: center;
 		align-items: center;
+		display: flex;
+		width: 100%;
+		background-color: #ffffff;
+		padding: 10px;
+		box-sizing: border-box;
+		border-bottom: 1px solid #EEF0EF;
 	}
 	.tag-e {
 		background-color:#fff;
@@ -173,6 +189,14 @@
 			display: flex;
 			width: 100%;
 			background-color: #ffffff;
+			padding: 10px;
+			box-sizing: border-box;
+			border-bottom: 1px solid #EEF0EF;
+		}
+		.goods-gray {
+			display: flex;
+			width: 100%;
+			background-color: #d1d1d1;
 			padding: 10px;
 			box-sizing: border-box;
 			border-bottom: 1px solid #EEF0EF;

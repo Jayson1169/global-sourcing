@@ -37,16 +37,26 @@
 				<button class="action-btn recom" @click="jumpToPurchaseReceive(item)">接收商品</button>
 			</view>
 		</view>
-		<view class="H50"></view>
+		<!-- <view class="H50"></view> -->
 		<!-- <view class="p_btn">
 			<view class=" flex flex-direction">
 				<button class="cu-btn bg-red margin-tb-sm lg" @click="jumpToWarehouseOutput">导出海关信息</button>
 			</view>
 		</view> -->
-		<view class="p_btn_group">
-			<button class="p_btn cu-btn bg-green margin-tb-sm lg" @click="jumpToPurchaseExpress">发送快递物流</button>
-			<button class="p_btn cu-btn bg-green margin-tb-sm lg" @click="jumpToWarehouseOutput">导出海关信息</button>
-		</view>
+	<!-- 	<view class="p_btn_group">
+			<button class="p_btn cu-btn bg-red margin-tb-sm lg" @click="jumpToExpressOrderAppend">发送快递物流</button>
+			<button class="p_btn cu-btn bg-red margin-tb-sm lg" @click="jumpToWarehouseOutput">导出海关信息</button>
+		</view> -->
+		<u-tabbar
+			:value="value"
+			:fixed="true"
+			:placeholder="true"
+			:safeAreaInsetBottom="true"
+		>
+			<u-tabbar-item text="采购管理" icon="shopping-cart" @click="click" ></u-tabbar-item>
+			<u-tabbar-item text="快递物流" icon="car" @click="click" ></u-tabbar-item>
+			<u-tabbar-item text="导出海关信息" icon="reload" @click="click" ></u-tabbar-item>
+		</u-tabbar>
 	</view>
 </template> 
 
@@ -60,6 +70,7 @@
 					page: '0',
 					size: '999'
 				},
+				value: 0,
 				purchaseOrderList: [],
 				// purchaseOrderList: [{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}}],
 				tabCurrentIndex: 0,
@@ -75,6 +86,21 @@
 			})
 		},
 		methods: {
+			click(e) {
+				if (e == 0) {
+					uni.redirectTo({
+						url: './WarehouseKeeper'
+					})
+				} else if (e == 1) {
+					uni.redirectTo({
+						url: './ExpressOrder'
+					})
+				} else {
+					uni.redirectTo({
+						url: './WarehouseOutput?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
+					})
+				}
+			},
 			tabClick(index){
 				this.tabCurrentIndex = index;
 			},
@@ -105,9 +131,9 @@
 					url: './WarehouseOutput?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
 				})
 			},
-			jumpToPurchaseExpress() {
+			jumpToExpressOrderAppend() {
 				uni.navigateTo({
-					url: './PurchaseExpress?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
+					url: './ExpressOrderAppend?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
 				})
 			}
 		}

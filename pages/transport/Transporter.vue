@@ -51,6 +51,15 @@
 				<button class="action-btn recom" @click="jumpOrderTransport(item)">发送快递</button>
 			</view>
 		</view>	
+		<u-tabbar
+			:value="value"
+			:fixed="true"
+			:placeholder="true"
+			:safeAreaInsetBottom="true"
+		>
+			<u-tabbar-item text="订单管理" icon="order" @click="click" ></u-tabbar-item>
+			<u-tabbar-item text="转运物流" icon="car" @click="click" ></u-tabbar-item>
+		</u-tabbar>
 	</view>
 </template> 
 
@@ -62,6 +71,7 @@
 		},
 		data() {
 			return {
+				value: 0,
 				request: {
 					page: '0',
 					size: '999'
@@ -87,6 +97,21 @@
 			uni.$off('send');
 		},
 		methods: {
+			click(e) {
+				if (e == 0) {
+					uni.navigateTo({
+						url: './WarehouseKeeper'
+					})
+				} else if (e == 1) {
+					uni.navigateTo({
+						url: './ExpressOrder'
+					})
+				} else {
+					uni.redirectTo({
+						url: './WarehouseOutput?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
+					})
+				}
+			},
 			jumpOrderDetail(order){
 				uni.navigateTo({
 					url: '../order/OrderDetail?order='+encodeURIComponent(JSON.stringify(order))

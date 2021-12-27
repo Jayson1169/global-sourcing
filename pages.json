@@ -1,4 +1,7 @@
 {
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		// {
 		// 	"path": "pages/index/index",
@@ -167,6 +170,7 @@
         ,{
             "path" : "pages/warehouse/WarehouseKeeper",
             "style" : {
+				"navigationBarTitleText": "采购管理",
             	"navigationBarBackgroundColor": "#ffffff",
             	"enablePullDownRefresh": false,
             	"app-plus": {
@@ -188,7 +192,11 @@
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "导出海关信息",
-		        "enablePullDownRefresh": false
+				"navigationBarBackgroundColor": "#ffffff",
+		        "enablePullDownRefresh": false,
+		        "app-plus": {
+		        	"bounce":"none"
+		        }
 		    }
 		    
 		}
@@ -228,15 +236,6 @@
 		    }
 		    
 		}
-        ,{
-            "path" : "pages/warehouse/test/test",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
         ,{
             "path" : "pages/product/Product",
             "style" :                                                                                    
@@ -282,14 +281,90 @@
             }
         }
         ,{
-            "path" : "pages/warehouse/PurchaseExpress",
+            "path" : "pages/warehouse/ExpressOrderAppend",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "发送快递物流",
+                "navigationBarTitleText": "添加物流单",
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+		    "path" : "pages/warehouse/ExpressOrderItemAppend",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "添加商品项",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/warehouse/ExpressOrderItemDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "查看商品项",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/warehouse/ExpressOrderDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "查看物流单",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/warehouse/ExpressOrderItemEdit",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "编辑商品项",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/warehouse/ExpressOrder",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "快递物流",
+				"navigationBarBackgroundColor": "#ffffff",
+		        "enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce":"none"
+				}
+		    }
+		},
+		{
+		    "path" : "pages/transport/ExpressOrder",
+		    "style" :                                                                                    
+		    {
+		        "enablePullDownRefresh": false,
+		        "app-plus": {
+		        	"bounce":"none"
+		        }
+		    }
+		    
+		},
+		{
+		    "path" : "pages/transport/ExpressOrderItemReceive",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "接收转运物流",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/transport/ExpressOrderReceive",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "接收转运物流",
+		        "enablePullDownRefresh": false
+		    }
+		}
     ],
 	// "tabBar": {
 	// 	"color":"#7A7E83",

@@ -6,46 +6,40 @@
 			<view class="title">商品名称：</view>
 			<selectlay :value="item.product.name" name="name" placeholder="请选择或搜索商品" :showplaceholder="false" slabel="name" svalue="id" @selectitem="selectitem"></selectlay>
 		</view>
-<!-- 		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="item.product.name"></input>
-		</view> -->
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">商品品牌：</view>
-			<input placeholder="请输入商品品牌" v-model="item.product.brand"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">商品型号：</view>
-			<input placeholder="请输入商品型号" v-model="item.product.specification"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">商品条码：</view>
-			<input placeholder="请扫描或输入商品条码" v-model="item.product.barcode"></input>
-			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">商品图片：</view>
-			<upimg @photo="getPhoto" :photo="item.product.image" ref="upimg"></upimg>
-		</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="item.product.brand">
 			<text :style="{color:'white'}">*</text>
-			<view class="title">生产厂家：</view>
-			<input placeholder="请输入生产厂家" v-model="item.product.manufacturer"></input>
+			<view class="cu-form-title">商品品牌：{{item.product.brand}}</view>
 		</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="item.product.specification">
 			<text :style="{color:'white'}">*</text>
-			<view class="title">生产地区：</view>
-			<input placeholder="请输入生产地区" v-model="item.product.origin"></input>
+			<view class="cu-form-title">商品型号：{{item.product.specification}}</view>
 		</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="item.product.barcode">
 			<text :style="{color:'white'}">*</text>
-			<view class="title">备注信息：</view>
-			<input placeholder="请输入备注信息" v-model="item.product.remark"></input>
+			<view class="cu-form-title">商品条码：{{item.product.barcode}}</view>
+		</view>
+		<view class="cu-form-group" v-if="item.product.image">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">商品图片：</view>
+			<myimg :photo="item.product.image" :padding="true"></myimg>
+		</view>
+		<view class="cu-form-group" v-if="item.product.barcode">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
+		</view>
+		<view class="cu-form-group" v-if="item.product.manufacturer">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">生产厂家：{{item.product.manufacturer}}</view>
+		</view>
+		<view class="cu-form-group" v-if="item.product.origin">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">生产地区：</view>
+			<input v-model="item.product.origin" disabled></input>
+		</view>
+		<view class="cu-form-group" v-if="item.product.remark">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">备注信息：</view>
+			<input v-model="item.product.remark" disabled></input>
 		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
@@ -58,7 +52,6 @@
 			<view class="title">销售数量：</view>
 			<input type="number" placeholder="请输入销售数量" v-model="item.quantity"></input>
 		</view>
-		
 		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
@@ -95,9 +88,6 @@
 			}
 		},
 		methods: {
-			getPhoto(val) {
-				this.item.product.image = val
-			},
 			checkPrice: function(e) {
 				//正则表达式
 				e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null
@@ -107,21 +97,11 @@
 					this.item.salePrice = this.item.price * 100
 				})
 			},
-			getScanCode() {
-				let _this = this;
-				uni.scanCode({
-					scanType:['barCode'],
-					success: function (res) {
-						_this.item.product.barcode = res.result
-					}
-				})
-			},
 			selectitem(index, item) {
 				if (index >= 0) {
 					this.$api.http.get('/product/getImage?id='+item.id, null).then(res => {
 						item.image = res;
 						this.item.product = item;
-						this.$refs.upimg.loadImage(this.item.product.image);
 					})
 				} else {
 					this.item.product = ""
@@ -132,11 +112,7 @@
 				productForm.price = this.item.price;
 				productForm.quantity = this.item.quantity;
 				let rules = [
-					{name: 'image', required: true, type: 'required', errmsg: '请上传商品图片'},
-					{name: 'name', required: true, type: 'required', errmsg: '请输入商品名称'},
-					{name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
-					{name: 'specification', required: true, type: 'required', errmsg: '请输入商品型号'},
-					{name: 'barcode', required: true, type: 'required', errmsg: '请输入商品条码'},
+					{name: 'name', required: true, type: 'required', errmsg: '请选择或搜索商品'},
 					{name: 'price', required: true, type: 'required', errmsg: '请输入销售价格'},
 					{name: 'quantity', required: true, type: 'required', errmsg: '请输入销售数量'}
 				]
@@ -178,6 +154,6 @@
 		height: 60upx;
 		line-height: 60upx;
 		/* add */
-		flex: 0 0 160rpx;
+		flex: 0 0 150upx;
 	}
 </style>
