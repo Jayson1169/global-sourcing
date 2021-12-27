@@ -69,18 +69,18 @@
 			}
 		},
 		{
-		    "path" : "pages/order/ProductAppend",
+		    "path" : "pages/order/ProductItemAppend",
 		    "style" :                                                                                    
 		    {
-		        "navigationBarTitleText": "添加商品",
+		        "navigationBarTitleText": "添加商品项",
 		        "enablePullDownRefresh": false
 		    }
 		},
 		{
-		    "path" : "pages/order/ProductEdit",
+		    "path" : "pages/order/ProductItemEdit",
 		    "style" :                                                                                    
 		    {
-		        "navigationBarTitleText": "编辑商品",
+		        "navigationBarTitleText": "编辑商品项",
 		        "enablePullDownRefresh": false
 		    }
 		},
@@ -91,9 +91,9 @@
 			}
 		},
 		{
-			"path" : "pages/order/ProductDetail",
+			"path" : "pages/order/ProductItemDetail",
 			"style" : {
-				"navigationBarTitleText": "查看商品"
+				"navigationBarTitleText": "查看商品项"
 			}
 		},
 		{
@@ -280,6 +280,15 @@
                 "navigationBarTitleText": "修改商品",
                 "enablePullDownRefresh": false
             }
+        }
+        ,{
+            "path" : "pages/warehouse/PurchaseExpress",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发送快递物流",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	// "tabBar": {

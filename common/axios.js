@@ -162,10 +162,10 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
-					// uni.showToast({
-					// 	title: res.data.message,
-					// 	icon: 'none'
-					// })
+					uni.showToast({
+						title: res.data.message,
+						icon: 'none'
+					})
 				}
 			}).catch(err => { 
 				console.log('请求异常:', err); 	

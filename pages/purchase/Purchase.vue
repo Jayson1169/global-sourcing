@@ -22,25 +22,25 @@
 				<text v-if="item.status==='REJECTED'" class="del-btn yticon icon-iconfontshanchu1"></text>
 				<text v-if="item.status==='REJECTED'" class="state" style="color: '#909399'">核验未通过</text>
 			</view>
-			<view class="goods-box-single" @click="jumpDetail(item)">
+			<view class="goods-box-single" @click="jumpPurchaseDetail(item)">
 				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
 				<image class="goods-img" src='@/imgs/order2.jpg' mode="aspectFill" v-if="item.photo === null"></image>	
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
 					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
-					<text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.purchasePrice}}</text>
+					<text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.purchasePrice / 100}}</text>
 				</view>
 			</view>
 			<view class="price-box" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">
 				共
 				<text class="num">{{item.quantity}}</text>
 				件商品 实付款
-				<text class="price">{{item.quantity * item.purchasePrice}}</text>
+				<text class="price">{{item.quantity * item.purchasePrice / 100}}</text>
 			</view>
 			<text v-if="item.status==='REJECTED'" style="font-size: 12px;">拒绝理由：{{item.rejectReason}}</text>
 			<view class="action-box b-t" v-if="status_to_state[item.status] != 4 && status_to_state[item.status] != 5">
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="purchaserAssign(item)">立即分配</button>
-				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpDetail(item)">立即核验</button>							
+				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpPurchaseDetail(item)">立即核验</button>							
 			</view>
 		</view>
 		<view class="H60"></view>
@@ -74,10 +74,19 @@
 		},
 		 
 		methods: {
-			jumpDetail(purchaseOrder) {
-				uni.navigateTo({
-					url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
-				});
+			jumpPurchaseDetail(purchaseOrder){
+				this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+					purchaseOrder.product.image = res;
+					// this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+					// 	purchaseOrder.photo = res;
+					// 	this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+					// 		purchaseOrder.invoice = res;
+							uni.navigateTo({
+								url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+							});
+					// 	})
+					// })
+				})
 			},
 			jumpPurchaseAppend() {
 				uni.navigateTo({

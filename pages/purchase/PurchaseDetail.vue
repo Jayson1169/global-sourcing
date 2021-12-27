@@ -1,60 +1,49 @@
 <template>
 	<view>
 		<view class="p_order">采购明细</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="purchaseOrder.photo">
 			<view class="title">采购照片：</view>
-			<myimg :photo="purchaseOrder.photo" :padding="true" v-if="purchaseOrder.photo != null"></myimg>
-			<image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.photo == null"></image>
+			<myimg :photo="purchaseOrder.photo" :padding="true"></myimg>
 		</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="purchaseOrder.invoice">
 			<view class="title">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</view>
-			<myimg :photo="purchaseOrder.invoice" :padding="true" v-if="purchaseOrder.invoice != null"></myimg>
-			<image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.invoice == null"></image>		
+			<myimg :photo="purchaseOrder.invoice" :padding="true"></myimg>
+			<!-- <image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.invoice == null"></image>		 -->
+		</view>
+		<view class="cu-form-group" v-if="purchaseOrder.invoiceDate">
+			<view class="title">发票日期：{{purchaseOrder.invoiceDate}}</view>
+		</view>
+		<view class="cu-form-group" v-if="purchaseOrder.purchasePrice">
+			<view class="title">采购单价：{{purchaseOrder.purchasePrice / 100}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">发票日期：</view>
-			<input placeholder="待采购输入发票日期" v-model="purchaseOrder.invoiceDate" disabled></input>
+			<view class="title">采购数量：{{purchaseOrder.quantity}}</view>
 		</view>
 		<view class="p_order">商品信息</view>
 		<view class="cu-form-group">
+			<view class="title">商品名称：{{purchaseOrder.product.name}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">商品品牌：{{purchaseOrder.product.brand}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">商品型号：{{purchaseOrder.product.specification}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">商品条码：{{purchaseOrder.product.barcode}}</view>
+		</view>
+		<view class="cu-form-group">
 			<view class="title">商品图片：</view>
-			<myimg :photo="purchaseOrder.product.photo" :padding="true"></myimg>
+			<myimg :photo="purchaseOrder.product.image" :padding="true"></myimg>
 		</view>
-		<view class="cu-form-group">
-			<view class="title">商品名称：</view>
-			<input v-model="purchaseOrder.product.name" disabled></input>
+		<view class="cu-form-group" v-if="purchaseOrder.product.manufacturer">
+			<view class="title">生产厂家：{{purchaseOrder.product.manufacturer}}</view>
 		</view>
-		<view class="cu-form-group">
-			<view class="title">商品品牌：</view>
-			<input v-model="purchaseOrder.product.brand" disabled></input>
+		<view class="cu-form-group" v-if="purchaseOrder.product.origin">
+			<view class="title">生产地区：{{purchaseOrder.product.origin}}</view>
 		</view>
-		<view class="cu-form-group">
-			<view class="title">商品型号：</view>
-			<input v-model="purchaseOrder.product.specification" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">商品条码：</view>
-			<input v-model="purchaseOrder.product.barcode" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">生产厂家：</view>
-			<input placeholder="未输入生产厂家" v-model="purchaseOrder.product.manufacturer" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">生产地区：</view>
-			<input placeholder="未输入生产地区" v-model="purchaseOrder.product.origin" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">备注信息：</view>
-			<input placeholder="未输入备注信息" v-model="purchaseOrder.product.remark" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">采购数量：</view>
-			<input v-model="purchaseOrder.quantity" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">采购单价：</view>
-			<input placeholder="待采购输入采购单价" v-model="purchaseOrder.purchasePrice" disabled></input>
+		<view class="cu-form-group" v-if="purchaseOrder.product.remark">
+			<view class="title">备注信息：{{purchaseOrder.product.remark}}</view>
 		</view>
 		<view v-if="purchaseOrder.status==='CONFIRMED'">
 			<view class="p_order">仓管信息</view>
@@ -80,11 +69,11 @@
 	export default {
 		data() {
 			return {
-				purchaseOrder: {"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},
+				purchaseOrder:  {"id":7,"createTime":"2021-12-27 00:29:08","updateTime":"2021-12-27 00:40:28","buyer":{"id":9,"createTime":"2021-12-27 00:37:19","updateTime":"2021-12-27 00:37:19","username":"15858780802","password":"$2a$10$Ro7YEGkUtXDS5AJdEkj1BeNSg0qSB.A6xbSLoe41sWSeSmvt85PAS","name":"采购","role":"BUYER","phoneNumber":null},"status":"READY","invoiceDate":null,"product":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","name":"清风牌面巾纸","barcode":"6922266446726","brand":"清风","specification":"150抽/包","inventory":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:58:03","warehouseInventory":3,"hubInventory":16,"midwayInventory":1},"manufacturer":null,"origin":"湖北省孝南市","remark":null,"customsInfo":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"purchasePrice":null,"quantity":2,"rejectReason":null,"warehouseKeeper":null} 
 			};
 		},
 		onLoad(option) {
-			this.role = uni.getStorageSync('user').role
+			this.role = uni.getStorageSync('user').role;
 			this.purchaseOrder = JSON.parse(decodeURIComponent(option.purchaseOrder));
 		},
 		methods: {
@@ -130,6 +119,7 @@
 		padding: 10rpx 10rpx 10rpx 0rpx;
 	}
 	.p_btn_group {
+		background-color: #FFFFFF;
 		padding: 0rpx 20rpx 0rpx 20rpx;
 		display: flex;			
 		position: fixed;

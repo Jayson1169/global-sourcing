@@ -118,8 +118,11 @@
 			},
 			selectitem(index, item) {
 				if (index >= 0) {
-					this.item.product = item;
-					this.$refs.upimg.loadImage(this.item.product.image);
+					this.$api.http.get('/product/getImage?id='+item.id, null).then(res => {
+						item.image = res;
+						this.item.product = item;
+						this.$refs.upimg.loadImage(this.item.product.image);
+					})
 				} else {
 					this.item.product = ""
 				}

@@ -2,7 +2,7 @@
 	<view class="product">
 		<view class="detail">订单明细</view>
 		<view class='tag-e'>
-			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
+			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductItemEdit(item)">
 				<view>
 					<myimg :photo="item.product.image"></myimg>
 				</view>
@@ -15,7 +15,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="goods goods_add" @click="jumpProductAppend">
+			<view class="goods goods_add" @click="jumpProductItemAppend">
 				<text class="iconfont icon-jiahao"></text>
 				<text>点击添加商品项</text>
 			</view>
@@ -110,14 +110,14 @@
 					})
 				}	
 			},
-			jumpProductAppend() {
+			jumpProductItemAppend() {
 				uni.navigateTo({
-					url: './ProductAppend'
+					url: './ProductItemAppend'
 				});
 			},
-			jumpProductEdit(item) {
+			jumpProductItemEdit(item) {
 				uni.navigateTo({
-					url: './ProductEdit?item='+encodeURIComponent(JSON.stringify(item))
+					url: './ProductItemEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});
 			}
 		}

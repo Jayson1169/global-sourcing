@@ -19,40 +19,40 @@
 				<text class="time">{{item.createTime}}</text>
 				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
 			</view>
-			<view class="goods-box-single" @click="jumpPurcahseDetail(item)">
-				<image class="goods-img" :src="item.photo" mode="aspectFill"></image>
+			<view class="goods-box-single" @click="jumpPurchaseDetail(item)">
+				<!-- <image class="goods-img" :src="item.photo" mode="aspectFill"></image> -->
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
 					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
-					<text class="price">{{item.purchasePrice}}</text>
+					<text class="price">{{item.purchasePrice / 100}}</text>
 				</view>
 			</view>
 			<view class="price-box">
 				共
 				<text class="num">{{item.quantity}}</text>
 				件商品 实付款
-				<text class="price">{{item.quantity * item.purchasePrice}}</text>
+				<text class="price">{{item.quantity * item.purchasePrice / 100}}</text>
 			</view>
 			<view class="action-box b-t" v-if="status_to_state[item.status] == 1">
 				<button class="action-btn recom" @click="jumpToPurchaseReceive(item)">接收商品</button>
 			</view>
 		</view>
 		<view class="H50"></view>
-		<view class="p_btn">
+		<!-- <view class="p_btn">
 			<view class=" flex flex-direction">
 				<button class="cu-btn bg-red margin-tb-sm lg" @click="jumpToWarehouseOutput">导出海关信息</button>
 			</view>
+		</view> -->
+		<view class="p_btn_group">
+			<button class="p_btn cu-btn bg-green margin-tb-sm lg" @click="jumpToPurchaseExpress">发送快递物流</button>
+			<button class="p_btn cu-btn bg-green margin-tb-sm lg" @click="jumpToWarehouseOutput">导出海关信息</button>
 		</view>
 	</view>
 </template> 
 
 <script>
-	import empty from "@/components/empty";
 	import Json from '@/Json';
 	export default {
-		components: {
-			empty
-		},
 		data() {
 			return {
 				request: {
@@ -60,11 +60,12 @@
 					page: '0',
 					size: '999'
 				},
-				purchaseOrderList: [{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}}],
+				purchaseOrderList: [],
+				// purchaseOrderList: [{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}}],
 				tabCurrentIndex: 0,
 				status_to_state: {"CONFIRMED": 1, "WAREHOUSED": 2},
-				status_to_state2: {"CONFIRMED": "待接收", "WAREHOUSED": "已完成"},
-				navList: ['全部', '待接收', '已完成']
+				status_to_state2: {"CONFIRMED": "待接收", "WAREHOUSED": "已接收"},
+				navList: ['全部', '待接收', '已接收']
 			};
 		},
 		onLoad(){
@@ -77,19 +78,36 @@
 			tabClick(index){
 				this.tabCurrentIndex = index;
 			},
-			jumpPurcahseDetail(purchaseOrder){
-				uni.navigateTo({
-					url: '../purchase/PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
-				});
+			jumpPurchaseDetail(purchaseOrder){
+				this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+					purchaseOrder.product.image = res;
+					this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+						purchaseOrder.photo = res;
+						this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.invoice = res;
+							uni.navigateTo({
+								url: '../purchase/PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+							});
+						})
+					})
+				})
 			},
 			jumpToPurchaseReceive(purchaseOrder) {
-				uni.navigateTo({
-					url: '../purchase/PurchaseReceive?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+				this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+					purchaseOrder.product.image = res;
+					uni.navigateTo({
+						url: '../purchase/PurchaseReceive?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+					})
 				})
 			},
 			jumpToWarehouseOutput() {
 				uni.navigateTo({
-					url: './WarehouseOutput'
+					url: './WarehouseOutput?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
+				})
+			},
+			jumpToPurchaseExpress() {
+				uni.navigateTo({
+					url: './PurchaseExpress?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
 				})
 			}
 		}
@@ -99,6 +117,19 @@
 <style lang="scss">
 	page, .content{
 		background: $page-color-base;
+	}
+	.p_btn_group {
+		background-color: $page-color-base;
+		padding: 0rpx 20rpx 0rpx 20rpx;
+		display: flex;			
+		position: fixed;
+		bottom: 0;
+		z-index: 9999;
+		width: 100%;
+		justify-content: space-between;
+		.p_btn {
+			width: 345rpx; 
+		}
 	}
 	.swiper-box{
 		height: calc(100% - 40px);
@@ -367,14 +398,14 @@
 	.load3 view:nth-child(4) {
 		animation-delay: 1.43s
 	}
-	.p_btn {
-		background: #FFFFFF;
-		padding: 0 10px 0px;
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		z-index: 9999;
-	}
+	// .p_btn {
+	// 	background: #FFFFFF;
+	// 	padding: 0 10px 0px;
+	// 	position: fixed;
+	// 	bottom: 0;
+	// 	width: 100%;
+	// 	z-index: 9999;
+	// }
 	@-webkit-keyframes load {
 		0% {
 			opacity: 1

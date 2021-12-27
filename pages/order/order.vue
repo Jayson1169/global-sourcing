@@ -15,7 +15,7 @@
 		</view>
 		<empty v-if="orderList.length === 0"></empty>
 		<view class="order-item" v-for="(item, index) in orderList" :key="index">
-			<view @click="jumpOrderDetail(item)"> 
+			<view @click="jumpOrderModify(item)"> 
 				<view class="i-top b-b">
 					<text class="time">{{item.updateTime}}</text>
 				</view>
@@ -65,41 +65,62 @@
 				tabCurrentIndex: 0,
 				navList: ['全部', '待发送', '已完成'],
 				orderList: []
+				// orderList: [{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","salesperson":{"id":1,"createTime":"2021-12-23 01:09:54","updateTime":"2021-12-23 01:10:01","username":"admin","password":"$2a$10$P8UFgtFSeCz.57PbNf2sRuOz2qg8JFJx9.wfJdNsX/7BuNzGvWeg2","name":"admin","role":"ADMIN","phoneNumber":null},"address":{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","name":"殷鑫","idNumber":"467489199910247815","phoneNumber":"15858780802","shipAddress":"湖南省长沙市天心区中南大学铁道学院"},"items":[{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","product":{"id":1,"createTime":"2021-12-26 21:54:39","updateTime":"2021-12-26 23:18:43","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":"6917246004355","brand":"曼秀雷敦","specification":"150ml","inventory":{"id":1,"createTime":"2021-12-26 21:54:38","updateTime":"2021-12-26 23:18:43","warehouseInventory":2,"hubInventory":10,"midwayInventory":8},"manufacturer":null,"origin":"广东省中山市","remark":null,"customsInfo":{"id":1,"createTime":"2021-12-26 21:54:38","updateTime":"2021-12-26 23:18:43","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"salePrice":2500,"quantity":4},{"id":2,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","product":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","name":"清风牌面巾纸","barcode":"6922266446726","brand":"清风","specification":"150抽/包","inventory":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","warehouseInventory":0,"hubInventory":10,"midwayInventory":7},"manufacturer":null,"origin":"湖北省孝南市","remark":null,"customsInfo":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"salePrice":400,"quantity":7}]}]
 			};
 		},
 		onLoad() {
 			uni.$on('edit', (e) => {
-				this.$api.http.get('/saleOrder/findAll', this.request).then(res => {
-					this.orderList = res.content
+				this.orderList.some((order, i) => {
+					if (order.id == e.id) {
+						this.$set(this.orderList, i, e)  
+					}
 				})
 			})
 			this.$api.http.get('/saleOrder/findAll', this.request).then(res => {
 				this.orderList = res.content
 			})
 		},
+		onUnload() {
+			uni.$off('eidt');
+		},
 		methods: {
 			jumpOrderDetail(order){
-				uni.navigateTo({
-					url: './OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
-				});
+				for (let i in order.items) {
+				    this.$api.http.get('/product/getImage?id='+order.items[i].product.id, null).then(res => {
+						order.items[i].product.image = res
+						// 加载完图片再跳转
+						if (i == order.items.length - 1) {
+							uni.navigateTo({
+								url: './OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
+							});
+						}
+					})
+				}
 			},
 			jumpOrderModify(order) {
-				uni.navigateTo({
-					url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
-				})
+				for (let i in order.items) {
+				    this.$api.http.get('/product/getImage?id='+order.items[i].product.id, null).then(res => {
+						order.items[i].product.image = res
+						// 加载完图片再跳转
+						if (i == order.items.length - 1) {
+							uni.navigateTo({
+								url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
+							})	
+						}
+					})
+				}
 			},
 			//删除订单
 			deleteOrder(item, index) {
-				// uni.showLoading({
-				// 	title: '请稍后'
-				// })
-				// setTimeout(()=>{
-				// 	this.navList[this.tabCurrentIndex].orderList.splice(index, 1);
-				// 	uni.hideLoading();
-				// }, 600)
-				this.$api.http.delete('/saleOrder/delete?id='+item.id, null).then(res => {
-					this.orderList.splice(index, 1)
+				uni.showLoading({
+					title: '请稍后'
 				})
+				setTimeout(()=>{
+					this.$api.http.delete('/saleOrder/delete?id='+item.id, null).then(res => {
+						this.orderList.splice(index, 1)
+						uni.hideLoading();
+					})
+				}, 600)				
 			},
 			//取消订单
 			cancelOrder(item){

@@ -60,7 +60,7 @@
 		</view>
 		<view class="H50"></view>
 		<view class="p_btn_group">
-			<button class="p_btn cu-btn bg-red margin-tb-sm lg" @click="sub('refund')" id="1">退款</button>
+			<button class="p_btn cu-btn bg-red margin-tb-sm lg" @click="sub('delete')" id="1">删除</button>
 			<button class="p_btn cu-btn bg-green margin-tb-sm lg" @click="sub('modify')" id="2">修改</button>
 		</view>
 	</view>
@@ -109,7 +109,7 @@
 				productForm.price = this.item.price;
 				productForm.quantity = this.item.quantity;
 				let rules = [
-					{name: 'photo', required: true, type: 'required', errmsg: '请上传商品图片'},
+					{name: 'image', required: true, type: 'required', errmsg: '请上传商品图片'},
 					{name: 'name', required: true, type: 'required', errmsg: '请输入商品名称'},
 					{name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
 					{name: 'specification', required: true, type: 'required', errmsg: '请输入商品型号'},

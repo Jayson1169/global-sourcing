@@ -2,7 +2,7 @@
 	<view class="product">
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
-			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductDetail(item)">
+			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductItemDetail(item)">
 				<view>
 					<myimg :photo="item.product.image"></myimg>
 				</view>
@@ -43,17 +43,9 @@
 			this.order = JSON.parse(decodeURIComponent(option.order));
 		},
 		methods: {
-			previewImage(image) {
-				let preview = [];
-				preview.push(image)
-				uni.previewImage({
-					current: 0,
-					urls: preview
-				});
-			},
-			jumpProductDetail(item) {
+			jumpProductItemDetail(item) {
 				uni.navigateTo({
-					url: './ProductDetail?item='+encodeURIComponent(JSON.stringify(item))
+					url: './ProductItemDetail?item='+encodeURIComponent(JSON.stringify(item))
 				})
 			},
 		}

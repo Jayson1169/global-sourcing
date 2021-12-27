@@ -18,7 +18,12 @@
 				<view class="title">{{purchaseOrder.invoiceDate==null?"请选择发票日期":purchaseOrder.invoiceDate}}</view>
 			</picker>
 		</view>
-		<view class="order">商品信息</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">采购单价：</view>
+			<input type="digit" placeholder="请输入采购单价" v-model="purchaseOrder.price" @input="checkPrice"></input>
+		</view>
+		<!-- <view class="order">商品信息</view> -->
 		<!-- <view class="cu-form-group">
 			<text :style="{color:'white'}">*</text>
 			<view class="title">商品名称：</view>
@@ -40,11 +45,7 @@
 			<input placeholder="请点击扫码或输入条形码" v-model="purchaseOrder.product.barcode"></input>
 			<image src="@/imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 		</view> -->
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">采购单价：</view>
-			<input type="digit" placeholder="请输入采购单价" v-model="purchaseOrder.purchasePrice" @input="checkPrice"></input>
-		</view>
+		
 		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
@@ -77,7 +78,8 @@
 				e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null
 				//重新赋值给input				
 				this.$nextTick(() => {
-					this.purchaseOrder.purchasePrice = e.target.value
+					this.purchaseOrder.price = e.target.value
+					this.purchaseOrder.purchasePrice = this.purchaseOrder.price * 100
 				})
 			},
 			sub() {
@@ -85,7 +87,7 @@
 					{name: 'photo', required: true, type: 'required', errmsg: '请上传商品图片'},
 					{name: 'invoice', required: true, type: 'required', errmsg: '请上传发票'},
 					{name: 'invoiceDate', required: true, type: 'required', errmsg: '请输入发票日期'},
-					{name: 'purchasePrice', required: true, type: 'required', errmsg: '请输入采购单价'}
+					{name: 'price', required: true, type: 'required', errmsg: '请输入采购单价'}
 				]
 				let valLoginRes = this.$validate.validate(this.purchaseOrder, rules)
 				if (!valLoginRes.isOk) {

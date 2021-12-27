@@ -18,8 +18,9 @@
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品条码：</view>
-			<input placeholder="请扫描或输入商品条码" v-model="product.barcode"></input>
-			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
+			<input placeholder="请扫描或点击获取随机条码" v-model="product.barcode"></input>
+			<image src="../../imgs/random.png" style="width: 70rpx; height: 70rpx;" @click="getRandomScanCode"></image>
+			<image src="../../imgs/scan.png" style="width: 60rpx; height: 60rpx;" @click="getScanCode"></image>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -147,8 +148,13 @@
 				uni.scanCode({
 					scanType:['barCode'],
 					success: function (res) {
-						_this.item.product.barcode = res.result
+						_this.product.barcode = res.result
 					}
+				})
+			},
+			getRandomScanCode() {
+				this.$api.http.get('/product/randomBarcode', null).then(res => {
+					this.product.barcode = res
 				})
 			},
 			sub() {
@@ -174,7 +180,6 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					console.log(this.product.image)
 					this.$api.http.post('/product/insert', this.product).then(res => {
 						uni.navigateTo({
 							url: './Product'

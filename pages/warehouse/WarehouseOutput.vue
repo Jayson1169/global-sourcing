@@ -2,13 +2,13 @@
 	<view class="product_list">
 		<view class="uni-list">
 			<checkbox-group @change="checkboxChange">
-				<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in items" :key="index">
+				<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in purchaseOrderList" :key="index" v-if="item.status === 'WAREHOUSED'">
 					<view class="list">
-						<checkbox class="radio" :value="item.value" :checked="item.checked" />
+						<checkbox class="radio" :value="item.id" :checked="item.checked" />
 						<view class="list_l"></view>
 						<view class="list_r">
-							<view class="list_r_01">{{item.name}}</view>
-							<view class="list_r_02">{{item.brand}} x {{item.quantity}}</view>
+							<view class="list_r_01">{{item.product.name}}</view>
+							<view class="list_r_02">{{item.product.brand}} x {{item.quantity}}</view>
 						</view>
 					</view>
 				</label>
@@ -48,39 +48,70 @@
 						quantity: 2
 					}
 				],
-				current: '',
+				current: [],
 				purchaseOrderList: [{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}}],
 			};
 		},
-		onLoad() {
+		onLoad(option) {
 			that = this
+			this.purchaseOrderList = JSON.parse(decodeURIComponent(option.purchaseOrderList));
+			// this.purchaseOrderList.some((purchaseOrder, i) => {
+			// 	if (purchaseOrder.status != "WAREHOUSED") {
+			// 		this.purchaseOrderList.splice(i, 1)
+			// 	}
+			// })
 		},
 		methods: {
 			checkboxChange: function (e) {
-				var items = this.items,
-					values = e.detail.value;
-				console.log(values)
-				for (var i = 0, lenI = items.length; i < lenI; ++i) {
-					const item = items[i]
-					if(values.includes(item.value)){
-						this.$set(item,'checked',true)
-					}else{
-						this.$set(item,'checked',false)
-					}
-				}
+				// var items = this.purchaseOrderList;
+				this.current = e.detail.value;
+				// for (var i = 0, lenI = items.length; i < lenI; ++i) {
+				// 	const item = items[i]
+				// 	if (values.includes(item.id)) {
+				// 		this.$set(item,'checked',true)
+				// 	} else {
+				// 		this.$set(item,'checked',false)
+				// 	}
+				// }
 			},
 			output() {
 				// 要导出的json数据
-				const jsonData = [{
-					hsCode: '测试数据',
-					materialBeschaffenheit: '123456',
-					brandArticleNo: '123@456.com',
-					brand: 'test',
-					articleName: 'test',
-					unitPrice: 'test',
-					totalQuantity: 'test',
-					sum: 'test'
-				}]
+				var items = this.purchaseOrderList;
+				const jsonData = [];
+				for (var i = 0, lenI = items.length; i < lenI; ++i) {
+					const item = items[i]
+					if (this.current.includes(item.id)) {
+						var data = {
+							hsCode: '',
+							materialBeschaffenheit: '',
+							brandArticleNo: '',
+							brand: '',
+							articleName: '',
+							unitPrice: '',
+							totalQuantity: '',
+							sum: ''
+						}
+						data.hsCode = item.hsCode;
+						data.materialBeschaffenheit = item.materialBeschaffenheit;
+						data.brandArticleNo = item.brandArticleNo;
+						data.brand = item.brand;
+						data.articleName = item.articleName;
+						data.unitPrice = item.purchasePrice / 100;
+						data.totalQuantity = item.quantity;
+						data.sum = data.unitPrice * data.totalQuantity;
+						jsonData.push(data);
+					}
+				}
+				// const jsonData = [{
+				// 	hsCode: '测试数据',
+				// 	materialBeschaffenheit: '123456',
+				// 	brandArticleNo: '123@456.com',
+				// 	brand: 'test',
+				// 	articleName: 'test',
+				// 	unitPrice: 'test',
+				// 	totalQuantity: 'test',
+				// 	sum: 'test'
+				// }]
 				// 列标题
 				let worksheet = 'sheet1'
 				let str = '<tr><td>HS Code</td><td>Material Beschaffenheit</td><td>Brand Article no.</td>'

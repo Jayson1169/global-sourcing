@@ -2,7 +2,7 @@
 	<view class="product">
 		<view class="order">订单明细</view>
 		<view class='tag-e'>
-			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductEdit(item)">
+			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductItemEdit(item)">
 				<view>
 					<myimg :photo="item.product.image"></myimg>
 				</view>
@@ -15,7 +15,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="goods goods_add" @click="jumpProductAppend">
+			<view class="goods goods_add" @click="jumpProductItemAppend">
 				<text class="iconfont icon-jiahao"></text>
 				<text>点击添加商品项</text>
 			</view>
@@ -70,7 +70,7 @@
 				this.$api.http.post('/saleOrder/insertItem?saleOrderId='+this.order.id, e).then(res => {
 					this.$api.msg.successToast('添加成功')
 					this.order.items = this.order.items.concat(e)
-					uni.$emit('edit', null)
+					uni.$emit('edit', this.order)
 				})
 			})
 			uni.$on('modify', (e) => {
@@ -81,27 +81,27 @@
 							this.$set(this.order.items, i, e)  
 						}
 					})
-					uni.$emit('edit', null)
+					uni.$emit('edit', this.order)
 				})
 			})
-			uni.$on('refund', (e) => {
+			uni.$on('delete', (e) => {
 				this.$api.http.delete('/saleOrder/deleteItem?saleOrderId='+this.order.id+'&itemId='+e.id, null).then(res => {
-					this.$api.msg.successToast('退款成功')
+					this.$api.msg.successToast('删除成功')
 					this.order.items.some((item, i) => {
 						if (item.id == e.id) {
 							this.order.items.splice(i, 1)
 						}
 					})
-					uni.$emit('edit', null)
+					uni.$emit('edit', this.order)
 				})
 			})
-			this.order = JSON.parse(decodeURIComponent(option.order));
+			this.order = JSON.parse(decodeURIComponent(option.order));			
 		},
 		onUnload() {  
 			// 移除监听事件  
 			uni.$off('append');  
 			uni.$off('modify');
-			uni.$off('refund');
+			uni.$off('delete');
 		},
 		methods: {
 			sub() { 
@@ -123,20 +123,22 @@
 							title: '修改成功',
 							icon: 'none'
 						})
-						uni.navigateTo({
-							url: './Order'
-						});
+						uni.$emit('edit', this.order)
+						uni.navigateBack()
+						// uni.({
+						// 	url: './Order'
+						// });
 					})
 				}	
 			},
-			jumpProductAppend() {
+			jumpProductItemAppend() {
 				uni.navigateTo({
-					url: './ProductAppend'
+					url: './ProductItemAppend'
 				});
 			},
-			jumpProductEdit(item) {
+			jumpProductItemEdit(item) {
 				uni.navigateTo({
-					url: './ProductEdit?item='+encodeURIComponent(JSON.stringify(item))
+					url: './ProductItemEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});
 			}
 		}

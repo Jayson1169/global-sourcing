@@ -90,7 +90,6 @@
 						uni.navigateTo({
 							url: '../Login'
 						})
-						// this.init()
 					})
 				}
 			}
