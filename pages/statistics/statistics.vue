@@ -1,20 +1,29 @@
 <template>
 	<view class="tongji">
 		<view class="t_tit">经营数据</view>
-		<view class="t_time">统计时间截止9月2号</view>
+		<!-- <view class="t_time">统计时间截止9月2号</view> -->
+		
 		<view class="card">
 			<view class="card_01">经营收入</view>
-			<view class="card_02">¥ {{data.total[0].all_money_total}}</view>
+			<view class="card_02">¥ 100</view>
 			<view class="card_03">
 				<view class="card_03_1">
-					订单数<br/><span>{{data.total[0].all_num_total}}</span>
+					订单数<br/><span>100</span>
 				</view>
 				<view class="card_03_1">
-					消费人数<br/><span>{{data.total[0].all_num_total}}</span>
+					采购数<br/><span>100</span>
 				</view>
 			</view>
 		</view>
-		<view class="name">用户数据</view>
+		<uni-datetime-picker
+			v-model="range"
+			type="daterange"
+			start="2021-12-20"
+			:end="today"
+			rangeSeparator="至"
+			@change="change($event)"
+		/>
+	<!-- 	<view class="name">用户数据</view>
 		<view class="uhsj">
 			<view class="uhsj_l">
 				<span>12</span> <br/>用户总数
@@ -22,17 +31,17 @@
 			<view class="uhsj_l">
 				<span>5</span> <br/>本月新用户
 			</view>
-		</view>
+		</view> -->
 		<view class="name">其他数据</view>
 		<view class="shuju">
 			<view class="sj_01"> 
-				<view class="sj_01_1">{{data.today[0].today_num_total}}<br/>今日订单</view>
-				<view class="sj_01_1">¥ {{data.today[0].today_money_total?data.today[0].today_money_total:0}}<br/>今日收益</view>
+				<view class="sj_01_1">0<br/>今日订单</view>
+				<view class="sj_01_1">¥ 100<br/>今日收益</view>
 			</view>
 			<view class="sj_02"></view>
 			<view class="sj_01">
-				<view class="sj_01_1">{{data.yesterday[0].yesterday_num_total}}<br/>昨日订单</view>
-				<view class="sj_01_1">¥ {{data.yesterday[0].yesterday_money_total?data.yesterday[0].yesterday_money_total:0}}<br/>昨日收益</view>
+				<view class="sj_01_1">1<br/>昨日订单</view>
+				<view class="sj_01_1">¥ 200<br/>昨日收益</view>
 			</view>
 		</view>
 	</view>
@@ -42,16 +51,20 @@
 	export default {
 		data() {
 			return {
-				data:[]
+				today: '',
+				range: ['', '']
 			};
 		},
 		onLoad() {
-			this._load()
+			var day = new Date();
+			day.setTime(day.getTime());
+			this.today = day.getFullYear()+"-" + (day.getMonth()+1) + "-" + day.getDate();
 		},
 		methods:{
-			_load(){
-				this.data=this.$api.json.count_order
-			}
+			change(e) {
+				this.range = e;
+				console.log(this.range[0])
+			},
 		}
 	}
 </script>

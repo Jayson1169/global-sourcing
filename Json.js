@@ -649,13 +649,13 @@ const cateList = [{
 ]
 
 export default {
-	carouselList,
-	cartList,
-	detailData,
-	lazyLoadList,
-	userInfo,
-	shareList,
-	goodsList,
-	orderList,
-	cateList
+	// carouselList,
+	// cartList,
+	// detailData,
+	// lazyLoadList,
+	// userInfo,
+	// shareList,
+	// goodsList,
+	// orderList,
+	// cateList
 }

@@ -12,23 +12,43 @@
 			<view class="shuju">
 				<view class="shuju_01">
 					<view>今日订单/金额</view>
-					<view class="shuju_01_s" v-if="shop.today[0].today_money_total">{{shop.today[0].today_num_total}} / ¥{{shop.today[0].today_money_total}}</view>
-					<view class="shuju_01_s" v-else>0 / ¥0</view>
+					<!-- <view class="shuju_01_s" v-if="shop.today[0].today_money_total">{{shop.today[0].today_num_total}} / ¥{{shop.today[0].today_money_total}}</view> -->
+					<view class="shuju_01_s">0 / ¥0</view>
 				</view>
 				<view class="shuju_01 no">
 					<view>昨日订单/金额</view> 
-					<view class="shuju_01_s" v-if="shop.yesterday[0].yesterday_money_total">{{shop.yesterday[0].yesterday_num_total}} /
-					 ¥{{shop.yesterday[0].yesterday_money_total}}</view>
-					 <view class="shuju_01_s" v-else>0 / ¥0</view>
+					<!-- <view class="shuju_01_s" v-if="shop.yesterday[0].yesterday_money_total">{{shop.yesterday[0].yesterday_num_total}} / -->
+					 <!-- ¥{{shop.yesterday[0].yesterday_money_total}}</view> -->
+					 <view class="shuju_01_s">0 / ¥0</view>
 				</view>
 				<view class="shuju_01">
 					<view>总订单数</view>
-					<view class="shuju_01_s">{{shop.total[0].all_num_total}}</view>
+					<view class="shuju_01_s">100</view>
 				</view>
 				<view class="shuju_01 no">
 					<view>总销售金额</view>
-					<view class="shuju_01_s" v-if="shop.total[0].all_money_total">¥ {{shop.total[0].all_money_total}}</view>
-					 <view class="shuju_01_s" v-else>0 </view>
+					<!-- <view class="shuju_01_s" v-if="shop.total[0].all_money_total">¥ {{shop.total[0].all_money_total}}</view> -->
+					 <view class="shuju_01_s" >0 </view>
+				</view>
+				<view class="shuju_01">
+					<view>今日采购/金额</view>
+					<!-- <view class="shuju_01_s" v-if="shop.today[0].today_money_total">{{shop.today[0].today_num_total}} / ¥{{shop.today[0].today_money_total}}</view> -->
+					<view class="shuju_01_s" >0 / ¥0</view>
+				</view>
+				<view class="shuju_01 no">
+					<view>今日采购/金额</view> 
+					<!-- <view class="shuju_01_s" v-if="shop.yesterday[0].yesterday_money_total">{{shop.yesterday[0].yesterday_num_total}} / -->
+					 <!-- ¥{{shop.yesterday[0].yesterday_money_total}}</view> -->
+					 <view class="shuju_01_s" >0 / ¥0</view>
+				</view>
+				<view class="shuju_01">
+					<view>总订单数</view>
+					<view class="shuju_01_s">12</view>
+				</view>
+				<view class="shuju_01 no">
+					<view>总销售金额</view>
+					<!-- <view class="shuju_01_s" v-if="shop.total[0].all_money_total">¥ {{shop.total[0].all_money_total}}</view> -->
+					 <view class="shuju_01_s" >0 </view>
 				</view>
 			</view>
 		</view>
@@ -70,31 +90,30 @@
 				</navigator>
 			</view>
 		</view>
-	<!-- 	<view class="BH"></view>
-		<view class="more">
-			<view class='mo'>
-				<view class='mo_01'>拓展
-					 </view>
-				<view class='mo_02'></view>
-			</view>
-		</view>
-		<view class="list">
-			<view class="list_01">拓展</view>
-		</view>
-		<view class="H50"></view> -->
 	</view>
 </template>
 
 <script>
+	import { formatDateThis, getUnixTime } from '@/common/dateUtil.js'
 	export default {
 		data() {
 			return {
-				shop: {},
+				todayFinance: '',
+				yesterdayFinance: ''
 			}
 		},
 		onLoad() {  
-			this.role = uni.getStorageSync('user').role
-			this.shop = this.$api.json.count_order
+			// 昨天的时间
+			// var day1 = new Date();
+			// day1.setTime(day1.getTime()-24*60*60*1000);
+			// var s1 = day1.getFullYear()+"-" + (day1.getMonth()+1) + "-" + day1.getDate();
+			// //今天的时间
+			// var day2 = new Date();
+			// day2.setTime(day2.getTime());
+			// var s2 = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
+			// console.log(s1, s2)
+			// this.shop = this.$api.json.count_order
+			// this.$api.http.get('/finance/countFinance')
 		},
 		methods: {
 		}
