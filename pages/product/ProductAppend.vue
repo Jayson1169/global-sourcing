@@ -1,5 +1,6 @@
 <template>
-	<view class="product">		
+	<view class="product">	
+		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">商品名称：</view>
@@ -22,6 +23,43 @@
 			<image src="../../imgs/random.png" style="width: 70rpx; height: 70rpx;" @click="getRandomScanCode"></image>
 			<image src="../../imgs/scan.png" style="width: 60rpx; height: 60rpx;" @click="getScanCode"></image>
 		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">商品图片：</view>
+			<upimg @photo="getPhoto" :photo="product.image"></upimg>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'white'}">*</text>
+			<view class="title">生产厂家：</view>
+			<input placeholder="请输入生产厂家" v-model="product.manufacturer"></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'white'}">*</text>
+			<view class="title">生产地区：</view>
+			<input placeholder="请输入生产地区" v-model="product.origin"></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'white'}">*</text>
+			<view class="title">备注信息：</view>
+			<input placeholder="请输入备注信息" v-model="product.remark"></input>
+		</view>
+		<view class="detail">库存信息</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">国外库存：</view>
+			<input type="number" placeholder="请输入国外库存" v-model="product.inventory.warehouseInventory"></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">在途库存：</view>
+			<input type="number" placeholder="请输入在途库存" v-model="product.inventory.midwayInventory"></input>
+		</view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">国内库存：</view>
+			<input type="number" placeholder="请输入国内库存" v-model="product.inventory.hubInventory"></input>
+		</view>
+		<view class="detail">海关信息</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">HS Code：</view>
@@ -49,9 +87,9 @@
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">商品图片：</view>
-			<upimg @photo="getPhoto" :photo="product.image"></upimg>
-		</view>
+			<view class="title">unit Price €：</view>
+			<input type="digit" placeholder="请输入unit Price €" v-model="product.customsInfo.price" @input="checkPrice"></input>
+		</view>	
 	<!-- 	<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="p_title">销售价格（优质客户）：</view>
@@ -67,36 +105,6 @@
 			<view class="p_title">销售价格（批量采购）：</view>
 			<input type="digit" placeholder="请输入销售价格" v-model="product.salePrice" @input="checkPrice"></input>
 		</view> -->
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">国外库存：</view>
-			<input type="number" placeholder="请输入国外库存" v-model="product.inventory.warehouseInventory"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">在途库存：</view>
-			<input type="number" placeholder="请输入在途库存" v-model="product.inventory.midwayInventory"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">国内库存：</view>
-			<input type="number" placeholder="请输入国内库存" v-model="product.inventory.hubInventory"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'white'}">*</text>
-			<view class="title">生产厂家：</view>
-			<input placeholder="请输入生产厂家" v-model="product.manufacturer"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'white'}">*</text>
-			<view class="title">生产地区：</view>
-			<input placeholder="请输入生产地区" v-model="product.origin"></input>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'white'}">*</text>
-			<view class="title">备注信息：</view>
-			<input placeholder="请输入备注信息" v-model="product.remark"></input>
-		</view>
 		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction">
@@ -126,6 +134,12 @@
 					},
 					customsInfo: {
 						hsCode: '42022900',
+						materialBeschaffenheit: '123',
+						brandArticleNo: '123',
+						brand: '123',
+						articleName: '123',
+						price: '',
+						unitPrice: ''
 					}
 				}
 			}
@@ -140,7 +154,8 @@
 				e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null
 				//重新赋值给input				
 				this.$nextTick(() => {
-					this.product.salePrice = e.target.value
+					this.product.customsInfo.price = e.target.value;
+					this.product.customsInfo.unitPrice = this.product.customsInfo.price * 100;
 				})
 			},
 			getScanCode() {
@@ -158,32 +173,54 @@
 				})
 			},
 			sub() {
-				let productForm = this.product;
-				productForm.warehouseInventory = this.product.inventory.warehouseInventory;
-				productForm.midwayInventory = this.product.inventory.midwayInventory;
-				productForm.hubInventory = this.product.inventory.hubInventory;
-				let rules = [
-					{name: 'image', required: true, type: 'required', errmsg: '请上传商品图片'},
-					{name: 'name', required: true, type: 'required', errmsg: '请输入商品名称'},
-					{name: 'brand', required: true, type: 'required', errmsg: '请输入商品品牌'},
-					{name: 'specification', required: true, type: 'required', errmsg: '请输入商品型号'},
-					{name: 'barcode', required: true, type: 'required', errmsg: '请输入商品条码'},
-					// {name: 'salePrice', required: true, type: 'required', errmsg: '请输入销售价格'},
-					// {name: 'warehouseInventory', required: true, type: 'required', errmsg: '请输入国外库存'},
-					// {name: 'midwayInventory', required: true, type: 'required', errmsg: '请输入在途库存'},
-					// {name: 'hubInventory', required: true, type: 'required', errmsg: '请输入国内库存'}
+				let productRule = [
+					{name: 'image', type: 'required', errmsg: '请上传商品图片'},
+					{name: 'name', type: 'required', errmsg: '请输入商品名称'},
+					{name: 'brand', type: 'required', errmsg: '请输入商品品牌'},
+					{name: 'specification', type: 'required', errmsg: '请输入商品型号'},
+					{name: 'barcode', type: 'required', errmsg: '请输入商品条码'},
 				]
-				let valLoginRes = this.$validate.validate(productForm, rules)
-				if (!valLoginRes.isOk) {
+				let inventoryRule = [
+					{name: 'warehouseInventory', type: 'required', errmsg: '请输入国外库存'},
+					{name: 'midwayInventory', type: 'required', errmsg: '请输入在途库存'},
+					{name: 'hubInventory', type: 'required', errmsg: '请输入国内库存'}
+				]
+				let customsInfoRule = [
+					{name: 'hsCode', type: 'required', errmsg: '请输入HS Code'},
+					{name: 'materialBeschaffenheit', type: 'required', errmsg: '请输入Material Beschaffenheit'},
+					{name: 'brandArticleNo', type: 'required', errmsg: '请输入Brand Article no.'},
+					{name: 'brand', type: 'required', errmsg: '请输入Brand'},
+					{name: 'articleName', type: 'required', errmsg: '请输入Article Name'},
+					{name: 'price', type: 'required', errmsg: '请输入unit Price €'},
+				]
+				let productRes = this.$validate.validate(this.product, productRule)
+				let inventoryRes = this.$validate.validate(this.product.inventory, inventoryRule)
+				let customsInfoRes = this.$validate.validate(this.product.customsInfo, customsInfoRule)
+				if (!productRes.isOk) {
 					uni.showToast({
 						icon: 'none',
-						title: valLoginRes.errmsg
+						title: productRes.errmsg
+					})
+				} else if (!inventoryRes.isOk) {
+					uni.showToast({
+						icon: 'none',
+						title: inventoryRes.errmsg
+					})
+				} else if (!customsInfoRes.isOk) {
+					uni.showToast({
+						icon: 'none',
+						title: customsInfoRes.errmsg
 					})
 				} else {
 					this.$api.http.post('/product/insert', this.product).then(res => {
 						uni.navigateTo({
 							url: './Product'
 						})
+					}, error => {
+						// uni.showToast({
+						// 	icon: 'none',
+						// 	title: error
+						// })
 					})
 				}	
 			}
@@ -202,15 +239,5 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-	}
-	.p_title {
-		text-align: justify;
-		padding-right: 0upx;
-		font-size: 30upx;
-		position: relative;
-		height: 60upx;
-		line-height: 60upx;
-		/* add */
-		flex: 0 0 325rpx;	
 	}
 </style>

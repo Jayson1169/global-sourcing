@@ -3,7 +3,6 @@
 		<view class="search">
 			<uni-easyinput suffixIcon="search" v-model="searchRequest.keyword" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
 		</view>
-		<!-- <empty v-if="userList.length === 0"></empty> -->
 		<block v-for="(item, index) of productList">
 			<view class="list" @click="jumpProductModify(item)">
 				<view class="list_l"><!-- <image :src="item.image"></image> --></view>
@@ -30,39 +29,34 @@
 	export default {
 		data() {
 			return {
-				userRequest: {
-					page: 0,
-					size: 10,
-				},
 				searchRequest: {
 					keyword: '',
 					page: 0,
-					size: 9999,
+					size: 10,
 				},
 				c_index: 0,
 				productList: [],
 				isLoadMore: false,
 				loadStatus: 'loading',
-				haveSearch: false
 			};
 		},
 		onLoad() {
-			// this.getProductList()
-		},
-		onPullDownRefresh(){
-			this.init()
-			this.haveSearch = false
-			setTimeout(function () {
-				uni.stopPullDownRefresh();
-			}, 1000);
+			uni.$on('modify', (e) => {
+				this.productList.some((item, i) => {
+					if (item.id == e.id) {
+						this.$set(this.productList, i, e)  
+					}
+				})
+			})
+			uni.$on('delete', (e) => {
+				this.productList.some((item, i) => {
+					if (item.id == e.id) {
+						this.productList.splice(i, 1)
+					}
+				})
+			})
 		},
 		methods: {
-			init() {
-				this.userRequest.page = 0
-				this.userRequest.size = 10
-				this.userList = []
-				this.getProductList()
-			},
 			jumpProductAppend() {
 				uni.navigateTo({
 					url: './ProductAppend'
@@ -79,15 +73,10 @@
 			num(index) {
 				this.c_index = index
 			},
-			search() {
-				this.$api.http.get('/product/search', this.searchRequest).then(res => {
-					this.productList = res.content
-				})
-			},
 			getProductList() {
-				this.$api.http.get('/product/findByBarcode', this.userRequest).then(res => {
+				this.$api.http.get('/product/search', this.searchRequest).then(res => {
 					this.productList = this.productList.concat(res.content);
-					if (res.numberOfElements < this.userRequest.size) {
+					if (res.numberOfElements < this.searchRequest.size) {
 						this.isLoadMore = true
 						this.loadStatus = 'nomore'
 					} else {
@@ -95,16 +84,23 @@
 					}
 				}).catch(err => {
 					this.isLoadMore = true
-					if (this.userRequest.page > 1) this.userRequest.page -= 1
+					if (this.searchRequest.page > 1) this.searchRequest.page -= 1
 				})	
+			},
+			search() {
+				// 每次搜索初始化分页
+				this.searchRequest.page = 0;
+				this.searchRequest.size = 10;
+				this.productList = [];
+				this.getProductList();
 			}
 		},
 		onReachBottom() {
 			// 此处判断，上锁，防止重复请求
 			if (!this.isLoadMore) { 
 				this.isLoadMore = true
-				this.userRequest.page += 1
-				this.getUserList()
+				this.searchRequest.page += 1
+				this.getProductList()
 			}
 		}
 	}

@@ -3929,3 +3929,7 @@ scroll-view.cu-steps .cu-item {
 	height: 60upx;
 	line-height: 60upx;
 }
+
+.detail {
+	padding: 10px 10px 10px 10px;
+}

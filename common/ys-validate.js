@@ -43,9 +43,9 @@ export default {
 			if (!rule || !rule.name || !rule.type) {
 				continue
 			}
-			
+
 			// 如果值不存在
-			if (!data[rule.name]) {
+			if (!data[rule.name] && data[rule.name] !== 0) {
 				// 如果是必填项就返回错误提示，required可以作为type是为了不同的type能给用户不同的提示
 				if (rule.type === 'required' || rule.required) {
 					res = { isOk: false, errmsg: rule.errmsg }

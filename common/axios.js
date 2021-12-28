@@ -24,6 +24,7 @@ export default {
 					// })
 					cback(res.data.data);
 				} else {
+					console.log(res.data.message)
 					reject(res.data.message)
 					// uni.showToast({
 					// 	title: res.data.message,
@@ -74,6 +75,7 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
+					console.log(res.data.message)
 					reject(res.data.message)
 					// uni.showToast({
 					// 	title: res.data.message,
@@ -104,6 +106,7 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
+					console.log(res.data.message)
 					reject(res.data.message)
 					// uni.showToast({
 					// 	title: res.data.message,
@@ -134,7 +137,7 @@ export default {
 				if (res_code == 200){
 					cback(res.data.data);
 				} else {
-					reject(res.data.message)
+					reject(res)
 					// uni.showToast({
 					// 	title: res.data.message,
 					// 	icon: 'none'
@@ -162,13 +165,14 @@ export default {
 			}).then(data => { // data为一个数组，数组第一项为错误信息，第二项为返回数据
 				var [error, res] = data; 
 				var res_code = res.data.status;
-				if (res_code == 200){
+				if (res_code == 200) {
 					cback(res.data.data);
 				} else {
 					uni.showToast({
 						title: res.data.message,
 						icon: 'none'
 					})
+					console.log(res.data.message)
 				}
 			}).catch(err => { 
 				console.log('请求异常:', err); 	

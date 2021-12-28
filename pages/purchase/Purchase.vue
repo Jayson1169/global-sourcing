@@ -1,7 +1,7 @@
 <template>
 	<!-- 显示采购员信息，按住复制号码 -->
 	<view class="content">
-		<view class="navbar" v-if="purchaseOrder.length != 0">
+		<view class="navbar" v-if="purchaseOrderList.length != 0">
 			<view 
 				class="nav-item"
 				:class="{current: tabCurrentIndex === index}"
@@ -11,9 +11,9 @@
 				{{item}}
 			</view>
 		</view>
-		<empty v-if="purchaseOrder.length === 0"></empty>
+		<empty v-if="purchaseOrderList.length === 0"></empty>
 		<view 
-			v-for="(item, index) in purchaseOrder" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || tabCurrentIndex === 0"
+			v-for="(item, index) in purchaseOrderList" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || tabCurrentIndex === 0"
 			class="order-item"
 		>
 			<view class="i-top b-b">
@@ -43,7 +43,10 @@
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpPurchaseDetail(item)">立即核验</button>							
 			</view>
 		</view>
-		<view class="H60"></view>
+		<view v-show="isLoadMore">
+			<uni-load-more :status="loadStatus" ></uni-load-more>
+		</view>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpPurchaseAppend" class="cu-btn bg-red margin-tb-sm lg">新增采购单</button>
@@ -56,36 +59,51 @@
 	export default {
 		data() {
 			return {
-				request: {
+				purchaseRequest: {
 					page: '0',
-					size: '999'
+					size: '10'
 				},
-				purchaseOrder: [],
+				purchaseOrderList: [],
 				tabCurrentIndex: 0,
+				isLoadMore: false,
+				loadStatus: 'loading',
 				status_to_state: {"CREATED": 1, "READY": 2, "PENDING": 3, "REJECTED": 2, "CONFIRMED": 4, "WAREHOUSED": 5},
 				status_to_state2: {"CREATED": "待分配", "READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "待接收", "WAREHOUSED": "已完成"},
 				navList: ['全部', '待分配', '待采购', '待核验', '待接收', '已完成']
 			};
 		},
 		onLoad(){
-			this.$api.http.get('/purchaseOrder/findAll', this.request).then(res => {
-				this.purchaseOrder = res.content
-			})
+			this.getPurchaseOrderList();
 		},
-		 
 		methods: {
-			jumpPurchaseDetail(purchaseOrder){
-				this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+			getPurchaseOrderList() {
+				this.$api.http.get('/purchaseOrder/findAll', this.purchaseRequest).then(res => {
+					this.purchaseOrderList = this.purchaseOrderList.concat(res.content);
+					if (res.numberOfElements < this.purchaseRequest.size) {
+						this.isLoadMore = true
+						this.loadStatus = 'nomore'
+					} else {
+						this.isLoadMore = false
+					}
+				}).catch(err => {
+					this.isLoadMore = true
+					if (this.purchaseRequest.page > 1) this.purchaseRequest.page -= 1
+				})	
+			},
+			async jumpPurchaseDetail(purchaseOrder){
+				await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
 					purchaseOrder.product.image = res;
-					// this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
-					// 	purchaseOrder.photo = res;
-					// 	this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
-					// 		purchaseOrder.invoice = res;
-							uni.navigateTo({
-								url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
-							});
-					// 	})
-					// })
+				})
+				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
+					await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+						purchaseOrder.photo = res;
+					})
+					await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+						purchaseOrder.invoice = res;
+					})
+				}
+				uni.navigateTo({
+					url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
 				})
 			},
 			jumpPurchaseAppend() {
@@ -101,7 +119,6 @@
 			//顶部tab点击
 			tabClick(index) {
 				this.tabCurrentIndex = index;
-				console.log(index)
 			},
 			purchaseNumberEdit(item, index) {
 				let _this = this;
@@ -124,6 +141,14 @@
 				});
 			}
 		},
+		onReachBottom() {
+			// 此处判断，上锁，防止重复请求
+			if (!this.isLoadMore) { 
+				this.isLoadMore = true
+				this.purchaseRequest.page += 1
+				this.getPurchaseOrderList()
+			}
+		}
 	}
 </script>
 
