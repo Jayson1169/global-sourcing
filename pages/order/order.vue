@@ -14,10 +14,11 @@
 			</view>
 		</view>
 		<empty v-if="orderList.length === 0"></empty>
-		<view class="order-item" v-for="(item, index) in orderList" :key="index">
-			<view @click="jumpOrderModify(item)"> 
+		<view class="order-item" v-for="(item, index) in orderList" :key="index" v-if="item.delivered == tabCurrentIndex - 1 || tabCurrentIndex === 0">
+			<view @click="item.delivered?jumpOrderDetail(item):jumpOrderModify(item)"> 
 				<view class="i-top b-b">
 					<text class="time">{{item.updateTime}}</text>
+					<text class="state" v-if="item.delivered">已完成</text>
 				</view>
 				<scroll-view v-if="item.items.length > 1" class="goods-box-single" scroll-x>
 					<view class="right" v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex">
@@ -40,7 +41,7 @@
 					<text class="price"> --></text>
 				</view>
 			</view>
-			<view class="action-box b-t" v-if="item.state != 9">
+			<view class="action-box b-t" v-if="!item.delivered">
 				<button class="action-btn" @click="deleteOrder(item, index)">取消订单</button>
 				<button class="action-btn recom" @click="jumpOrderModify(item)">修改订单</button>
 			</view>
@@ -167,21 +168,15 @@
 					uni.hideLoading();
 				}, 600)
 			},
-			//订单状态文字和颜色
-			orderStateExp(state){
-				let stateTip = '',
-					stateTipColor = '#fa436a';
-				if (state == 9) {
-					stateTip = '订单已关闭';
-					stateTipColor = '#909399';
-				}
-				return {stateTip, stateTipColor};
-			},
 			jumpOrderAppend() {
 				uni.navigateTo({
 					url: './OrderAppend'
 				});
-			}
+			},
+			//顶部tab点击
+			tabClick(index) {
+				this.tabCurrentIndex = index;
+			},
 		},
 		onReachBottom() {
 			// 此处判断，上锁，防止重复请求

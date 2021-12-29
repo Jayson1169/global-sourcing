@@ -50,14 +50,12 @@
 					// }, 500)
 					res.password = this.userForm.password
 					uni.setStorageSync('user', res)
-					// this.login(res);
 					let roleList = this.$api.json.roleList
 					uni.redirectTo({
 						url: roleList[res.role]
 					})
 				})
 			},
-			...mapMutations(['login'])
 		}
 	};
 </script>

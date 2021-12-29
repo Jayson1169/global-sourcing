@@ -220,7 +220,7 @@
 			display: flex;
 			align-items: center;
 			font-size: 30upx;
-			color: #999;
+			color: #555;
 
 			.uni-disabled {
 				position: absolute;
@@ -273,7 +273,7 @@
 
 			.uni-select-lay-input {
 				font-size: 30upx;
-				color: #999;
+				color: #555;
 				display: block;
 				width: 98%;
 				overflow: hidden;

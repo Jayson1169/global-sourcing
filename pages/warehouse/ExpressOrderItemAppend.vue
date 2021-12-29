@@ -23,10 +23,6 @@
 			<view class="cu-form-title">商品图片：</view>
 			<myimg :photo="item.product.image" :padding="true"></myimg>
 		</view>
-		<view class="cu-form-group" v-if="item.product.barcode">
-			<text :style="{color:'white'}">*</text>
-			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
-		</view>
 		<view class="cu-form-group" v-if="item.product.manufacturer">
 			<text :style="{color:'white'}">*</text>
 			<view class="cu-form-title">生产厂家：{{item.product.manufacturer}}</view>
@@ -40,6 +36,10 @@
 			<text :style="{color:'white'}">*</text>
 			<view class="cu-form-title">备注信息：</view>
 			<input v-model="item.product.remark" disabled></input>
+		</view>
+		<view class="cu-form-group" v-if="item.product.barcode">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
 		</view>
 		<view class="detail">物流信息</view>
 		<view class="cu-form-group">

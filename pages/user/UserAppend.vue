@@ -83,12 +83,10 @@
 					})
 				} else {
 					this.$api.http.post('/user/insert', this.userForm).then(res => {
-						uni.showToast({
-							title: '添加成功',
-							icon: 'none'
-						})
-						uni.navigateTo({
-							url: '../Login'
+						this.$api.msg.successToast('添加成功').then(res => {
+							uni.navigateTo({
+								url: './User'
+							})
 						})
 					})
 				}

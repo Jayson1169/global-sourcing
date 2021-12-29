@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App'
-import store from './store'
 import json from './static_data.js'
 import http from '@/common/axios.js'
 import validate from '@/common/ys-validate.js'
@@ -13,7 +12,8 @@ import upimg from '@/components/sunui-upimg.vue'
 import myimg from '@/components/my-img.vue'
 import selectlay from '@/components/select-lay.vue'
 import uView from '@/uni_modules/uview-ui'
-
+import { formatDateThis, getUnixTime } from '@/common/dateUtil.js'
+import { exportFile } from '@/common/exportFile.js'
 Vue.use(uView)
 
 Vue.component('scan', scan)
@@ -26,12 +26,10 @@ Vue.config.productionTip = false
 
 Vue.prototype.$api = {msg, json, http}
 Vue.prototype.$validate = validate
-Vue.prototype.$store = store
 
 App.mpType = 'app'
 
 const app = new Vue({
-	store,
     ...App
 })
 app.$mount()

@@ -118,30 +118,7 @@
 	export default {
 		data() {
 			return {
-				product: {
-					image: null,
-					name: 'iPhone 13 Pro',
-					brand: 'Apple',
-					specification: 'MLT83CH/A',
-					barcode: '1111111111111',
-					manufacturer: '富士康',
-					origin: '中国',
-					remark: 'iPhone',
-					inventory: {
-						warehouseInventory: '0',
-						midwayInventory: '0',
-						hubInventory: '0'
-					},
-					customsInfo: {
-						hsCode: '42022900',
-						materialBeschaffenheit: '123',
-						brandArticleNo: '123',
-						brand: '123',
-						articleName: '123',
-						price: '',
-						unitPrice: ''
-					}
-				}
+				product: {"image":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAYAAACqj0o2AAAAAXNSR0IArs4c6QAACQ9JREFUeF7tnH2MFGcdx7+/mT1KSvFuZ4/yIlzgurOXUoJUa/9ojdDEGvuiYnlp40tTDC13swcaY5RIG4u2StMY9WB3D5CWlJSatkSpqZhaS2u1sdDGmEKBm73ljCaFcjt7isoBt8/PzMHB7t6+zcyzewfM/EXY5/d9vs9nfvM8zzzzPEfwL88EyLOCLwAfooQk8CH6ECUQkCDhZ6IPUQIBCRJ+JvoQJRCQIOFnog9RAgEJEuMyE5t+erQJEwebINQmCGoKqOoHWZWPZVZd9y8JbZYuMeYQtZj5WYDmM/F8An/M/neZVp4C8zEQfQDgL0y8dwKUfcc7wh9KJ+NAcEwgNiUOzSZWlxGwDKBPOvBboij9CeB9CmhnvxF+17ueM4W6QmyOJz8hIB4C6CsAJjmzWm1p3qJA2VJPmHWBmAPvoWpReC/HW4TC8YH2tr951yqvUHOIWiz5bRA/WUVDUgClAJFiRq9KdBhQj/QbrUe0reZMnMYsKJgJwkxi3MTAXQAay+tymhnrMtHI5irqd12kZhCv3ZqaevZs9kkCvlZuoGDgKSZsG+jQ/+q0FcF48g5A3EFEXwJjZpn4pxX17Lr+VXPtAUn6VROIjfEjrSroV2VGWgvgp0ht2JZeNeew11Zd02VOaQjQAwSxAqDri+oR3iemdWkj/Guv9RXGS4c4edOhUIMSeAPADUXM/g/MPxEc2DbQ2fp32Y1Bl3lVsIEeIBbfAai1hP5yy9BfkFm3XIjf3xvQpn70OEDaKJNE70DgG1Y0/JbMBhTT0rrMmVD5YRCtqgdIqRC1uHkSwDWFxhnYEeDTxonovP/UGmCuvpboWQKm9SWeCmkZKQ2iFjf/DOCWIv3F99KG/uN6wssD2W3OhcDzxUAKRV040N76R6/epEAMxXsSDGofBVDB4nS7vturSa/xWkmQ9KplhG/3qu8ZYjCRvI+YnyuSgZ1pQ495NSgrvhRIBtZmDP0JL/V4gjhj8ztXD2Yb3wYwr8DELsvQl3oxVovY833ki3nazP9VSFno5TXRE8RgIvkYMa/LbzDtt4zwzbWAIENTi/V0F47azNidieqL3eq7hjgldmDaECbcT0T3X+i0iY6rQl1wIjrnmFtDtY4bnv4E+I3CeaTI4raB1frrbup3DbFwBCTBq1lRdlvt4d+5MVLPGC125EGQsqWgzm2Woa9040MKRDcVj3WMFut5E0SfuuCDcIYEL0hHI4eceruCISbvBfEvc4Ex8KOMoRf08ZWRXrEQbTRaIvkymO+8gIlx0IrqhTONihSvcIjm18HYlkdJwQ1Wu/5+RXI5Ba5siOfeZA7mAiPmFeloZLsP0QGBYMx8lwgfHwlhRjwT1aMOJPxNnqPf+3m/ZUQcvSy4epy1bnMpC6wFcJIYMSuq579KObmNNS4biiU7mXijjGoYvDFjRNYUajmGGOo2v8iCdgGsnhOjLAleku4c+9WaYqCCcXMvAYtkQATYsoxIyBPEYHfvnSTELgATC4QGWYglmc6238oxK09Fi5vLgOH1RO8Xi/VWtO1R1xC17tTtEFkb4OQSbk5C8BKrM/J7727lKkgBWQLg8LNYjd3mhLlIMO8q+u0kT4AtkaUlbl/kq/HitownkGUAVgUxmEjeSoJ3gTC1ugbQMSYszXSE7c8F4+pyBbICwIoQQ4nUzcxZe+Sd5ZDGP4jE0nRH2z6HcTUv7ghkFQDLQmxKmDcqDBtgqe+3lRqcEoSlbnY2VBL2+ntVIKsEWBJiMJGcRyxeBKjNm2E+wqTYj/YBbzryo8uCdACwNESJcysGXs8Y+m3yMXhXLAqS8KjVodvfqqu+io7Ocieo2GMZ+sXlpqqt1afgeZD2KncTXAAsmYnN8VTbUDY7vVgzFBVhAFtzf7O/T5RqcoNC/zwRDSfrg8RdLc1PHJ58JjSp4d8rZ1luFKqaJ+YJd5lXaQEM5v4fgR5JG+HH3Bi4HGKcQwQQipsvMfD5iwD4kGVE5l4OQNy0wRVELVFkRZixbDyv5riBU22MK4iNGw/PUVU1VVDJuB5AqgXippwriHZFwbi5iYC8FWBm/nImGhm1L8eNsUspxjVErcuciwDsfTi5+xHfsgz91ksJgAyvriHalYfi5gYGvps/UvMjaSMybkdqLd77TUCsBONbVlR/ZcwhBn92oIUmTHwb4GkFU541aSMsZUleRiNHNELdvffwuUXlkesgmLYHJig7Pnyw9bjbujxl4nDfGDMNIozah6gy6eNpkt3c3XuTEGJ/IShiejgdDT/uFqAd5xmiLaLFk1sBHrUZiFWlaTycDJ2aSF57lnlUphHwm7Shf8ELQGkQ7WMXATXwCvHF77cjxjirzM+svu49r0bdxk+JHZ2WpaFih4AOqkyLZTwtUjLx3CDT+xmGKPp9hcF3Z4zIy25BuI0Lxsy1RCi26f4MFNzodLtIKR/SIA73j4meu4npWQAfGd33YIMIKBvq8XjPfvroxJOnhp7PfzXNceRiv025GykVol1R00ZzkRLAjqJn7QjvMfOGjBHZ6Ta7KsVpseTnAP45CJFiZRni0xmj7c1KOk5+lw7Rrvz8SPgMgOLn7ECvArRTGxI7k2v0004MlyobivXcw6QsB/jeEmWk9YGjnjIZDSimYb9fB1T1Bwx8tXQd1APOPseMfY2TJrzWt2JO3hJbJW/2QUyFlOXEsMEtKFmeaLsqBlfX6kRXTTIxtzHBeE+7ArJhTqnQr5xm5v0A/4FAfVlBfQgM9Q10XN8X3NzbgiG0gLItIGpRGC0MagHsxWC+usxN6iMW651ulat08+qWiXkgE8l5YP4hAa6POThtGIBfCBp63L4JLmIdhdQ8E3PdDP/lEWL7TPJ9jlw6K/yCELxpoDPi+cxetdXWFeKIKS2WvOU8zLsALvotp9oGnC/Xz7CPxil7MkZ4j8NYz8XHBGKu6+EpkSIWMSkLq9sCR6cAThGQYqKUwvxav6G/5JmEB4Exh1jovXlz33Rkh2ZkiaaDeQZxdgYpSq8ApVQlkOpfNbsmf8fBA0M5CxBeDFwOseMuEy9FqD5ECXfNh+hDlEBAgoSfiT5ECQQkSPiZ6EOUQECChJ+JPkQJBCRI/B+ymiZ/WsT+2gAAAABJRU5ErkJggg==","name":"iPhone 13 Pro","brand":"Apple","specification":"MLT83CH/A","barcode":"1111111111111","manufacturer":"富士康","origin":"中国","remark":"iPhone","inventory":{"warehouseInventory":"0","midwayInventory":"0","hubInventory":"0"},"customsInfo":{"hsCode":"42022900","materialBeschaffenheit":"123","brandArticleNo":"123","brand":"123","articleName":"123","price":"100","unitPrice":"1"}}
 			}
 		},
 		
@@ -213,14 +190,16 @@
 					})
 				} else {
 					this.$api.http.post('/product/insert', this.product).then(res => {
-						uni.navigateTo({
-							url: './Product'
+						this.$api.msg.successToast('添加成功').then(res => {
+							uni.navigateTo({
+								url: './Product'
+							})
 						})
 					}, error => {
-						// uni.showToast({
-						// 	icon: 'none',
-						// 	title: error
-						// })
+						uni.showToast({
+							icon: 'none',
+							title: error
+						})
 					})
 				}	
 			}

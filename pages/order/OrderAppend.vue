@@ -100,13 +100,11 @@
 					})
 				} else {
 					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
-						uni.showToast({
-							title: '添加成功',
-							icon: 'none'
+						this.$api.msg.successToast('添加成功').then(res => {
+							uni.navigateTo({
+								url: './Order'
+							});
 						})
-						uni.navigateTo({
-							url: './Order'
-						});
 					})
 				}	
 			},

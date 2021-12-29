@@ -3,12 +3,6 @@
 		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		// {
-		// 	"path": "pages/index/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "index"
-		// 	}
-		// },
 		{
 			"path" : "pages/Login",
 			"style" : {
@@ -55,6 +49,13 @@
 		{
 			"path" : "pages/statistics/Statistics",
 			"style" : {}
+		},
+		{
+			"path" : "pages/statistics/StatisticsOutput",
+			"style" : {
+				"navigationBarTitleText": "导出财务信息",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
 			"path" : "pages/order/Order",
@@ -201,14 +202,6 @@
 		    
 		}
         ,{
-            "path" : "pages/test/test",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },{
             "path" : "pages/transport/Transporter",
             "style" : {
             	"navigationBarBackgroundColor": "#ffffff",

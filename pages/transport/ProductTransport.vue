@@ -1,44 +1,57 @@
 <template>
 	<view class="product">		
+		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
-			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="item.product.name" disabled></input>
+			<view class="cu-form-title">商品名称：{{item.product.name}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品型号：</view>
-			<input placeholder="请输入商品型号" v-model="item.product.specification" disabled></input>
+			<view class="cu-form-title">商品品牌：{{item.product.brand}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">生产厂家：</view>
-			<input placeholder="未输入生产厂家" v-model="item.product.manufacturer" disabled></input>
+			<view class="cu-form-title">商品型号：{{item.product.specification}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">生产地区：</view>
-			<input placeholder="未输入生产地区" v-model="item.product.origin" disabled></input>
+			<view class="cu-form-title">商品条码：{{item.product.barcode}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">备注信息：</view>
-			<input placeholder="未输入备注信息" v-model="item.product.remark" disabled></input>
+			<view class="cu-form-title">商品图片：</view>
+			<myimg :photo="item.product.image" :padding="true"></myimg>
+		</view>
+		<view class="cu-form-group" v-if="item.product.manufacturer">
+			<view class="cu-form-title">生产厂家：{{item.product.manufacturer}}</view>
+		</view>
+		<view class="cu-form-group" v-if="item.product.origin">
+			<view class="cu-form-title">生产地区：{{item.product.origin}}</view>
+		</view>
+		<view class="cu-form-group" v-if="item.product.remark">
+			<view class="cu-form-title">备注信息：{{item.product.remark}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">销售价格：</view>
-			<input v-model="item.salePrice" @input="checkPrice" disabled></input>
+			<view class="cu-form-title">商品库存：{{item.product.inventory.hubInventory}}</view>
 		</view>
+		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
-			<view class="title">销售数量：</view>
-			<input v-model="item.quantity" @input="checkQuantity" disabled></input>
+			<view class="cu-form-title">销售数量：{{item.quantity}}</view>
 		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">快递物流：</view>
-			<input placeholder="请扫描或输入物流单号" v-model="item.number"></input>
-			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
-		</view>
-		<view class="H50"></view>
-		<view class="o_btn">
-			<view class="flex flex-direction">
-				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">发送</button>
+		<view class="detail">物流明细</view>
+		<view v-if="!item.delivered">
+			<view class="cu-form-group" >
+				<text :style="{color:'red'}">*</text>
+				<view class="title">物流单号：</view>
+				<input placeholder="请扫描或输入物流单号" v-model="item.expressNumber"></input>
+				<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 			</view>
+			<view>
+				<view class="H50"></view>
+				<view class="o_btn">
+					<view class="flex flex-direction">
+						<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">发送</button>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="cu-form-group" v-else>
+			<view class="cu-form-title">物流单号：{{item.expressNumbers[0]}}</view>
 		</view>
 	</view>
 </template>
@@ -58,7 +71,7 @@
 					},
 					salePrice: '2',
 					quantity: '2',
-					number: ''
+					expressNumber: ''
 				},
 				
 			}
@@ -68,13 +81,15 @@
 				uni.scanCode({
 					scanType:['barCode'],
 					success: function (res) {
-						this.item.number = res.result
+						this.item.expressNumber = res.result
 					}
 				})
 			},
-			sub() {
-				uni.navigateBack()
-				uni.$emit('send', this.item)
+			sub() {	
+				this.$api.http.put('/saleOrder/deliverItem?itemId='+this.item.id+'&quantity='+this.item.quantity+'&expressNumber='+this.item.expressNumber, null).then(res => {
+					uni.$emit('send', res)
+					uni.navigateBack()
+				})
 			}
 		},
 		onLoad(option) {

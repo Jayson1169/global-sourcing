@@ -24,7 +24,7 @@
 		<view v-show="isLoadMore">
 			<uni-load-more :status="loadStatus" ></uni-load-more>
 		</view>
-		<view class="H60"></view>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpUserAppend" class="cu-btn bg-red margin-tb-sm lg">新增用户</button>

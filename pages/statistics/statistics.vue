@@ -1,47 +1,56 @@
 <template>
-	<view class="tongji">
-		<view class="t_tit">经营数据</view>
-		<!-- <view class="t_time">统计时间截止9月2号</view> -->
-		
-		<view class="card">
-			<view class="card_01">经营收入</view>
-			<view class="card_02">¥ 100</view>
-			<view class="card_03">
-				<view class="card_03_1">
-					订单数<br/><span>100</span>
+	<view>
+		<view class="tongji">
+			<view class="t_tit">经营数据</view>
+				<!-- <view class="t_time">统计时间截止9月2号</view> -->
+				<view class="card">
+					<view class="card_01">经营收入</view>
+					<view class="card_02">¥ {{(totalFinance.sales - totalFinance.purchases) / 100}}</view>
+					<view class="card_03">
+						<view class="card_03_1">
+							订单数<br/><span>{{totalFinance.saleOrderQuantity}}</span>
+						</view>
+						<view class="card_03_1">
+							采购数<br/><span>{{totalFinance.purchaseOrderQuantity}}</span>
+						</view>
+					</view>
 				</view>
-				<view class="card_03_1">
-					采购数<br/><span>100</span>
+				<uni-datetime-picker
+					v-model="range"
+					type="daterange"
+					start="2021-12-20"
+					:end="today"
+					rangeSeparator="至"
+					@change="change($event)"
+				/>
+			<!-- 	<view class="name">用户数据</view>
+				<view class="uhsj">
+					<view class="uhsj_l">
+						<span>12</span> <br/>用户总数
+					</view>
+					<view class="uhsj_l">
+						<span>5</span> <br/>本月新用户
+					</view>
+				</view> -->
+			<view class="name">其他数据</view>
+			<view class="shuju">
+				<view class="sj_01"> 
+					<view class="sj_01_1">{{todayFinance.saleOrderQuantity}}<br/>今日订单</view>
+					<view class="sj_01_1">{{todayFinance.purchaseOrderQuantity}}<br/>今日采购</view>
+					<view class="sj_01_1">¥ {{(todayFinance.sales - todayFinance.purchases) / 100}}<br/>今日收益</view>
+				</view>
+				<view class="sj_02"></view>
+				<view class="sj_01">
+					<view class="sj_01_1">{{yesterdayFinance.saleOrderQuantity}}<br/>昨日订单</view>
+					<view class="sj_01_1">{{yesterdayFinance.purchaseOrderQuantity}}<br/>昨日采购</view>
+					<view class="sj_01_1">¥ {{(yesterdayFinance.sales - yesterdayFinance.purchases) / 100}}<br/>昨日收益</view>
 				</view>
 			</view>
 		</view>
-		<uni-datetime-picker
-			v-model="range"
-			type="daterange"
-			start="2021-12-20"
-			:end="today"
-			rangeSeparator="至"
-			@change="change($event)"
-		/>
-	<!-- 	<view class="name">用户数据</view>
-		<view class="uhsj">
-			<view class="uhsj_l">
-				<span>12</span> <br/>用户总数
-			</view>
-			<view class="uhsj_l">
-				<span>5</span> <br/>本月新用户
-			</view>
-		</view> -->
-		<view class="name">其他数据</view>
-		<view class="shuju">
-			<view class="sj_01"> 
-				<view class="sj_01_1">0<br/>今日订单</view>
-				<view class="sj_01_1">¥ 100<br/>今日收益</view>
-			</view>
-			<view class="sj_02"></view>
-			<view class="sj_01">
-				<view class="sj_01_1">1<br/>昨日订单</view>
-				<view class="sj_01_1">¥ 200<br/>昨日收益</view>
+		<view class="H50"></view>
+		<view class="p_btn">
+			<view class="flex flex-direction" >
+				<button @click="output" class="cu-btn bg-red margin-tb-sm lg">导出数据</button>
 			</view>
 		</view>
 	</view>
@@ -52,19 +61,43 @@
 		data() {
 			return {
 				today: '',
-				range: ['', '']
+				range: ['', ''],
+				todayFinance: '',
+				yesterdayFinance: '',
+				totalFinance: '',
 			};
 		},
 		onLoad() {
-			var day = new Date();
-			day.setTime(day.getTime());
-			this.today = day.getFullYear()+"-" + (day.getMonth()+1) + "-" + day.getDate();
+			// 昨天的时间
+			var day1 = new Date();
+			day1.setTime(day1.getTime()-24*60*60*1000);
+			var yesterday = day1.getFullYear()+"-" + (day1.getMonth()+1) + "-" + day1.getDate();
+			//今天的时间
+			var day2 = new Date();
+			day2.setTime(day2.getTime());
+			this.today = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
+			this.$api.http.get('/finance/countFinance?startDate=2020-1-1'+'&endDate='+this.today, null).then(res => {
+				this.totalFinance = res;
+			})
+			this.$api.http.get('/finance/countFinance?startDate='+yesterday+'&endDate='+yesterday, null).then(res => {
+				this.yesterdayFinance = res;
+			})
+			this.$api.http.get('/finance/countCurrentFinance', null).then(res => {
+				this.todayFinance = res;
+			})
 		},
 		methods:{
 			change(e) {
 				this.range = e;
-				console.log(this.range[0])
+				this.$api.http.get('/finance/countFinance?startDate='+this.range[0]+'&endDate='+this.range[1], null).then(res => {
+					this.totalFinance = res;
+				})
 			},
+			output() {
+				uni.navigateTo({
+					url: './StatisticsOutput?totalFinance='+encodeURIComponent(JSON.stringify(this.totalFinance))
+				})
+			}
 		}
 	}
 </script>
@@ -87,5 +120,13 @@
 	.sj_01{display: flex;}
 	.sj_01_1{width: 35%;text-align: center;line-height: 25px;padding: 10px;}
 	.sj_02{height: 1px;background-color: #fff;}
+}
+.p_btn {
+	background: #FFFFFF;
+	padding: 0 10px 0px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 0;
 }
 </style>

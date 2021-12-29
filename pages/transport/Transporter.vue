@@ -12,7 +12,7 @@
 		</view>
 		<empty v-if="orderList.length === 0"></empty>
 		<view 
-			v-for="(item, index) in orderList" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || tabCurrentIndex === 0"
+			v-for="(item, index) in orderList" :key="index" v-if="item.delivered == tabCurrentIndex - 1 || tabCurrentIndex === 0"
 			class="order-item"
 		>
 			<view @click="jumpOrderTransport(item)"> 
@@ -47,8 +47,8 @@
 					<text class="price"> --></text>
 				</view>
 			</view>
-			<view class="action-box b-t" v-if="item.state != 9">
-				<button class="action-btn recom" @click="jumpOrderTransport(item)">发送快递</button>
+			<view class="action-box b-t" v-if="!item.delivered">
+				<button class="action-btn recom" @click="send(item)">发送快递</button>
 			</view>
 		</view>	
 		<u-tabbar
@@ -64,11 +64,7 @@
 </template> 
 
 <script>
-	import empty from "@/components/empty";
 	export default {
-		components: {
-			empty
-		},
 		data() {
 			return {
 				value: 0,
@@ -85,8 +81,10 @@
 		},
 		onLoad() {
 			uni.$on('send', (e) => {
-				this.$api.http.get('/saleOrder/findAll', this.request).then(res => {
-					this.orderList = res.content
+				this.orderList.some((item, i) => {
+					if (item.id == e.id) {
+						this.$set(this.orderList, i, e)  
+					}
 				})
 			})
 			this.$api.http.get('/saleOrder/findAll', this.request).then(res => {
@@ -112,19 +110,44 @@
 					})
 				}
 			},
-			jumpOrderDetail(order){
-				uni.navigateTo({
-					url: '../order/OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
-				});
-			},
-			jumpOrderTransport(order) {
+			async jumpOrderTransport(order){
+				for (let i in order.items) {
+					if (order.items[i].product.image == null) {
+						await this.$api.http.get('/product/getImage?id='+order.items[i].product.id, null).then(res => {
+							order.items[i].product.image = res
+						})
+					}
+				}
 				uni.navigateTo({
 					url: './OrderTransport?order='+encodeURIComponent(JSON.stringify(order))
-				})
+				});
 			},
 			//顶部tab点击
 			tabClick(index) {
 				this.tabCurrentIndex = index;
+			},
+			send(item) {
+				let _this = this;
+				uni.showModal({
+					title: '发送快递',
+					cancelText: "取消",  
+					confirmText: "确定",
+					editable: true,
+					placeholderText: "请输入物流单号",
+					success: function(res) {
+						if (res.confirm) {
+							_this.$api.http.put('/saleOrder/deliver?id='
+									+item.id+'&expressNumber='+res.content, null).then(res => {
+								// item.delivered = true;
+								this.$api.msg.successToast('发送成功').then(res => {
+									uni.reLaunch()
+								})
+							
+							})
+						}
+					}
+				});
+
 			}
 		}
 	}

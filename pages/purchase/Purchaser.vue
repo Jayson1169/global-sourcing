@@ -16,12 +16,12 @@
 			class="order-item"
 		>
 			<view class="i-top b-b">
-				<text class="time">{{item.createTime}}</text>
+				<text class="time">{{item.updateTime}}</text>
 				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
 				<text v-if="item.status==='REJECTED'" class="del-btn yticon icon-iconfontshanchu1"></text>
 				<text v-if="item.status==='REJECTED'" class="state" style="color: '#909399'">核验未通过</text>
 			</view>
-			<view class="goods-box-single" @click="jumpPurchaseDetail(item)">
+			<view class="goods-box-single" @click="item.status=='READY'?jumpToPurchaseUpload(item):jumpPurchaseDetail(item)">
 				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
 				<image class="goods-img" src='../../imgs/order2.jpg' mode="aspectFill" v-if="item.photo === null"></image>				
 				<view class="right">
@@ -72,24 +72,29 @@
 			})
 		},
 		methods: {
-			jumpPurchaseDetail(purchaseOrder){
-				this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+			async jumpPurchaseDetail(purchaseOrder){
+				await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
 					purchaseOrder.product.image = res;
-					this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+				})
+				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
+					await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
 						purchaseOrder.photo = res;
-						this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
-							purchaseOrder.invoice = res;
-							uni.navigateTo({
-								url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
-							});
-						})
 					})
+					await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+						purchaseOrder.invoice = res;
+					})
+				}
+				uni.navigateTo({
+					url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
 				})
 			},
 			tabClick(index){
 				this.tabCurrentIndex = index;
 			},
-			jumpToPurchaseUpload(purchaseOrder) {
+			async jumpToPurchaseUpload(purchaseOrder) {
+				await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+					purchaseOrder.product.image = res;
+				})
 				uni.navigateTo({
 					url: './PurchaseUpload?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
 				})

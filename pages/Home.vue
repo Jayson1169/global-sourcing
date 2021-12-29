@@ -1,6 +1,6 @@
 <template>
 	<view class="index">
-		<view>
+		<view v-if="totalFinance && todayFinance">
 			<view class="more">
 				<view class='mo'>
 					<view class='mo_01'>财务分析</view>
@@ -12,43 +12,27 @@
 			<view class="shuju">
 				<view class="shuju_01">
 					<view>今日订单/金额</view>
-					<!-- <view class="shuju_01_s" v-if="shop.today[0].today_money_total">{{shop.today[0].today_num_total}} / ¥{{shop.today[0].today_money_total}}</view> -->
-					<view class="shuju_01_s">0 / ¥0</view>
+					<view class="shuju_01_s">{{todayFinance.saleOrderQuantity}} / ¥{{todayFinance.sales / 100}}</view>
 				</view>
 				<view class="shuju_01 no">
-					<view>昨日订单/金额</view> 
-					<!-- <view class="shuju_01_s" v-if="shop.yesterday[0].yesterday_money_total">{{shop.yesterday[0].yesterday_num_total}} / -->
-					 <!-- ¥{{shop.yesterday[0].yesterday_money_total}}</view> -->
-					 <view class="shuju_01_s">0 / ¥0</view>
+					<view>总订单/金额</view>
+					<view class="shuju_01_s">{{totalFinance.saleOrderQuantity}} / ¥{{totalFinance.sales / 100}}</view>
 				</view>
 				<view class="shuju_01">
-					<view>总订单数</view>
-					<view class="shuju_01_s">100</view>
-				</view>
-				<view class="shuju_01 no">
-					<view>总销售金额</view>
-					<!-- <view class="shuju_01_s" v-if="shop.total[0].all_money_total">¥ {{shop.total[0].all_money_total}}</view> -->
-					 <view class="shuju_01_s" >0 </view>
-				</view>
-				<view class="shuju_01">
-					<view>今日采购/金额</view>
-					<!-- <view class="shuju_01_s" v-if="shop.today[0].today_money_total">{{shop.today[0].today_num_total}} / ¥{{shop.today[0].today_money_total}}</view> -->
-					<view class="shuju_01_s" >0 / ¥0</view>
-				</view>
-				<view class="shuju_01 no">
 					<view>今日采购/金额</view> 
-					<!-- <view class="shuju_01_s" v-if="shop.yesterday[0].yesterday_money_total">{{shop.yesterday[0].yesterday_num_total}} / -->
-					 <!-- ¥{{shop.yesterday[0].yesterday_money_total}}</view> -->
-					 <view class="shuju_01_s" >0 / ¥0</view>
-				</view>
-				<view class="shuju_01">
-					<view>总订单数</view>
-					<view class="shuju_01_s">12</view>
+					 <view class="shuju_01_s">{{todayFinance.purchaseOrderQuantity}} / ¥{{todayFinance.purchases / 100}}</view>
 				</view>
 				<view class="shuju_01 no">
-					<view>总销售金额</view>
-					<!-- <view class="shuju_01_s" v-if="shop.total[0].all_money_total">¥ {{shop.total[0].all_money_total}}</view> -->
-					 <view class="shuju_01_s" >0 </view>
+					<view>总采购/金额</view>
+					<view class="shuju_01_s">{{totalFinance.purchaseOrderQuantity}} / ¥{{totalFinance.purchases / 100}}</view>
+				</view>
+				<view class="shuju_01">
+					<view>今日经营收入</view> 
+					 <view class="shuju_01_s" >¥{{(todayFinance.sales - todayFinance.purchases) / 100}}</view>
+				</view>
+				<view class="shuju_01 no">
+					<view>总经营收入</view> 
+					 <view class="shuju_01_s" >¥{{(totalFinance.sales - totalFinance.purchases) / 100}}</view>
 				</view>
 			</view>
 		</view>
@@ -99,23 +83,24 @@
 		data() {
 			return {
 				todayFinance: '',
-				yesterdayFinance: ''
+				totalFinance: '',
 			}
 		},
 		onLoad() {  
-			// 昨天的时间
-			// var day1 = new Date();
-			// day1.setTime(day1.getTime()-24*60*60*1000);
-			// var s1 = day1.getFullYear()+"-" + (day1.getMonth()+1) + "-" + day1.getDate();
-			// //今天的时间
-			// var day2 = new Date();
-			// day2.setTime(day2.getTime());
-			// var s2 = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
-			// console.log(s1, s2)
-			// this.shop = this.$api.json.count_order
-			// this.$api.http.get('/finance/countFinance')
+			this.getFinance();
 		},
 		methods: {
+			getFinance() {
+				var day = new Date();
+				day.setTime(day.getTime());
+				var today = day.getFullYear()+"-" + (day.getMonth()+1) + "-" + day.getDate();
+				this.$api.http.get('/finance/countFinance?startDate=2020-1-1'+'&endDate='+today, null).then(res => {
+					this.totalFinance = res;
+				})
+				this.$api.http.get('/finance/countCurrentFinance', null).then(res => {
+					this.todayFinance = res;
+				})
+			}
 		}
 	}
 </script>
@@ -190,7 +175,7 @@
 			padding: 18px 10px;
 			box-sizing: border-box;
 			font-size: 30upx;
-			line-height: 25px;
+			line-height: 20px;
 			border-right: 1px solid #f0f0f0;
 			border-bottom: 1px solid #f0f0f0;
 		}

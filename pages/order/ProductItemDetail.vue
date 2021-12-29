@@ -21,12 +21,13 @@
 			<view class="cu-form-title">生产厂家：{{item.product.manufacturer}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.origin">
-			<view class="cu-form-title">生产地区：</view>
-			<input v-model="item.product.origin" disabled></input>
+			<view class="cu-form-title">生产地区：{{item.product.origin}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.remark">
-			<view class="cu-form-title">备注信息：</view>
-			<input v-model="item.product.remark" disabled></input>
+			<view class="cu-form-title">备注信息：{{item.product.remark}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
 		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">

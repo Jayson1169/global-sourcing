@@ -8,7 +8,6 @@
 		<view class="cu-form-group" v-if="purchaseOrder.invoice">
 			<view class="title">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</view>
 			<myimg :photo="purchaseOrder.invoice" :padding="true"></myimg>
-			<!-- <image class="p_image" src="../../imgs/order2.jpg" mode="aspectFill" v-if="purchaseOrder.invoice == null"></image>		 -->
 		</view>
 		<view class="cu-form-group" v-if="purchaseOrder.invoiceDate">
 			<view class="title">发票日期：{{purchaseOrder.invoiceDate}}</view>
@@ -48,12 +47,10 @@
 		<view v-if="purchaseOrder.status==='CONFIRMED'">
 			<view class="p_order">仓管信息</view>
 			<view class="cu-form-group">
-				<view class="title">仓管姓名：</view>
-				<input v-model="purchaseOrder.warehouseKeeper.name" disabled></input>
+				<view class="title">仓管姓名：{{purchaseOrder.warehouseKeeper.name}}</view>
 			</view>
-			<view class="cu-form-group">
-				<view class="title">仓管电话：</view>
-				<input v-model="purchaseOrder.warehouseKeeper.phoneNumber" disabled></input>
+			<view class="cu-form-group" v-if="purchaseOrder.warehouseKeeper.phoneNumber">
+				<view class="title">仓管电话：{{purchaseOrder.warehouseKeeper.phoneNumber}}</view>
 			</view>
 		</view>
 		<view class="H50" v-if="purchaseOrder.status === 'PENDING' && role === 'ADMIN'"></view>

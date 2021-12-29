@@ -28,6 +28,9 @@
 			<view class="cu-form-title">备注信息：</view>
 			<input v-model="item.product.remark" disabled></input>
 		</view>
+		<view class="cu-form-group">
+			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
+		</view>
 		<view class="detail">物流信息</view>
 		<view class="cu-form-group">
 			<view class="cu-form-title">发货数量：{{item.deliveredQuantity}}</view>
