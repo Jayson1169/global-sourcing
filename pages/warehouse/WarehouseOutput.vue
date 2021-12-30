@@ -34,6 +34,8 @@
 </template>
 
 <script>
+	import { formatDateThis, getUnixTime } from '@/common/dateUtil.js'
+	import { exportFile } from '@/common/exportFile.js'
 	var that
 	export default {
 		data() {
@@ -169,7 +171,7 @@
 				</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
 				</head><body><table>${str}</table></body></html>`
 				// 下载模板
-				exportFile(template)
+				exportFile(template, "导出海关信息", "海关信息")
 			}
 		}
 	}

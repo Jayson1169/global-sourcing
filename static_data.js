@@ -7,7 +7,8 @@ const roleList = {
 				"BUYER": '/pages/purchase/Purchaser',
 				"SALESPERSON": '/pages/order/Order',
 				"WAREHOUSE_KEEPER": '/pages/warehouse/WarehouseKeeper',
-				"TRANSPORTER": '/pages/transport/Transporter'
+				"TRANSPORTER": '/pag es/transport/Transporter',
+				"TREASURER": '/pages/statistics/Statistics'
 			}
 
 export default {

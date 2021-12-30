@@ -41,13 +41,14 @@
 		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
-				<button @click="sub" class="cu-btn bg-red margin-tb-sm lg">导出</button>
+				<button @click="output" class="cu-btn bg-red margin-tb-sm lg">导出</button>
 			</view>
 		</view>	
 	</view>
 </template>
 
 <script>
+	import { exportFile } from '@/common/exportFile.js'
 	export default {
 		data() {
 			return {
@@ -84,7 +85,7 @@
 				const jsonData = [];
 				for (var i = 0, lenI = items.length; i < lenI; ++i) {
 					const item = items[i]
-					if (this.current.includes(item.id)) {
+					if (this.salesCurrent.includes(item.salesperson.id)) {
 						var data = {
 							name: '',
 							saleOrderQuantity: '',
@@ -95,7 +96,7 @@
 						data.saleOrderQuantity = item.saleOrderQuantity;
 						jsonData.push(data);
 					}
-				}
+				}				
 				// 列标题
 				let worksheet = 'sheet1'
 				let str = '<tr><td>姓名</td><td>订单数</td><td>金额 ￥</td></tr>'
@@ -118,7 +119,7 @@
 				</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
 				</head><body><table>${str}</table></body></html>`
 				// 下载模板
-				exportFile(template, "导出销售财务信息")
+				exportFile(template, "导出财务信息", "销售财务信息")
 			},
 			outputPurchase() {
 				// 要导出的json数据
@@ -126,7 +127,7 @@
 				const jsonData = [];
 				for (var i = 0, lenI = items.length; i < lenI; ++i) {
 					const item = items[i]
-					if (this.current.includes(item.id)) {
+					if (this.buyerCurrent.includes(item.buyer.id)) {
 						var data = {
 							name: '',
 							purchaseOrderQuantity: '',
@@ -160,7 +161,7 @@
 				</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
 				</head><body><table>${str}</table></body></html>`
 				// 下载模板
-				exportFile(template, "导出采购财务信息")
+				exportFile(template, "导出财务信息", "采购财务信息")
 			}
 		}
 	}

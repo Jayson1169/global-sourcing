@@ -1,5 +1,6 @@
+import { formatDateThis, getUnixTime } from '@/common/dateUtil.js'
 // 导出文件到手机 fileData:要写入到文件的数据，返回参数为文档路径
-function exportFile(fileData, documentName = '导出海关信息') {
+function exportFile(fileData, documentName = '导出海关信息', info) {
 	/*
 	PRIVATE_DOC: 应用私有文档目录常量
 	PUBLIC_DOCUMENTS: 程序公用文档目录常量
@@ -26,7 +27,7 @@ function exportFile(fileData, documentName = '导出海关信息') {
 		create: true
 	  }, function(dirEntry2) {
 		// 创建文件,防止重名
-		let fileName = formatDateThis(new Date())
+		let fileName = info + formatDateThis(new Date())
 		// let fileName = 'excel' + getUnixTime(formatDateThis(new Date()))
 		console.log(fileName)
 		dirEntry2.getFile(`${fileName}.xlsx`, {
@@ -50,9 +51,8 @@ function exportFile(fileData, documentName = '导出海关信息') {
 				  icon: 'none'
 				})
 				console.log(`文件位置：${pathStr}/${documentName}/${year}年${month}月`)
-				this.$api.msg.toast(`文件位置：${pathStr}/${documentName}/${year}年${month}月`)
-				that.successTip = `文件位置：${pathStr}/${documentName}/${year}年${month}月`
-			  }, 500)
+				// that.successTip = `文件位置：${pathStr}/${documentName}/${year}年${month}月`
+			  }, 1000)
 			}
 			// 写入内容;
 			writer.write(fileData)

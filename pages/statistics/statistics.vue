@@ -3,7 +3,7 @@
 		<view class="tongji">
 			<view class="t_tit">经营数据</view>
 				<!-- <view class="t_time">统计时间截止9月2号</view> -->
-				<view class="card">
+				<view class="card" v-if="totalFinance">
 					<view class="card_01">经营收入</view>
 					<view class="card_02">¥ {{(totalFinance.sales - totalFinance.purchases) / 100}}</view>
 					<view class="card_03">
@@ -33,7 +33,7 @@
 					</view>
 				</view> -->
 			<view class="name">其他数据</view>
-			<view class="shuju">
+			<view class="shuju" v-if="todayFinance && yesterdayFinance">
 				<view class="sj_01"> 
 					<view class="sj_01_1">{{todayFinance.saleOrderQuantity}}<br/>今日订单</view>
 					<view class="sj_01_1">{{todayFinance.purchaseOrderQuantity}}<br/>今日采购</view>
@@ -48,7 +48,7 @@
 			</view>
 		</view>
 		<view class="H50"></view>
-		<view class="p_btn">
+		<view class="p_btn" v-if="totalFinance">
 			<view class="flex flex-direction" >
 				<button @click="output" class="cu-btn bg-red margin-tb-sm lg">导出数据</button>
 			</view>
