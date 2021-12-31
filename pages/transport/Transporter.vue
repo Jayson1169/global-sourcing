@@ -142,7 +142,6 @@
 								this.$api.msg.successToast('发送成功').then(res => {
 									uni.reLaunch()
 								})
-							
 							})
 						}
 					}

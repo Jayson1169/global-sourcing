@@ -37,7 +37,7 @@
 			<view class="cu-form-title">备注信息：</view>
 			<input v-model="item.product.remark" disabled></input>
 		</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="item.product.barcode">
 			<text :style="{color:'white'}">*</text>
 			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
 		</view>

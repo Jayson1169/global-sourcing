@@ -76,7 +76,7 @@
 			var day2 = new Date();
 			day2.setTime(day2.getTime());
 			this.today = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
-			this.$api.http.get('/finance/countFinance?startDate=2020-1-1'+'&endDate='+this.today, null).then(res => {
+			this.$api.http.get('/finance/countFinance?startDate=2021-12-29'+'&endDate='+this.today, null).then(res => {
 				this.totalFinance = res;
 			})
 			this.$api.http.get('/finance/countFinance?startDate='+yesterday+'&endDate='+yesterday, null).then(res => {

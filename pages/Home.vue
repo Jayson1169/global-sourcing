@@ -78,7 +78,6 @@
 </template>
 
 <script>
-	import { formatDateThis, getUnixTime } from '@/common/dateUtil.js'
 	export default {
 		data() {
 			return {
@@ -90,14 +89,14 @@
 			this.getFinance();
 		},
 		methods: {
-			getFinance() {
+			async getFinance() {
 				var day = new Date();
 				day.setTime(day.getTime());
 				var today = day.getFullYear()+"-" + (day.getMonth()+1) + "-" + day.getDate();
-				this.$api.http.get('/finance/countFinance?startDate=2020-1-1'+'&endDate='+today, null).then(res => {
+				await this.$api.http.get('/finance/countFinance?startDate=2021-12-29'+'&endDate='+today, null).then(res => {
 					this.totalFinance = res;
 				})
-				this.$api.http.get('/finance/countCurrentFinance', null).then(res => {
+				await this.$api.http.get('/finance/countCurrentFinance', null).then(res => {
 					this.todayFinance = res;
 				})
 			}
