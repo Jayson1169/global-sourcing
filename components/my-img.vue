@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<image :src='photo' :style="padding?style1:style2" mode="aspectFill" @click="previewImage">
+		<image :src='photo' :style="padding?style1:style2" mode="aspectFill" @click="previewImage" lazy-load="true">
 	</view>
 </template>
 

@@ -112,16 +112,6 @@
 <style lang="scss">
 	.index {
 		background:#fff;
-		.H50 {
-			height:50px;
-		}
-		.head {
-			background:  linear-gradient(to bottom, #52c693, #27a26c);
-			text-align: center;
-			padding: 20px 0 10px;
-			color: #fff;
-			font-size: 38upx;
-		}
 		.jiu {
 			padding: 10px;
 			display: flex;
@@ -133,7 +123,7 @@
 			text-align: center;
 			padding: 15px 10px 15px;
 			box-sizing: border-box;
-			font-size: 38upx;
+			font-size: 30upx;
 		}
 		.jiu_01 image {
 			width: 32px;
@@ -166,7 +156,7 @@
 		.mo_02 {
 			// color: #D6D6D6;
 			color: black;
-			font-size: 30upx;
+			font-size: 38upx;
 			font-weight: bold;
 		}
 		.shuju {
@@ -178,7 +168,7 @@
 			text-align: center;
 			padding: 18px 10px;
 			box-sizing: border-box;
-			font-size: 38upx;
+			font-size: 30upx;
 			line-height: 20px;
 			border-right: 1px solid #f0f0f0;
 			border-bottom: 1px solid #f0f0f0;
@@ -186,7 +176,7 @@
 		.shuju_01_s {
 			color: #EB511B;
 			font-weight: 800;
-			font-size: 38upx;
+			font-size: 30upx;
 		}
 		.no {
 			border-right: none;

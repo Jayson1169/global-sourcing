@@ -46,12 +46,12 @@
 		<view v-show="isLoadMore">
 			<uni-load-more :status="loadStatus" ></uni-load-more>
 		</view>
-		<view class="H50"></view>
+	<!-- 	<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpPurchaseAppend" class="cu-btn bg-red margin-tb-sm lg">新增采购单</button>
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template> 
 

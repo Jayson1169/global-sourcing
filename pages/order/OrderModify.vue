@@ -4,7 +4,7 @@
 		<view class='tag-e'>
 			<view v-for="(item, index) of order.items" :key="index" :class="item.isItemUpdatable?'goods':'goods-gray'" @click="item.isItemUpdatable?jumpProductItemEdit(item):jumpProductItemDetail(item)">
 				<view>
-					<myimg :photo="item.product.image"></myimg>
+					<myimg :photo="item.product.image" v-if="item.product.image"></myimg>
 				</view>
 				<view class='goods_02'>
 					<view class='goods_title'>{{item.product.name}}</view>
@@ -54,15 +54,15 @@
 	export default {
 		data() {
 			return {
-				order: {
-					items: [],
-					address: {
-						name: 'test',
-						idNumber: '111111111111111111',
-						phoneNumber: '11111111111',
-						shipAddress: 'test'
-					}
-				}
+				// order: {
+				// 	items: [],
+				// 	address: {
+				// 		name: 'test',
+				// 		idNumber: '111111111111111111',
+				// 		phoneNumber: '11111111111',
+				// 		shipAddress: 'test'
+				// 	}
+				// }
 			};
 		},
 		onLoad(option) {
@@ -95,12 +95,7 @@
 					uni.$emit('edit', this.order)
 				})
 			})
-			this.order = JSON.parse(decodeURIComponent(option.order));		
-			for (let i in this.order.items) {
-			    this.$api.http.get('/product/getImage?id='+this.order.items[i].product.id, null).then(res => {
-					this.order.items[i].product.image = res
-				})
-			}
+			this.order = JSON.parse(decodeURIComponent(option.order));
 		},
 		onUnload() {  
 			// 移除监听事件  
@@ -134,7 +129,7 @@
 						// 	url: './Order'
 						// });
 					})
-				}	
+				}
 			},
 			jumpProductItemAppend() {
 				uni.navigateTo({

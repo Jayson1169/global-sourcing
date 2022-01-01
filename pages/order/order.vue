@@ -34,11 +34,7 @@
 						<text class="attr-box">{{goodsItem.quantity}}</text>
 					</view>
 				</view>
-					<view class="price-box">
-					共
-					<text class="num">{{item.items.length}}</text>
-					类商品 <!-- 实付款
-					<text class="price"> --></text>
+				<view class="price-box">共<text class="num">{{item.items.length}}</text>类商品</text>
 				</view>
 			</view>
 			<view class="action-box b-t" v-if="!item.delivered">
@@ -49,7 +45,7 @@
 		<view v-show="isLoadMore">
 			<uni-load-more :status="loadStatus" ></uni-load-more>
 		</view>
-		<view class="H60"></view>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpOrderAppend" class="cu-btn bg-red margin-tb-sm lg">添加订单</button>
@@ -66,12 +62,12 @@
 					page: 0,
 					size: 5
 				},
+				noClick: true,
 				tabCurrentIndex: 0,
 				navList: ['全部', '待发送', '已完成'],
 				orderList: [],
 				isLoadMore: false,
 				loadStatus: 'loading'
-				// orderList: [{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","salesperson":{"id":1,"createTime":"2021-12-23 01:09:54","updateTime":"2021-12-23 01:10:01","username":"admin","password":"$2a$10$P8UFgtFSeCz.57PbNf2sRuOz2qg8JFJx9.wfJdNsX/7BuNzGvWeg2","name":"admin","role":"ADMIN","phoneNumber":null},"address":{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","name":"殷鑫","idNumber":"467489199910247815","phoneNumber":"15858780802","shipAddress":"湖南省长沙市天心区中南大学铁道学院"},"items":[{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","product":{"id":1,"createTime":"2021-12-26 21:54:39","updateTime":"2021-12-26 23:18:43","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":"6917246004355","brand":"曼秀雷敦","specification":"150ml","inventory":{"id":1,"createTime":"2021-12-26 21:54:38","updateTime":"2021-12-26 23:18:43","warehouseInventory":2,"hubInventory":10,"midwayInventory":8},"manufacturer":null,"origin":"广东省中山市","remark":null,"customsInfo":{"id":1,"createTime":"2021-12-26 21:54:38","updateTime":"2021-12-26 23:18:43","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"salePrice":2500,"quantity":4},{"id":2,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","product":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","name":"清风牌面巾纸","barcode":"6922266446726","brand":"清风","specification":"150抽/包","inventory":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","warehouseInventory":0,"hubInventory":10,"midwayInventory":7},"manufacturer":null,"origin":"湖北省孝南市","remark":null,"customsInfo":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"salePrice":400,"quantity":7}]}]
 			};
 		},
 		onLoad() {
@@ -86,6 +82,9 @@
 		},
 		onUnload() {
 			uni.$off('eidt');
+		},
+		onShow() {
+			this.noClick = true;
 		},
 		methods: {
 			getOrderList() {
@@ -110,9 +109,12 @@
 						})
 					}
 				}
-				uni.navigateTo({
-					url: './OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
-				});
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
+					});
+				}
 			},
 			async jumpOrderModify(order) {
 				for (let i in order.items) {
@@ -129,9 +131,12 @@
 						})
 					}
 				}
-				uni.navigateTo({
-					url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
-				})	
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
+					})	
+				}
 			},
 			//删除订单
 			deleteOrder(item, index) {
@@ -147,39 +152,16 @@
 					})
 				}, 600)
 			},
-			//取消订单
-			cancelOrder(item){
-				uni.showLoading({
-					title: '请稍后'
-				})
-				setTimeout(()=>{
-					let {stateTip, stateTipColor} = this.orderStateExp(9);
-					item = Object.assign(item, {
-						state: 9,
-						stateTip, 
-						stateTipColor
-					})
-					
-					//取消订单后删除待付款中该项
-					let list = this.navList[1].orderList;
-					let index = list.findIndex(val=>val.id === item.id);
-					index !== -1 && list.splice(index, 1);
-					
-					uni.hideLoading();
-				}, 600)
-			},
 			jumpOrderAppend() {
 				uni.navigateTo({
 					url: './OrderAppend'
 				});
 			},
-			//顶部tab点击
 			tabClick(index) {
 				this.tabCurrentIndex = index;
 			},
 		},
 		onReachBottom() {
-			// 此处判断，上锁，防止重复请求
 			if (!this.isLoadMore) { 
 				this.isLoadMore = true;
 				this.orderRequest.page += 1;
@@ -191,7 +173,9 @@
 
 <style lang="scss">
 	page, .content{
-		background: $page-color-base;
+		font-size: 38upx;
+		background: #FFFFFF;
+		// background: $page-color-base;
 		height: 100%;
 	}
 	.search {
@@ -201,13 +185,7 @@
 		box-sizing: border-box;
 		padding: 10px;
 	}
-	.swiper-box{
-		height: calc(100% - 40px);
-	}
-	.list-scroll-content{
-		height: 100%;
-	}
-	.navbar{
+	.navbar {
 		display: flex;
 		height: 40px;
 		padding: 0 5px;
@@ -215,13 +193,13 @@
 		box-shadow: 0 1px 5px rgba(0,0,0,.06);
 		position: relative;
 		z-index: 10;
-		.nav-item{
+		.nav-item {
 			flex: 1;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			font-size: 15px;
+			font-size: 38upx;
 			color: $font-color-dark;
 			position: relative;
 			&.current{
@@ -239,17 +217,12 @@
 			}
 		}
 	}
-
-	.uni-swiper-item{
-		height: auto;
-	}
 	.order-item{
+		border-bottom: 1px solid #EAEAEA;
 		display: flex;
 		flex-direction: column;
 		padding-left: 30upx;
 		background: #fff;
-		// margin-top: 16upx;
-		margin-bottom: 16upx;
 		.i-top{
 			display: flex;
 			align-items: center;
@@ -281,7 +254,7 @@
 				}
 			}
 		}
-	
+
 		/* 单条商品 */
 		.goods-box-single{
 			display: flex;
@@ -316,7 +289,6 @@
 				}
 			}
 		}
-		
 		.price-box{
 			display: flex;
 			justify-content: flex-end;
@@ -370,129 +342,6 @@
 			}
 		}
 	}
-	
-	
-	/* load-more */
-	.uni-load-more {
-		display: flex;
-		flex-direction: row;
-		height: 80upx;
-		align-items: center;
-		justify-content: center
-	}
-	
-	.uni-load-more__text {
-		font-size: 28upx;
-		color: #999
-	}
-	
-	.uni-load-more__img {
-		height: 24px;
-		width: 24px;
-		margin-right: 10px
-	}
-	
-	.uni-load-more__img>view {
-		position: absolute
-	}
-	
-	.uni-load-more__img>view view {
-		width: 6px;
-		height: 2px;
-		border-top-left-radius: 1px;
-		border-bottom-left-radius: 1px;
-		background: #999;
-		position: absolute;
-		opacity: .2;
-		transform-origin: 50%;
-		animation: load 1.56s ease infinite
-	}
-	
-	.uni-load-more__img>view view:nth-child(1) {
-		transform: rotate(90deg);
-		top: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(2) {
-		transform: rotate(180deg);
-		top: 11px;
-		right: 0
-	}
-	
-	.uni-load-more__img>view view:nth-child(3) {
-		transform: rotate(270deg);
-		bottom: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(4) {
-		top: 11px;
-		left: 0
-	}
-	
-	.load1,
-	.load2,
-	.load3 {
-		height: 24px;
-		width: 24px
-	}
-	
-	.load2 {
-		transform: rotate(30deg)
-	}
-	
-	.load3 {
-		transform: rotate(60deg)
-	}
-	
-	.load1 view:nth-child(1) {
-		animation-delay: 0s
-	}
-	
-	.load2 view:nth-child(1) {
-		animation-delay: .13s
-	}
-	
-	.load3 view:nth-child(1) {
-		animation-delay: .26s
-	}
-	
-	.load1 view:nth-child(2) {
-		animation-delay: .39s
-	}
-	
-	.load2 view:nth-child(2) {
-		animation-delay: .52s
-	}
-	
-	.load3 view:nth-child(2) {
-		animation-delay: .65s
-	}
-	
-	.load1 view:nth-child(3) {
-		animation-delay: .78s
-	}
-	
-	.load2 view:nth-child(3) {
-		animation-delay: .91s
-	}
-	
-	.load3 view:nth-child(3) {
-		animation-delay: 1.04s
-	}
-	
-	.load1 view:nth-child(4) {
-		animation-delay: 1.17s
-	}
-	
-	.load2 view:nth-child(4) {
-		animation-delay: 1.3s
-	}
-	
-	.load3 view:nth-child(4) {
-		animation-delay: 1.43s
-	}
 	.p_btn {
 		background: #FFFFFF;
 		padding: 0 10px 0px;
@@ -500,15 +349,5 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-	}
-	
-	@-webkit-keyframes load {
-		0% {
-			opacity: 1
-		}
-	
-		100% {
-			opacity: .2
-		}
 	}
 </style>
