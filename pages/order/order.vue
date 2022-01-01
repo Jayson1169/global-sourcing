@@ -25,6 +25,7 @@
 						<text class="title">{{goodsItem.product.name}}</text>
 						<text class="price">{{goodsItem.salePrice / 100}}</text>
 						<text class="attr-box">{{goodsItem.quantity}}</text>
+						<text class="attr-box">{{goodsItem.quantity}}</text>
 					</view>
 				</scroll-view>
 				<view class="goods-box-single" v-if="item.items.length === 1" v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex">
@@ -173,7 +174,6 @@
 
 <style lang="scss">
 	page, .content{
-		font-size: 38upx;
 		background: #FFFFFF;
 		// background: $page-color-base;
 		height: 100%;

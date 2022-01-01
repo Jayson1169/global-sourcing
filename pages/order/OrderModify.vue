@@ -166,7 +166,7 @@
 		z-index: 9999;
 	}
 	.goods_add {
-		font-size: 13px;
+		font-size: 30upx;
 		justify-content: center;
 		align-items: center;
 		display: flex;
@@ -179,7 +179,7 @@
 	.tag-e {
 		background-color:#fff;
 		margin-bottom: 0px;
-		font-size: 13px;
+		font-size: 30upx;
 		.goods {
 			display: flex;
 			width: 100%;
