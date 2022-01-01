@@ -199,7 +199,7 @@
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			font-size: 38upx;
+			font-size: 30upx;
 			color: $font-color-dark;
 			position: relative;
 			&.current{
