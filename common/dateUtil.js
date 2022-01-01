@@ -164,7 +164,6 @@ const compareTime = (startTime, endTime) => {
   return false
 }
 
-
 export {
   dateCompare,
   getCurrentTime,

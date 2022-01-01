@@ -89,16 +89,21 @@
 			this.getFinance();
 		},
 		methods: {
-			async getFinance() {
+			getFinance() {
 				var day = new Date();
-				day.setTime(day.getTime());
-				var today = day.getFullYear()+"-" + (day.getMonth()+1) + "-" + day.getDate();
-				await this.$api.http.get('/finance/countFinance?startDate=2021-12-29'+'&endDate='+today, null).then(res => {
+				this.$api.http.get('/finance/countFinance?startDate=2021-12-31'+'&endDate='+this.formatDate(day), null).then(res => {
 					this.totalFinance = res;
 				})
-				await this.$api.http.get('/finance/countCurrentFinance', null).then(res => {
+				this.$api.http.get('/finance/countCurrentFinance', null).then(res => {
 					this.todayFinance = res;
 				})
+			},
+			formatDate(date) {
+				var ye = date.getFullYear();
+				var mo = (date.getMonth()+1).toString().padStart(2,'0');
+				var da = date.getDate().toString().padStart(2,'0');
+				var time = ye+'-'+mo+'-'+da;
+				return time;
 			}
 		}
 	}
@@ -107,7 +112,7 @@
 <style lang="scss">
 	.index {
 		background:#fff;
-		.H50{
+		.H50 {
 			height:50px;
 		}
 		.head {
@@ -115,7 +120,7 @@
 			text-align: center;
 			padding: 20px 0 10px;
 			color: #fff;
-			font-size: 30upx;
+			font-size: 38upx;
 		}
 		.jiu {
 			padding: 10px;
@@ -128,7 +133,7 @@
 			text-align: center;
 			padding: 15px 10px 15px;
 			box-sizing: border-box;
-			font-size: 30upx;
+			font-size: 38upx;
 		}
 		.jiu_01 image {
 			width: 32px;
@@ -149,13 +154,13 @@
 			height: 20px;
 			overflow: hidden;
 			border-left: 3px solid #EC521B;
-			font-size: 30upx;
+			font-size: 38upx;
 			font-weight: bold;
 		}
 		.mo_01 span {
 			color: #8E8E8E;
 			font-weight: 100;
-			font-size: 30upx;
+			font-size: 38upx;
 			padding-left: 10px;
 		}
 		.mo_02 {
@@ -173,7 +178,7 @@
 			text-align: center;
 			padding: 18px 10px;
 			box-sizing: border-box;
-			font-size: 30upx;
+			font-size: 38upx;
 			line-height: 20px;
 			border-right: 1px solid #f0f0f0;
 			border-bottom: 1px solid #f0f0f0;
@@ -181,7 +186,7 @@
 		.shuju_01_s {
 			color: #EB511B;
 			font-weight: 800;
-			font-size: 30upx;
+			font-size: 38upx;
 		}
 		.no {
 			border-right: none;
@@ -194,11 +199,6 @@
 			padding: 10px;
 			display: flex;
 			flex-wrap: wrap;
-		}
-		.list_01 {
-			padding: 15px 10px 8px;
-			border-bottom: 1px solid #F4F4F4;
-			font-size: 12px;
 		}
 	}
 </style>

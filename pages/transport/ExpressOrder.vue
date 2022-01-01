@@ -13,7 +13,7 @@
 			{{item}}
 			</view>
 		</view>
-		<empty v-if="expressOrderList.length === 0"></empty>
+		<!-- <empty v-if="expressOrderList.length === 0"></empty> -->
 		<view class="order-item" v-for="(item, index) in expressOrderList" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || tabCurrentIndex === 0">
 			<view @click="item.status=='DELIVERED'?jumpExpressOrderReceive(item):jumpExpressOrderDetail(item)"> 
 				<view class="i-top b-b">
@@ -74,7 +74,9 @@
 		onLoad() {
 			this.$api.http.get('/expressOrder/findAll', this.request).then(res => {
 				this.expressOrderList = res.content
+				// console.log(123)
 			})
+			// console.log(JSON.stringify(this.expressOrderList))
 		},
 		methods: {
 			click(e) {

@@ -1,7 +1,5 @@
 <template>
-	<view class="product">
-		<view class="top">
-		</view>
+	<view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</view>
@@ -99,9 +97,9 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	
 	.p_btn {
-		background: #F7F6FB;
+		// background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;
@@ -109,8 +107,4 @@
 		z-index: 9999;
 		
 	}
-	.u_input {
-		font-size: 15px;
-		background: #FFFFFF;
-	} 
 </style>

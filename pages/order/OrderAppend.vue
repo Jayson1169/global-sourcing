@@ -99,10 +99,11 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
+					var role = uni.getStorageSync('user').role;
 					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
 						this.$api.msg.successToast('添加成功').then(res => {
 							uni.navigateTo({
-								url: './Order'
+								url: role=='ADMIN'?'./Order':'./Salesperson'
 							});
 						})
 					})

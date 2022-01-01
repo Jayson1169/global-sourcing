@@ -19,6 +19,9 @@
 		</view>
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
+			<view class="cu-form-title">是否可直接发货：是</view>
+		</view>
+		<view class="cu-form-group">
 			<view class="cu-form-title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{order.address.name}}</view>
 		</view>
 		<view class="cu-form-group">

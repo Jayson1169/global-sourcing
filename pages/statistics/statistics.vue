@@ -71,11 +71,10 @@
 			// 昨天的时间
 			var day1 = new Date();
 			day1.setTime(day1.getTime()-24*60*60*1000);
-			var yesterday = day1.getFullYear()+"-" + (day1.getMonth()+1) + "-" + day1.getDate();
+			var yesterday = this.formatDate(day1)
 			//今天的时间
 			var day2 = new Date();
-			day2.setTime(day2.getTime());
-			this.today = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
+			this.today = this.formatDate(day2);
 			this.$api.http.get('/finance/countFinance?startDate=2021-12-29'+'&endDate='+this.today, null).then(res => {
 				this.totalFinance = res;
 			})
@@ -92,6 +91,13 @@
 				this.$api.http.get('/finance/countFinance?startDate='+this.range[0]+'&endDate='+this.range[1], null).then(res => {
 					this.totalFinance = res;
 				})
+			},
+			formatDate(date) {
+				var ye = date.getFullYear();
+				var mo = (date.getMonth()+1).toString().padStart(2,'0');
+				var da = date.getDate().toString().padStart(2,'0');
+				var time = ye+'-'+mo+'-'+da;
+				return time;
 			},
 			output() {
 				uni.navigateTo({
