@@ -27,15 +27,32 @@
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "用户管理",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"app-plus":{
+					// 关闭界面上拉下拉阴影回弹效果
+					"bounce":"none",
+					// 自定义导航栏字体大小
+					"titleNView": {
+						"titleSize": "38upx"
+					}
+				}
 			}
+			
 		},
 		{
 			"path" : "pages/user/UserAppend",
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "新增用户",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus":{
+					// 关闭界面上拉下拉阴影回弹效果
+					"bounce":"none",
+					// 自定义导航栏字体大小
+					"titleNView": {
+						"titleSize": "38upx"
+					}
+				}
 			}
 		},
 		{
@@ -43,7 +60,15 @@
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "密码重置",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus":{
+					// 关闭界面上拉下拉阴影回弹效果
+					"bounce":"none",
+					// 自定义导航栏字体大小
+					"titleNView": {
+						"titleSize": "38upx"
+					}
+				}
 			}  
 		},
 		{
@@ -395,7 +420,15 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"app-plus":{
+			// 关闭界面上拉下拉阴影回弹效果
+			"bounce":"none",
+			// 自定义导航栏字体大小
+			"titleNView": {
+				"titleSize": "38upx"
+			}
+		}
 	},
 	"condition" : { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)

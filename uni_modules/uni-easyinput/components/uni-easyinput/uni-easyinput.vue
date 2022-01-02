@@ -148,7 +148,7 @@
 					return {
 						color: '#333',
 						disableColor: '#eee',
-						borderColor: '#e5e5e5'
+						borderColor: '#e5e5e5',
 					}
 				}
 			},
@@ -355,7 +355,7 @@
 		overflow: hidden;
 		flex: 1;
 		line-height: 1;
-		font-size: 14px;
+		font-size: $font-base;
 	}
 
 	.is-textarea {

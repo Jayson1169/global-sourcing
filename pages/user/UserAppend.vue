@@ -16,7 +16,6 @@
 			<input placeholder="长度在2～10位之间" v-model="userForm.name"></input>
 		</view>
 		<view class="cu-form-group">
-			<text :style="{color:'white'}">*</text>
 			<view class="title">手机号码：</view>
 			<input type="number" placeholder="请输入手机号码"  v-model="userForm.phoneNumber" maxlength="11"></input>
 		</view>
@@ -48,14 +47,6 @@
 			};
 		},
 		methods: {
-			init() {
-				this.userForm.username = '',
-				this.userForm.name = '',
-				this.userForm.password = '',
-				this.userForm.role = '',
-				this.userForm.phoneNumber = '',
-				this.role = ''
-			},
 			selectOne(options) {
 				this.role = options.label
 				this.userForm.role = options.value
@@ -105,6 +96,5 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-		
 	}
 </style>

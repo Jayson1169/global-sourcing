@@ -14,6 +14,7 @@ import selectlay from '@/components/select-lay.vue'
 import uView from '@/uni_modules/uview-ui'
 import { formatDateThis, getUnixTime } from '@/common/dateUtil.js'
 import { exportFile } from '@/common/exportFile.js'
+
 Vue.use(uView)
 
 Vue.component('scan', scan)

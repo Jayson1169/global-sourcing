@@ -1,7 +1,7 @@
 <template>
 	<view class="user_list">
 		<view class="search">
-			<uni-easyinput suffixIcon="search" v-model="searchRequest.keyword" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
+			<uni-easyinput suffixIcon="search" v-model="searchRequest.keyword" placeholder="请输入内容" @iconClick="search" confirmType="search" @confirm="search"></uni-easyinput>
 		</view>
 		<scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
 			<view class='tab'>
@@ -13,7 +13,7 @@
 		</scroll-view>
 		<block v-for="(item, index) of userList" v-if="c_index==0||roleMap[item.role][1]==c_index - 1">
 			<view class="list" @click="jumpPasswordReset(item)">
-				<view class="list_l"><!-- <img :src="item.pic"></img> --></view>
+				<view class="list_l"></view>
 				<view class="list_r">
 					<view class="list_r_01">{{item.username}}<span class="hui">{{roleMap[item.role][0]}}</span></view>
 					<view class="list_r_02">{{item.name}}</view>
@@ -52,7 +52,6 @@
 				roleMap: '',
 				isLoadMore: false,
 				loadStatus: 'loading',
-				haveSearch: false
 			};
 		},
 		onLoad() {
@@ -62,7 +61,6 @@
 		},
 		onPullDownRefresh(){
 			this.init()
-			this.haveSearch = false
 			setTimeout(function () {
 				uni.stopPullDownRefresh();
 			}, 1000);
@@ -120,7 +118,7 @@
 
 <style lang="scss">
 	.user_list {
-		font-size: 38upx;
+		font-size: 30upx;
 		.search {
 			background: #FFFFFF;
 			display: flex;
@@ -129,7 +127,8 @@
 			padding: 10px;
 		}
 		.tab {
-			padding: 10px 10%;
+			font-size: 38upx;
+			padding: 10px;
 			display: flex;
 			width: 100%;
 			.tab_normal {
@@ -150,12 +149,6 @@
 			border-bottom: 1px solid #EAEAEA;
 			.list_l {
 				padding: 0 10px 0 0;
-
-				img {
-					width: 50px;
-					height: 50px;
-					border-radius: 5px;
-				}
 			}
 			.list_r {
 				line-height: 25px;
@@ -164,7 +157,6 @@
 						border: 1px solid #FF6D6D;
 						border-radius: 3px;
 						color: #ff6d6d;
-						font-size: 38upx;
 						padding: 0 5px;
 						margin-left: 8px;
 					}

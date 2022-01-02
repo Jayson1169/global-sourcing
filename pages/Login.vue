@@ -113,6 +113,7 @@
 	position: relative;
 }
 .login-center-input input {
+	font-size: 35upx;
 	z-index: 2;
 	transition: all 0.5s;
 	padding-left: 10px;
@@ -162,5 +163,6 @@
 	margin: 0 auto;
 	margin-top: 50px;
 	color: white;
+	font-size: 35upx;
 }
 </style>

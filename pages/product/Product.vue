@@ -5,7 +5,7 @@
 		</view>
 		<block v-for="(item, index) of productList">
 			<view class="list" @click="jumpProductModify(item)">
-				<view class="list_l"><!-- <image :src="item.image"></image> --></view>
+				<view class="list_l"></view>
 				<view class="list_r">
 					<view>{{item.name}}</view>
 					<view class="list_r_01">{{item.brand}}</view>
@@ -40,6 +40,9 @@
 				loadStatus: 'loading',
 			};
 		},
+		onShow() {
+			this.noClick = true;
+		},
 		onLoad() {
 			uni.$on('modify', (e) => {
 				this.productList.some((item, i) => {
@@ -65,9 +68,12 @@
 			jumpProductModify(product) {
 				this.$api.http.get('/product/getImage?id='+product.id, null).then(res => {
 					product.image = res
-					uni.navigateTo({
-						url: './ProductModify?product='+encodeURIComponent(JSON.stringify(product))
-					})
+					if (this.noClick) {
+						this.noClick = false;
+						uni.navigateTo({
+							url: './ProductModify?product='+encodeURIComponent(JSON.stringify(product))
+						})
+					}
 				})
 			},
 			num(index) {
@@ -125,7 +131,6 @@
 				image {
 					width: 162upx;
 					height: 162upx;
-					// border-radius: 5px;
 				}
 			}
 			.list_r {
