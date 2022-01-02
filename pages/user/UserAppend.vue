@@ -71,12 +71,16 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
+					
 					this.$api.http.post('/user/insert', this.userForm).then(res => {
 						this.$api.msg.successToast('添加成功').then(res => {
-							uni.navigateTo({
-								url: './User'
-							})
+							// uni.redirectTo({
+							// 	url: './User'
+							// })
+							uni.navigateBack()
 						})
+					}, error => {
+						this.$api.msg.toast(error);
 					})
 				}
 			}

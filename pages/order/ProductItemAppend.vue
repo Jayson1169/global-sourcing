@@ -123,8 +123,8 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					uni.navigateBack()
 					uni.$emit('append', this.item)
+					uni.navigateBack()
 				}	
 			}
 		}

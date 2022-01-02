@@ -102,9 +102,12 @@
 					var role = uni.getStorageSync('user').role;
 					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
 						this.$api.msg.successToast('添加成功').then(res => {
-							uni.navigateTo({
-								url: role=='ADMIN'?'./Order':'./Salesperson'
-							});
+							// uni.navigateTo({
+							// 	url: role=='ADMIN'?'./Order':'./Salesperson'
+							// });
+							uni.navigateBack({
+								delta: 1
+							})
 						})
 					})
 				}	
@@ -139,14 +142,15 @@
 		z-index: 9999;
 	}
 	.goods_add {
-		font-size: 13px;
+		font-size: 30upx;
+		// 13px
 		justify-content: center;
 		align-items: center;
 	}
 	.tag-e {
 		background-color:#fff;
 		margin-bottom: 0px;
-		font-size: 13px;
+		font-size: 30upx;
 		.goods {
 			display: flex;
 			width: 100%;

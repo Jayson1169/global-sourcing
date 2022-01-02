@@ -70,7 +70,7 @@
 				this.$api.http.post('/saleOrder/insertItem?saleOrderId='+this.order.id, e).then(res => {
 					this.$api.msg.successToast('添加成功')
 					this.order.items = this.order.items.concat(e)
-					uni.$emit('edit', this.order)
+					// uni.$emit('edit', this.order)
 				})
 			})
 			uni.$on('modify', (e) => {
@@ -78,10 +78,11 @@
 					this.$api.msg.successToast('修改成功')
 					this.order.items.some((item, i) => {
 						if (item.id == e.id) {
-							this.$set(this.order.items, i, e)  
+							this.$set(this.order.items, i, e)
+							console.log(i)
 						}
 					})
-					uni.$emit('edit', this.order)
+					// uni.$emit('edit', this.order)
 				})
 			})
 			uni.$on('delete', (e) => {
@@ -92,7 +93,7 @@
 							this.order.items.splice(i, 1)
 						}
 					})
-					uni.$emit('edit', this.order)
+					// uni.$emit('edit', this.order)
 				})
 			})
 			this.order = JSON.parse(decodeURIComponent(option.order));
@@ -123,8 +124,10 @@
 							title: '修改成功',
 							icon: 'none'
 						})
-						uni.$emit('edit', this.order)
-						uni.navigateBack()
+						this.$api.msg.successToast('修改成功').then(res => {
+							uni.navigateBack()
+						})
+						// uni.$emit('edit', this.order)
 						// uni.({
 						// 	url: './Order'
 						// });

@@ -53,7 +53,7 @@
 					this.$api.http.put('/user/updatePassword?id='+this.userForm.id+'&password='+this.userForm.password, null).then(res => {
 						this.$api.msg.successToast("修改成功")						
 						setTimeout(function() {
-							uni.navigateBack({delta:2})
+							uni.navigateBack();
 						}, 500)
 					})
 				}
