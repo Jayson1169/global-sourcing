@@ -96,10 +96,19 @@
 				})
 			})
 			this.order = JSON.parse(decodeURIComponent(option.order));		
-			for (let i in this.order.items) {
-			    this.$api.http.get('/product/getImage?id='+this.order.items[i].product.id, null).then(res => {
-					this.order.items[i].product.image = res
-				})
+			for (let i in order.items) {
+				if (order.items[i].isItemUpdatable == null) {
+					this.$api.http.get('/saleOrder/isItemUpdatable?itemId='+order.items[i].id, null).then(res => {
+						order.items[i].isItemUpdatable = res;
+					})
+				}
+			}
+			for (let i in order.items) {
+				if (order.items[i].product.image == null) {
+					this.$api.http.get('/product/getImage?id='+order.items[i].product.id, null).then(res => {
+						order.items[i].product.image = res
+					})
+				}
 			}
 		},
 		onUnload() {  
