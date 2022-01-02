@@ -105,9 +105,8 @@
 							// uni.navigateTo({
 							// 	url: role=='ADMIN'?'./Order':'./Salesperson'
 							// });
-							uni.navigateBack({
-								delta: 1
-							})
+							uni.navigateBack()
+							uni.$emit('edit', this.order)
 						})
 					})
 				}	
@@ -142,7 +141,7 @@
 		z-index: 9999;
 	}
 	.goods_add {
-		font-size: 30upx;
+		font-size: 13px;
 		// 13px
 		justify-content: center;
 		align-items: center;
@@ -150,7 +149,7 @@
 	.tag-e {
 		background-color:#fff;
 		margin-bottom: 0px;
-		font-size: 30upx;
+		font-size: 13px;
 		.goods {
 			display: flex;
 			width: 100%;

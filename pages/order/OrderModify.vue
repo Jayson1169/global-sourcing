@@ -4,7 +4,7 @@
 		<view class='tag-e'>
 			<view v-for="(item, index) of order.items" :key="index" :class="item.isItemUpdatable?'goods':'goods-gray'" @click="item.isItemUpdatable?jumpProductItemEdit(item):jumpProductItemDetail(item)">
 				<view>
-					<myimg :photo="item.product.image" v-if="item.product.image"></myimg>
+					<myimg :photo="item.product.image"></myimg>
 				</view>
 				<view class='goods_02'>
 					<view class='goods_title'>{{item.product.name}}</view>
@@ -54,15 +54,15 @@
 	export default {
 		data() {
 			return {
-				// order: {
-				// 	items: [],
-				// 	address: {
-				// 		name: 'test',
-				// 		idNumber: '111111111111111111',
-				// 		phoneNumber: '11111111111',
-				// 		shipAddress: 'test'
-				// 	}
-				// }
+				order: {
+					items: [],
+					address: {
+						name: 'test',
+						idNumber: '111111111111111111',
+						phoneNumber: '11111111111',
+						shipAddress: 'test'
+					}
+				}
 			};
 		},
 		onLoad(option) {
@@ -70,7 +70,7 @@
 				this.$api.http.post('/saleOrder/insertItem?saleOrderId='+this.order.id, e).then(res => {
 					this.$api.msg.successToast('添加成功')
 					this.order.items = this.order.items.concat(e)
-					// uni.$emit('edit', this.order)
+					uni.$emit('edit', this.order)
 				})
 			})
 			uni.$on('modify', (e) => {
@@ -78,11 +78,10 @@
 					this.$api.msg.successToast('修改成功')
 					this.order.items.some((item, i) => {
 						if (item.id == e.id) {
-							this.$set(this.order.items, i, e)
-							console.log(i)
+							this.$set(this.order.items, i, e)  
 						}
 					})
-					// uni.$emit('edit', this.order)
+					uni.$emit('edit', this.order)
 				})
 			})
 			uni.$on('delete', (e) => {
@@ -93,10 +92,10 @@
 							this.order.items.splice(i, 1)
 						}
 					})
-					// uni.$emit('edit', this.order)
+					uni.$emit('edit', this.order)
 				})
 			})
-			this.order = JSON.parse(decodeURIComponent(option.order));
+			this.order = JSON.parse(decodeURIComponent(option.order));		
 		},
 		onUnload() {  
 			// 移除监听事件  
@@ -120,19 +119,12 @@
 					})
 				} else {
 					this.$api.http.put('/saleOrder/update', this.order).then(res => {
-						uni.showToast({
-							title: '修改成功',
-							icon: 'none'
-						})
 						this.$api.msg.successToast('修改成功').then(res => {
 							uni.navigateBack()
+							uni.$emit('edit', this.order)
 						})
-						// uni.$emit('edit', this.order)
-						// uni.({
-						// 	url: './Order'
-						// });
 					})
-				}
+				}	
 			},
 			jumpProductItemAppend() {
 				uni.navigateTo({
@@ -169,7 +161,7 @@
 		z-index: 9999;
 	}
 	.goods_add {
-		font-size: 30upx;
+		font-size: 13px;
 		justify-content: center;
 		align-items: center;
 		display: flex;
@@ -182,7 +174,7 @@
 	.tag-e {
 		background-color:#fff;
 		margin-bottom: 0px;
-		font-size: 30upx;
+		font-size: 13px;
 		.goods {
 			display: flex;
 			width: 100%;
