@@ -59,6 +59,9 @@
 			this.roleList = this.$api.json.role_list;
 			this.roleMap = this.$api.json.role_map;
 		},
+		onShow() {
+			this.init()
+		},
 		onPullDownRefresh(){
 			this.init()
 			setTimeout(function () {
@@ -127,7 +130,7 @@
 			padding: 10px;
 		}
 		.tab {
-			font-size: 38upx;
+			font-size: 30upx;
 			padding: 10px;
 			display: flex;
 			width: 100%;

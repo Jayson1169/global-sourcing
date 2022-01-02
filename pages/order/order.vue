@@ -61,7 +61,7 @@
 			return {
 				orderRequest: {
 					page: 0,
-					size: 5
+					size: 10
 				},
 				noClick: true,
 				tabCurrentIndex: 0,
@@ -72,22 +72,29 @@
 			};
 		},
 		onLoad() {
-			uni.$on('edit', (e) => {
-				this.orderList.some((order, i) => {
-					if (order.id == e.id) {
-						this.$set(this.orderList, i, e)  
-					}
-				})
-			})
-			this.getOrderList();
+			// uni.$on('edit', (e) => {
+			// 	this.orderList.some((order, i) => {
+			// 		if (order.id == e.id) {
+			// 			this.$set(this.orderList, i, e)  
+			// 		}
+			// 	})
+			// })
+			// this.getOrderList();
 		},
 		onUnload() {
 			uni.$off('eidt');
 		},
 		onShow() {
 			this.noClick = true;
+			this.init();
 		},
 		methods: {
+			init() {
+				this.orderRequest.page = 0
+				this.orderRequest.size = 10
+				this.orderList = []
+				this.getOrderList()
+			},
 			getOrderList() {
 				this.$api.http.get('/saleOrder/findAll', this.orderRequest).then(res => {
 					this.orderList = this.orderList.concat(res.content);

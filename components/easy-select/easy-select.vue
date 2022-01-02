@@ -168,7 +168,7 @@
 <style scoped>
 	.easy-select {
 		position: relative;
-		/* font-size: 28rpx; */
+		font-size: 30upx;
 		color: #606266;
 		outline: none;
 		box-sizing: content-box;
@@ -226,7 +226,7 @@
 		padding: 0 20rpx;
 		position: relative;
 		white-space: nowrap;
-		font-size: 14px;
+		font-size: 30upx;
 		color: #606266;
 		height: 33px;
 		line-height: 33px;

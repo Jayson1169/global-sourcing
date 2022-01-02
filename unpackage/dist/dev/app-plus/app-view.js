@@ -2676,7 +2676,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../Program Files/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\r\n/* 页面左右间距 */\r\n/* 文字尺寸 */\r\n/*文字颜色*/\r\n/* 边框颜色 */\r\n/* 图片加载中颜色 */\r\n/* 行为相关颜色 */\n.user_list {\r\n  font-size: 30upx;\n}\n.user_list .search {\r\n  background: #FFFFFF;\r\n  display: flex;\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  padding: 10px;\n}\n.user_list .tab {\r\n  font-size: 38upx;\r\n  padding: 10px;\r\n  display: flex;\r\n  width: 100%;\n}\n.user_list .tab .tab_normal {\r\n  padding-bottom: 5px;\r\n  min-width: 80px;\r\n  text-align: center;\n}\n.user_list .tab .tab_focus {\r\n  border-bottom: 2px solid red;\r\n  padding-bottom: 5px;\r\n  min-width: 80px;\r\n  text-align: center;\n}\n.user_list .list {\r\n  display: flex;\r\n  padding: 10px;\r\n  border-bottom: 1px solid #EAEAEA;\n}\n.user_list .list .list_l {\r\n  padding: 0 10px 0 0;\n}\n.user_list .list .list_r {\r\n  line-height: 25px;\n}\n.user_list .list .list_r .list_r_01 .hui {\r\n  border: 1px solid #FF6D6D;\r\n  border-radius: 3px;\r\n  color: #ff6d6d;\r\n  padding: 0 5px;\r\n  margin-left: 8px;\n}\n.user_list .list .list_r .list_r_02 {\r\n  color: #ABABAB;\n}\n.user_list .p_btn {\r\n  background: #FFFFFF;\r\n  padding: 0 10px 0px;\r\n  position: fixed;\r\n  bottom: 0;\r\n  width: 100%;\r\n  z-index: 9999;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\r\n/* 页面左右间距 */\r\n/* 文字尺寸 */\r\n/*文字颜色*/\r\n/* 边框颜色 */\r\n/* 图片加载中颜色 */\r\n/* 行为相关颜色 */\n.user_list {\r\n  font-size: 30upx;\n}\n.user_list .search {\r\n  background: #FFFFFF;\r\n  display: flex;\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  padding: 10px;\n}\n.user_list .tab {\r\n  font-size: 30upx;\r\n  padding: 10px;\r\n  display: flex;\r\n  width: 100%;\n}\n.user_list .tab .tab_normal {\r\n  padding-bottom: 5px;\r\n  min-width: 80px;\r\n  text-align: center;\n}\n.user_list .tab .tab_focus {\r\n  border-bottom: 2px solid red;\r\n  padding-bottom: 5px;\r\n  min-width: 80px;\r\n  text-align: center;\n}\n.user_list .list {\r\n  display: flex;\r\n  padding: 10px;\r\n  border-bottom: 1px solid #EAEAEA;\n}\n.user_list .list .list_l {\r\n  padding: 0 10px 0 0;\n}\n.user_list .list .list_r {\r\n  line-height: 25px;\n}\n.user_list .list .list_r .list_r_01 .hui {\r\n  border: 1px solid #FF6D6D;\r\n  border-radius: 3px;\r\n  color: #ff6d6d;\r\n  padding: 0 5px;\r\n  margin-left: 8px;\n}\n.user_list .list .list_r .list_r_02 {\r\n  color: #ABABAB;\n}\n.user_list .p_btn {\r\n  background: #FFFFFF;\r\n  padding: 0 10px 0px;\r\n  position: fixed;\r\n  bottom: 0;\r\n  width: 100%;\r\n  z-index: 9999;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3239,7 +3239,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../Program Files/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.easy-select[data-v-32406354] {\n\tposition: relative;\n\t/* font-size: 28rpx; */\n\tcolor: #606266;\n\toutline: none;\n\tbox-sizing: content-box;\n\theight: 30px;\n}\n.easy-select uni-input[data-v-32406354] {\n\tpadding: 0 0rpx;\n\tpadding-right: 60rpx;\n\toverflow: hidden;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\theight: 100% !important;\n\tmin-height: 100% !important;\n}\n.easy-select .easy-select-suffix[data-v-32406354] {\n\tposition: absolute;\n\tbox-sizing: border-box;\n\theight: 100%;\n\tright: 5px;\n\ttop: 0;\n\tdisplay: flex;\n\talign-items: center;\n\t-webkit-transform: rotate(180deg);\n\t        transform: rotate(180deg);\n\ttransition: all .3s;\n\t-webkit-transform-origin: center;\n\t        transform-origin: center;\n}\n.easy-select .showOptions[data-v-32406354] {\n\t-webkit-transform: rotate(180deg) !important;\n\t        transform: rotate(180deg) !important;\n}\n.easy-select .no-showOptions[data-v-32406354] {\n\t-webkit-transform: rotate(0) !important;\n\t        transform: rotate(0) !important;\n}\n.easy-select .easy-select-options[data-v-32406354] {\n\tposition: absolute;\n\tpadding: 0px 0px;\n\tleft: -20rpx;\n\tmargin-top: 10px;\n\tborder: 1px solid #e4e7ed;\n\tborder-radius: 4px;\n\tbackground-color: #fff;\n\tbox-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n\tbox-sizing: border-box;\n\t-webkit-transform-origin: center top;\n\t        transform-origin: center top;\n\tz-index: 2238;\n\toverflow: scroll;\n\tmax-height: 274rpx;\n}\n.easy-select .easy-select-options-item[data-v-32406354] {\n\tpadding: 0 20rpx;\n\tposition: relative;\n\twhite-space: nowrap;\n\tfont-size: 14px;\n\tcolor: #606266;\n\theight: 33px;\n\tline-height: 33px;\n\tbox-sizing: border-box;\n}\n.easy-select .active[data-v-32406354] {\n\tbackground-color: #F5F7FA\n}\n", ""]);
+exports.push([module.i, "\n.easy-select[data-v-32406354] {\n\tposition: relative;\n\tfont-size: 30upx;\n\tcolor: #606266;\n\toutline: none;\n\tbox-sizing: content-box;\n\theight: 30px;\n}\n.easy-select uni-input[data-v-32406354] {\n\tpadding: 0 0rpx;\n\tpadding-right: 60rpx;\n\toverflow: hidden;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\theight: 100% !important;\n\tmin-height: 100% !important;\n}\n.easy-select .easy-select-suffix[data-v-32406354] {\n\tposition: absolute;\n\tbox-sizing: border-box;\n\theight: 100%;\n\tright: 5px;\n\ttop: 0;\n\tdisplay: flex;\n\talign-items: center;\n\t-webkit-transform: rotate(180deg);\n\t        transform: rotate(180deg);\n\ttransition: all .3s;\n\t-webkit-transform-origin: center;\n\t        transform-origin: center;\n}\n.easy-select .showOptions[data-v-32406354] {\n\t-webkit-transform: rotate(180deg) !important;\n\t        transform: rotate(180deg) !important;\n}\n.easy-select .no-showOptions[data-v-32406354] {\n\t-webkit-transform: rotate(0) !important;\n\t        transform: rotate(0) !important;\n}\n.easy-select .easy-select-options[data-v-32406354] {\n\tposition: absolute;\n\tpadding: 0px 0px;\n\tleft: -20rpx;\n\tmargin-top: 10px;\n\tborder: 1px solid #e4e7ed;\n\tborder-radius: 4px;\n\tbackground-color: #fff;\n\tbox-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);\n\tbox-sizing: border-box;\n\t-webkit-transform-origin: center top;\n\t        transform-origin: center top;\n\tz-index: 2238;\n\toverflow: scroll;\n\tmax-height: 274rpx;\n}\n.easy-select .easy-select-options-item[data-v-32406354] {\n\tpadding: 0 20rpx;\n\tposition: relative;\n\twhite-space: nowrap;\n\tfont-size: 30upx;\n\tcolor: #606266;\n\theight: 33px;\n\tline-height: 33px;\n\tbox-sizing: border-box;\n}\n.easy-select .active[data-v-32406354] {\n\tbackground-color: #F5F7FA\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -6855,6 +6855,21 @@ var render = function() {
                                       _vm._$g("13-" + $31 + "-" + $32, "t0-0")
                                     )
                                   ]
+                                ),
+                                _c(
+                                  "v-uni-text",
+                                  {
+                                    staticClass: _vm._$g(
+                                      "14-" + $31 + "-" + $32,
+                                      "sc"
+                                    ),
+                                    attrs: { _i: "14-" + $31 + "-" + $32 }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._$g("14-" + $31 + "-" + $32, "t0-0")
+                                    )
+                                  ]
                                 )
                               ],
                               1
@@ -6863,49 +6878,34 @@ var render = function() {
                           1
                         )
                       : _vm._e(),
-                    _vm._l(_vm._$g(14 + "-" + $31, "f"), function(
+                    _vm._l(_vm._$g(15 + "-" + $31, "f"), function(
                       goodsItem,
                       goodsIndex,
                       $23,
                       $33
                     ) {
-                      return _vm._$g("14-" + $31 + "-" + $33, "i")
+                      return _vm._$g("15-" + $31 + "-" + $33, "i")
                         ? _c(
                             "v-uni-view",
                             {
                               key: goodsItem,
                               staticClass: _vm._$g(
-                                "14-" + $31 + "-" + $33,
+                                "15-" + $31 + "-" + $33,
                                 "sc"
                               ),
-                              attrs: { _i: "14-" + $31 + "-" + $33 }
+                              attrs: { _i: "15-" + $31 + "-" + $33 }
                             },
                             [
                               _c(
                                 "v-uni-view",
                                 {
                                   staticClass: _vm._$g(
-                                    "15-" + $31 + "-" + $33,
+                                    "16-" + $31 + "-" + $33,
                                     "sc"
                                   ),
-                                  attrs: { _i: "15-" + $31 + "-" + $33 }
+                                  attrs: { _i: "16-" + $31 + "-" + $33 }
                                 },
                                 [
-                                  _c(
-                                    "v-uni-text",
-                                    {
-                                      staticClass: _vm._$g(
-                                        "16-" + $31 + "-" + $33,
-                                        "sc"
-                                      ),
-                                      attrs: { _i: "16-" + $31 + "-" + $33 }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._$g("16-" + $31 + "-" + $33, "t0-0")
-                                      )
-                                    ]
-                                  ),
                                   _c(
                                     "v-uni-text",
                                     {
@@ -6935,6 +6935,21 @@ var render = function() {
                                         _vm._$g("18-" + $31 + "-" + $33, "t0-0")
                                       )
                                     ]
+                                  ),
+                                  _c(
+                                    "v-uni-text",
+                                    {
+                                      staticClass: _vm._$g(
+                                        "19-" + $31 + "-" + $33,
+                                        "sc"
+                                      ),
+                                      attrs: { _i: "19-" + $31 + "-" + $33 }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._$g("19-" + $31 + "-" + $33, "t0-0")
+                                      )
+                                    ]
                                   )
                                 ],
                                 1
@@ -6947,18 +6962,18 @@ var render = function() {
                     _c(
                       "v-uni-view",
                       {
-                        staticClass: _vm._$g("19-" + $31, "sc"),
-                        attrs: { _i: "19-" + $31 }
+                        staticClass: _vm._$g("20-" + $31, "sc"),
+                        attrs: { _i: "20-" + $31 }
                       },
                       [
                         _vm._v("共"),
                         _c(
                           "v-uni-text",
                           {
-                            staticClass: _vm._$g("20-" + $31, "sc"),
-                            attrs: { _i: "20-" + $31 }
+                            staticClass: _vm._$g("21-" + $31, "sc"),
+                            attrs: { _i: "21-" + $31 }
                           },
-                          [_vm._v(_vm._$g("20-" + $31, "t0-0"))]
+                          [_vm._v(_vm._$g("21-" + $31, "t0-0"))]
                         ),
                         _vm._v("类商品")
                       ],
@@ -6967,19 +6982,19 @@ var render = function() {
                   ],
                   2
                 ),
-                _vm._$g("21-" + $31, "i")
+                _vm._$g("22-" + $31, "i")
                   ? _c(
                       "v-uni-view",
                       {
-                        staticClass: _vm._$g("21-" + $31, "sc"),
-                        attrs: { _i: "21-" + $31 }
+                        staticClass: _vm._$g("22-" + $31, "sc"),
+                        attrs: { _i: "22-" + $31 }
                       },
                       [
                         _c(
                           "v-uni-button",
                           {
-                            staticClass: _vm._$g("22-" + $31, "sc"),
-                            attrs: { _i: "22-" + $31 },
+                            staticClass: _vm._$g("23-" + $31, "sc"),
+                            attrs: { _i: "23-" + $31 },
                             on: {
                               click: function($event) {
                                 return _vm.$handleViewEvent($event)
@@ -6991,8 +7006,8 @@ var render = function() {
                         _c(
                           "v-uni-button",
                           {
-                            staticClass: _vm._$g("23-" + $31, "sc"),
-                            attrs: { _i: "23-" + $31 },
+                            staticClass: _vm._$g("24-" + $31, "sc"),
+                            attrs: { _i: "24-" + $31 },
                             on: {
                               click: function($event) {
                                 return _vm.$handleViewEvent($event)
@@ -7017,29 +7032,29 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm._$g(24, "v-show"),
-              expression: "_$g(24,'v-show')"
+              value: _vm._$g(25, "v-show"),
+              expression: "_$g(25,'v-show')"
             }
           ],
-          attrs: { _i: 24 }
+          attrs: { _i: 25 }
         },
-        [_c("uni-load-more", { attrs: { _i: 25 } })],
+        [_c("uni-load-more", { attrs: { _i: 26 } })],
         1
       ),
-      _c("v-uni-view", { staticClass: _vm._$g(26, "sc"), attrs: { _i: 26 } }),
+      _c("v-uni-view", { staticClass: _vm._$g(27, "sc"), attrs: { _i: 27 } }),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(27, "sc"), attrs: { _i: 27 } },
+        { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
+            { staticClass: _vm._$g(29, "sc"), attrs: { _i: 29 } },
             [
               _c(
                 "v-uni-button",
                 {
-                  staticClass: _vm._$g(29, "sc"),
-                  attrs: { _i: 29 },
+                  staticClass: _vm._$g(30, "sc"),
+                  attrs: { _i: 30 },
                   on: {
                     click: function($event) {
                       return _vm.$handleViewEvent($event)
@@ -7146,7 +7161,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../Program Files/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\r\n/* 页面左右间距 */\r\n/* 文字尺寸 */\r\n/*文字颜色*/\r\n/* 边框颜色 */\r\n/* 图片加载中颜色 */\r\n/* 行为相关颜色 */\nbody, .content {\r\n  font-size: 38upx;\r\n  background: #FFFFFF;\r\n  height: 100%;\n}\n.search {\r\n  background: #FFFFFF;\r\n  display: flex;\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  padding: 10px;\n}\n.navbar {\r\n  display: flex;\r\n  height: 40px;\r\n  padding: 0 5px;\r\n  background: #fff;\r\n  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);\r\n  position: relative;\r\n  z-index: 10;\n}\n.navbar .nav-item {\r\n  flex: 1;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  height: 100%;\r\n  font-size: 38upx;\r\n  color: #303133;\r\n  position: relative;\n}\n.navbar .nav-item.current {\r\n  color: #fa436a;\n}\n.navbar .nav-item.current:after {\r\n  content: '';\r\n  position: absolute;\r\n  left: 50%;\r\n  bottom: 0;\r\n  -webkit-transform: translateX(-50%);\r\n          transform: translateX(-50%);\r\n  width: 44px;\r\n  height: 0;\r\n  border-bottom: 2px solid #fa436a;\n}\n.order-item {\r\n  border-bottom: 1px solid #EAEAEA;\r\n  display: flex;\r\n  flex-direction: column;\r\n  padding-left: 30upx;\r\n  background: #fff;\r\n  /* 单条商品 */\n}\n.order-item .i-top {\r\n  display: flex;\r\n  align-items: center;\r\n  height: 80upx;\r\n  padding-right: 30upx;\r\n  font-size: 28upx;\r\n  color: #303133;\r\n  position: relative;\n}\n.order-item .i-top .time {\r\n  flex: 1;\n}\n.order-item .i-top .state {\r\n  color: #fa436a;\n}\n.order-item .i-top .del-btn {\r\n  padding: 10upx 0 10upx 36upx;\r\n  font-size: 32upx;\r\n  color: #909399;\r\n  position: relative;\n}\n.order-item .i-top .del-btn:after {\r\n  content: '';\r\n  width: 0;\r\n  height: 30upx;\r\n  border-left: 1px solid #DCDFE6;\r\n  position: absolute;\r\n  left: 20upx;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n          transform: translateY(-50%);\n}\n.order-item .goods-box-single {\r\n  display: flex;\r\n  padding: 0upx 0;\n}\n.order-item .goods-box-single .right {\r\n  flex: 1;\r\n  padding: 0 30upx 0 0upx;\r\n  overflow: hidden;\n}\n.order-item .goods-box-single .right .title {\r\n  font-size: 30upx;\r\n  color: #303133;\r\n  line-height: 1;\n}\n.order-item .goods-box-single .right .attr-box {\r\n  font-size: 26upx;\r\n  color: #909399;\r\n  padding: 10upx 12upx;\n}\n.order-item .goods-box-single .right .attr-box:before {\r\n  content: 'x';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 8upx;\n}\n.order-item .goods-box-single .right .price {\r\n  font-size: 30upx;\r\n  color: #303133;\n}\n.order-item .goods-box-single .right .price:before {\r\n  content: '￥';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 8upx;\n}\n.order-item .price-box {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  align-items: baseline;\r\n  padding: 20upx 30upx;\r\n  font-size: 26upx;\r\n  color: #909399;\n}\n.order-item .price-box .num {\r\n  margin: 0 8upx;\r\n  color: #303133;\n}\n.order-item .price-box .price {\r\n  font-size: 32upx;\r\n  color: #303133;\n}\n.order-item .price-box .price:before {\r\n  content: '￥';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 8upx;\n}\n.order-item .action-box {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  align-items: center;\r\n  height: 100upx;\r\n  position: relative;\r\n  padding-right: 30upx;\n}\n.order-item .action-btn {\r\n  width: 160upx;\r\n  height: 60upx;\r\n  margin: 0;\r\n  margin-left: 24upx;\r\n  padding: 0;\r\n  text-align: center;\r\n  line-height: 60upx;\r\n  font-size: 26upx;\r\n  color: #303133;\r\n  background: #fff;\r\n  border-radius: 100px;\n}\n.order-item .action-btn:after {\r\n  border-radius: 100px;\n}\n.order-item .action-btn.recom {\r\n  background: #fff9f9;\r\n  color: #fa436a;\n}\n.order-item .action-btn.recom:after {\r\n  border-color: #f7bcc8;\n}\n.p_btn {\r\n  background: #FFFFFF;\r\n  padding: 0 10px 0px;\r\n  position: fixed;\r\n  bottom: 0;\r\n  width: 100%;\r\n  z-index: 9999;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\r\n/* 页面左右间距 */\r\n/* 文字尺寸 */\r\n/*文字颜色*/\r\n/* 边框颜色 */\r\n/* 图片加载中颜色 */\r\n/* 行为相关颜色 */\nbody, .content {\r\n  background: #FFFFFF;\r\n  height: 100%;\n}\n.search {\r\n  background: #FFFFFF;\r\n  display: flex;\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  padding: 10px;\n}\n.navbar {\r\n  display: flex;\r\n  height: 40px;\r\n  padding: 0 5px;\r\n  background: #fff;\r\n  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);\r\n  position: relative;\r\n  z-index: 10;\n}\n.navbar .nav-item {\r\n  flex: 1;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  height: 100%;\r\n  font-size: 30upx;\r\n  color: #303133;\r\n  position: relative;\n}\n.navbar .nav-item.current {\r\n  color: #fa436a;\n}\n.navbar .nav-item.current:after {\r\n  content: '';\r\n  position: absolute;\r\n  left: 50%;\r\n  bottom: 0;\r\n  -webkit-transform: translateX(-50%);\r\n          transform: translateX(-50%);\r\n  width: 44px;\r\n  height: 0;\r\n  border-bottom: 2px solid #fa436a;\n}\n.order-item {\r\n  border-bottom: 1px solid #EAEAEA;\r\n  display: flex;\r\n  flex-direction: column;\r\n  padding-left: 30upx;\r\n  background: #fff;\r\n  /* 单条商品 */\n}\n.order-item .i-top {\r\n  display: flex;\r\n  align-items: center;\r\n  height: 80upx;\r\n  padding-right: 30upx;\r\n  font-size: 28upx;\r\n  color: #303133;\r\n  position: relative;\n}\n.order-item .i-top .time {\r\n  flex: 1;\n}\n.order-item .i-top .state {\r\n  color: #fa436a;\n}\n.order-item .i-top .del-btn {\r\n  padding: 10upx 0 10upx 36upx;\r\n  font-size: 32upx;\r\n  color: #909399;\r\n  position: relative;\n}\n.order-item .i-top .del-btn:after {\r\n  content: '';\r\n  width: 0;\r\n  height: 30upx;\r\n  border-left: 1px solid #DCDFE6;\r\n  position: absolute;\r\n  left: 20upx;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n          transform: translateY(-50%);\n}\n.order-item .goods-box-single {\r\n  display: flex;\r\n  padding: 0upx 0;\n}\n.order-item .goods-box-single .right {\r\n  flex: 1;\r\n  padding: 0 30upx 0 0upx;\r\n  overflow: hidden;\n}\n.order-item .goods-box-single .right .title {\r\n  font-size: 30upx;\r\n  color: #303133;\r\n  line-height: 1;\n}\n.order-item .goods-box-single .right .attr-box {\r\n  font-size: 26upx;\r\n  color: #909399;\r\n  padding: 10upx 12upx;\n}\n.order-item .goods-box-single .right .attr-box:before {\r\n  content: 'x';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 8upx;\n}\n.order-item .goods-box-single .right .price {\r\n  font-size: 30upx;\r\n  color: #303133;\n}\n.order-item .goods-box-single .right .price:before {\r\n  content: '￥';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 8upx;\n}\n.order-item .price-box {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  align-items: baseline;\r\n  padding: 20upx 30upx;\r\n  font-size: 26upx;\r\n  color: #909399;\n}\n.order-item .price-box .num {\r\n  margin: 0 8upx;\r\n  color: #303133;\n}\n.order-item .price-box .price {\r\n  font-size: 32upx;\r\n  color: #303133;\n}\n.order-item .price-box .price:before {\r\n  content: '￥';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 8upx;\n}\n.order-item .action-box {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  align-items: center;\r\n  height: 100upx;\r\n  position: relative;\r\n  padding-right: 30upx;\n}\n.order-item .action-btn {\r\n  width: 160upx;\r\n  height: 60upx;\r\n  margin: 0;\r\n  margin-left: 24upx;\r\n  padding: 0;\r\n  text-align: center;\r\n  line-height: 60upx;\r\n  font-size: 26upx;\r\n  color: #303133;\r\n  background: #fff;\r\n  border-radius: 100px;\n}\n.order-item .action-btn:after {\r\n  border-radius: 100px;\n}\n.order-item .action-btn.recom {\r\n  background: #fff9f9;\r\n  color: #fa436a;\n}\n.order-item .action-btn.recom:after {\r\n  border-color: #f7bcc8;\n}\n.p_btn {\r\n  background: #FFFFFF;\r\n  padding: 0 10px 0px;\r\n  position: fixed;\r\n  bottom: 0;\r\n  width: 100%;\r\n  z-index: 9999;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -8759,7 +8774,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../Program Files/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.order {\n  padding: 10px 10px 10px 10px;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.goods_add {\n  font-size: 13px;\n  justify-content: center;\n  align-items: center;\n}\n.tag-e {\n  background-color: #fff;\n  margin-bottom: 0px;\n  font-size: 13px;\n}\n.tag-e .goods {\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods_02 {\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  height: 160rpx;\n  flex-grow: 1;\n  justify-content: space-between;\n  padding-top: 10rpx;\n  padding-left: 25rpx;\n}\n.tag-e .goods_title {\n  max-height: 40px;\n  overflow: hidden;\n  line-height: 20px;\n  font-weight: 600;\n}\n.tag-e .goods_des {\n  color: #979797;\n}\n.tag-e .good_p {\n  display: flex;\n  justify-content: space-between;\n}\n.tag-e .good_p .good_price {\n  color: #F04E42;\n  font-weight: 600;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.order {\n  padding: 10px 10px 10px 10px;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.goods_add {\n  font-size: 30upx;\n  justify-content: center;\n  align-items: center;\n}\n.tag-e {\n  background-color: #fff;\n  margin-bottom: 0px;\n  font-size: 30upx;\n}\n.tag-e .goods {\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods_02 {\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  height: 160rpx;\n  flex-grow: 1;\n  justify-content: space-between;\n  padding-top: 10rpx;\n  padding-left: 25rpx;\n}\n.tag-e .goods_title {\n  max-height: 40px;\n  overflow: hidden;\n  line-height: 20px;\n  font-weight: 600;\n}\n.tag-e .goods_des {\n  color: #979797;\n}\n.tag-e .good_p {\n  display: flex;\n  justify-content: space-between;\n}\n.tag-e .good_p .good_price {\n  color: #F04E42;\n  font-weight: 600;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -9575,125 +9590,95 @@ var render = function() {
                     }
                   },
                   [
-                    _vm._$g("11-" + $31, "i")
-                      ? _c("v-uni-image", {
-                          staticClass: _vm._$g("11-" + $31, "sc"),
-                          attrs: {
-                            src: _vm._$g("11-" + $31, "a-src"),
-                            mode: "aspectFill",
-                            _i: "11-" + $31
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._$g("12-" + $31, "i")
-                      ? _c("v-uni-image", {
-                          staticClass: _vm._$g("12-" + $31, "sc"),
-                          attrs: {
-                            src: "/imgs/order2.jpg",
-                            mode: "aspectFill",
-                            _i: "12-" + $31
-                          }
-                        })
-                      : _vm._e(),
                     _c(
                       "v-uni-view",
                       {
-                        staticClass: _vm._$g("13-" + $31, "sc"),
-                        attrs: { _i: "13-" + $31 }
+                        staticClass: _vm._$g("11-" + $31, "sc"),
+                        attrs: { _i: "11-" + $31 }
                       },
                       [
                         _c(
                           "v-uni-text",
                           {
-                            staticClass: _vm._$g("14-" + $31, "sc"),
-                            attrs: { _i: "14-" + $31 }
+                            staticClass: _vm._$g("12-" + $31, "sc"),
+                            attrs: { _i: "12-" + $31 }
                           },
-                          [_vm._v(_vm._$g("14-" + $31, "t0-0"))]
+                          [_vm._v(_vm._$g("12-" + $31, "t0-0"))]
                         ),
                         _c(
                           "v-uni-text",
                           {
-                            staticClass: _vm._$g("15-" + $31, "sc"),
-                            attrs: { _i: "15-" + $31 }
+                            staticClass: _vm._$g("13-" + $31, "sc"),
+                            attrs: { _i: "13-" + $31 }
                           },
                           [
                             _vm._v(
-                              _vm._$g("15-" + $31, "t0-0") +
+                              _vm._$g("13-" + $31, "t0-0") +
                                 " x " +
-                                _vm._$g("15-" + $31, "t0-1")
+                                _vm._$g("13-" + $31, "t0-1")
                             )
                           ]
-                        ),
-                        _vm._$g("16-" + $31, "i")
-                          ? _c(
-                              "v-uni-text",
-                              {
-                                staticClass: _vm._$g("16-" + $31, "sc"),
-                                attrs: { _i: "16-" + $31 }
-                              },
-                              [_vm._v(_vm._$g("16-" + $31, "t0-0"))]
-                            )
-                          : _vm._e()
+                        )
                       ],
                       1
                     )
                   ],
                   1
                 ),
-                _vm._$g("17-" + $31, "i")
+                _vm._$g("14-" + $31, "i")
                   ? _c(
                       "v-uni-view",
                       {
-                        staticClass: _vm._$g("17-" + $31, "sc"),
-                        attrs: { _i: "17-" + $31 }
+                        staticClass: _vm._$g("14-" + $31, "sc"),
+                        attrs: { _i: "14-" + $31 }
                       },
                       [
                         _vm._v("共"),
                         _c(
                           "v-uni-text",
                           {
-                            staticClass: _vm._$g("18-" + $31, "sc"),
-                            attrs: { _i: "18-" + $31 }
+                            staticClass: _vm._$g("15-" + $31, "sc"),
+                            attrs: { _i: "15-" + $31 }
                           },
-                          [_vm._v(_vm._$g("18-" + $31, "t0-0"))]
+                          [_vm._v(_vm._$g("15-" + $31, "t0-0"))]
                         ),
                         _vm._v("件商品 实付款"),
                         _c(
                           "v-uni-text",
                           {
-                            staticClass: _vm._$g("19-" + $31, "sc"),
-                            attrs: { _i: "19-" + $31 }
+                            staticClass: _vm._$g("16-" + $31, "sc"),
+                            attrs: { _i: "16-" + $31 }
                           },
-                          [_vm._v(_vm._$g("19-" + $31, "t0-0"))]
+                          [_vm._v(_vm._$g("16-" + $31, "t0-0"))]
                         )
                       ],
                       1
                     )
                   : _vm._e(),
-                _vm._$g("20-" + $31, "i")
+                _vm._$g("17-" + $31, "i")
                   ? _c(
                       "v-uni-text",
                       {
                         staticStyle: { "font-size": "12px" },
-                        attrs: { _i: "20-" + $31 }
+                        attrs: { _i: "17-" + $31 }
                       },
-                      [_vm._v("拒绝理由：" + _vm._$g("20-" + $31, "t0-0"))]
+                      [_vm._v("拒绝理由：" + _vm._$g("17-" + $31, "t0-0"))]
                     )
                   : _vm._e(),
-                _vm._$g("21-" + $31, "i")
+                _vm._$g("18-" + $31, "i")
                   ? _c(
                       "v-uni-view",
                       {
-                        staticClass: _vm._$g("21-" + $31, "sc"),
-                        attrs: { _i: "21-" + $31 }
+                        staticClass: _vm._$g("18-" + $31, "sc"),
+                        attrs: { _i: "18-" + $31 }
                       },
                       [
-                        _vm._$g("22-" + $31, "i")
+                        _vm._$g("19-" + $31, "i")
                           ? _c(
                               "v-uni-button",
                               {
-                                staticClass: _vm._$g("22-" + $31, "sc"),
-                                attrs: { _i: "22-" + $31 },
+                                staticClass: _vm._$g("19-" + $31, "sc"),
+                                attrs: { _i: "19-" + $31 },
                                 on: {
                                   click: function($event) {
                                     return _vm.$handleViewEvent($event)
@@ -9703,12 +9688,12 @@ var render = function() {
                               [_vm._v("立即分配")]
                             )
                           : _vm._e(),
-                        _vm._$g("23-" + $31, "i")
+                        _vm._$g("20-" + $31, "i")
                           ? _c(
                               "v-uni-button",
                               {
-                                staticClass: _vm._$g("23-" + $31, "sc"),
-                                attrs: { _i: "23-" + $31 },
+                                staticClass: _vm._$g("20-" + $31, "sc"),
+                                attrs: { _i: "20-" + $31 },
                                 on: {
                                   click: function($event) {
                                     return _vm.$handleViewEvent($event)
@@ -9734,13 +9719,13 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm._$g(24, "v-show"),
-              expression: "_$g(24,'v-show')"
+              value: _vm._$g(21, "v-show"),
+              expression: "_$g(21,'v-show')"
             }
           ],
-          attrs: { _i: 24 }
+          attrs: { _i: 21 }
         },
-        [_c("uni-load-more", { attrs: { _i: 25 } })],
+        [_c("uni-load-more", { attrs: { _i: 22 } })],
         1
       )
     ],
@@ -9835,7 +9820,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../Program Files/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\r\n/* 页面左右间距 */\r\n/* 文字尺寸 */\r\n/*文字颜色*/\r\n/* 边框颜色 */\r\n/* 图片加载中颜色 */\r\n/* 行为相关颜色 */\nbody, .content {\r\n  background: #f8f8f8;\n}\n.search {\r\n  background: #FFFFFF;\r\n  display: flex;\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  padding: 10px;\n}\n.swiper-box {\r\n  height: calc(100% - 40px);\n}\n.list-scroll-content {\r\n  height: 100%;\n}\n.navbar {\r\n  display: flex;\r\n  height: 40px;\r\n  padding: 0 5px;\r\n  background: #fff;\r\n  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);\r\n  position: relative;\r\n  z-index: 10;\n}\n.navbar .nav-item {\r\n  flex: 1;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  height: 100%;\r\n  font-size: 15px;\r\n  color: #303133;\r\n  position: relative;\n}\n.navbar .nav-item.current {\r\n  color: #fa436a;\n}\n.navbar .nav-item.current:after {\r\n  content: '';\r\n  position: absolute;\r\n  left: 50%;\r\n  bottom: 0;\r\n  -webkit-transform: translateX(-50%);\r\n          transform: translateX(-50%);\r\n  width: 44px;\r\n  height: 0;\r\n  border-bottom: 2px solid #fa436a;\n}\n.uni-swiper-item {\r\n  height: auto;\n}\n.order-item {\r\n  display: flex;\r\n  flex-direction: column;\r\n  padding-left: 30upx;\r\n  background: #fff;\r\n  margin-top: 16upx;\r\n  /* 单条商品 */\n}\n.order-item .i-top {\r\n  display: flex;\r\n  align-items: center;\r\n  height: 80upx;\r\n  padding-right: 30upx;\r\n  font-size: 28upx;\r\n  color: #303133;\r\n  position: relative;\n}\n.order-item .i-top .time {\r\n  flex: 1;\n}\n.order-item .i-top .state {\r\n  color: #fa436a;\n}\n.order-item .i-top .del-btn {\r\n  padding: 10upx 0 10upx 36upx;\r\n  font-size: 32upx;\r\n  color: #909399;\r\n  position: relative;\n}\n.order-item .i-top .del-btn:after {\r\n  content: '';\r\n  width: 0;\r\n  height: 30upx;\r\n  border-left: 1px solid #DCDFE6;\r\n  position: absolute;\r\n  left: 20upx;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n          transform: translateY(-50%);\n}\n.order-item .goods-box-single {\r\n  display: flex;\r\n  padding: 20upx 0;\n}\n.order-item .goods-box-single .goods-img {\r\n  display: block;\r\n  width: 135upx;\r\n  height: 135upx;\n}\n.order-item .goods-box-single .right {\r\n  flex: 1;\r\n  display: flex;\r\n  flex-direction: column;\r\n  padding: 0 30upx 0 24upx;\r\n  overflow: hidden;\n}\n.order-item .goods-box-single .right .title {\r\n  font-size: 30upx;\r\n  color: #303133;\r\n  line-height: 1;\r\n  padding: 0upx 6upx;\n}\n.order-item .goods-box-single .right .attr-box {\r\n  font-size: 26upx;\r\n  color: #909399;\r\n  padding: 10upx 6upx;\n}\n.order-item .goods-box-single .right .price {\r\n  font-size: 30upx;\r\n  color: #303133;\n}\n.order-item .goods-box-single .right .price:before {\r\n  content: '￥';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 5upx;\n}\n.order-item .price-box {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  align-items: baseline;\r\n  padding: 20upx 30upx;\r\n  font-size: 26upx;\r\n  color: #909399;\n}\n.order-item .price-box .num {\r\n  margin: 0 8upx;\r\n  color: #303133;\n}\n.order-item .price-box .price {\r\n  font-size: 32upx;\r\n  color: #303133;\n}\n.order-item .price-box .price:before {\r\n  content: '￥';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 8upx;\n}\n.order-item .action-box {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  align-items: center;\r\n  height: 100upx;\r\n  position: relative;\r\n  padding-right: 30upx;\n}\n.order-item .action-btn {\r\n  width: 160upx;\r\n  height: 60upx;\r\n  margin: 0;\r\n  margin-left: 24upx;\r\n  padding: 0;\r\n  text-align: center;\r\n  line-height: 60upx;\r\n  font-size: 26upx;\r\n  color: #303133;\r\n  background: #fff;\r\n  border-radius: 100px;\n}\n.order-item .action-btn:after {\r\n  border-radius: 100px;\n}\n.order-item .action-btn.recom {\r\n  background: #fff9f9;\r\n  color: #fa436a;\n}\n.order-item .action-btn.recom:after {\r\n  border-color: #f7bcc8;\n}\r\n/* load-more */\n.uni-load-more {\r\n  display: flex;\r\n  flex-direction: row;\r\n  height: 80upx;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.uni-load-more__text {\r\n  font-size: 28upx;\r\n  color: #999;\n}\n.uni-load-more__img {\r\n  height: 24px;\r\n  width: 24px;\r\n  margin-right: 10px;\n}\n.uni-load-more__img > uni-view {\r\n  position: absolute;\n}\n.uni-load-more__img > uni-view uni-view {\r\n  width: 6px;\r\n  height: 2px;\r\n  border-top-left-radius: 1px;\r\n  border-bottom-left-radius: 1px;\r\n  background: #999;\r\n  position: absolute;\r\n  opacity: .2;\r\n  -webkit-transform-origin: 50%;\r\n          transform-origin: 50%;\r\n  -webkit-animation: load 1.56s ease infinite;\r\n          animation: load 1.56s ease infinite;\n}\n.uni-load-more__img > uni-view uni-view:nth-child(1) {\r\n  -webkit-transform: rotate(90deg);\r\n          transform: rotate(90deg);\r\n  top: 2px;\r\n  left: 9px;\n}\n.uni-load-more__img > uni-view uni-view:nth-child(2) {\r\n  -webkit-transform: rotate(180deg);\r\n          transform: rotate(180deg);\r\n  top: 11px;\r\n  right: 0;\n}\n.uni-load-more__img > uni-view uni-view:nth-child(3) {\r\n  -webkit-transform: rotate(270deg);\r\n          transform: rotate(270deg);\r\n  bottom: 2px;\r\n  left: 9px;\n}\n.uni-load-more__img > uni-view uni-view:nth-child(4) {\r\n  top: 11px;\r\n  left: 0;\n}\n.load1,\r\n.load2,\r\n.load3 {\r\n  height: 24px;\r\n  width: 24px;\n}\n.load2 {\r\n  -webkit-transform: rotate(30deg);\r\n          transform: rotate(30deg);\n}\n.load3 {\r\n  -webkit-transform: rotate(60deg);\r\n          transform: rotate(60deg);\n}\n.load1 uni-view:nth-child(1) {\r\n  -webkit-animation-delay: 0s;\r\n          animation-delay: 0s;\n}\n.load2 uni-view:nth-child(1) {\r\n  -webkit-animation-delay: .13s;\r\n          animation-delay: .13s;\n}\n.load3 uni-view:nth-child(1) {\r\n  -webkit-animation-delay: .26s;\r\n          animation-delay: .26s;\n}\n.load1 uni-view:nth-child(2) {\r\n  -webkit-animation-delay: .39s;\r\n          animation-delay: .39s;\n}\n.load2 uni-view:nth-child(2) {\r\n  -webkit-animation-delay: .52s;\r\n          animation-delay: .52s;\n}\n.load3 uni-view:nth-child(2) {\r\n  -webkit-animation-delay: .65s;\r\n          animation-delay: .65s;\n}\n.load1 uni-view:nth-child(3) {\r\n  -webkit-animation-delay: .78s;\r\n          animation-delay: .78s;\n}\n.load2 uni-view:nth-child(3) {\r\n  -webkit-animation-delay: .91s;\r\n          animation-delay: .91s;\n}\n.load3 uni-view:nth-child(3) {\r\n  -webkit-animation-delay: 1.04s;\r\n          animation-delay: 1.04s;\n}\n.load1 uni-view:nth-child(4) {\r\n  -webkit-animation-delay: 1.17s;\r\n          animation-delay: 1.17s;\n}\n.load2 uni-view:nth-child(4) {\r\n  -webkit-animation-delay: 1.3s;\r\n          animation-delay: 1.3s;\n}\n.load3 uni-view:nth-child(4) {\r\n  -webkit-animation-delay: 1.43s;\r\n          animation-delay: 1.43s;\n}\n.p_btn {\r\n  background: #FFFFFF;\r\n  padding: 0 10px 0px;\r\n  position: fixed;\r\n  bottom: 0;\r\n  width: 100%;\r\n  z-index: 9999;\n}\n@-webkit-keyframes load {\n0% {\r\n    opacity: 1;\n}\n100% {\r\n    opacity: .2;\n}\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\r\n/* 页面左右间距 */\r\n/* 文字尺寸 */\r\n/*文字颜色*/\r\n/* 边框颜色 */\r\n/* 图片加载中颜色 */\r\n/* 行为相关颜色 */\nbody, .content {\r\n  background: #FFFFFF;\n}\n.search {\r\n  background: #FFFFFF;\r\n  display: flex;\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  padding: 10px;\n}\n.navbar {\r\n  display: flex;\r\n  height: 40px;\r\n  padding: 0 5px;\r\n  background: #fff;\r\n  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);\r\n  position: relative;\r\n  z-index: 10;\n}\n.navbar .nav-item {\r\n  flex: 1;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  height: 100%;\r\n  font-size: 30upx;\r\n  color: #303133;\r\n  position: relative;\n}\n.navbar .nav-item.current {\r\n  color: #fa436a;\n}\n.navbar .nav-item.current:after {\r\n  content: '';\r\n  position: absolute;\r\n  left: 50%;\r\n  bottom: 0;\r\n  -webkit-transform: translateX(-50%);\r\n          transform: translateX(-50%);\r\n  width: 44px;\r\n  height: 0;\r\n  border-bottom: 2px solid #fa436a;\n}\n.order-item {\r\n  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);\r\n  display: flex;\r\n  flex-direction: column;\r\n  padding-left: 30upx;\r\n  background: #fff;\r\n  margin-top: 16upx;\r\n  /* 单条商品 */\n}\n.order-item .i-top {\r\n  display: flex;\r\n  align-items: center;\r\n  height: 80upx;\r\n  padding-right: 30upx;\r\n  font-size: 28upx;\r\n  color: #303133;\r\n  position: relative;\n}\n.order-item .i-top .time {\r\n  flex: 1;\n}\n.order-item .i-top .state {\r\n  color: #fa436a;\n}\n.order-item .i-top .del-btn {\r\n  padding: 10upx 0 10upx 36upx;\r\n  font-size: 32upx;\r\n  color: #909399;\r\n  position: relative;\n}\n.order-item .i-top .del-btn:after {\r\n  content: '';\r\n  width: 0;\r\n  height: 30upx;\r\n  border-left: 1px solid #DCDFE6;\r\n  position: absolute;\r\n  left: 20upx;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n          transform: translateY(-50%);\n}\n.order-item .goods-box-single {\r\n  display: flex;\r\n  padding: 0upx 0;\n}\n.order-item .goods-box-single .goods-img {\r\n  display: block;\r\n  width: 135upx;\r\n  height: 135upx;\n}\n.order-item .goods-box-single .right {\r\n  flex: 1;\r\n  display: flex;\r\n  flex-direction: column;\r\n  padding: 0 30upx 0 0upx;\r\n  overflow: hidden;\n}\n.order-item .goods-box-single .right .title {\r\n  font-size: 30upx;\r\n  color: #303133;\r\n  line-height: 1;\r\n  padding: 0upx 0upx;\n}\n.order-item .goods-box-single .right .attr-box {\r\n  font-size: 26upx;\r\n  color: #909399;\r\n  padding: 10upx 0upx;\n}\n.order-item .goods-box-single .right .price {\r\n  font-size: 30upx;\r\n  color: #303133;\n}\n.order-item .goods-box-single .right .price:before {\r\n  content: '￥';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 0upx;\n}\n.order-item .price-box {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  align-items: baseline;\r\n  padding: 20upx 30upx;\r\n  font-size: 26upx;\r\n  color: #909399;\n}\n.order-item .price-box .num {\r\n  margin: 0 8upx;\r\n  color: #303133;\n}\n.order-item .price-box .price {\r\n  font-size: 32upx;\r\n  color: #303133;\n}\n.order-item .price-box .price:before {\r\n  content: '￥';\r\n  font-size: 24upx;\r\n  margin: 0 2upx 0 8upx;\n}\n.order-item .action-box {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  align-items: center;\r\n  height: 100upx;\r\n  position: relative;\r\n  padding-right: 30upx;\n}\n.order-item .action-btn {\r\n  width: 160upx;\r\n  height: 60upx;\r\n  margin: 0;\r\n  margin-left: 24upx;\r\n  padding: 0;\r\n  text-align: center;\r\n  line-height: 60upx;\r\n  font-size: 26upx;\r\n  color: #303133;\r\n  background: #fff;\r\n  border-radius: 100px;\n}\n.order-item .action-btn:after {\r\n  border-radius: 100px;\n}\n.order-item .action-btn.recom {\r\n  background: #fff9f9;\r\n  color: #fa436a;\n}\n.order-item .action-btn.recom:after {\r\n  border-color: #f7bcc8;\n}\n.p_btn {\r\n  background: #FFFFFF;\r\n  padding: 0 10px 0px;\r\n  position: fixed;\r\n  bottom: 0;\r\n  width: 100%;\r\n  z-index: 9999;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -12588,7 +12573,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../Program Files/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.order {\n  padding: 10px 10px 10px 10px;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.goods_add {\n  font-size: 13px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e {\n  background-color: #fff;\n  margin-bottom: 0px;\n  font-size: 13px;\n}\n.tag-e .goods {\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods-gray {\n  display: flex;\n  width: 100%;\n  background-color: #d1d1d1;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods_02 {\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  height: 160rpx;\n  flex-grow: 1;\n  justify-content: space-between;\n  padding-top: 10rpx;\n  padding-left: 25rpx;\n}\n.tag-e .goods_title {\n  max-height: 40px;\n  overflow: hidden;\n  line-height: 20px;\n  font-weight: 600;\n}\n.tag-e .goods_des {\n  color: #979797;\n}\n.tag-e .good_p {\n  display: flex;\n  justify-content: space-between;\n}\n.tag-e .good_p .good_price {\n  color: #F04E42;\n  font-weight: 600;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.order {\n  padding: 10px 10px 10px 10px;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.goods_add {\n  font-size: 30upx;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e {\n  background-color: #fff;\n  margin-bottom: 0px;\n  font-size: 30upx;\n}\n.tag-e .goods {\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods-gray {\n  display: flex;\n  width: 100%;\n  background-color: #d1d1d1;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods_02 {\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  height: 160rpx;\n  flex-grow: 1;\n  justify-content: space-between;\n  padding-top: 10rpx;\n  padding-left: 25rpx;\n}\n.tag-e .goods_title {\n  max-height: 40px;\n  overflow: hidden;\n  line-height: 20px;\n  font-weight: 600;\n}\n.tag-e .goods_des {\n  color: #979797;\n}\n.tag-e .good_p {\n  display: flex;\n  justify-content: space-between;\n}\n.tag-e .good_p .good_price {\n  color: #F04E42;\n  font-weight: 600;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
