@@ -18,6 +18,10 @@
 		</view>
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
+			<view class="title">直接发货：</view>
+			<switch :checked="order.canSend" disabled/>
+		</view>
+		<view class="cu-form-group">
 			<view class="cu-form-title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{order.address.name}}</view>
 		</view>
 		<view class="cu-form-group">

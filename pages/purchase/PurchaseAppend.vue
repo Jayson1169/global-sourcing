@@ -29,17 +29,23 @@
 		</view>
 		<view class="cu-form-group" v-if="purchaseOrder.product.origin">
 			<text :style="{color:'white'}">*</text>
-			<view class="cu-form-title">生产地区：</view>
-			<input v-model="purchaseOrder.product.origin" disabled></input>
+			<view class="cu-form-title">生产地区：{{purchaseOrder.product.origin}}</view>
 		</view>
 		<view class="cu-form-group" v-if="purchaseOrder.product.remark">
 			<text :style="{color:'white'}">*</text>
-			<view class="cu-form-title">备注信息：</view>
-			<input v-model="purchaseOrder.product.remark" disabled></input>
+			<view class="cu-form-title">备注信息：{{purchaseOrder.product.remark}}</view>
 		</view>
 		<view class="cu-form-group" v-if="purchaseOrder.product.barcode">
 			<text :style="{color:'white'}">*</text>
-			<view class="cu-form-title">商品库存：{{purchaseOrder.product.inventory.warehouseInventory}}</view>
+			<view class="cu-form-title">国外库存：{{purchaseOrder.product.inventory.warehouseInventory}}</view>
+		</view>
+		<view class="cu-form-group" v-if="purchaseOrder.product.barcode">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">在途库存：{{purchaseOrder.product.inventory.midwayInventory}}</view>
+		</view>
+		<view class="cu-form-group" v-if="purchaseOrder.product.barcode">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">国内库存：{{purchaseOrder.product.inventory.hubInventory}}</view>
 		</view>
 		<view class="detail">采购明细</view>
 		<view class="cu-form-group">
@@ -120,7 +126,7 @@
 		background-color: #F7F6FB;
 	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

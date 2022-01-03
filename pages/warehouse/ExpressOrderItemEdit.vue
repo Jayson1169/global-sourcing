@@ -91,16 +91,8 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.o_btn {
-		background: #F7F6FB;
-		padding: 0 10px 0px;
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		z-index: 9999;
-	}
 	.p_btn_group {
-		background-color: #F7F6FB;
+		background-color: #FFFFFF;
 		padding: 0rpx 20rpx 0rpx 20rpx;
 		display: flex;			
 		position: fixed;
@@ -111,9 +103,6 @@
 		.p_btn {
 			width: 345rpx; 
 		}
-	}
-	.detail {
-		padding: 10px 10px 10px 10px;
 	}
 	.cu-form-group .title {
 		text-align: justify;

@@ -21,7 +21,7 @@
 				</view>
 			</view>
 		</block>
-		<view v-show="isLoadMore">
+		<view v-show="isLoadMore" v-if="userList.length != 0">
 			<uni-load-more :status="loadStatus" ></uni-load-more>
 		</view>
 		<view class="H50"></view>

@@ -1,13 +1,16 @@
 <template>
 	<view class="product">
-		<view class="order">订单明细</view>
+		<view class="detail">订单明细</view>
 		<view class='tag-e'>
-			<view v-for="(item, index) of order.items" :key="index" :class="item.isItemUpdatable?'goods':'goods-gray'" @click="item.isItemUpdatable?jumpProductItemEdit(item):jumpProductItemDetail(item)">
+			<view v-for="(item, index) of order.items" :key="index" :class="item.isItemUpdatable?'goods':'goods'" @click="item.isItemUpdatable?jumpProductItemEdit(item):jumpProductItemDetail(item)">
 				<view>
-					<myimg :photo="item.product.image" v-if="item.product.image"></myimg>
+					<myimg :photo="item.product.image"></myimg>
 				</view>
 				<view class='goods_02'>
-					<view class='goods_title'>{{item.product.name}}</view>
+					<view class="good_p">
+						<view class='goods_title'>{{item.product.name}}</view>
+						<view class='goods_title' v-if="!item.isItemUpdatable && item.isItemUpdatable != null">已分配</view>
+					</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
 					<view class='good_p'>
 						<view class="good_price">¥ {{item.salePrice / 100}}</view>
@@ -20,7 +23,12 @@
 				<text>点击添加商品项</text>
 			</view>
 		</view>
-		<view class="order">收货信息</view>
+		<view class="detail">收货信息</view>
+		<view class="cu-form-group">
+			<text :style="{color:'white'}">*</text>
+			<view class="title">直接发货：</view>
+			<switch @change="switchChange" :checked="order.canSend"/>
+		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
@@ -54,15 +62,16 @@
 	export default {
 		data() {
 			return {
-				// order: {
-				// 	items: [],
-				// 	address: {
-				// 		name: 'test',
-				// 		idNumber: '111111111111111111',
-				// 		phoneNumber: '11111111111',
-				// 		shipAddress: 'test'
-				// 	}
-				// }
+				order: {
+					items: [],
+					address: {
+						name: 'test',
+						idNumber: '111111111111111111',
+						phoneNumber: '11111111111',
+						shipAddress: 'test'
+					},
+					canSend: false
+				}
 			};
 		},
 		onLoad(option) {
@@ -70,7 +79,7 @@
 				this.$api.http.post('/saleOrder/insertItem?saleOrderId='+this.order.id, e).then(res => {
 					this.$api.msg.successToast('添加成功')
 					this.order.items = this.order.items.concat(e)
-					// uni.$emit('edit', this.order)
+					uni.$emit('edit', this.order)
 				})
 			})
 			uni.$on('modify', (e) => {
@@ -78,11 +87,10 @@
 					this.$api.msg.successToast('修改成功')
 					this.order.items.some((item, i) => {
 						if (item.id == e.id) {
-							this.$set(this.order.items, i, e)
-							console.log(i)
+							this.$set(this.order.items, i, e)  
 						}
 					})
-					// uni.$emit('edit', this.order)
+					uni.$emit('edit', this.order)
 				})
 			})
 			uni.$on('delete', (e) => {
@@ -93,10 +101,10 @@
 							this.order.items.splice(i, 1)
 						}
 					})
-					// uni.$emit('edit', this.order)
+					uni.$emit('edit', this.order)
 				})
 			})
-			this.order = JSON.parse(decodeURIComponent(option.order));
+			this.order = JSON.parse(decodeURIComponent(option.order));		
 		},
 		onUnload() {  
 			// 移除监听事件  
@@ -120,19 +128,12 @@
 					})
 				} else {
 					this.$api.http.put('/saleOrder/update', this.order).then(res => {
-						uni.showToast({
-							title: '修改成功',
-							icon: 'none'
-						})
 						this.$api.msg.successToast('修改成功').then(res => {
 							uni.navigateBack()
+							uni.$emit('edit', this.order)
 						})
-						// uni.$emit('edit', this.order)
-						// uni.({
-						// 	url: './Order'
-						// });
 					})
-				}
+				}	
 			},
 			jumpProductItemAppend() {
 				uni.navigateTo({
@@ -148,6 +149,10 @@
 				uni.navigateTo({
 					url: './ProductItemDetail?item='+encodeURIComponent(JSON.stringify(item))
 				});
+			},
+			switchChange: function (e) {
+				// console.log('switch1 发生 change 事件，携带值为', e.target.value)
+				this.order.canSend = e.target.value;
 			}
 		}
 	}
@@ -157,11 +162,8 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.order {
-		padding: 10px 10px 10px 10px;
-	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;
@@ -169,7 +171,7 @@
 		z-index: 9999;
 	}
 	.goods_add {
-		font-size: 30upx;
+		font-size: 13px;
 		justify-content: center;
 		align-items: center;
 		display: flex;
@@ -182,7 +184,7 @@
 	.tag-e {
 		background-color:#fff;
 		margin-bottom: 0px;
-		font-size: 30upx;
+		font-size: 13px;
 		.goods {
 			display: flex;
 			width: 100%;
@@ -214,6 +216,7 @@
 			overflow: hidden;
 			line-height: 20px;
 			font-weight: 600;
+			.goods_right {}
 		}
 		.goods_des {
 			color: #979797;

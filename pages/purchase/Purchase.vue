@@ -28,6 +28,7 @@
 					<text class="title clamp">{{item.product.name}}</text>
 					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
 					<!-- <text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.purchasePrice / 100}}</text> -->
+					<text class="reason" v-if="item.status==='REJECTED'">拒绝理由：{{item.rejectReason}}</text>
 				</view>
 			</view>
 			<view class="price-box" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">
@@ -36,21 +37,20 @@
 				件商品 实付款
 				<text class="price">{{item.quantity * item.purchasePrice / 100}}</text>
 			</view>
-			<text v-if="item.status==='REJECTED'" style="font-size: 12px;">拒绝理由：{{item.rejectReason}}</text>
 			<view class="action-box b-t" v-if="status_to_state[item.status] != 4 && status_to_state[item.status] != 5">
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="purchaserAssign(item)">立即分配</button>
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpPurchaseDetail(item)">立即核验</button>							
 			</view>
 		</view>
-		<view v-show="isLoadMore">
+		<view v-show="isLoadMore" v-if="purchaseOrderList.length != 0">
 			<uni-load-more :status="loadStatus" ></uni-load-more>
 		</view>
-	<!-- 	<view class="H50"></view>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpPurchaseAppend" class="cu-btn bg-red margin-tb-sm lg">新增采购单</button>
 			</view>
-		</view> -->
+		</view>
 	</view>
 </template> 
 
@@ -71,10 +71,26 @@
 				navList: ['全部', '待分配', '待采购', '待核验', '待接收', '已完成']
 			};
 		},
-		onLoad(){
+		onLoad() {
+			uni.$on('edit', (e) => {
+				this.init();
+			})
 			this.getPurchaseOrderList();
 		},
+		onUnload() {
+			uni.$off('edit');
+		},
+		onShow() {
+			this.noClick = true;
+			// this.init();
+		},
 		methods: {
+			init() {
+				this.purchaseRequest.page = 0;
+				this.purchaseRequest.size = 10;
+				this.purchaseOrderList = [];
+				this.getPurchaseOrderList();
+			},
 			getPurchaseOrderList() {
 				this.$api.http.get('/purchaseOrder/findAll', this.purchaseRequest).then(res => {
 					this.purchaseOrderList = this.purchaseOrderList.concat(res.content);
@@ -90,20 +106,27 @@
 				})	
 			},
 			async jumpPurchaseDetail(purchaseOrder){
-				await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
-					purchaseOrder.product.image = res;
-				})
-				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
-					await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
-						purchaseOrder.photo = res;
-					})
-					await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
-						purchaseOrder.invoice = res;
+				if (!purchaseOrder.product.image) {
+					await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+						purchaseOrder.product.image = res;
 					})
 				}
-				uni.navigateTo({
-					url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
-				})
+				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
+					if (!purchaseOrder.photo) {
+						await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.photo = res;
+						})
+						await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.invoice = res;
+						})
+					}
+				}
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+					})
+				}
 			},
 			jumpPurchaseAppend() {
 				uni.navigateTo({
@@ -195,12 +218,13 @@
 		}
 	}
 	.order-item{
-		box-shadow: 0 1px 5px rgba(0,0,0,.06);
+		border-bottom: 1px solid #EAEAEA;
+		// box-shadow: 0 1px 5px rgba(0,0,0,.06);
 		display: flex;
 		flex-direction: column;
 		padding-left: 30upx;
 		background: #fff;
-		margin-top: 16upx;
+		// margin-top: 16upx;
 		.i-top{
 			display: flex;
 			align-items: center;
@@ -266,6 +290,9 @@
 						font-size: $font-sm;
 						margin: 0 2upx 0 0upx;
 					}
+				}
+				.reason {
+					font-size: $font-sm + 2upx;
 				}
 			}
 		}

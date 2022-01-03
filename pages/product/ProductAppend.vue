@@ -191,9 +191,7 @@
 				} else {
 					this.$api.http.post('/product/insert', this.product).then(res => {
 						this.$api.msg.successToast('添加成功').then(res => {
-							uni.navigateBack({
-								delta: 1
-							})
+							uni.navigateBack()
 						})
 					}, error => {
 						uni.showToast({

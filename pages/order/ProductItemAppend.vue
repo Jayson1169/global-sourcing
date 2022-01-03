@@ -39,7 +39,15 @@
 		</view>
 		<view class="cu-form-group" v-if="item.product.barcode">
 			<text :style="{color:'white'}">*</text>
-			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
+			<view class="cu-form-title">国外库存：{{item.product.inventory.warehouseInventory}}</view>
+		</view>
+		<view class="cu-form-group" v-if="item.product.barcode">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">在途库存：{{item.product.inventory.midwayInventory}}</view>
+		</view>
+		<view class="cu-form-group" v-if="item.product.barcode">
+			<text :style="{color:'white'}">*</text>
+			<view class="cu-form-title">国内库存：{{item.product.inventory.hubInventory}}</view>
 		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
@@ -136,7 +144,7 @@
 		background-color: #F7F6FB;
 	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

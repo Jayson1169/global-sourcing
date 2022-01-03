@@ -26,7 +26,7 @@
 					>
 						<text class="title">{{goodsItem.product.name}}</text>
 						<text class="attr-box">{{goodsItem.quantity}}</text>
-						<text class="price">{{goodsItem.salePrice * goodsItem.quantity}}</text>
+						<text class="price">{{goodsItem.salePrice * goodsItem.quantity / 100}}</text>
 					</view>
 				</scroll-view>
 				<view 
@@ -43,14 +43,16 @@
 					<view class="price-box">
 					共
 					<text class="num">{{item.items.length}}</text>
-					类商品 <!-- 实付款
-					<text class="price"> --></text>
+					类商品</text>
 				</view>
 			</view>
 			<view class="action-box b-t" v-if="!item.delivered">
 				<button class="action-btn recom" @click="send(item)">发送快递</button>
 			</view>
 		</view>	
+		<view v-show="isLoadMore" v-if="orderList.length != 0">
+			<uni-load-more :status="loadStatus" ></uni-load-more>
+		</view>
 		<u-tabbar
 			:value="value"
 			:fixed="true"
@@ -68,33 +70,55 @@
 		data() {
 			return {
 				value: 0,
-				request: {
-					page: '0',
-					size: '999'
+				orderRequest: {
+					page: 0,
+					size: 10
 				},
 				tabCurrentIndex: 0,
 				orderList: [],
 				status_to_state: {"CREATED": 1, "READY": 2, "PENDING": 3, "REJECTED": 2, "CONFIRMED": 4, "WAREHOUSED": 5},
 				status_to_state2: {"CREATED": "待分配", "READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "待接收", "WAREHOUSED": "已完成"},
-				navList: ['全部', '待发送', '已完成']
+				navList: ['全部', '待发送', '已完成'],
+				isLoadMore: false,
+				loadStatus: 'loading'
 			};
 		},
+		onBackPress(options) {
+		    return true;
+		},
 		onLoad() {
-			uni.$on('send', (e) => {
-				this.orderList.some((item, i) => {
-					if (item.id == e.id) {
-						this.$set(this.orderList, i, e)  
-					}
-				})
+			uni.$on('edit', (e) => {
+				this.init();
 			})
-			this.$api.http.get('/saleOrder/findAll', this.request).then(res => {
-				this.orderList = res.content
-			})
+			this.getOrderList();
 		},
 		onUnload() {
-			uni.$off('send');
+			uni.$off('edit');
+		},
+		onShow() {
+			this.noClick = true;
 		},
 		methods: {
+			init() {
+				this.orderRequest.page = 0;
+				this.orderRequest.size = 10;
+				this.orderList = [];
+				this.getOrderList();
+			},
+			getOrderList() {
+				this.$api.http.get('/saleOrder/findAll', this.orderRequest).then(res => {
+					this.orderList = this.orderList.concat(res.content);
+					if (res.numberOfElements < this.orderRequest.size) {
+						this.isLoadMore = true
+						this.loadStatus = 'nomore'
+					} else {
+						this.isLoadMore = false
+					}
+				}).catch(err => {
+					this.isLoadMore = true
+					if (this.orderRequest.page > 1) this.orderRequest.page -= 1
+				})	
+			},
 			click(e) {
 				if (e == 0) {
 					uni.navigateTo({
@@ -118,9 +142,12 @@
 						})
 					}
 				}
-				uni.navigateTo({
-					url: './OrderTransport?order='+encodeURIComponent(JSON.stringify(order))
-				});
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './OrderTransport?order='+encodeURIComponent(JSON.stringify(order))
+					});
+				}
 			},
 			//顶部tab点击
 			tabClick(index) {
@@ -154,7 +181,8 @@
 
 <style lang="scss">
 	page, .content{
-		background: $page-color-base;
+		background: #FFFFFF;
+		height: 100%;
 	}
 	.search {
 		background: #FFFFFF;
@@ -162,12 +190,6 @@
 		width: 100%;
 		box-sizing: border-box;
 		padding: 10px;
-	}
-	.swiper-box{
-		height: calc(100% - 40px);
-	}
-	.list-scroll-content{
-		height: 100%;
 	}
 	.navbar{
 		display: flex;
@@ -183,7 +205,7 @@
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			font-size: 15px;
+			font-size: 30upx;
 			color: $font-color-dark;
 			position: relative;
 			&.current{
@@ -201,17 +223,14 @@
 			}
 		}
 	}
-
-	.uni-swiper-item{
-		height: auto;
-	}
 	.order-item{
 		display: flex;
 		flex-direction: column;
 		padding-left: 30upx;
 		background: #fff;
+		border-bottom: 1px solid #EAEAEA;
 		// margin-top: 16upx;
-		margin-bottom: 16upx;
+		// margin-bottom: 16upx;
 		.i-top{
 			display: flex;
 			align-items: center;
@@ -330,146 +349,6 @@
 					border-color: #f7bcc8;
 				}
 			}
-		}
-	}
-	
-	
-	/* load-more */
-	.uni-load-more {
-		display: flex;
-		flex-direction: row;
-		height: 80upx;
-		align-items: center;
-		justify-content: center
-	}
-	
-	.uni-load-more__text {
-		font-size: 28upx;
-		color: #999
-	}
-	
-	.uni-load-more__img {
-		height: 24px;
-		width: 24px;
-		margin-right: 10px
-	}
-	
-	.uni-load-more__img>view {
-		position: absolute
-	}
-	
-	.uni-load-more__img>view view {
-		width: 6px;
-		height: 2px;
-		border-top-left-radius: 1px;
-		border-bottom-left-radius: 1px;
-		background: #999;
-		position: absolute;
-		opacity: .2;
-		transform-origin: 50%;
-		animation: load 1.56s ease infinite
-	}
-	
-	.uni-load-more__img>view view:nth-child(1) {
-		transform: rotate(90deg);
-		top: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(2) {
-		transform: rotate(180deg);
-		top: 11px;
-		right: 0
-	}
-	
-	.uni-load-more__img>view view:nth-child(3) {
-		transform: rotate(270deg);
-		bottom: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(4) {
-		top: 11px;
-		left: 0
-	}
-	
-	.load1,
-	.load2,
-	.load3 {
-		height: 24px;
-		width: 24px
-	}
-	
-	.load2 {
-		transform: rotate(30deg)
-	}
-	
-	.load3 {
-		transform: rotate(60deg)
-	}
-	
-	.load1 view:nth-child(1) {
-		animation-delay: 0s
-	}
-	
-	.load2 view:nth-child(1) {
-		animation-delay: .13s
-	}
-	
-	.load3 view:nth-child(1) {
-		animation-delay: .26s
-	}
-	
-	.load1 view:nth-child(2) {
-		animation-delay: .39s
-	}
-	
-	.load2 view:nth-child(2) {
-		animation-delay: .52s
-	}
-	
-	.load3 view:nth-child(2) {
-		animation-delay: .65s
-	}
-	
-	.load1 view:nth-child(3) {
-		animation-delay: .78s
-	}
-	
-	.load2 view:nth-child(3) {
-		animation-delay: .91s
-	}
-	
-	.load3 view:nth-child(3) {
-		animation-delay: 1.04s
-	}
-	
-	.load1 view:nth-child(4) {
-		animation-delay: 1.17s
-	}
-	
-	.load2 view:nth-child(4) {
-		animation-delay: 1.3s
-	}
-	
-	.load3 view:nth-child(4) {
-		animation-delay: 1.43s
-	}
-	.p_btn {
-		background: #FFFFFF;
-		padding: 0 10px 0px;
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		z-index: 9999;
-	}
-	
-	@-webkit-keyframes load {
-		0% {
-			opacity: 1
-		}
-		100% {
-			opacity: .2
 		}
 	}
 </style>

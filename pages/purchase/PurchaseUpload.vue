@@ -72,6 +72,7 @@
 		},
 		onLoad(option) {
 			this.purchaseOrder = JSON.parse(decodeURIComponent(option.purchaseOrder));
+			this.purchaseOrder.price = this.purchaseOrder.purchasePrice / 100;
 		},
 		methods: {
 			getPhoto(val) {
@@ -105,9 +106,10 @@
 				} else {
 					this.$api.http.put('/purchaseOrder/uploadPurchaseInfo', this.purchaseOrder).then(res => {
 						this.$api.msg.successToast('上传成功').then(res => {
-							uni.navigateTo({
+							uni.$emit('edit');
+							uni.redirectTo({
 								url: './Purchaser'
-							});
+							})
 						})
 					})
 				}	
@@ -133,7 +135,7 @@
 		background-color: #F7F6FB;
 	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

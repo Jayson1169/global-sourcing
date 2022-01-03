@@ -27,7 +27,13 @@
 			<view class="cu-form-title">备注信息：{{item.product.remark}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
+			<view class="cu-form-title">国外库存：{{item.product.inventory.warehouseInventory}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="cu-form-title">在途库存：{{item.product.inventory.midwayInventory}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="cu-form-title">国内库存：{{item.product.inventory.hubInventory}}</view>
 		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">

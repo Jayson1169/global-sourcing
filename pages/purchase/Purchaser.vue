@@ -21,13 +21,12 @@
 				<text v-if="item.status==='REJECTED'" class="del-btn yticon icon-iconfontshanchu1"></text>
 				<text v-if="item.status==='REJECTED'" class="state" style="color: '#909399'">核验未通过</text>
 			</view>
-			<view class="goods-box-single" @click="item.status=='READY'?jumpToPurchaseUpload(item):jumpPurchaseDetail(item)">
-				<image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image>
-				<image class="goods-img" src='../../imgs/order2.jpg' mode="aspectFill" v-if="item.photo === null"></image>				
+			<view class="goods-box-single" @click="status_to_state[item.status] == 1?jumpToPurchaseUpload(item):jumpPurchaseDetail(item)">
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
 					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
-					<text class="price" v-if="status_to_state[item.status] == 2 || status_to_state[item.status] == 3">{{item.purchasePrice / 100}}</text>
+					<!-- <text class="price" v-if="status_to_state[item.status] == 2 || status_to_state[item.status] == 3">{{item.purchasePrice / 100}}</text> -->
+					<text class="reason" v-if="item.status==='REJECTED'">拒绝理由：{{item.rejectReason}}</text>
 				</view>
 			</view>
 			<view class="price-box" v-if="status_to_state[item.status] != 1">
@@ -36,68 +35,126 @@
 				件商品 实付款
 				<text class="price">{{item.quantity * item.purchasePrice / 100}}</text>
 			</view>
-			<text v-if="item.status==='REJECTED'" style="font-size: 12px;">拒绝理由：{{item.rejectReason}}</text>
 			<view class="action-box b-t" v-if="status_to_state[item.status] == 1">
 				<button class="action-btn recom" @click="jumpToPurchaseUpload(item)">上传信息</button>
 			</view>
+		</view>
+		<view v-show="isLoadMore" v-if="purchaseOrderList.length != 0">
+			<uni-load-more :status="loadStatus" ></uni-load-more>
 		</view>
 	</view>
 </template> 
 
 <script>
-	import empty from "@/components/empty";
-	import Json from '@/Json';
 	export default {
-		components: {
-			empty
-		},
 		data() {
 			return {
-				request: {
-					buyerId: '',
+				purchaseRequest: {
 					page: '0',
-					size: '999'
+					size: '10'
 				},
 				purchaseOrderList: [],
 				tabCurrentIndex: 0,
+				isLoadMore: false,
+				loadStatus: 'loading',
 				status_to_state: {"READY": 1, "PENDING": 2, "REJECTED": 1, "CONFIRMED": 3, "WAREHOUSED": 4},
 				status_to_state2: {"READY": "待采购", "PENDING": "待核验", "REJECTED": "待采购", "CONFIRMED": "待接收", "WAREHOUSED": "已完成"},
 				navList: ['全部', '待采购', '待核验', '待接收', '已完成']
 			};
 		},
-		onLoad(){
-			this.request.buyerId = uni.getStorageSync('user').id
-			this.$api.http.get('/purchaseOrder/findAllByBuyer', this.request).then(res => {
-				this.purchaseOrderList = res.content
+		onBackPress(options) {
+		    return true
+		},
+		onLoad() {
+			uni.$on('edit', (e) => {
+				this.init();
 			})
+			this.purchaseRequest.buyerId = uni.getStorageSync('user').id
+			this.getPurchaseOrderList();
+		},
+		onUnload() {
+			uni.$off('edit');
+		},
+		onShow() {
+			this.noClick = true;
 		},
 		methods: {
+			init() {
+				this.purchaseRequest.page = 0;
+				this.purchaseRequest.size = 10;
+				this.purchaseOrderList = [];
+				this.getPurchaseOrderList();
+			},
+			getPurchaseOrderList() {
+				this.$api.http.get('/purchaseOrder/findAllByBuyer', this.purchaseRequest).then(res => {
+					this.purchaseOrderList = this.purchaseOrderList.concat(res.content);
+					if (res.numberOfElements < this.purchaseRequest.size) {
+						this.isLoadMore = true
+						this.loadStatus = 'nomore'
+					} else {
+						this.isLoadMore = false
+					}
+				}).catch(err => {
+					this.isLoadMore = true
+					if (this.purchaseRequest.page > 1) this.purchaseRequest.page -= 1
+				})	
+			},
 			async jumpPurchaseDetail(purchaseOrder){
-				await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
-					purchaseOrder.product.image = res;
-				})
-				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
-					await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
-						purchaseOrder.photo = res;
-					})
-					await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
-						purchaseOrder.invoice = res;
+				if (!purchaseOrder.product.image) {
+					await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+						purchaseOrder.product.image = res;
 					})
 				}
-				uni.navigateTo({
-					url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
-				})
+				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
+					if (!purchaseOrder.photo) {
+						await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.photo = res;
+						})
+						await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.invoice = res;
+						})
+					}
+				}
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+					})
+				}
 			},
 			tabClick(index){
 				this.tabCurrentIndex = index;
 			},
 			async jumpToPurchaseUpload(purchaseOrder) {
-				await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
-					purchaseOrder.product.image = res;
-				})
-				uni.navigateTo({
-					url: './PurchaseUpload?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
-				})
+				if (!purchaseOrder.product.image) {
+					await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+						purchaseOrder.product.image = res;
+					})
+				}
+				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
+					if (!purchaseOrder.photo) {
+						await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.photo = res;
+						})
+						await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.invoice = res;
+						})
+					}
+				}
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './PurchaseUpload?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+					})
+				}
+			},
+			onReachBottom() {
+				// 此处判断，上锁，防止重复请求
+				if (!this.isLoadMore) { 
+					this.isLoadMore = true
+					this.purchaseRequest.page += 1
+					this.getPurchaseOrderList()
+				}
 			}
 		},
 	}
@@ -105,8 +162,7 @@
 
 <style lang="scss">
 	page, .content{
-		background: $page-color-base;
-		height: 100%;
+		background: #FFFFFF;
 	}
 	.search {
 		background: #FFFFFF;
@@ -114,12 +170,6 @@
 		width: 100%;
 		box-sizing: border-box;
 		padding: 10px;
-	}
-	.swiper-box{
-		height: calc(100% - 40px);
-	}
-	.list-scroll-content{
-		height: 100%;
 	}
 	.navbar{
 		display: flex;
@@ -135,7 +185,7 @@
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			font-size: 15px;
+			font-size: 30upx;
 			color: $font-color-dark;
 			position: relative;
 			&.current{
@@ -153,15 +203,14 @@
 			}
 		}
 	}
-	.uni-swiper-item{
-		height: auto;
-	}
 	.order-item{
+		border-bottom: 1px solid #EAEAEA;
+		// box-shadow: 0 1px 5px rgba(0,0,0,.06);
 		display: flex;
 		flex-direction: column;
 		padding-left: 30upx;
 		background: #fff;
-		margin-top: 16upx;
+		// margin-top: 16upx;
 		.i-top{
 			display: flex;
 			align-items: center;
@@ -196,7 +245,7 @@
 		/* 单条商品 */
 		.goods-box-single{
 			display: flex;
-			padding: 20upx 0;
+			padding: 0upx 0;
 			.goods-img{
 				display: block;
 				width: 135upx;
@@ -206,18 +255,18 @@
 				flex: 1;
 				display: flex;
 				flex-direction: column;
-				padding: 0 30upx 0 24upx;
+				padding: 0 30upx 0 0upx;
 				overflow: hidden;
 				.title{
 					font-size: $font-base + 2upx;
 					color: $font-color-dark;
 					line-height: 1;
-					padding: 0upx 6upx;
+					padding: 0upx 0upx;
 				}
 				.attr-box{
 					font-size: $font-sm + 2upx;
 					color: $font-color-light;
-					padding: 10upx 6upx;
+					padding: 10upx 0upx;
 				}
 				.price{
 					font-size: $font-base + 2upx;
@@ -225,12 +274,14 @@
 					&:before{
 						content: '￥';
 						font-size: $font-sm;
-						margin: 0 2upx 0 6upx;
+						margin: 0 2upx 0 0upx;
 					}
+				}
+				.reason {
+					font-size: $font-sm + 2upx;
 				}
 			}
 		}
-		
 		.price-box{
 			display: flex;
 			justify-content: flex-end;
@@ -248,7 +299,7 @@
 				&:before{
 					content: '￥';
 					font-size: $font-sm;
-					margin: 0 upx 0 8upx;
+					margin: 0 2upx 0 8upx;
 				}
 			}
 		}
@@ -284,129 +335,6 @@
 			}
 		}
 	}
-	
-	
-	/* load-more */
-	.uni-load-more {
-		display: flex;
-		flex-direction: row;
-		height: 80upx;
-		align-items: center;
-		justify-content: center
-	}
-	
-	.uni-load-more__text {
-		font-size: 28upx;
-		color: #999
-	}
-	
-	.uni-load-more__img {
-		height: 24px;
-		width: 24px;
-		margin-right: 10px
-	}
-	
-	.uni-load-more__img>view {
-		position: absolute
-	}
-	
-	.uni-load-more__img>view view {
-		width: 6px;
-		height: 2px;
-		border-top-left-radius: 1px;
-		border-bottom-left-radius: 1px;
-		background: #999;
-		position: absolute;
-		opacity: .2;
-		transform-origin: 50%;
-		animation: load 1.56s ease infinite
-	}
-	
-	.uni-load-more__img>view view:nth-child(1) {
-		transform: rotate(90deg);
-		top: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(2) {
-		transform: rotate(180deg);
-		top: 11px;
-		right: 0
-	}
-	
-	.uni-load-more__img>view view:nth-child(3) {
-		transform: rotate(270deg);
-		bottom: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(4) {
-		top: 11px;
-		left: 0
-	}
-	
-	.load1,
-	.load2,
-	.load3 {
-		height: 24px;
-		width: 24px
-	}
-	
-	.load2 {
-		transform: rotate(30deg)
-	}
-	
-	.load3 {
-		transform: rotate(60deg)
-	}
-	
-	.load1 view:nth-child(1) {
-		animation-delay: 0s
-	}
-	
-	.load2 view:nth-child(1) {
-		animation-delay: .13s
-	}
-	
-	.load3 view:nth-child(1) {
-		animation-delay: .26s
-	}
-	
-	.load1 view:nth-child(2) {
-		animation-delay: .39s
-	}
-	
-	.load2 view:nth-child(2) {
-		animation-delay: .52s
-	}
-	
-	.load3 view:nth-child(2) {
-		animation-delay: .65s
-	}
-	
-	.load1 view:nth-child(3) {
-		animation-delay: .78s
-	}
-	
-	.load2 view:nth-child(3) {
-		animation-delay: .91s
-	}
-	
-	.load3 view:nth-child(3) {
-		animation-delay: 1.04s
-	}
-	
-	.load1 view:nth-child(4) {
-		animation-delay: 1.17s
-	}
-	
-	.load2 view:nth-child(4) {
-		animation-delay: 1.3s
-	}
-	
-	.load3 view:nth-child(4) {
-		animation-delay: 1.43s
-	}
 	.p_btn {
 		background: #FFFFFF;
 		padding: 0 10px 0px;
@@ -414,15 +342,5 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-	}
-	
-	@-webkit-keyframes load {
-		0% {
-			opacity: 1
-		}
-	
-		100% {
-			opacity: .2
-		}
 	}
 </style>

@@ -22,6 +22,12 @@
 		</view>
 		<view class="detail">收货信息</view>
 		<view class="cu-form-group">
+			<text :style="{color:'white'}">*</text>
+			<view class="title">直接发货：</view>
+			<!-- <view class="uni-list-cell-db">开启中</view> -->
+			<switch @change="switchChange" :checked="order.canSend"/>
+		</view>
+		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
 			<input placeholder="请输入姓名" v-model="order.address.name"></input>
@@ -61,7 +67,8 @@
 						idNumber: '111111111111111111',
 						phoneNumber: '11111111111',
 						shipAddress: 'test'
-					}
+					},
+					canSend: false
 				}
 			};
 		},
@@ -105,9 +112,8 @@
 							// uni.navigateTo({
 							// 	url: role=='ADMIN'?'./Order':'./Salesperson'
 							// });
-							uni.navigateBack({
-								delta: 1
-							})
+							uni.navigateBack()
+							uni.$emit('edit', this.order)
 						})
 					})
 				}	
@@ -121,6 +127,10 @@
 				uni.navigateTo({
 					url: './ProductItemEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});
+			},
+			switchChange: function (e) {
+				// console.log('switch1 发生 change 事件，携带值为', e.target.value)
+				this.order.canSend = e.target.value;
 			}
 		}
 	}
@@ -142,7 +152,7 @@
 		z-index: 9999;
 	}
 	.goods_add {
-		font-size: 30upx;
+		font-size: 13px;
 		// 13px
 		justify-content: center;
 		align-items: center;
@@ -150,7 +160,7 @@
 	.tag-e {
 		background-color:#fff;
 		margin-bottom: 0px;
-		font-size: 30upx;
+		font-size: 13px;
 		.goods {
 			display: flex;
 			width: 100%;
