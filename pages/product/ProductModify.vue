@@ -159,6 +159,10 @@
 				if (e == 'delete') {
 					this.$api.http.delete('/product/delete?id='+this.product.id, null).then(res => {
 						uni.$emit('delete', this.product)
+						uni.showToast({
+							icon: 'success',
+							title: '删除成功'
+						})
 					}, error => {
 						uni.showToast({
 							icon: 'none',
@@ -209,7 +213,9 @@
 				} else {
 					this.$api.http.put('/product/update', this.product).then(res => {
 						uni.$emit('modify', this.product)
-						uni.navigateBack()
+						this.$api.msg.successToast('修改成功').then(res => {
+							uni.navigateBack()
+						})
 					})
 				}	
 			}

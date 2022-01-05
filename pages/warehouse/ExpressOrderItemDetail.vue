@@ -71,7 +71,4 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.detail {
-		padding: 10px 10px 10px 10px;
-	}
 </style>

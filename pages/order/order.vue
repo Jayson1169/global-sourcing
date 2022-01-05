@@ -46,10 +46,10 @@
 				<button class="action-btn recom" @click="jumpOrderModify(item)">修改订单</button>
 			</view>
 		</view>	
-		<view v-show="isLoadMore">
+		<view v-show="isLoadMore" v-if="orderList.length != 0">
 			<uni-load-more :status="loadStatus" ></uni-load-more>
 		</view>
-		<view class="H60"></view>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpOrderAppend" class="cu-btn bg-red margin-tb-sm lg">添加订单</button>

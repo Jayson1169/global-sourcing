@@ -29,6 +29,13 @@
 		<view class="cu-form-group">
 			<view class="cu-form-title">商品库存：{{item.product.inventory.hubInventory}}</view>
 		</view>
+		<view class="cu-form-group">
+			<view class="cu-form-title">已发货数量：{{item.deliveredQuantity}}</view>
+		</view>
+		<view class="cu-form-group" v-for="number in item.expressNumbers">
+			已发货物流：
+			<view class="cu-form-title">{{number}}</view>
+		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
 			<view class="cu-form-title">销售数量：{{item.quantity}}</view>
@@ -40,6 +47,16 @@
 				<view class="title">物流单号：</view>
 				<input placeholder="请扫描或输入物流单号" v-model="item.expressNumber"></input>
 				<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
+			</view>
+			<view class="cu-form-group">
+				<text :style="{color:'red'}">*</text>
+				<view class="title">物流公司：</view>
+				<input placeholder="请输入物流公司" v-model="item.expressCompany"></input>
+			</view>
+			<view class="cu-form-group">
+				<text :style="{color:'red'}">*</text>
+				<view class="title">发货数量：</view>
+				<input placeholder="请输入发货数量" v-model="item.expressQuantity"></input>
 			</view>
 			<view>
 				<view class="H50"></view>
@@ -86,8 +103,8 @@
 				})
 			},
 			sub() {	
-				this.$api.http.put('/saleOrder/deliverItem?itemId='+this.item.id+'&quantity='+this.item.quantity+'&expressNumber='+this.item.expressNumber, null).then(res => {
-					uni.$emit('send', res)
+				this.$api.http.put('/saleOrder/deliverItem?itemId='+this.item.id+'&quantity='+this.item.expressQuantity+'&expressNumber='+this.item.expressNumber, null).then(res => {
+					uni.$emit('edit', res)
 					uni.navigateBack()
 				})
 			}

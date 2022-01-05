@@ -16,15 +16,13 @@
 			class="order-item"
 		>
 			<view class="i-top b-b">
-				<text class="time">{{item.createTime}}</text>
+				<text class="time">{{item.updateTime}}</text>
 				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
 			</view>
-			<view class="goods-box-single" @click="jumpPurchaseDetail(item)">
-				<!-- <image class="goods-img" :src="item.photo" mode="aspectFill"></image> -->
+			<view class="goods-box-single" @click="status_to_state[item.status] == 1?jumpToPurchaseReceive(item):jumpPurchaseDetail(item)">
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
 					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
-					<text class="price">{{item.purchasePrice / 100}}</text>
 				</view>
 			</view>
 			<view class="price-box">
@@ -37,16 +35,9 @@
 				<button class="action-btn recom" @click="jumpToPurchaseReceive(item)">接收商品</button>
 			</view>
 		</view>
-		<!-- <view class="H50"></view> -->
-		<!-- <view class="p_btn">
-			<view class=" flex flex-direction">
-				<button class="cu-btn bg-red margin-tb-sm lg" @click="jumpToWarehouseOutput">导出海关信息</button>
-			</view>
-		</view> -->
-	<!-- 	<view class="p_btn_group">
-			<button class="p_btn cu-btn bg-red margin-tb-sm lg" @click="jumpToExpressOrderAppend">发送快递物流</button>
-			<button class="p_btn cu-btn bg-red margin-tb-sm lg" @click="jumpToWarehouseOutput">导出海关信息</button>
-		</view> -->
+		<view v-show="isLoadMore" v-if="purchaseOrderList.length != 0">
+			<uni-load-more :status="loadStatus" ></uni-load-more>
+		</view>
 		<u-tabbar
 			:value="value"
 			:fixed="true"
@@ -61,31 +52,61 @@
 </template> 
 
 <script>
-	import Json from '@/Json';
 	export default {
 		data() {
 			return {
-				request: {
-					warehouseKeeperId: '',
+				purchaseRequest: {
 					page: '0',
-					size: '999'
+					size: '10'
 				},
 				value: 0,
+				isLoadMore: false,
+				loadStatus: 'loading',
 				purchaseOrderList: [],
-				// purchaseOrderList: [{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},{"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}}],
 				tabCurrentIndex: 0,
 				status_to_state: {"CONFIRMED": 1, "WAREHOUSED": 2},
 				status_to_state2: {"CONFIRMED": "待接收", "WAREHOUSED": "已接收"},
 				navList: ['全部', '待接收', '已接收']
 			};
 		},
+		onBackPress(options) {
+		    return true
+		},
 		onLoad(){
-			this.request.warehouseKeeperId = uni.getStorageSync('user').id
-			this.$api.http.get('/purchaseOrder/findAllByWarehouseKeeper', this.request).then(res => {
-				this.purchaseOrderList = res.content
+			this.purchaseRequest.warehouseKeeperId = uni.getStorageSync('user').id
+			uni.$on('edit', (e) => {
+				this.init();
 			})
+			this.getPurchaseOrderList();
+			
+		},
+		onUnload() {
+			uni.$off('edit');
+		},
+		onShow() {
+			this.noClick = true;
 		},
 		methods: {
+			init() {
+				this.purchaseRequest.page = 0;
+				this.purchaseRequest.size = 10;
+				this.purchaseOrderList = [];
+				this.getPurchaseOrderList();
+			},
+			getPurchaseOrderList() {
+				this.$api.http.get('/purchaseOrder/findAllByWarehouseKeeper', this.purchaseRequest).then(res => {
+					this.purchaseOrderList = this.purchaseOrderList.concat(res.content);
+					if (res.numberOfElements < this.purchaseRequest.size) {
+						this.isLoadMore = true
+						this.loadStatus = 'nomore'
+					} else {
+						this.isLoadMore = false
+					}
+				}).catch(err => {
+					this.isLoadMore = true
+					if (this.purchaseRequest.page > 1) this.purchaseRequest.page -= 1
+				})	
+			},
 			click(e) {
 				if (e == 0) {
 					uni.redirectTo({
@@ -104,27 +125,51 @@
 			tabClick(index){
 				this.tabCurrentIndex = index;
 			},
-			jumpPurchaseDetail(purchaseOrder){
-				this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
-					purchaseOrder.product.image = res;
-					this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
-						purchaseOrder.photo = res;
-						this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
-							purchaseOrder.invoice = res;
-							uni.navigateTo({
-								url: '../purchase/PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
-							});
-						})
+			async jumpPurchaseDetail(purchaseOrder){
+				if (!purchaseOrder.product.image) {
+					await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+						purchaseOrder.product.image = res;
 					})
-				})
+				}
+				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
+					if (!purchaseOrder.photo) {
+						await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.photo = res;
+						})
+						await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.invoice = res;
+						})
+					}
+				}
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: '../purchase/PurchaseDetail?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
+					})
+				}
 			},
-			jumpToPurchaseReceive(purchaseOrder) {
-				this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
-					purchaseOrder.product.image = res;
+			async jumpToPurchaseReceive(purchaseOrder) {
+				if (!purchaseOrder.product.image) {
+					await this.$api.http.get('/product/getImage?id='+purchaseOrder.product.id, null).then(res => {
+						purchaseOrder.product.image = res;
+					})
+				}
+				if (purchaseOrder.status != 'CREATED' && purchaseOrder.status != 'READY') {
+					if (!purchaseOrder.photo) {
+						await this.$api.http.get('/purchaseOrder/getPhoto?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.photo = res;
+						})
+						await this.$api.http.get('/purchaseOrder/getInvoice?id='+purchaseOrder.id, null).then(res => {
+							purchaseOrder.invoice = res;
+						})
+					}
+				}
+				if (this.noClick) {
+					this.noClick = false;
 					uni.navigateTo({
 						url: '../purchase/PurchaseReceive?purchaseOrder='+encodeURIComponent(JSON.stringify(purchaseOrder))
 					})
-				})
+				}
 			},
 			jumpToWarehouseOutput() {
 				uni.navigateTo({
@@ -142,26 +187,7 @@
 
 <style lang="scss">
 	page, .content{
-		background: $page-color-base;
-	}
-	.p_btn_group {
-		background-color: $page-color-base;
-		padding: 0rpx 20rpx 0rpx 20rpx;
-		display: flex;			
-		position: fixed;
-		bottom: 0;
-		z-index: 9999;
-		width: 100%;
-		justify-content: space-between;
-		.p_btn {
-			width: 345rpx; 
-		}
-	}
-	.swiper-box{
-		height: calc(100% - 40px);
-	}
-	.list-scroll-content{
-		height: 100%;
+		background: #FFFFFF;
 	}
 	.navbar{
 		display: flex;
@@ -177,7 +203,7 @@
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			font-size: 15px;
+			font-size: 30upx;
 			color: $font-color-dark;
 			position: relative;
 			&.current{
@@ -195,15 +221,14 @@
 			}
 		}
 	}
-	.uni-swiper-item{
-		height: auto;
-	}
 	.order-item{
+		border-bottom: 1px solid #EAEAEA;
+		// box-shadow: 0 1px 5px rgba(0,0,0,.06);
 		display: flex;
 		flex-direction: column;
 		padding-left: 30upx;
 		background: #fff;
-		margin-top: 16upx;
+		// margin-top: 16upx;
 		.i-top{
 			display: flex;
 			align-items: center;
@@ -238,7 +263,7 @@
 		/* 单条商品 */
 		.goods-box-single{
 			display: flex;
-			padding: 20upx 0;
+			padding: 0upx 0;
 			.goods-img{
 				display: block;
 				width: 135upx;
@@ -248,18 +273,18 @@
 				flex: 1;
 				display: flex;
 				flex-direction: column;
-				padding: 0 30upx 0 24upx;
+				padding: 0 30upx 0 0upx;
 				overflow: hidden;
 				.title{
 					font-size: $font-base + 2upx;
 					color: $font-color-dark;
 					line-height: 1;
-					padding: 0upx 6upx;
+					padding: 0upx 0upx;
 				}
 				.attr-box{
 					font-size: $font-sm + 2upx;
 					color: $font-color-light;
-					padding: 10upx 6upx;
+					padding: 10upx 0upx;
 				}
 				.price{
 					font-size: $font-base + 2upx;
@@ -267,12 +292,14 @@
 					&:before{
 						content: '￥';
 						font-size: $font-sm;
-						margin: 0 2upx 0 6upx;
+						margin: 0 2upx 0 0upx;
 					}
+				}
+				.reason {
+					font-size: $font-sm + 2upx;
 				}
 			}
 		}
-		
 		.price-box{
 			display: flex;
 			justify-content: flex-end;
@@ -290,7 +317,7 @@
 				&:before{
 					content: '￥';
 					font-size: $font-sm;
-					margin: 0 upx 0 8upx;
+					margin: 0 2upx 0 8upx;
 				}
 			}
 		}
@@ -324,120 +351,6 @@
 					border-color: #f7bcc8;
 				}
 			}
-		}
-	}
-	/* load-more */
-	.uni-load-more {
-		display: flex;
-		flex-direction: row;
-		height: 80upx;
-		align-items: center;
-		justify-content: center
-	}
-	.uni-load-more__text {
-		font-size: 28upx;
-		color: #999
-	}
-	.uni-load-more__img {
-		height: 24px;
-		width: 24px;
-		margin-right: 10px
-	}
-	.uni-load-more__img>view {
-		position: absolute
-	}
-	.uni-load-more__img>view view {
-		width: 6px;
-		height: 2px;
-		border-top-left-radius: 1px;
-		border-bottom-left-radius: 1px;
-		background: #999;
-		position: absolute;
-		opacity: .2;
-		transform-origin: 50%;
-		animation: load 1.56s ease infinite
-	}
-	.uni-load-more__img>view view:nth-child(1) {
-		transform: rotate(90deg);
-		top: 2px;
-		left: 9px
-	}
-	.uni-load-more__img>view view:nth-child(2) {
-		transform: rotate(180deg);
-		top: 11px;
-		right: 0
-	}
-	.uni-load-more__img>view view:nth-child(3) {
-		transform: rotate(270deg);
-		bottom: 2px;
-		left: 9px
-	}
-	.uni-load-more__img>view view:nth-child(4) {
-		top: 11px;
-		left: 0
-	}
-	.load1,
-	.load2,
-	.load3 {
-		height: 24px;
-		width: 24px
-	}
-	.load2 {
-		transform: rotate(30deg)
-	}
-	.load3 {
-		transform: rotate(60deg)
-	}
-	.load1 view:nth-child(1) {
-		animation-delay: 0s
-	}
-	.load2 view:nth-child(1) {
-		animation-delay: .13s
-	}
-	.load3 view:nth-child(1) {
-		animation-delay: .26s
-	}
-	.load1 view:nth-child(2) {
-		animation-delay: .39s
-	}
-	.load2 view:nth-child(2) {
-		animation-delay: .52s
-	}
-	.load3 view:nth-child(2) {
-		animation-delay: .65s
-	}
-	.load1 view:nth-child(3) {
-		animation-delay: .78s
-	}
-	.load2 view:nth-child(3) {
-		animation-delay: .91s
-	}
-	.load3 view:nth-child(3) {
-		animation-delay: 1.04s
-	}
-	.load1 view:nth-child(4) {
-		animation-delay: 1.17s
-	}
-	.load2 view:nth-child(4) {
-		animation-delay: 1.3s
-	}
-	.load3 view:nth-child(4) {
-		animation-delay: 1.43s
-	}
-	// .p_btn {
-	// 	background: #FFFFFF;
-	// 	padding: 0 10px 0px;
-	// 	position: fixed;
-	// 	bottom: 0;
-	// 	width: 100%;
-	// 	z-index: 9999;
-	// }
-	@-webkit-keyframes load {
-		0% {
-			opacity: 1
-		}
-		100% {
-			opacity: .2
 		}
 	}
 </style>

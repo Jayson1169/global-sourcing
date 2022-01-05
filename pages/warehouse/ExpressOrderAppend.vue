@@ -26,8 +26,12 @@
 			<input placeholder="请扫描或输入物流单号" v-model="expressOrder.expressNumber"></input>
 			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 		</view>
-
-		<view class="H60"></view>
+		<view class="cu-form-group">
+			<text :style="{color:'red'}">*</text>
+			<view class="title">物流公司：</view>
+			<input placeholder="请输入物流公司" v-model="expressOrder.expressCompany"></input>
+		</view>
+		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
 				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">添加物流单</button>
@@ -70,6 +74,7 @@
 				let rules = [
 					{name: 'expressNumber', type: 'required', errmsg: '请输入物流单号'},
 					{name: 'expressNumber', type: 'expressNumber', errmsg: '请正确输入物流单号'},
+					{name: 'expressCompany', type: 'required', errmsg: '请输入物流公司'},
 				]
 				let valLoginRes = this.$validate.validate(this.expressOrder, rules)
 				if (!valLoginRes.isOk) {
@@ -114,11 +119,8 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.detail {
-		padding: 10px 10px 10px 10px;
-	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

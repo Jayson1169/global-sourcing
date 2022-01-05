@@ -1,0 +1,22 @@
+page {
+  background-color: #F7F6FB;
+}
+.p_order {
+  padding: 10px;
+}
+.p_image {
+  width: 162rpx;
+  height: 162rpx;
+  padding: 10rpx;
+}
+.p_btn {
+  width: 50%;
+  margin: 5px;
+}
+.p_btn_group {
+  padding: 1rpx 30rpx;
+  display: flex;
+  align-items: center;
+  min-height: 100rpx;
+}
+

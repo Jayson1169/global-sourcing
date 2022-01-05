@@ -52,9 +52,10 @@
 				this.$api.http.put('/purchaseOrder/confirmAndAssignToWarehouseKeeper?id='
 						+this.purchaseOrderId+'&warehouseKeeperId='+this.warehouseKeeperId, null).then(res => {
 					this.$api.msg.successToast("分配成功").then(res => {
-						uni.navigateTo({
-							url: '../purchase/Purchase'
-						});
+						uni.$emit('edit');
+						uni.navigateBack({
+							delta: 2
+						})
 					})
 				})
 			}

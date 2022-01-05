@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="p_order">采购明细</view>
+		<view class="detail">采购明细</view>
 		<view class="cu-form-group" v-if="purchaseOrder.photo">
 			<view class="title">采购照片：</view>
 			<myimg :photo="purchaseOrder.photo" :padding="true"></myimg>
@@ -18,7 +18,7 @@
 		<view class="cu-form-group">
 			<view class="title">采购数量：{{purchaseOrder.quantity}}</view>
 		</view>
-		<view class="p_order">商品信息</view>
+		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
 			<view class="title">商品名称：{{purchaseOrder.product.name}}</view>
 		</view>
@@ -44,8 +44,23 @@
 		<view class="cu-form-group" v-if="purchaseOrder.product.remark">
 			<view class="title">备注信息：{{purchaseOrder.product.remark}}</view>
 		</view>
+		<view v-if="purchaseOrder.status!='CREATED'">
+			<view class="detail">采购员信息</view>
+			<view class="cu-form-group">
+				<view class="title">采购员账号：{{purchaseOrder.buyer.username}}</view>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">采购员姓名：{{purchaseOrder.buyer.name}}</view>
+			</view>
+			<view class="cu-form-group" v-if="purchaseOrder.buyer.phoneNumber">
+				<view class="title">采购员电话：{{purchaseOrder.buyer.phoneNumber}}</view>
+			</view>
+		</view>
 		<view v-if="purchaseOrder.status==='CONFIRMED'">
-			<view class="p_order">仓管信息</view>
+			<view class="detail">仓管信息</view>
+			<view class="cu-form-group">
+				<view class="title">仓管账号：{{purchaseOrder.warehouseKeeper.username}}</view>
+			</view>
 			<view class="cu-form-group">
 				<view class="title">仓管姓名：{{purchaseOrder.warehouseKeeper.name}}</view>
 			</view>
@@ -86,9 +101,8 @@
 					success: function(res) {
 						if (res.confirm) {
 							_this.$api.http.put('/purchaseOrder/reject?id='+_this.purchaseOrder.id+'&rejectReason='+res.content, null).then(res => {
-								uni.navigateTo({
-									url: './Purchase'
-								})
+								uni.$emit('edit');
+								uni.navigateBack()
 							})
 						}
 					}
@@ -107,25 +121,5 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.p_order {
-		padding: 10px;
-	}
-	.p_image {
-		width: 162rpx;
-		height: 162rpx;
-		padding: 10rpx 10rpx 10rpx 0rpx;
-	}
-	.p_btn_group {
-		background-color: #FFFFFF;
-		padding: 0rpx 20rpx 0rpx 20rpx;
-		display: flex;			
-		position: fixed;
-		bottom: 0;
-		z-index: 9999;
-		width: 100%;
-		justify-content: space-between;
-		.p_btn {
-			width: 345rpx; 
-		}
-	}
+
 </style>

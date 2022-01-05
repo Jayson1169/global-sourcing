@@ -21,15 +21,19 @@
 			<view class="cu-form-title">生产厂家：{{item.product.manufacturer}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.origin">
-			<view class="cu-form-title">生产地区：</view>
-			<input v-model="item.product.origin" disabled></input>
+			<view class="cu-form-title">生产地区：{{item.product.origin}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.remark">
-			<view class="cu-form-title">备注信息：</view>
-			<input v-model="item.product.remark" disabled></input>
+			<view class="cu-form-title">备注信息：{{item.product.remark}}</view>
 		</view>
-		<view class="cu-form-group" v-if="item.product.barcode">
-			<view class="cu-form-title">商品库存：{{item.product.inventory.warehouseInventory}}</view>
+		<view class="cu-form-group">
+			<view class="cu-form-title">国外库存：{{item.product.inventory.warehouseInventory}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="cu-form-title">在途库存：{{item.product.inventory.midwayInventory}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="cu-form-title">国内库存：{{item.product.inventory.hubInventory}}</view>
 		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
@@ -54,21 +58,21 @@
 	export default {
 		data() {
 			return {
-				item: {
-					product: {
-						photo: null,
-						name: 'iPhone 13 Pro',
-						brand: 'Apple',
-						specification: 'MLT83CH/A',
-						barcode: '1111111111111',
-						manufacturer: '富士康',
-						origin: '中国',
-						remark: 'iPhone',
-					},
-					salePrice: '200',
-					quantity: '2',
-					price: '2.00'
-				}
+				// item: {
+				// 	product: {
+				// 		photo: null,
+				// 		name: 'iPhone 13 Pro',
+				// 		brand: 'Apple',
+				// 		specification: 'MLT83CH/A',
+				// 		barcode: '1111111111111',
+				// 		manufacturer: '富士康',
+				// 		origin: '中国',
+				// 		remark: 'iPhone',
+				// 	},
+				// 	salePrice: '200',
+				// 	quantity: '2',
+				// 	price: '2.00'
+				// }
 			}
 		},
 		onLoad(option) {
@@ -108,30 +112,6 @@
 <style lang="less">
 	page {
 		background-color: #F7F6FB;
-	}
-	.o_btn {
-		background: #F7F6FB;
-		padding: 0 10px 0px;
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		z-index: 9999;
-	}
-	.p_btn_group {
-		background-color: #F7F6FB;
-		padding: 0rpx 20rpx 0rpx 20rpx;
-		display: flex;			
-		position: fixed;
-		bottom: 0;
-		z-index: 9999;
-		width: 100%;
-		justify-content: space-between;
-		.p_btn {
-			width: 345rpx; 
-		}
-	}
-	.detail {
-		padding: 10px 10px 10px 10px;
 	}
 	.cu-form-group .title {
 		text-align: justify;

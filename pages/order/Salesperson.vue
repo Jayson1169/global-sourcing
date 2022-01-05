@@ -46,10 +46,10 @@
 				<button class="action-btn recom" @click="jumpOrderModify(item)">修改订单</button>
 			</view>
 		</view>	
-		<view v-show="isLoadMore">
+		<view v-show="isLoadMore" v-if="orderList.length != 0">
 			<uni-load-more :status="loadStatus" ></uni-load-more>
 		</view>
-		<view class="H60"></view>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpOrderAppend" class="cu-btn bg-red margin-tb-sm lg">添加订单</button>
@@ -63,9 +63,8 @@
 		data() {
 			return {
 				orderRequest: {
-					salespersonId: '',
 					page: 0,
-					size: 5
+					size: 10
 				},
 				tabCurrentIndex: 0,
 				navList: ['全部', '待发送', '已完成'],
@@ -76,20 +75,26 @@
 			};
 		},
 		onLoad() {
-			this.orderRequest.salespersonId = uni.getStorageSync('user').id;
 			uni.$on('edit', (e) => {
-				this.orderList.some((order, i) => {
-					if (order.id == e.id) {
-						this.$set(this.orderList, i, e)  
-					}
-				})
+				this.init();
 			})
+			this.orderRequest.salespersonId = uni.getStorageSync('user').id;
 			this.getOrderList();
 		},
 		onUnload() {
-			uni.$off('eidt');
+			uni.$off('edit');
+		},
+		onShow() {
+			this.noClick = true;
+			// this.init();
 		},
 		methods: {
+			init() {
+				this.orderRequest.page = 0;
+				this.orderRequest.size = 10;
+				this.orderList = [];
+				this.getOrderList();
+			},
 			getOrderList() {
 				this.$api.http.get('/saleOrder/findAllBySalesperson', this.orderRequest).then(res => {
 					this.orderList = this.orderList.concat(res.content);
@@ -112,9 +117,12 @@
 						})
 					}
 				}
-				uni.navigateTo({
-					url: './OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
-				});
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
+					});
+				}
 			},
 			async jumpOrderModify(order) {
 				for (let i in order.items) {
@@ -131,9 +139,12 @@
 						})
 					}
 				}
-				uni.navigateTo({
-					url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
-				})	
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
+					})	
+				}
 			},
 			//删除订单
 			deleteOrder(item, index) {
@@ -147,27 +158,6 @@
 					}).catch(err => {
 						this.$api.msg.toast("销售单中存在无法删除的销售单项目！");
 					})
-				}, 600)
-			},
-			//取消订单
-			cancelOrder(item){
-				uni.showLoading({
-					title: '请稍后'
-				})
-				setTimeout(()=>{
-					let {stateTip, stateTipColor} = this.orderStateExp(9);
-					item = Object.assign(item, {
-						state: 9,
-						stateTip, 
-						stateTipColor
-					})
-					
-					//取消订单后删除待付款中该项
-					let list = this.navList[1].orderList;
-					let index = list.findIndex(val=>val.id === item.id);
-					index !== -1 && list.splice(index, 1);
-					
-					uni.hideLoading();
 				}, 600)
 			},
 			jumpOrderAppend() {
@@ -193,7 +183,7 @@
 
 <style lang="scss">
 	page, .content{
-		background: $page-color-base;
+		background: #FFFFFF;
 		height: 100%;
 	}
 	.search {
@@ -202,12 +192,6 @@
 		width: 100%;
 		box-sizing: border-box;
 		padding: 10px;
-	}
-	.swiper-box{
-		height: calc(100% - 40px);
-	}
-	.list-scroll-content{
-		height: 100%;
 	}
 	.navbar{
 		display: flex;
@@ -223,7 +207,7 @@
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			font-size: 15px;
+			font-size: 30upx;
 			color: $font-color-dark;
 			position: relative;
 			&.current{
@@ -241,17 +225,14 @@
 			}
 		}
 	}
-
-	.uni-swiper-item{
-		height: auto;
-	}
 	.order-item{
 		display: flex;
 		flex-direction: column;
 		padding-left: 30upx;
 		background: #fff;
+		border-bottom: 1px solid #EAEAEA;
 		// margin-top: 16upx;
-		margin-bottom: 16upx;
+		// margin-bottom: 16upx;
 		.i-top{
 			display: flex;
 			align-items: center;
@@ -372,129 +353,6 @@
 			}
 		}
 	}
-	
-	
-	/* load-more */
-	.uni-load-more {
-		display: flex;
-		flex-direction: row;
-		height: 80upx;
-		align-items: center;
-		justify-content: center
-	}
-	
-	.uni-load-more__text {
-		font-size: 28upx;
-		color: #999
-	}
-	
-	.uni-load-more__img {
-		height: 24px;
-		width: 24px;
-		margin-right: 10px
-	}
-	
-	.uni-load-more__img>view {
-		position: absolute
-	}
-	
-	.uni-load-more__img>view view {
-		width: 6px;
-		height: 2px;
-		border-top-left-radius: 1px;
-		border-bottom-left-radius: 1px;
-		background: #999;
-		position: absolute;
-		opacity: .2;
-		transform-origin: 50%;
-		animation: load 1.56s ease infinite
-	}
-	
-	.uni-load-more__img>view view:nth-child(1) {
-		transform: rotate(90deg);
-		top: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(2) {
-		transform: rotate(180deg);
-		top: 11px;
-		right: 0
-	}
-	
-	.uni-load-more__img>view view:nth-child(3) {
-		transform: rotate(270deg);
-		bottom: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(4) {
-		top: 11px;
-		left: 0
-	}
-	
-	.load1,
-	.load2,
-	.load3 {
-		height: 24px;
-		width: 24px
-	}
-	
-	.load2 {
-		transform: rotate(30deg)
-	}
-	
-	.load3 {
-		transform: rotate(60deg)
-	}
-	
-	.load1 view:nth-child(1) {
-		animation-delay: 0s
-	}
-	
-	.load2 view:nth-child(1) {
-		animation-delay: .13s
-	}
-	
-	.load3 view:nth-child(1) {
-		animation-delay: .26s
-	}
-	
-	.load1 view:nth-child(2) {
-		animation-delay: .39s
-	}
-	
-	.load2 view:nth-child(2) {
-		animation-delay: .52s
-	}
-	
-	.load3 view:nth-child(2) {
-		animation-delay: .65s
-	}
-	
-	.load1 view:nth-child(3) {
-		animation-delay: .78s
-	}
-	
-	.load2 view:nth-child(3) {
-		animation-delay: .91s
-	}
-	
-	.load3 view:nth-child(3) {
-		animation-delay: 1.04s
-	}
-	
-	.load1 view:nth-child(4) {
-		animation-delay: 1.17s
-	}
-	
-	.load2 view:nth-child(4) {
-		animation-delay: 1.3s
-	}
-	
-	.load3 view:nth-child(4) {
-		animation-delay: 1.43s
-	}
 	.p_btn {
 		background: #FFFFFF;
 		padding: 0 10px 0px;
@@ -502,15 +360,5 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-	}
-	
-	@-webkit-keyframes load {
-		0% {
-			opacity: 1
-		}
-	
-		100% {
-			opacity: .2
-		}
 	}
 </style>

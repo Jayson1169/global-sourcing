@@ -178,10 +178,10 @@ switch .uni-switch-input {
 	border-radius: 100upx;
 }
 
-switch .wx-switch-input:not([class*="bg-"]),
+/* switch .wx-switch-input:not([class*="bg-"]),
 switch .uni-switch-input:not([class*="bg-"]) {
 	background: #8799a3 !important;
-}
+} */
 
 switch .wx-switch-input::after,
 switch .uni-switch-input::after {
@@ -3932,4 +3932,19 @@ scroll-view.cu-steps .cu-item {
 
 .detail {
 	padding: 10px 10px 10px 10px;
+}
+
+.p_btn_group {
+	background-color: #FFFFFF;
+	padding: 0rpx 20rpx 0rpx 20rpx;
+	display: flex;			
+	position: fixed;
+	bottom: 0;
+	z-index: 9999;
+	width: 100%;
+	justify-content: space-between;
+	
+}
+.p_btn {
+	width: 345rpx; 
 }

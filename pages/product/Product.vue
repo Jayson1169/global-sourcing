@@ -1,7 +1,7 @@
 <template>
 	<view class="user_list">
 		<view class="search">
-			<uni-easyinput suffixIcon="search" v-model="searchRequest.keyword" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
+			<uni-easyinput suffixIcon="search" v-model="searchRequest.keyword" placeholder="请输入内容" @iconClick="search" color="#A5A5A5" confirmType="search" @confirm="search"></uni-easyinput>
 		</view>
 		<block v-for="(item, index) of productList">
 			<view class="list" @click="jumpProductModify(item)">

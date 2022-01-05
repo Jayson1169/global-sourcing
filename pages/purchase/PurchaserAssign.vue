@@ -64,15 +64,15 @@
 							_this.$api.http.put('/purchaseOrder/assign?purchaseOrderId='
 									+_this.purchaseOrderId+'&buyerId='+_this.buyerId+'&quantity='+res.content, '').then(res => {
 								_this.$api.msg.successToast("分配成功").then(res => {
-									uni.navigateTo({
-										url: './Purchase'
-									});
+									uni.$emit('edit');
+									uni.navigateBack({
+										delta: 1
+									})
 								})
 							})
 						}
 					}
 				});
-				
 			}
 		}
 	}

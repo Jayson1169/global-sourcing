@@ -1,8 +1,5 @@
 <template>
 	<view class="content">
-		<!-- <view class="search">
-			<uni-easyinput suffixIcon="search" v-model="tabCurrentIndex" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
-		</view>	 -->
 		<view class="navbar" v-if="expressOrderList.length != 0">
 			<view 
 				v-for="(item, index) in navList" :key="index" 
@@ -38,12 +35,11 @@
 					类商品</text>
 				</view>
 			</view>
-			<!-- <view class="action-box b-t" v-if="item.state != 9">
-				<button class="action-btn" @click="deleteOrder(item, index)">取消订单</button>
-				<button class="action-btn recom" @click="jumpOrderModify(item)">修改订单</button>
-			</view> -->
 		</view>	
-		<view class="H60"></view>
+		<view v-show="isLoadMore" v-if="expressOrderList.length != 0">
+			<uni-load-more :status="loadStatus" ></uni-load-more>
+		</view>
+		<view class="H50"></view>
 		<view class="p_btn">
 			<view class="flex flex-direction" >
 				<button @click="jumpExpressOrderAppend" class="cu-btn bg-red margin-tb-sm lg">添加物流单</button>
@@ -67,17 +63,21 @@
 		data() {
 			return {
 				value: 1,
-				request: {
+				expressOrderRequest: {
 					page: '0',
-					size: '999'
+					size: '10'
 				},
 				tabCurrentIndex: 0,
 				navList: ['全部', '已发货', '已收货'],
 				status_to_state: {"DELIVERED": 1, "RECEIVED": 2},
 				status_to_state2: {"DELIVERED": "已发货", "RECEIVED": "已收货"},
-				expressOrderList: []
-				// orderList: [{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","salesperson":{"id":1,"createTime":"2021-12-23 01:09:54","updateTime":"2021-12-23 01:10:01","username":"admin","password":"$2a$10$P8UFgtFSeCz.57PbNf2sRuOz2qg8JFJx9.wfJdNsX/7BuNzGvWeg2","name":"admin","role":"ADMIN","phoneNumber":null},"address":{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","name":"殷鑫","idNumber":"467489199910247815","phoneNumber":"15858780802","shipAddress":"湖南省长沙市天心区中南大学铁道学院"},"items":[{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","product":{"id":1,"createTime":"2021-12-26 21:54:39","updateTime":"2021-12-26 23:18:43","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":"6917246004355","brand":"曼秀雷敦","specification":"150ml","inventory":{"id":1,"createTime":"2021-12-26 21:54:38","updateTime":"2021-12-26 23:18:43","warehouseInventory":2,"hubInventory":10,"midwayInventory":8},"manufacturer":null,"origin":"广东省中山市","remark":null,"customsInfo":{"id":1,"createTime":"2021-12-26 21:54:38","updateTime":"2021-12-26 23:18:43","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"salePrice":2500,"quantity":4},{"id":2,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","product":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","name":"清风牌面巾纸","barcode":"6922266446726","brand":"清风","specification":"150抽/包","inventory":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","warehouseInventory":0,"hubInventory":10,"midwayInventory":7},"manufacturer":null,"origin":"湖北省孝南市","remark":null,"customsInfo":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"salePrice":400,"quantity":7}]}]
+				expressOrderList: [],
+				isLoadMore: false,
+				loadStatus: 'loading'
 			};
+		},
+		onBackPress(options) {
+		    return true
 		},
 		onLoad() {
 			uni.$on('edit', (e) => {
@@ -87,14 +87,38 @@
 					}
 				})
 			})
-			this.$api.http.get('/expressOrder/findAll', this.request).then(res => {
-				this.expressOrderList = res.content
+			uni.$on('edit', (e) => {
+				this.init();
 			})
+			this.getExpressOrderList();
 		},
 		onUnload() {
-			uni.$off('eidt');
+			uni.$off('edit');
+		},
+		onShow() {
+			this.noClick = true;
 		},
 		methods: {
+			init() {
+				this.expressOrderRequest.page = 0;
+				this.expressOrderRequest.size = 10;
+				this.expressOrderList = [];
+				this.getExpressOrderList();
+			},
+			getExpressOrderList() {
+				this.$api.http.get('/expressOrder/findAll', this.expressOrderRequest).then(res => {
+					this.expressOrderList = this.expressOrderList.concat(res.content);
+					if (res.numberOfElements < this.orderRequest.size) {
+						this.isLoadMore = true
+						this.loadStatus = 'nomore'
+					} else {
+						this.isLoadMore = false
+					}
+				}).catch(err => {
+					this.isLoadMore = true
+					if (this.expressOrderRequest.page > 1) this.expressOrderRequest.page -= 1
+				})	
+			},
 			click(e) {
 				if (e == 0) {
 					uni.redirectTo({
@@ -113,41 +137,20 @@
 			tabClick(index){
 				this.tabCurrentIndex = index;
 			},
-			jumpExpressOrderDetail(expressOrder){
+			async jumpExpressOrderDetail(expressOrder){
 				for (let i in expressOrder.items) {
-				    this.$api.http.get('/product/getImage?id='+expressOrder.items[i].product.id, null).then(res => {
-						expressOrder.items[i].product.image = res
-						// 加载完图片再跳转
-						if (i == expressOrder.items.length - 1) {
-							uni.navigateTo({
-								url: './ExpressOrderDetail?expressOrder='+encodeURIComponent(JSON.stringify(expressOrder))
-							});
-						}
-					})
+					if (expressOrder.items[i].product.image == null) {
+						await this.$api.http.get('/product/getImage?id='+expressOrder.items[i].product.id, null).then(res => {
+							expressOrder.items[i].product.image = res
+						})
+					}
 				}
-			},
-			jumpOrderModify(order) {
-				for (let i in order.items) {
-				    this.$api.http.get('/product/getImage?id='+order.items[i].product.id, null).then(res => {
-						order.items[i].product.image = res
-						// 加载完图片再跳转
-						if (i == order.items.length - 1) {
-							uni.navigateTo({
-								url: './OrderModify?order='+encodeURIComponent(JSON.stringify(order))
-							})	
-						}
-					})
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './ExpressOrderDetail?expressOrder='+encodeURIComponent(JSON.stringify(expressOrder))
+					});
 				}
-			},
-			//订单状态文字和颜色
-			orderStateExp(state){
-				let stateTip = '',
-					stateTipColor = '#fa436a';
-				if (state == 9) {
-					stateTip = '订单已关闭';
-					stateTipColor = '#909399';
-				}
-				return {stateTip, stateTipColor};
 			},
 			jumpExpressOrderAppend() {
 				uni.navigateTo({

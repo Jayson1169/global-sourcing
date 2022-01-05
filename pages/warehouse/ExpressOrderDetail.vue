@@ -22,6 +22,9 @@
 		<view class="cu-form-group">
 			<view class="title">物流单号：{{expressOrder.expressNumber}}</view>
 		</view>
+		<view class="cu-form-group">
+			<view class="title">物流公司：{{expressOrder.expressCompany}}</view>
+		</view>
 	</view>
 </template>
 

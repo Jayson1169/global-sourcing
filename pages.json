@@ -196,7 +196,7 @@
         ,{
             "path" : "pages/warehouse/WarehouseKeeper",
             "style" : {
-				"navigationBarTitleText": "采购管理",
+				// "navigationBarTitleText": "采购管理",
             	"navigationBarBackgroundColor": "#ffffff",
             	"enablePullDownRefresh": false,
             	"app-plus": {
@@ -347,7 +347,7 @@
 		    "path" : "pages/warehouse/ExpressOrder",
 		    "style" :                                                                                    
 		    {
-		        "navigationBarTitleText": "快递物流",
+		        // "navigationBarTitleText": "快递物流",
 				"navigationBarBackgroundColor": "#ffffff",
 		        "enablePullDownRefresh": false,
 				"app-plus": {
