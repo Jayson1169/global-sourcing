@@ -29,18 +29,20 @@
 		<view class="cu-form-group">
 			<view class="cu-form-title">商品库存：{{item.product.inventory.hubInventory}}</view>
 		</view>
-		<view class="cu-form-group">
-			<view class="cu-form-title">已发货数量：{{item.deliveredQuantity}}</view>
-		</view>
-		<view class="cu-form-group" v-for="number in item.expressNumbers">
-			已发货物流：
-			<view class="cu-form-title">{{number}}</view>
-		</view>
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
 			<view class="cu-form-title">销售数量：{{item.quantity}}</view>
 		</view>
-		<view class="detail">物流明细</view>
+		<view v-if="item.deliveredQuantity != 0">
+			<view class="detail">物流明细</view>
+			<view class="cu-form-group">
+				<view class="cu-form-title">已发数量：{{item.deliveredQuantity}}</view>
+			</view>
+			<view class="cu-form-group" v-for="express in item.expresses">
+				<view class="cu-form-title">已发物流：{{express.expressNumber}} {{express.expressCompany}}</text></view>
+			</view>	
+		</view>
+		<view class="detail">发货明细</view>
 		<view v-if="!item.delivered">
 			<view class="cu-form-group" >
 				<text :style="{color:'red'}">*</text>
@@ -103,9 +105,15 @@
 				})
 			},
 			sub() {	
-				this.$api.http.put('/saleOrder/deliverItem?itemId='+this.item.id+'&quantity='+this.item.expressQuantity+'&expressNumber='+this.item.expressNumber, null).then(res => {
-					uni.$emit('edit', res)
-					uni.navigateBack()
+				this.$api.http.put('/saleOrder/deliverItem?itemId='+this.item.id+'&quantity='+this.item.expressQuantity+'&expressCompany='+this.item.expressCompany+'&expressNumber='+this.item.expressNumber, null).then(res => {
+					this.$api.msg.successToast('发送成功').then(res => {
+						uni.$emit('edit', res)
+						// uni.navigateBack()
+						uni.navigateTo({
+							url: './Transporter'
+						})
+					})
+					
 				})
 			}
 		},
@@ -120,7 +128,7 @@
 		background-color: #F7F6FB;
 	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

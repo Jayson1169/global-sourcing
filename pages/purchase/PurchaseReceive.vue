@@ -76,14 +76,15 @@
 			sub() {
 				let _this = this;
 				uni.showModal({
-					title: '请确定接收数量',
+					title: '确定接收数量',
 					cancelText: "取消",  
 					confirmText: "确定",
 					editable: true,
-					content: _this.number,
+					placeholderText: _this.number,
 					success: function(res) {
 						if (res.confirm) {
-							_this.$api.http.put('/purchaseOrder/putIntoWarehouse?id='+_this.purchaseOrder.id+'&quantity='+res.content, null).then(res => {
+							var quantity = res.content==''?_this.number:res.content;
+							_this.$api.http.put('/purchaseOrder/putIntoWarehouse?id='+_this.purchaseOrder.id+'&quantity='+quantity, null).then(res => {
 								_this.$api.msg.successToast('接收成功').then(res => {
 									// uni.$emit('edit');
 									uni.navigateTo({

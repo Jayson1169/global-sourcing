@@ -42,6 +42,15 @@
 		<view class="cu-form-group">
 			<view class="cu-form-title">销售数量：{{item.quantity}}</view>
 		</view>
+		<view v-if="item.deliveredQuantity != 0">
+			<view class="detail">物流明细</view>
+			<view class="cu-form-group">
+				<view class="cu-form-title">已发数量：{{item.deliveredQuantity}}</view>
+			</view>
+			<view class="cu-form-group" v-for="express in item.expresses">
+				<view class="cu-form-title">已发物流：{{express.expressNumber}} {{express.expressCompany}}</text></view>
+			</view>	
+		</view>
 	</view>
 </template>
 

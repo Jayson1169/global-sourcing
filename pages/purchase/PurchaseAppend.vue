@@ -82,9 +82,7 @@
 							hubInventory: ''
 						}
 					},
-					price: '',
 					quantity: '',
-					salePrice: ''
 				}
 			}
 		},
@@ -103,8 +101,12 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					this.$api.http.post()
-					uni.navigateBack()
+					this.$api.http.post("/purchaseOrder/create?productId="+this.purchaseOrder.product.id+"&quantity="+this.purchaseOrder.quantity).then(res => {
+						this.$api.msg.successToast('添加成功').then(res => {
+							this.$emit('edit');
+							uni.navigateBack();
+						})
+					})
 				}	
 			},
 			selectitem(index, item) {

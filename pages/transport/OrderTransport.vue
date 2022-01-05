@@ -19,7 +19,8 @@
 		</view>
 		<view class="order">收货信息</view>
 		<view class="cu-form-group">
-			<view class="cu-form-title">是否可直接发货：是</view>
+			<view class="title">直接发货：</view>
+			<switch :checked="order.canSend" disabled/>
 		</view>
 		<view class="cu-form-group">
 			<view class="cu-form-title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{order.address.name}}</view>
@@ -44,13 +45,13 @@
 			};
 		},
 		onLoad(option) {
-			uni.$on('send', (e) => {
+			uni.$on('edit', (e) => {
 				this.order = e;
 			})
 			this.order = JSON.parse(decodeURIComponent(option.order));
 		},
 		onUnload() {
-			uni.$off('send');
+			uni.$off('edit');
 		},
 		methods: {
 			jumpProductTransport(item) {

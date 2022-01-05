@@ -15,7 +15,7 @@
 			v-for="(item, index) in orderList" :key="index" v-if="item.delivered == tabCurrentIndex - 1 || tabCurrentIndex === 0"
 			class="order-item"
 		>
-			<view @click="jumpOrderTransport(item)"> 
+			<view @click="item.delivered?jumpOrderDetail(item):jumpOrderTransport(item)"> 
 				<view class="i-top b-b">
 					<text class="time">{{item.updateTime}}</text>
 				</view>
@@ -47,7 +47,7 @@
 				</view>
 			</view>
 			<view class="action-box b-t" v-if="!item.delivered">
-				<button class="action-btn recom" @click="send(item)">发送快递</button>
+				<button class="action-btn recom" @click="jumpOrderTransport(item)">发送快递</button>
 			</view>
 		</view>	
 		<view v-show="isLoadMore" v-if="orderList.length != 0">
@@ -121,16 +121,12 @@
 			},
 			click(e) {
 				if (e == 0) {
-					uni.navigateTo({
+					uni.redirectTo({
 						url: './WarehouseKeeper'
 					})
 				} else if (e == 1) {
-					uni.navigateTo({
-						url: './ExpressOrder'
-					})
-				} else {
 					uni.redirectTo({
-						url: './WarehouseOutput?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
+						url: './ExpressOrder'
 					})
 				}
 			},
@@ -149,32 +145,46 @@
 					});
 				}
 			},
+			async jumpOrderDetail(order){
+				for (let i in order.items) {
+					if (order.items[i].product.image == null) {
+						await this.$api.http.get('/product/getImage?id='+order.items[i].product.id, null).then(res => {
+							order.items[i].product.image = res
+						})
+					}
+				}
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: '../order/OrderDetail?order='+encodeURIComponent(JSON.stringify(order))
+					});
+				}
+			},
 			//顶部tab点击
 			tabClick(index) {
 				this.tabCurrentIndex = index;
 			},
-			send(item) {
-				let _this = this;
-				uni.showModal({
-					title: '发送快递',
-					cancelText: "取消",  
-					confirmText: "确定",
-					editable: true,
-					placeholderText: "请输入物流单号",
-					success: function(res) {
-						if (res.confirm) {
-							_this.$api.http.put('/saleOrder/deliver?id='
-									+item.id+'&expressNumber='+res.content, null).then(res => {
-								// item.delivered = true;
-								this.$api.msg.successToast('发送成功').then(res => {
-									uni.reLaunch()
-								})
-							})
-						}
-					}
-				});
-
-			}
+			// send(item) {
+			// 	let _this = this;
+			// 	uni.showModal({
+			// 		title: '发送快递',
+			// 		cancelText: "取消",  
+			// 		confirmText: "确定",
+			// 		editable: true,
+			// 		placeholderText: "请输入物流单号",
+			// 		success: function(res) {
+			// 			if (res.confirm) {
+			// 				_this.$api.http.put('/saleOrder/deliver?id='
+			// 						+item.id+'&expressNumber='+res.content, null).then(res => {
+			// 					// item.delivered = true;
+			// 					this.$api.msg.successToast('发送成功').then(res => {
+			// 						uni.reLaunch()
+			// 					})
+			// 				})
+			// 			}
+			// 		}
+			// 	});
+			// }
 		}
 	}
 </script>

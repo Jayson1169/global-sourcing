@@ -74,14 +74,15 @@
 			sub() {
 				let _this = this;
 				uni.showModal({
-					title: '请确定接收数量',
+					title: '确定接收数量',
 					cancelText: "取消",  
 					confirmText: "确定",
 					editable: true,
-					content: _this.number,
+					// content: _this.number,
+					placeholderText: _this.number,
 					success: function(res) {
 						if (res.confirm) {
-							_this.item.receivedQuantity = res.content;
+							_this.item.receivedQuantity = res.content==''?_this.number:res.content;;
 							uni.$emit('edit', _this.item)
 							uni.navigateBack()
 						}
@@ -115,11 +116,8 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.detail {
-		padding: 10px 10px 10px 10px;
-	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

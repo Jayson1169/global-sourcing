@@ -22,7 +22,10 @@
 		<view class="cu-form-group">
 			<view class="title">物流单号：{{expressOrder.expressNumber}}</view>
 		</view>
-		<view class="H70"></view>
+		<view class="cu-form-group">
+			<view class="title">物流公司：{{expressOrder.expressCompany}}</view>
+		</view>
+		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
 				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">确定接收</button>
@@ -59,9 +62,11 @@
 			},
 			sub() {
 				this.$api.http.put('/expressOrder/receive', this.expressOrder).then(res => {
-					uni.navigateTo({
-						url: './ExpressOrder'
-					});
+					this.$api.msg.successToast('接收成功').then(res => {
+						uni.navigateTo({
+							url: './ExpressOrder'
+						});
+					})
 				})
 			}
 		}
@@ -76,7 +81,7 @@
 		padding: 10px 10px 10px 10px;
 	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

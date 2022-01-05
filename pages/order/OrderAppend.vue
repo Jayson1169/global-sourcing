@@ -112,9 +112,11 @@
 							// uni.navigateTo({
 							// 	url: role=='ADMIN'?'./Order':'./Salesperson'
 							// });
-							uni.navigateBack()
+							uni.navigateBack();
 							uni.$emit('edit', this.order)
 						})
+					}, error => {
+						this.$api.msg.toast(error);
 					})
 				}	
 			},

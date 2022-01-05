@@ -48,7 +48,7 @@
 			:placeholder="true"
 			:safeAreaInsetBottom="true"
 		>
-			<u-tabbar-item text="采购管理" icon="shopping-cart" @click="click" ></u-tabbar-item>
+			<u-tabbar-item text="订单管理" icon="order" @click="click" ></u-tabbar-item>
 			<u-tabbar-item text="转运物流" icon="car" @click="click" ></u-tabbar-item>
 		</u-tabbar>
 	</view>
@@ -59,87 +59,113 @@
 		data() {
 			return {
 				value: 1,
-				request: {
+				expressOrderRequest: {
 					page: '0',
-					size: '999'
+					size: '10'
 				},
 				tabCurrentIndex: 0,
 				navList: ['全部', '已发货', '已收货'],
 				status_to_state: {"DELIVERED": 1, "RECEIVED": 2},
 				status_to_state2: {"DELIVERED": "已发货", "RECEIVED": "已收货"},
-				// expressOrderList: []
-				expressOrderList: [{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","salesperson":{"id":1,"createTime":"2021-12-23 01:09:54","updateTime":"2021-12-23 01:10:01","username":"admin","password":"$2a$10$P8UFgtFSeCz.57PbNf2sRuOz2qg8JFJx9.wfJdNsX/7BuNzGvWeg2","name":"admin","role":"ADMIN","phoneNumber":null},"address":{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","name":"殷鑫","idNumber":"467489199910247815","phoneNumber":"15858780802","shipAddress":"湖南省长沙市天心区中南大学铁道学院"},"items":[{"id":1,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","product":{"id":1,"createTime":"2021-12-26 21:54:39","updateTime":"2021-12-26 23:18:43","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":"6917246004355","brand":"曼秀雷敦","specification":"150ml","inventory":{"id":1,"createTime":"2021-12-26 21:54:38","updateTime":"2021-12-26 23:18:43","warehouseInventory":2,"hubInventory":10,"midwayInventory":8},"manufacturer":null,"origin":"广东省中山市","remark":null,"customsInfo":{"id":1,"createTime":"2021-12-26 21:54:38","updateTime":"2021-12-26 23:18:43","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"salePrice":2500,"quantity":4},{"id":2,"createTime":"2021-12-26 21:54:49","updateTime":"2021-12-26 21:54:49","product":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","name":"清风牌面巾纸","barcode":"6922266446726","brand":"清风","specification":"150抽/包","inventory":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","warehouseInventory":0,"hubInventory":10,"midwayInventory":7},"manufacturer":null,"origin":"湖北省孝南市","remark":null,"customsInfo":{"id":2,"createTime":"2021-12-26 21:54:42","updateTime":"2021-12-26 23:04:44","hsCode":"42022900","materialBeschaffenheit":"This version is in a nano size in classic calfskin.Shoulder, crossbody, top handle or clutch carry. Detachable chain. shoulder strap. Zip closure with calfskin pull. Customisable with strap and personalised charms. Herringbone cotton canvas lining Embossed Anagram","brandArticleNo":"A510U98X01","brand":"LOEWE","articleName":"Nano Puzzle bag in classic calfskin"}},"salePrice":400,"quantity":7}]}]
+				expressOrderList: [],
+				isLoadMore: false,
+				loadStatus: 'loading'
 			};
 		},
+		onBackPress(options) {
+		    return true
+		},
 		onLoad() {
-			this.$api.http.get('/expressOrder/findAll', this.request).then(res => {
-				this.expressOrderList = res.content
-				// console.log(123)
+			uni.$on('edit', (e) => {
+				this.expressOrderList.some((order, i) => {
+					if (order.id == e.id) {
+						this.$set(this.orderList, i, e)  
+					}
+				})
 			})
-			// console.log(JSON.stringify(this.expressOrderList))
+			uni.$on('edit', (e) => {
+				this.init();
+			})
+			this.getExpressOrderList();
+		},
+		onUnload() {
+			uni.$off('edit');
+		},
+		onShow() {
+			this.noClick = true;
 		},
 		methods: {
+			init() {
+				this.expressOrderRequest.page = 0;
+				this.expressOrderRequest.size = 10;
+				this.expressOrderList = [];
+				this.getExpressOrderList();
+			},
+			getExpressOrderList() {
+				this.$api.http.get('/expressOrder/findAll', this.expressOrderRequest).then(res => {
+					this.expressOrderList = this.expressOrderList.concat(res.content);
+					if (res.numberOfElements < this.expressOrderRequest.size) {
+						this.isLoadMore = true
+						this.loadStatus = 'nomore'
+					} else {
+						this.isLoadMore = false
+					}
+				}).catch(err => {
+					this.isLoadMore = true
+					if (this.expressOrderRequest.page > 1) this.expressOrderRequest.page -= 1
+				})	
+			},
 			click(e) {
 				if (e == 0) {
-					uni.navigateTo({
+					uni.redirectTo({
 						url: './Transporter'
 					})
 				} else if (e == 1) {
-					uni.navigateTo({
-						url: './ExpressOrder'
-					})
-				} else {
 					uni.redirectTo({
-						url: './WarehouseOutput?purchaseOrderList='+encodeURIComponent(JSON.stringify(this.purchaseOrderList))
+						url: './ExpressOrder'
 					})
 				}
 			},
 			tabClick(index){
 				this.tabCurrentIndex = index;
 			},
-			jumpExpressOrderReceive(expressOrder){
+			async jumpExpressOrderReceive(expressOrder){
 				for (let i in expressOrder.items) {
-				    this.$api.http.get('/product/getImage?id='+expressOrder.items[i].product.id, null).then(res => {
-						expressOrder.items[i].product.image = res
-						// 加载完图片再跳转
-						if (i == expressOrder.items.length - 1) {
-							uni.navigateTo({
-								url: './ExpressOrderReceive?expressOrder='+encodeURIComponent(JSON.stringify(expressOrder))
-							});
-						}
-					})
+					if (expressOrder.items[i].product.image == null) {
+						await this.$api.http.get('/product/getImage?id='+expressOrder.items[i].product.id, null).then(res => {
+							expressOrder.items[i].product.image = res
+						})
+					}
+				}
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: './ExpressOrderReceive?expressOrder='+encodeURIComponent(JSON.stringify(expressOrder))
+					});
 				}
 			},
-			jumpExpressOrderDetail(expressOrder){
+			async jumpExpressOrderDetail(expressOrder){
 				for (let i in expressOrder.items) {
-					this.$api.http.get('/product/getImage?id='+expressOrder.items[i].product.id, null).then(res => {
-						expressOrder.items[i].product.image = res
-						// 加载完图片再跳转
-						if (i == expressOrder.items.length - 1) {
-							uni.navigateTo({
-								url: '../warehouse/ExpressOrderDetail?expressOrder='+encodeURIComponent(JSON.stringify(expressOrder))
-							});
-						}
-					})
+					if (expressOrder.items[i].product.image == null) {
+						await this.$api.http.get('/product/getImage?id='+expressOrder.items[i].product.id, null).then(res => {
+							expressOrder.items[i].product.image = res
+						})
+					}
 				}
-			},
-			//订单状态文字和颜色
-			orderStateExp(state){
-				let stateTip = '',
-					stateTipColor = '#fa436a';
-				if (state == 9) {
-					stateTip = '订单已关闭';
-					stateTipColor = '#909399';
+				if (this.noClick) {
+					this.noClick = false;
+					uni.navigateTo({
+						url: '../warehouse/ExpressOrderDetail?expressOrder='+encodeURIComponent(JSON.stringify(expressOrder))
+					});
 				}
-				return {stateTip, stateTipColor};
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	page, .content{
-		background: $page-color-base;
+page, .content{
+		background: #FFFFFF;
 		height: 100%;
 	}
 	.search {
@@ -148,12 +174,6 @@
 		width: 100%;
 		box-sizing: border-box;
 		padding: 10px;
-	}
-	.swiper-box{
-		height: calc(100% - 40px);
-	}
-	.list-scroll-content{
-		height: 100%;
 	}
 	.navbar{
 		display: flex;
@@ -169,7 +189,7 @@
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			font-size: 15px;
+			font-size: 30upx;
 			color: $font-color-dark;
 			position: relative;
 			&.current{
@@ -187,17 +207,14 @@
 			}
 		}
 	}
-
-	.uni-swiper-item{
-		height: auto;
-	}
 	.order-item{
 		display: flex;
 		flex-direction: column;
 		padding-left: 30upx;
 		background: #fff;
+		border-bottom: 1px solid #EAEAEA;
 		// margin-top: 16upx;
-		margin-bottom: 16upx;
+		// margin-bottom: 16upx;
 		.i-top{
 			display: flex;
 			align-items: center;
@@ -316,147 +333,6 @@
 					border-color: #f7bcc8;
 				}
 			}
-		}
-	}
-	
-	
-	/* load-more */
-	.uni-load-more {
-		display: flex;
-		flex-direction: row;
-		height: 80upx;
-		align-items: center;
-		justify-content: center
-	}
-	
-	.uni-load-more__text {
-		font-size: 28upx;
-		color: #999
-	}
-	
-	.uni-load-more__img {
-		height: 24px;
-		width: 24px;
-		margin-right: 10px
-	}
-	
-	.uni-load-more__img>view {
-		position: absolute
-	}
-	
-	.uni-load-more__img>view view {
-		width: 6px;
-		height: 2px;
-		border-top-left-radius: 1px;
-		border-bottom-left-radius: 1px;
-		background: #999;
-		position: absolute;
-		opacity: .2;
-		transform-origin: 50%;
-		animation: load 1.56s ease infinite
-	}
-	
-	.uni-load-more__img>view view:nth-child(1) {
-		transform: rotate(90deg);
-		top: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(2) {
-		transform: rotate(180deg);
-		top: 11px;
-		right: 0
-	}
-	
-	.uni-load-more__img>view view:nth-child(3) {
-		transform: rotate(270deg);
-		bottom: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(4) {
-		top: 11px;
-		left: 0
-	}
-	
-	.load1,
-	.load2,
-	.load3 {
-		height: 24px;
-		width: 24px
-	}
-	
-	.load2 {
-		transform: rotate(30deg)
-	}
-	
-	.load3 {
-		transform: rotate(60deg)
-	}
-	
-	.load1 view:nth-child(1) {
-		animation-delay: 0s
-	}
-	
-	.load2 view:nth-child(1) {
-		animation-delay: .13s
-	}
-	
-	.load3 view:nth-child(1) {
-		animation-delay: .26s
-	}
-	
-	.load1 view:nth-child(2) {
-		animation-delay: .39s
-	}
-	
-	.load2 view:nth-child(2) {
-		animation-delay: .52s
-	}
-	
-	.load3 view:nth-child(2) {
-		animation-delay: .65s
-	}
-	
-	.load1 view:nth-child(3) {
-		animation-delay: .78s
-	}
-	
-	.load2 view:nth-child(3) {
-		animation-delay: .91s
-	}
-	
-	.load3 view:nth-child(3) {
-		animation-delay: 1.04s
-	}
-	
-	.load1 view:nth-child(4) {
-		animation-delay: 1.17s
-	}
-	
-	.load2 view:nth-child(4) {
-		animation-delay: 1.3s
-	}
-	
-	.load3 view:nth-child(4) {
-		animation-delay: 1.43s
-	}
-	.p_btn {
-		background: $page-color-base;
-		padding: 0 10px 0px;
-		position: fixed;
-		bottom: 100upx;
-		width: 100%;
-		z-index: 9999;
-	}
-	
-	@-webkit-keyframes load {
-		0% {
-			opacity: 1
-		}
-	
-		100% {
-			opacity: .2
 		}
 	}
 </style>

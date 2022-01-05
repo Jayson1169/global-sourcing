@@ -57,12 +57,14 @@
 					cancelText: "取消",  
 					confirmText: "确定",
 					editable: true,
-					content: _this.quantity,
-					placeholderText: "请输入采购数量",
+					// content: _this.quantity,
+					placeholderText: _this.quantity,
+					// placeholderText: '请输入采购数量',
 					success: function(res) {
 						if (res.confirm) {
+							var quantity = res.content==''?_this.quantity:res.content;
 							_this.$api.http.put('/purchaseOrder/assign?purchaseOrderId='
-									+_this.purchaseOrderId+'&buyerId='+_this.buyerId+'&quantity='+res.content, '').then(res => {
+									+_this.purchaseOrderId+'&buyerId='+_this.buyerId+'&quantity='+quantity, '').then(res => {
 								_this.$api.msg.successToast("分配成功").then(res => {
 									uni.$emit('edit');
 									uni.navigateBack({

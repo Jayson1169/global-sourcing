@@ -108,7 +108,7 @@
 			getExpressOrderList() {
 				this.$api.http.get('/expressOrder/findAll', this.expressOrderRequest).then(res => {
 					this.expressOrderList = this.expressOrderList.concat(res.content);
-					if (res.numberOfElements < this.orderRequest.size) {
+					if (res.numberOfElements < this.expressOrderRequest.size) {
 						this.isLoadMore = true
 						this.loadStatus = 'nomore'
 					} else {
@@ -162,8 +162,8 @@
 </script>
 
 <style lang="scss">
-	page, .content{
-		background: $page-color-base;
+page, .content{
+		background: #FFFFFF;
 		height: 100%;
 	}
 	.search {
@@ -172,12 +172,6 @@
 		width: 100%;
 		box-sizing: border-box;
 		padding: 10px;
-	}
-	.swiper-box{
-		height: calc(100% - 40px);
-	}
-	.list-scroll-content{
-		height: 100%;
 	}
 	.navbar{
 		display: flex;
@@ -193,7 +187,7 @@
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			font-size: 15px;
+			font-size: 30upx;
 			color: $font-color-dark;
 			position: relative;
 			&.current{
@@ -211,17 +205,14 @@
 			}
 		}
 	}
-
-	.uni-swiper-item{
-		height: auto;
-	}
 	.order-item{
 		display: flex;
 		flex-direction: column;
 		padding-left: 30upx;
 		background: #fff;
+		border-bottom: 1px solid #EAEAEA;
 		// margin-top: 16upx;
-		margin-bottom: 16upx;
+		// margin-bottom: 16upx;
 		.i-top{
 			display: flex;
 			align-items: center;
@@ -342,145 +333,12 @@
 			}
 		}
 	}
-	
-	
-	/* load-more */
-	.uni-load-more {
-		display: flex;
-		flex-direction: row;
-		height: 80upx;
-		align-items: center;
-		justify-content: center
-	}
-	
-	.uni-load-more__text {
-		font-size: 28upx;
-		color: #999
-	}
-	
-	.uni-load-more__img {
-		height: 24px;
-		width: 24px;
-		margin-right: 10px
-	}
-	
-	.uni-load-more__img>view {
-		position: absolute
-	}
-	
-	.uni-load-more__img>view view {
-		width: 6px;
-		height: 2px;
-		border-top-left-radius: 1px;
-		border-bottom-left-radius: 1px;
-		background: #999;
-		position: absolute;
-		opacity: .2;
-		transform-origin: 50%;
-		animation: load 1.56s ease infinite
-	}
-	
-	.uni-load-more__img>view view:nth-child(1) {
-		transform: rotate(90deg);
-		top: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(2) {
-		transform: rotate(180deg);
-		top: 11px;
-		right: 0
-	}
-	
-	.uni-load-more__img>view view:nth-child(3) {
-		transform: rotate(270deg);
-		bottom: 2px;
-		left: 9px
-	}
-	
-	.uni-load-more__img>view view:nth-child(4) {
-		top: 11px;
-		left: 0
-	}
-	
-	.load1,
-	.load2,
-	.load3 {
-		height: 24px;
-		width: 24px
-	}
-	
-	.load2 {
-		transform: rotate(30deg)
-	}
-	
-	.load3 {
-		transform: rotate(60deg)
-	}
-	
-	.load1 view:nth-child(1) {
-		animation-delay: 0s
-	}
-	
-	.load2 view:nth-child(1) {
-		animation-delay: .13s
-	}
-	
-	.load3 view:nth-child(1) {
-		animation-delay: .26s
-	}
-	
-	.load1 view:nth-child(2) {
-		animation-delay: .39s
-	}
-	
-	.load2 view:nth-child(2) {
-		animation-delay: .52s
-	}
-	
-	.load3 view:nth-child(2) {
-		animation-delay: .65s
-	}
-	
-	.load1 view:nth-child(3) {
-		animation-delay: .78s
-	}
-	
-	.load2 view:nth-child(3) {
-		animation-delay: .91s
-	}
-	
-	.load3 view:nth-child(3) {
-		animation-delay: 1.04s
-	}
-	
-	.load1 view:nth-child(4) {
-		animation-delay: 1.17s
-	}
-	
-	.load2 view:nth-child(4) {
-		animation-delay: 1.3s
-	}
-	
-	.load3 view:nth-child(4) {
-		animation-delay: 1.43s
-	}
 	.p_btn {
-		background: $page-color-base;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 100upx;
 		width: 100%;
 		z-index: 9999;
-	}
-	
-	@-webkit-keyframes load {
-		0% {
-			opacity: 1
-		}
-	
-		100% {
-			opacity: .2
-		}
 	}
 </style>
