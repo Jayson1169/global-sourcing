@@ -46,7 +46,7 @@
 		>
 			<u-tabbar-item text="采购管理" icon="shopping-cart" @click="click" ></u-tabbar-item>
 			<u-tabbar-item text="快递物流" icon="car" @click="click" ></u-tabbar-item>
-			<u-tabbar-item text="导出海关信息" icon="reload" @click="click" ></u-tabbar-item>
+			<!-- <u-tabbar-item text="导出海关信息" icon="reload" @click="click" ></u-tabbar-item> -->
 		</u-tabbar>
 	</view>
 </template> 

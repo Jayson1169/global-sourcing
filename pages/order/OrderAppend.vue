@@ -119,12 +119,9 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					var role = uni.getStorageSync('user').role;
-					this.$api.http.post('/saleOrder/insert', this.order).then(res => {
+					var param = this.canSend?"createPurchaseOrder=false":"createPurchaseOrder=true"
+					this.$api.http.post('/saleOrder/insert?'+param, this.order).then(res => {
 						this.$api.msg.successToast('添加成功').then(res => {
-							// uni.navigateTo({
-							// 	url: role=='ADMIN'?'./Order':'./Salesperson'
-							// });
 							uni.navigateBack();
 							uni.$emit('edit', this.order)
 						})
@@ -145,6 +142,7 @@
 			},
 			switchChange: function (e) {
 				// console.log('switch1 发生 change 事件，携带值为', e.target.value)
+				this.canSend = e.target.value
 			}
 		}
 	}

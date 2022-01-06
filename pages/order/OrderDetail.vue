@@ -1,6 +1,6 @@
 <template>
 	<view class="product">
-		<view class="order">订单明细</view>
+		<view class="detail">订单明细</view>
 		<view class='tag-e'>
 			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductItemDetail(item)">
 				<view>
@@ -16,7 +16,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="order">收货信息</view>
+		<view class="detail">收货信息</view>
 		<!-- <view class="cu-form-group">
 			<view class="title">直接发货：</view>
 			<switch :checked="order.canSend" disabled/>
@@ -63,9 +63,6 @@
 <style lang="less">
 	page {
 		background-color: #F7F6FB;
-	}
-	.order {
-		padding: 10px 10px 10px 10px;
 	}
 	.o_btn {
 		background: #F7F6FB;
