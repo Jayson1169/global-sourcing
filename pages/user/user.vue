@@ -62,12 +62,12 @@
 		onShow() {
 			this.init()
 		},
-		onPullDownRefresh(){
-			this.init()
-			setTimeout(function () {
-				uni.stopPullDownRefresh();
-			}, 1000);
-		},
+		// onPullDownRefresh(){
+		// 	this.init()
+		// 	setTimeout(function () {
+		// 		uni.stopPullDownRefresh();
+		// 	}, 1000);
+		// },
 		methods: {
 			init() {
 				this.userRequest.page = 0

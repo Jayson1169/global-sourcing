@@ -48,7 +48,8 @@
 				<view class="cu-form-title">已发数量：{{item.deliveredQuantity}}</view>
 			</view>
 			<view class="cu-form-group" v-for="express in item.expresses">
-				<view class="cu-form-title">已发物流：{{express.expressNumber}} {{express.expressCompany}}</text></view>
+				<view class="cu-form-title">已发物流：</view>
+				<input v-model="express.expressNumber+' '+express.expressCompany" disabled="true" style="color: #000000;"></input>
 			</view>	
 		</view>
 	</view>

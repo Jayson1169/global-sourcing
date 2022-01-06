@@ -69,19 +69,23 @@
 		},
 		methods: {
 			sub: function(e) {
-				let rules = [
-					{name: 'deliveredQuantity', required: true, type: 'required', errmsg: '请输入发货数量'}
-				]
-				let valLoginRes = this.$validate.validate(this.item, rules)
-				if (!valLoginRes.isOk && e != 'delete') {
-					uni.showToast({
-						icon: 'none',
-						title: valLoginRes.errmsg
-					})
+				if (this.item.deliveredQuantity > this.item.product.inventory.warehouseInventory && e == 'modify') {
+					this.$api.msg.toast('库存不足')
 				} else {
-					uni.navigateBack()
-					uni.$emit(e, this.item)
-				}	
+					let rules = [
+						{name: 'deliveredQuantity', required: true, type: 'required', errmsg: '请输入发货数量'}
+					]
+					let valLoginRes = this.$validate.validate(this.item, rules)
+					if (!valLoginRes.isOk && e != 'delete') {
+						uni.showToast({
+							icon: 'none',
+							title: valLoginRes.errmsg
+						})
+					} else {
+						uni.navigateBack()
+						uni.$emit(e, this.item)
+					}	
+				}
 			}
 		}
 	}

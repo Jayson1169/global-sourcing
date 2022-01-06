@@ -25,7 +25,7 @@
 			<text :style="{color:'white'}">*</text>
 			<view class="title">直接发货：</view>
 			<!-- <view class="uni-list-cell-db">开启中</view> -->
-			<switch @change="switchChange" :checked="order.canSend"/>
+			<switch @change="switchChange" :disabled="disabled" :checked="canSend"/>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -47,7 +47,7 @@
 			<view class="title">收货地址：</view>
 			<input placeholder="请输入收货地址" v-model="order.address.shipAddress"></input>
 		</view>
-		<view class="H60"></view>
+		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
 				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">添加订单</button>
@@ -67,14 +67,16 @@
 						idNumber: '111111111111111111',
 						phoneNumber: '11111111111',
 						shipAddress: 'test'
-					},
-					canSend: false
-				}
+					}
+				},
+				canSend: false,
+				disabled: false
 			};
 		},
 		onLoad(option) {
 			uni.$on('append', (e) => {
 				this.order.items = this.order.items.concat(e)
+				this.checkSend();
 			})
 			uni.$on('modify', (e) => {
 				this.order.items.some((item, i) => {
@@ -82,6 +84,7 @@
 						this.$set(this.order.items, i, e)  
 					}
 				})
+				this.checkSend();
 			})
 			uni.$on('delete', (e) => {
 				this.order.items.some((item, i) => {
@@ -89,9 +92,19 @@
 						this.order.items.splice(i, 1)
 					}
 				})
+				this.checkSend();
 			})
 		},
 		methods: {
+			checkSend() {
+				this.disabled = false;
+				this.order.items.some((item, i) => {
+					if (item.product.inventory.midwayInventory + item.product.inventory.hubInventory < item.quantity) {
+						this.canSend = false;
+						this.disabled = true;
+					}
+				})
+			},
 			sub() { 
 				let rules = [
 					{name: 'name', type: 'required', errmsg: '请输入姓名'},
@@ -132,7 +145,6 @@
 			},
 			switchChange: function (e) {
 				// console.log('switch1 发生 change 事件，携带值为', e.target.value)
-				this.order.canSend = e.target.value;
 			}
 		}
 	}
@@ -141,9 +153,6 @@
 <style lang="less">
 	page {
 		background-color: #F7F6FB;
-	}
-	.detail {
-		padding: 10px 10px 10px 10px;
 	}
 	.o_btn {
 		background: #F7F6FB;

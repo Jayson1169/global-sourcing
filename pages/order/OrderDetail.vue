@@ -17,21 +17,25 @@
 			</view>
 		</view>
 		<view class="order">收货信息</view>
-		<view class="cu-form-group">
+		<!-- <view class="cu-form-group">
 			<view class="title">直接发货：</view>
 			<switch :checked="order.canSend" disabled/>
+		</view> -->
+		<view class="cu-form-group">
+			<view class="cu-form-title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>
+			<input v-model="order.address.name" disabled="true" style="color: #000000;"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="cu-form-title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{order.address.name}}</view>
+			<view class="cu-form-title">身份证号：</view>
+			<input v-model="order.address.idNumber" disabled="true" style="color: #000000;"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="cu-form-title">身份证号：{{order.address.idNumber}}</view>
+			<view class="cu-form-title">手机号码：</view>
+			<input v-model="order.address.phoneNumber" disabled="true" style="color: #000000;"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="cu-form-title">手机号码：{{order.address.phoneNumber}}</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="cu-form-title">收货地址：{{order.address.shipAddress}}</view>
+			<view class="cu-form-title">收货地址：</view>
+			<input v-model="order.address.shipAddress" disabled="true" style="color: #000000;"></input>
 		</view>
 	</view>
 </template>

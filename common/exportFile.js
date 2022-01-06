@@ -27,7 +27,7 @@ function exportFile(fileData, documentName = '导出海关信息', info) {
 		create: true
 	  }, function(dirEntry2) {
 		// 创建文件,防止重名
-		let fileName = info + formatDateThis(new Date())
+		let fileName = info + '_' + formatDateThis(new Date())
 		// let fileName = 'excel' + getUnixTime(formatDateThis(new Date()))
 		console.log(fileName)
 		dirEntry2.getFile(`${fileName}.xlsx`, {

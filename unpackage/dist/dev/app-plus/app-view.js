@@ -7363,7 +7363,11 @@ var render = function() {
             [_vm._v("直接发货：")]
           ),
           _c("v-uni-switch", {
-            attrs: { checked: _vm._$g(19, "a-checked"), _i: 19 },
+            attrs: {
+              disabled: _vm._$g(19, "a-disabled"),
+              checked: _vm._$g(19, "a-checked"),
+              _i: 19
+            },
             on: {
               change: function($event) {
                 return _vm.$handleViewEvent($event)
@@ -7603,7 +7607,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../Program Files/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.detail {\n  padding: 10px 10px 10px 10px;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.goods_add {\n  font-size: 13px;\n  justify-content: center;\n  align-items: center;\n}\n.tag-e {\n  background-color: #fff;\n  margin-bottom: 0px;\n  font-size: 13px;\n}\n.tag-e .goods {\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods_02 {\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  height: 160rpx;\n  flex-grow: 1;\n  justify-content: space-between;\n  padding-top: 10rpx;\n  padding-left: 25rpx;\n}\n.tag-e .goods_title {\n  max-height: 40px;\n  overflow: hidden;\n  line-height: 20px;\n  font-weight: 600;\n}\n.tag-e .goods_des {\n  color: #979797;\n}\n.tag-e .good_p {\n  display: flex;\n  justify-content: space-between;\n}\n.tag-e .good_p .good_price {\n  color: #F04E42;\n  font-weight: 600;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #F7F6FB;\n}\n.o_btn {\n  background: #F7F6FB;\n  padding: 0 10px 0px;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  z-index: 9999;\n}\n.goods_add {\n  font-size: 13px;\n  justify-content: center;\n  align-items: center;\n}\n.tag-e {\n  background-color: #fff;\n  margin-bottom: 0px;\n  font-size: 13px;\n}\n.tag-e .goods {\n  display: flex;\n  width: 100%;\n  background-color: #ffffff;\n  padding: 10px;\n  box-sizing: border-box;\n  border-bottom: 1px solid #EEF0EF;\n}\n.tag-e .goods_02 {\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  height: 160rpx;\n  flex-grow: 1;\n  justify-content: space-between;\n  padding-top: 10rpx;\n  padding-left: 25rpx;\n}\n.tag-e .goods_title {\n  max-height: 40px;\n  overflow: hidden;\n  line-height: 20px;\n  font-weight: 600;\n}\n.tag-e .goods_des {\n  color: #979797;\n}\n.tag-e .good_p {\n  display: flex;\n  justify-content: space-between;\n}\n.tag-e .good_p .good_price {\n  color: #F04E42;\n  font-weight: 600;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -8689,10 +8693,18 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
-            [_vm._v("直接发货：")]
+            [_vm._v("姓       名：")]
           ),
-          _c("v-uni-switch", {
-            attrs: { checked: _vm._$g(15, "a-checked"), disabled: true, _i: 15 }
+          _c("v-uni-input", {
+            staticStyle: { color: "#000000" },
+            attrs: { disabled: "true", _i: 15 },
+            model: {
+              value: _vm._$g(15, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(15, $$v)
+              },
+              expression: "order.address.name"
+            }
           })
         ],
         1
@@ -8704,32 +8716,42 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
-            [_vm._v("姓       名：" + _vm._$g(17, "t0-0"))]
-          )
+            [_vm._v("身份证号：")]
+          ),
+          _c("v-uni-input", {
+            staticStyle: { color: "#000000" },
+            attrs: { disabled: "true", _i: 18 },
+            model: {
+              value: _vm._$g(18, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(18, $$v)
+              },
+              expression: "order.address.idNumber"
+            }
+          })
         ],
         1
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
+        { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
-            [_vm._v("身份证号：" + _vm._$g(19, "t0-0"))]
-          )
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
-        [
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
-            [_vm._v("手机号码：" + _vm._$g(21, "t0-0"))]
-          )
+            { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
+            [_vm._v("手机号码：")]
+          ),
+          _c("v-uni-input", {
+            staticStyle: { color: "#000000" },
+            attrs: { disabled: "true", _i: 21 },
+            model: {
+              value: _vm._$g(21, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(21, $$v)
+              },
+              expression: "order.address.phoneNumber"
+            }
+          })
         ],
         1
       ),
@@ -8740,8 +8762,19 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
-            [_vm._v("收货地址：" + _vm._$g(23, "t0-0"))]
-          )
+            [_vm._v("收货地址：")]
+          ),
+          _c("v-uni-input", {
+            staticStyle: { color: "#000000" },
+            attrs: { disabled: "true", _i: 24 },
+            model: {
+              value: _vm._$g(24, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(24, $$v)
+              },
+              expression: "order.address.shipAddress"
+            }
+          })
         ],
         1
       )
@@ -9132,15 +9165,20 @@ var render = function() {
                         staticClass: _vm._$g("35-" + $30, "sc"),
                         attrs: { _i: "35-" + $30 }
                       },
-                      [
-                        _vm._v(
-                          "已发物流：" +
-                            _vm._$g("35-" + $30, "t0-0") +
-                            " " +
-                            _vm._$g("35-" + $30, "t0-1")
-                        )
-                      ]
-                    )
+                      [_vm._v("已发物流：")]
+                    ),
+                    _c("v-uni-input", {
+                      staticStyle: { color: "#000000" },
+                      attrs: { disabled: "true", _i: "36-" + $30 },
+                      model: {
+                        value: _vm._$g("36-" + $30, "v-model"),
+                        callback: function($$v) {
+                          _vm.$handleVModelEvent("36-" + $30, $$v)
+                        },
+                        expression:
+                          "express.expressNumber+' '+express.expressCompany"
+                      }
+                    })
                   ],
                   1
                 )
@@ -11598,8 +11636,19 @@ var render = function() {
                       _c(
                         "v-uni-view",
                         { staticClass: _vm._$g(39, "sc"), attrs: { _i: 39 } },
-                        [_vm._v("采购员电话：" + _vm._$g(39, "t0-0"))]
-                      )
+                        [_vm._v("采购员电话：")]
+                      ),
+                      _c("v-uni-input", {
+                        staticStyle: { color: "#000000" },
+                        attrs: { disabled: "true", _i: 40 },
+                        model: {
+                          value: _vm._$g(40, "v-model"),
+                          callback: function($$v) {
+                            _vm.$handleVModelEvent(40, $$v)
+                          },
+                          expression: "purchaseOrder.buyer.phoneNumber"
+                        }
+                      })
                     ],
                     1
                   )
@@ -11608,50 +11657,62 @@ var render = function() {
             1
           )
         : _vm._e(),
-      _vm._$g(40, "i")
+      _vm._$g(41, "i")
         ? _c(
             "v-uni-view",
-            { attrs: { _i: 40 } },
+            { attrs: { _i: 41 } },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(41, "sc"), attrs: { _i: 41 } },
+                { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } },
                 [_vm._v("仓管信息")]
               ),
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } },
+                { staticClass: _vm._$g(43, "sc"), attrs: { _i: 43 } },
                 [
                   _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(43, "sc"), attrs: { _i: 43 } },
-                    [_vm._v("仓管账号：" + _vm._$g(43, "t0-0"))]
+                    { staticClass: _vm._$g(44, "sc"), attrs: { _i: 44 } },
+                    [_vm._v("仓管账号：" + _vm._$g(44, "t0-0"))]
                   )
                 ],
                 1
               ),
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(44, "sc"), attrs: { _i: 44 } },
+                { staticClass: _vm._$g(45, "sc"), attrs: { _i: 45 } },
                 [
                   _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(45, "sc"), attrs: { _i: 45 } },
-                    [_vm._v("仓管姓名：" + _vm._$g(45, "t0-0"))]
+                    { staticClass: _vm._$g(46, "sc"), attrs: { _i: 46 } },
+                    [_vm._v("仓管姓名：" + _vm._$g(46, "t0-0"))]
                   )
                 ],
                 1
               ),
-              _vm._$g(46, "i")
+              _vm._$g(47, "i")
                 ? _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(46, "sc"), attrs: { _i: 46 } },
+                    { staticClass: _vm._$g(47, "sc"), attrs: { _i: 47 } },
                     [
                       _c(
                         "v-uni-view",
-                        { staticClass: _vm._$g(47, "sc"), attrs: { _i: 47 } },
-                        [_vm._v("仓管电话：" + _vm._$g(47, "t0-0"))]
-                      )
+                        { staticClass: _vm._$g(48, "sc"), attrs: { _i: 48 } },
+                        [_vm._v("仓管电话：")]
+                      ),
+                      _c("v-uni-input", {
+                        staticStyle: { color: "#000000" },
+                        attrs: { disabled: "true", _i: 49 },
+                        model: {
+                          value: _vm._$g(49, "v-model"),
+                          callback: function($$v) {
+                            _vm.$handleVModelEvent(49, $$v)
+                          },
+                          expression:
+                            "purchaseOrder.warehouseKeeper.phoneNumber"
+                        }
+                      })
                     ],
                     1
                   )
@@ -11660,22 +11721,22 @@ var render = function() {
             1
           )
         : _vm._e(),
-      _vm._$g(48, "i")
+      _vm._$g(50, "i")
         ? _c("v-uni-view", {
-            staticClass: _vm._$g(48, "sc"),
-            attrs: { _i: 48 }
+            staticClass: _vm._$g(50, "sc"),
+            attrs: { _i: 50 }
           })
         : _vm._e(),
-      _vm._$g(49, "i")
+      _vm._$g(51, "i")
         ? _c(
             "v-uni-view",
-            { staticClass: _vm._$g(49, "sc"), attrs: { _i: 49 } },
+            { staticClass: _vm._$g(51, "sc"), attrs: { _i: 51 } },
             [
               _c(
                 "v-uni-button",
                 {
-                  staticClass: _vm._$g(50, "sc"),
-                  attrs: { _i: 50 },
+                  staticClass: _vm._$g(52, "sc"),
+                  attrs: { _i: 52 },
                   on: {
                     click: function($event) {
                       return _vm.$handleViewEvent($event)
@@ -11687,8 +11748,8 @@ var render = function() {
               _c(
                 "v-uni-button",
                 {
-                  staticClass: _vm._$g(51, "sc"),
-                  attrs: { _i: 51 },
+                  staticClass: _vm._$g(53, "sc"),
+                  attrs: { _i: 53 },
                   on: {
                     click: function($event) {
                       return _vm.$handleViewEvent($event)
@@ -12441,14 +12502,16 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
-            [_vm._v("直接发货：")]
+            [_vm._v("姓       名：")]
           ),
-          _c("v-uni-switch", {
-            attrs: { checked: _vm._$g(21, "a-checked"), _i: 21 },
-            on: {
-              change: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
+          _c("v-uni-input", {
+            attrs: { placeholder: "请输入姓名", _i: 21 },
+            model: {
+              value: _vm._$g(21, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(21, $$v)
+              },
+              expression: "order.address.name"
             }
           })
         ],
@@ -12464,16 +12527,21 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
-            [_vm._v("姓       名：")]
+            [_vm._v("身份证号：")]
           ),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入姓名", _i: 25 },
+            attrs: {
+              type: "idcard",
+              placeholder: "请输入身份证号",
+              maxlength: "18",
+              _i: 25
+            },
             model: {
               value: _vm._$g(25, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(25, $$v)
               },
-              expression: "order.address.name"
+              expression: "order.address.idNumber"
             }
           })
         ],
@@ -12489,13 +12557,13 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
-            [_vm._v("身份证号：")]
+            [_vm._v("手机号码：")]
           ),
           _c("v-uni-input", {
             attrs: {
-              type: "idcard",
-              placeholder: "请输入身份证号",
-              maxlength: "18",
+              type: "number",
+              placeholder: "请输入手机号码",
+              maxlength: "11",
               _i: 29
             },
             model: {
@@ -12503,7 +12571,7 @@ var render = function() {
               callback: function($$v) {
                 _vm.$handleVModelEvent(29, $$v)
               },
-              expression: "order.address.idNumber"
+              expression: "order.address.phoneNumber"
             }
           })
         ],
@@ -12519,44 +12587,14 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(32, "sc"), attrs: { _i: 32 } },
-            [_vm._v("手机号码：")]
+            [_vm._v("收货地址：")]
           ),
           _c("v-uni-input", {
-            attrs: {
-              type: "number",
-              placeholder: "请输入手机号码",
-              maxlength: "11",
-              _i: 33
-            },
+            attrs: { placeholder: "请输入收货地址", _i: 33 },
             model: {
               value: _vm._$g(33, "v-model"),
               callback: function($$v) {
                 _vm.$handleVModelEvent(33, $$v)
-              },
-              expression: "order.address.phoneNumber"
-            }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(34, "sc"), attrs: { _i: 34 } },
-        [
-          _c("v-uni-text", { style: _vm._$g(35, "s"), attrs: { _i: 35 } }, [
-            _vm._v("*")
-          ]),
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(36, "sc"), attrs: { _i: 36 } },
-            [_vm._v("收货地址：")]
-          ),
-          _c("v-uni-input", {
-            attrs: { placeholder: "请输入收货地址", _i: 37 },
-            model: {
-              value: _vm._$g(37, "v-model"),
-              callback: function($$v) {
-                _vm.$handleVModelEvent(37, $$v)
               },
               expression: "order.address.shipAddress"
             }
@@ -12564,20 +12602,20 @@ var render = function() {
         ],
         1
       ),
-      _c("v-uni-view", { staticClass: _vm._$g(38, "sc"), attrs: { _i: 38 } }),
+      _c("v-uni-view", { staticClass: _vm._$g(34, "sc"), attrs: { _i: 34 } }),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(39, "sc"), attrs: { _i: 39 } },
+        { staticClass: _vm._$g(35, "sc"), attrs: { _i: 35 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(40, "sc"), attrs: { _i: 40 } },
+            { staticClass: _vm._$g(36, "sc"), attrs: { _i: 36 } },
             [
               _c(
                 "v-uni-button",
                 {
-                  staticClass: _vm._$g(41, "sc"),
-                  attrs: { _i: 41 },
+                  staticClass: _vm._$g(37, "sc"),
+                  attrs: { _i: 37 },
                   on: {
                     click: function($event) {
                       return _vm.$handleViewEvent($event)
@@ -15521,35 +15559,43 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
-            [_vm._v("直接发货：")]
+            [_vm._v("姓       名：" + _vm._$g(14, "t0-0"))]
+          )
+        ],
+        1
+      ),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
+        [
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
+            [_vm._v("身份证号：" + _vm._$g(16, "t0-0"))]
+          )
+        ],
+        1
+      ),
+      _c(
+        "v-uni-view",
+        { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
+        [
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
+            [_vm._v("手机号码：")]
           ),
-          _c("v-uni-switch", {
-            attrs: { checked: _vm._$g(15, "a-checked"), disabled: true, _i: 15 }
+          _c("v-uni-input", {
+            staticStyle: { color: "#000000" },
+            attrs: { disabled: "true", _i: 19 },
+            model: {
+              value: _vm._$g(19, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(19, $$v)
+              },
+              expression: "order.address.phoneNumber"
+            }
           })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
-        [
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
-            [_vm._v("姓       名：" + _vm._$g(17, "t0-0"))]
-          )
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
-        [
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
-            [_vm._v("身份证号：" + _vm._$g(19, "t0-0"))]
-          )
         ],
         1
       ),
@@ -15560,19 +15606,7 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
-            [_vm._v("手机号码：" + _vm._$g(21, "t0-0"))]
-          )
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(22, "sc"), attrs: { _i: 22 } },
-        [
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
-            [_vm._v("收货地址：" + _vm._$g(23, "t0-0"))]
+            [_vm._v("收货地址：" + _vm._$g(21, "t0-0"))]
           )
         ],
         1
@@ -19929,19 +19963,30 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
-            [_vm._v("物流单号：" + _vm._$g(13, "t0-0"))]
-          )
+            [_vm._v("物流单号：")]
+          ),
+          _c("v-uni-input", {
+            staticStyle: { color: "#000000" },
+            attrs: { disabled: "true", _i: 14 },
+            model: {
+              value: _vm._$g(14, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(14, $$v)
+              },
+              expression: "expressOrder.expressNumber"
+            }
+          })
         ],
         1
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
+        { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
-            [_vm._v("物流公司：" + _vm._$g(15, "t0-0"))]
+            { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
+            [_vm._v("物流公司：" + _vm._$g(16, "t0-0"))]
           )
         ],
         1
@@ -21974,37 +22019,48 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
-            [_vm._v("物流单号：" + _vm._$g(13, "t0-0"))]
-          )
+            [_vm._v("物流单号：")]
+          ),
+          _c("v-uni-input", {
+            staticStyle: { color: "#000000" },
+            attrs: { disabled: "true", _i: 14 },
+            model: {
+              value: _vm._$g(14, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(14, $$v)
+              },
+              expression: "expressOrder.expressNumber"
+            }
+          })
         ],
         1
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
+        { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
-            [_vm._v("物流公司：" + _vm._$g(15, "t0-0"))]
+            { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
+            [_vm._v("物流公司：" + _vm._$g(16, "t0-0"))]
           )
         ],
         1
       ),
-      _c("v-uni-view", { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } }),
+      _c("v-uni-view", { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } }),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
+        { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
+            { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
             [
               _c(
                 "v-uni-button",
                 {
-                  staticClass: _vm._$g(19, "sc"),
-                  attrs: { _i: 19 },
+                  staticClass: _vm._$g(20, "sc"),
+                  attrs: { _i: 20 },
                   on: {
                     click: function($event) {
                       return _vm.$handleViewEvent($event)

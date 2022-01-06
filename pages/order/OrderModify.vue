@@ -24,11 +24,11 @@
 			</view>
 		</view>
 		<view class="detail">收货信息</view>
-		<view class="cu-form-group">
+	<!-- 	<view class="cu-form-group">
 			<text :style="{color:'white'}">*</text>
 			<view class="title">直接发货：</view>
 			<switch @change="switchChange" :checked="order.canSend"/>
-		</view>
+		</view> -->
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</view>

@@ -104,22 +104,27 @@
 				}
 			},
 			sub() {
-				let productForm = this.item.product;
-				productForm.deliveredQuantity = this.item.deliveredQuantity;
-				let rules = [
-					{name: 'name', required: true, type: 'required', errmsg: '请选择或搜索商品'},
-					{name: 'deliveredQuantity', required: true, type: 'required', errmsg: '请输入发货数量'}
-				]
-				let valLoginRes = this.$validate.validate(productForm, rules)
-				if (!valLoginRes.isOk) {
-					uni.showToast({
-						icon: 'none',
-						title: valLoginRes.errmsg
-					})
+				if (this.item.deliveredQuantity > this.item.product.inventory.warehouseInventory) {
+					this.$api.msg.toast('库存不足')
 				} else {
-					uni.navigateBack()
-					uni.$emit('append', this.item)
-				}	
+					let productForm = this.item.product;
+					productForm.deliveredQuantity = this.item.deliveredQuantity;
+					let rules = [
+						{name: 'name', required: true, type: 'required', errmsg: '请选择或搜索商品'},
+						{name: 'deliveredQuantity', required: true, type: 'required', errmsg: '请输入发货数量'}
+					]
+					let valLoginRes = this.$validate.validate(productForm, rules)
+					if (!valLoginRes.isOk) {
+						uni.showToast({
+							icon: 'none',
+							title: valLoginRes.errmsg
+						})
+					} else {
+						uni.navigateBack()
+						uni.$emit('append', this.item)
+					}
+				}
+					
 			}
 		}
 	}

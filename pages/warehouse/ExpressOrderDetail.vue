@@ -20,7 +20,8 @@
 		</view>
 		<view class="detail">物流信息</view>
 		<view class="cu-form-group">
-			<view class="title">物流单号：{{expressOrder.expressNumber}}</view>
+			<view class="title">物流单号：</view>
+			<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">物流公司：{{expressOrder.expressCompany}}</view>

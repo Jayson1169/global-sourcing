@@ -53,7 +53,8 @@
 				<view class="title">采购员姓名：{{purchaseOrder.buyer.name}}</view>
 			</view>
 			<view class="cu-form-group" v-if="purchaseOrder.buyer.phoneNumber">
-				<view class="title">采购员电话：{{purchaseOrder.buyer.phoneNumber}}</view>
+				<view class="title">采购员电话：</view>
+				<input v-model="purchaseOrder.buyer.phoneNumber" disabled="true" style="color: #000000;"></input>
 			</view>
 		</view>
 		<view v-if="purchaseOrder.status==='CONFIRMED'">
@@ -65,7 +66,8 @@
 				<view class="title">仓管姓名：{{purchaseOrder.warehouseKeeper.name}}</view>
 			</view>
 			<view class="cu-form-group" v-if="purchaseOrder.warehouseKeeper.phoneNumber">
-				<view class="title">仓管电话：{{purchaseOrder.warehouseKeeper.phoneNumber}}</view>
+				<view class="title">仓管电话：</view>
+				<input v-model="purchaseOrder.warehouseKeeper.phoneNumber" disabled="true" style="color: #000000;"></input>
 			</view>
 		</view>
 		<view class="H50" v-if="purchaseOrder.status === 'PENDING' && role === 'ADMIN'"></view>

@@ -41,6 +41,8 @@
 </template>
 
 <script>
+	import { formatDateThis, getUnixTime } from '@/common/dateUtil.js'
+	import { exportFile } from '@/common/exportFile.js'
 	export default {
 		data() {
 			return {
@@ -84,11 +86,17 @@
 					})
 				} else {
 					this.$api.http.post('/expressOrder/insert', this.expressOrder).then(res => {
-						this.$api.msg.successToast('添加成功').then(res => {
-							uni.navigateTo({
-								url: './ExpressOrder'
-							});
-						})
+						this.output();
+						uni.navigateTo({
+							url: './ExpressOrder'
+						});
+						// this.$api.msg.successToast('添加成功').then(res => {
+						// 	uni.navigateTo({
+						// 		url: './ExpressOrder'
+						// 	});
+						// })
+					}, error => {
+						this.$api.msg.toast(error);
 					})
 				}	
 			},
@@ -110,6 +118,59 @@
 				uni.navigateTo({
 					url: './ExpressOrderItemEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});
+			},
+			output() {
+				// 要导出的json数据
+				var items = this.expressOrder.items;
+				const jsonData = [];
+				for (var i = 0, lenI = items.length; i < lenI; ++i) {
+					const item = items[i]
+					// if (this.current.includes(item.id)) {
+						var data = {
+							hsCode: '',
+							materialBeschaffenheit: '',
+							brandArticleNo: '',
+							brand: '',
+							articleName: '',
+							unitPrice: '',
+							totalQuantity: '',
+							sum: ''
+						}
+						data.hsCode = item.product.customsInfo.hsCode;
+						data.materialBeschaffenheit = item.product.customsInfo.materialBeschaffenheit;
+						data.brandArticleNo = item.product.customsInfo.brandArticleNo;
+						data.brand = item.product.customsInfo.brand;
+						data.articleName = item.product.customsInfo.articleName;
+						data.unitPrice = item.product.customsInfo.price / 100;
+						data.totalQuantity = item.deliveredQuantity;
+						data.sum = data.unitPrice * data.totalQuantity;
+						jsonData.push(data);
+					// }
+				}
+				// 列标题
+				let worksheet = 'sheet1'
+				let str = '<tr><td>HS Code</td><td>Material Beschaffenheit</td><td>Brand Article no.</td>'
+						 +'<td>Brand</td><td>Article Name</td><td>unit Price €</td><td>Total Quantity</td><td>Sum</td></tr>'
+				// 循环遍历，每行加入tr标签，每个单元格加td标签
+				for (let i = 0; i < jsonData.length; i++) {
+					str += '<tr>'
+					for (let item in jsonData[i]) {
+						// 增加\t为了不让表格显示科学计数法或者其他格式
+						str += `<td>${jsonData[i][item] + '\t'}</td>`
+					}
+					str += '</tr>'
+				}
+				// 下载的表格模板数据
+				let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+				xmlns:x="urn:schemas-microsoft-com:office:excel" 
+				xmlns="http://www.w3.org/TR/REC-html40">
+				<head><!--[if gte mso 9]><xml encoding="UTF-8"><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+				<x:Name>${worksheet}</x:Name>
+				<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+				</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+				</head><body><table>${str}</table></body></html>`
+				// 下载模板
+				exportFile(template, "导出海关信息", this.expressOrder.expressNumber)
 			}
 		}
 	}
