@@ -1,0 +1,437 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path" : "pages/Login",
+			"style" : {
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationStyle":"custom"
+			},
+			"app-plus": {
+				"bounce":"none"
+			}
+		},
+		{
+			"path" : "pages/Home",
+			"style" : {
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce":"none"
+				}
+			}
+		},
+		{
+			"path" : "pages/user/User",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "用户管理",
+				"enablePullDownRefresh": false,
+				"app-plus":{
+					// 关闭界面上拉下拉阴影回弹效果
+					"bounce":"none",
+					// 自定义导航栏字体大小
+					"titleNView": {
+						"titleSize": "38upx"
+					}
+				}
+			}
+			
+		},
+		{
+			"path" : "pages/user/UserAppend",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "新增用户",
+				"enablePullDownRefresh": false,
+				"app-plus":{
+					// 关闭界面上拉下拉阴影回弹效果
+					"bounce":"none",
+					// 自定义导航栏字体大小
+					"titleNView": {
+						"titleSize": "38upx"
+					}
+				}
+			}
+		},
+		{
+			"path" : "pages/user/PasswordReset",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "密码重置",
+				"enablePullDownRefresh": false,
+				"app-plus":{
+					// 关闭界面上拉下拉阴影回弹效果
+					"bounce":"none",
+					// 自定义导航栏字体大小
+					"titleNView": {
+						"titleSize": "38upx"
+					}
+				}
+			}  
+		},
+		{
+			"path" : "pages/statistics/Statistics",
+			"style" : {}
+		},
+		{
+			"path" : "pages/statistics/StatisticsOutput",
+			"style" : {
+				"navigationBarTitleText": "导出财务信息",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/order/Order",
+			"style" : {
+				"navigationBarTitleText": "订单管理",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/order/OrderAppend",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "添加订单",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+		    "path" : "pages/order/ProductItemAppend",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "添加商品项",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/order/ProductItemEdit",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "编辑商品项",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+			"path" : "pages/order/OrderDetail",
+			"style" : {
+				"navigationBarTitleText": "查看订单"
+			}
+		},
+		{
+			"path" : "pages/order/ProductItemDetail",
+			"style" : {
+				"navigationBarTitleText": "查看商品项"
+			}
+		},
+		{
+			"path" : "pages/purchase/PurchaserAssign",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "分配采购员",
+				"enablePullDownRefresh": false
+			} 
+		}
+        ,{
+            "path" : "pages/purchase/Purchase",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "采购管理",
+                "enablePullDownRefresh": false
+            }
+        }
+        ,{
+            "path" : "pages/purchase/Purchaser",
+            "style" : {
+            	"navigationBarBackgroundColor": "#ffffff",
+            	"enablePullDownRefresh": false,
+            	"app-plus": {
+            		"bounce":"none"
+            	}
+            }
+            
+        }
+		,{
+		    "path" : "pages/purchase/PurchaseAppend",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "添加采购单",
+		        "enablePullDownRefresh": false
+		    }
+		}
+        ,{
+            "path" : "pages/purchase/PurchaseUpload",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "采购信息",
+                "enablePullDownRefresh": false
+            }  
+        },
+		{
+		    "path" : "pages/purchase/PurchaseDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "采购信息",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/purchase/PurchaseReceive",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "接收商品",
+		        "enablePullDownRefresh": false
+		    }
+		}
+        ,{
+            "path" : "pages/order/OrderModify",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/warehouse/WarehouseKeeper",
+            "style" : {
+				// "navigationBarTitleText": "采购管理",
+            	"navigationBarBackgroundColor": "#ffffff",
+            	"enablePullDownRefresh": false,
+            	"app-plus": {
+            		"bounce":"none"
+            	}
+            }
+        }
+        ,{
+            "path" : "pages/warehouse/WarehouseKeeperAssign",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "分配仓管",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+		,{
+		    "path" : "pages/warehouse/WarehouseOutput",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "导出海关信息",
+				"navigationBarBackgroundColor": "#ffffff",
+		        "enablePullDownRefresh": false,
+		        "app-plus": {
+		        	"bounce":"none"
+		        }
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/transport/Transporter",
+            "style" : {
+            	"navigationBarBackgroundColor": "#ffffff",
+            	"enablePullDownRefresh": false,
+            	"app-plus": {
+            		"bounce":"none"
+            	}
+            }
+        },
+		{
+		    "path" : "pages/transport/OrderTransport",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "快递物流",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/transport/ProductTransport",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "快递物流",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/product/Product",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品管理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/warehouse/ProductTransport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发送快递",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/product/ProductAppend",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加商品",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/product/ProductModify",
+            "style" :
+            {
+                "navigationBarTitleText": "修改商品",
+                "enablePullDownRefresh": false
+            }
+        }
+        ,{
+            "path" : "pages/warehouse/ExpressOrderAppend",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加物流单",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+		{
+		    "path" : "pages/warehouse/ExpressOrderItemAppend",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "添加商品项",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/warehouse/ExpressOrderItemDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "查看商品项",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/warehouse/ExpressOrderDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "查看物流单",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/warehouse/ExpressOrderItemEdit",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "编辑商品项",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/warehouse/ExpressOrder",
+		    "style" :                                                                                    
+		    {
+		        // "navigationBarTitleText": "快递物流",
+				"navigationBarBackgroundColor": "#ffffff",
+		        "enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce":"none"
+				}
+		    }
+		},
+		{
+		    "path" : "pages/transport/ExpressOrder",
+		    "style" :                                                                                    
+		    {
+				"navigationBarBackgroundColor": "#ffffff",
+		        "enablePullDownRefresh": false,
+		        "app-plus": {
+		        	"bounce":"none"
+		        }
+		    }
+		    
+		},
+		{
+		    "path" : "pages/transport/ExpressOrderItemReceive",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "接收转运物流",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/transport/ExpressOrderReceive",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "接收转运物流",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/order/Salesperson",
+		    "style" :
+		    {
+		        "navigationBarTitleText": "订单管理",
+		    	"navigationBarBackgroundColor": "#ffffff",
+		        "enablePullDownRefresh": false,
+		    	"app-plus": {
+		    		"bounce":"none"
+		    	}
+		    }
+		}
+    ],
+	// "tabBar": {
+	// 	"color":"#7A7E83",
+	// 	"selectedColor":"#1296DB",
+	// 	"borderStyle":"black",
+	// 	"backgroundColor": "#ffffff",
+	// 	"list": [
+	// 		{
+	// 			"pagePath": "pages/index/index",
+	// 			"iconPath": "/static/index.png",
+	// 			"selectedIconPath": "/static/index-select.png",
+	// 			"text": "首页"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/order/order",
+	// 			"iconPath": "/static/user.png",
+	// 			"selectedIconPath": "/static/user-select.png",
+	// 			"text": "我的"
+	// 		}
+	// 	]
+	// },
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus":{
+			// 关闭界面上拉下拉阴影回弹效果
+			"bounce":"none",
+			// 自定义导航栏字体大小
+			"titleNView": {
+				"titleSize": "38upx"
+			}
+		}
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+	
+}
