@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "采购信息",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "upimg": "/components/sunui-upimg/sunui-upimg"
-  }
-}
