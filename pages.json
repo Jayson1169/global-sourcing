@@ -28,7 +28,7 @@
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "用户管理",
-				"enablePullDownRefresh": true,
+				// "enablePullDownRefresh": true,
 				"app-plus":{
 					// 关闭界面上拉下拉阴影回弹效果
 					"bounce":"none",
@@ -360,6 +360,7 @@
 		    "path" : "pages/transport/ExpressOrder",
 		    "style" :                                                                                    
 		    {
+				"navigationBarBackgroundColor": "#ffffff",
 		        "enablePullDownRefresh": false,
 		        "app-plus": {
 		        	"bounce":"none"

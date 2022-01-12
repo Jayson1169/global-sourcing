@@ -63,10 +63,10 @@
 				order: {
 					items: [],
 					address: {
-						name: 'test',
-						idNumber: '111111111111111111',
-						phoneNumber: '11111111111',
-						shipAddress: 'test'
+						name: '',
+						idNumber: '',
+						phoneNumber: '',
+						shipAddress: '',
 					}
 				},
 				canSend: false,

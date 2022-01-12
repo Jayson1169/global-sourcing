@@ -1,26 +1,25 @@
 <template>
 	<view class="product">	
 		<view class="cu-form-group">
-			<view class="title">商品名称：</view>
-			<input placeholder="请输入商品名称" v-model="product.name" disabled></input>
+			<view class="title">商品名称：{{product.name}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品品牌：</view>
-			<input v-model="product.brand" disabled></input>
+			<view class="title">商品品牌：{{product.brand}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品型号：</view>
-			<input placeholder="请输入商品型号" v-model="product.specification" disabled></input>
+			<view class="title">商品型号：{{product.specification}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">商品条码：</view>
-			<input v-model="product.barcode" disabled></input>
+			<view class="title">商品条码：{{product.barcode}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">参考价格：{{product.price}}</view>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">商品图片：</view>
 			<myimg :photo="product.image" :padding="true"></myimg>
 		</view>
-		<view class="cu-form-group">
+		<!-- <view class="cu-form-group">
 			<view class="p_title">销售价格（优质客户）：</view>
 			<input type="digit" placeholder="未输入销售价格" v-model="product.salePrice" disabled></input>
 		</view>
@@ -31,18 +30,9 @@
 		<view class="cu-form-group">
 			<view class="p_title">销售价格（批量采购）：</view>
 			<input type="digit" placeholder="未输入销售价格" v-model="product.salePrice" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">生产厂家：</view>
-			<input placeholder="未输入生产厂家" v-model="product.manufacturer" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">生产地区：</view>
-			<input placeholder="未输入生产地区" v-model="product.origin" disabled></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">备注信息：</view>
-			<input placeholder="未输入备注信息" v-model="product.remark" disabled></input>
+		</view> -->
+		<view class="cu-form-group" v-if="product.remark">
+			<view class="title">备注信息：{{product.remark}}</view>
 		</view>
 	</view>
 </template>

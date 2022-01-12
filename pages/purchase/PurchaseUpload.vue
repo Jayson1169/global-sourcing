@@ -72,7 +72,7 @@
 		},
 		onLoad(option) {
 			this.purchaseOrder = JSON.parse(decodeURIComponent(option.purchaseOrder));
-			this.purchaseOrder.price = this.purchaseOrder.purchasePrice / 100;
+			// this.purchaseOrder.price = this.purchaseOrder.purchasePrice / 100;
 		},
 		methods: {
 			getPhoto(val) {
