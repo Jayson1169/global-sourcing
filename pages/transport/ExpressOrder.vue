@@ -3,7 +3,7 @@
 		<!-- <view class="search">
 			<uni-easyinput suffixIcon="search" v-model="tabCurrentIndex" placeholder="请输入内容" @iconClick="search" color="#A5A5A5"></uni-easyinput>
 		</view>	 -->
-		<view class="navbar" v-if="expressOrderList.length != 0">
+		<view class="navbar">
 			<view 
 				v-for="(item, index) in navList" :key="index" 
 				class="nav-item" 
@@ -13,7 +13,7 @@
 			{{item}}
 			</view>
 		</view>
-		<!-- <empty v-if="expressOrderList.length === 0"></empty> -->
+		<empty v-if="expressOrderList.length === 0"></empty>
 		<view class="order-item" v-for="(item, index) in expressOrderList" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || tabCurrentIndex === 0">
 			<view @click="item.status=='DELIVERED'?jumpExpressOrderReceive(item):jumpExpressOrderDetail(item)"> 
 				<view class="i-top b-b">

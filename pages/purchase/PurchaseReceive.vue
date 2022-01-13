@@ -16,7 +16,10 @@
 			<view class="title">采购单价：{{purchaseOrder.purchasePrice / 100}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">采购数量：{{purchaseOrder.quantity}}</view>
+			<view class="title">已采购数量：{{purchaseOrder.purchasedQuantity}}</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">应采购数量：{{purchaseOrder.quantity}}</view>
 		</view>
 		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
@@ -46,6 +49,9 @@
 		</view>
 		<view class="detail">接收信息</view>
 		<view class="cu-form-group">
+			<view class="title">已接收数量：{{purchaseOrder.warehousedQuantity}}</view>
+		</view>
+		<view class="cu-form-group">
 			<view class="title">接收数量：</view>
 			<input placeholder="请扫码确定接收数量" v-model="number" disabled></input>
 			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
@@ -64,13 +70,11 @@
 		data() {
 			return {
 				purchaseOrder: [],
-				// purchaseOrder: {"id":21,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-17 17:58:06","buyer":{"id":16,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"18390818785","password":"$2a$10$wT1N1PS1hkQ5T0sFMXUaau6bqjctpC5X2zPyzO3sgYPUputD5R.ri","name":"Jack","role":"BUYER","phoneNumber":null},"status":"READY","invoice":null,"invoiceDate":null,"photo":null,"product":{"id":41,"createTime":"2021-12-16 00:39:36","updateTime":"2021-12-16 00:39:36","name":"曼秀雷敦男士控油抗痘洁面乳","barcode":null,"specification":"150ml","image":null,"manufacturer":null,"origin":"广东省中山市","remark":null},"purchasePrice":null,"quantity":4,"rejectReason":null, "warehouseKeeper": {"name": "yinxin", "phoneNumber": "18390818785"}},
 				number: '0'
 			};
 		},
 		onLoad(option) {
 			this.purchaseOrder = JSON.parse(decodeURIComponent(option.purchaseOrder));
-			console.log(option.purchaseOrder)
 		},
 		methods: {
 			sub() {
@@ -86,11 +90,12 @@
 							var quantity = res.content==''?_this.number:res.content;
 							_this.$api.http.put('/purchaseOrder/putIntoWarehouse?id='+_this.purchaseOrder.id+'&quantity='+quantity, null).then(res => {
 								_this.$api.msg.successToast('接收成功').then(res => {
-									// uni.$emit('edit');
 									uni.navigateTo({
 										url: '../warehouse/WarehouseKeeper'
 									})
 								})
+							}, error => {
+								_this.$api.msg.toast(error)
 							})
 						}
 					}

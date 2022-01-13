@@ -45,7 +45,7 @@
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">发货数量：</view>
-			<input type="number" placeholder="请输入发货数量" v-model="item.deliveredQuantity"></input>
+			<input type="number" placeholder="请输入发货数量" v-model="item.quantity"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="o_btn">
@@ -104,14 +104,14 @@
 				}
 			},
 			sub() {
-				if (this.item.deliveredQuantity > this.item.product.inventory.warehouseInventory) {
+				if (this.item.quantity > this.item.product.inventory.warehouseInventory) {
 					this.$api.msg.toast('库存不足')
 				} else {
 					let productForm = this.item.product;
-					productForm.deliveredQuantity = this.item.deliveredQuantity;
+					productForm.quantity = this.item.quantity;
 					let rules = [
 						{name: 'name', required: true, type: 'required', errmsg: '请选择或搜索商品'},
-						{name: 'deliveredQuantity', required: true, type: 'required', errmsg: '请输入发货数量'}
+						{name: 'quantity', required: true, type: 'required', errmsg: '请输入发货数量'}
 					]
 					let valLoginRes = this.$validate.validate(productForm, rules)
 					if (!valLoginRes.isOk) {

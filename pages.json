@@ -24,6 +24,16 @@
 			}
 		},
 		{
+			"path" : "pages/Web",
+			"style" : {
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce":"none"
+				}
+			}
+		},
+		{
 			"path" : "pages/user/User",
 			"style" :                                                                                    
 			{

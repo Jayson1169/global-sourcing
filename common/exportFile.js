@@ -41,7 +41,8 @@ function exportFile(fileData, documentName = '导出海关信息', info) {
 			  })
 			}
 			//  /storage/emulated/0指的就是系统路径
-			let pathStr = fullPath.replace('/storage/emulated/0', '')
+			// let pathStr = fullPath.replace('/storage/emulated/0', '')
+			let pathStr = '/storage/emulated/0/Android'
 			writer.onwrite = (e) => {
 			  // 成功导出数据;
 			  uni.hideLoading()

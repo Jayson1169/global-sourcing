@@ -15,8 +15,11 @@
 		<view class="cu-form-group" v-if="purchaseOrder.purchasePrice">
 			<view class="title">采购单价：{{purchaseOrder.purchasePrice / 100}}</view>
 		</view>
+		<view class="cu-form-group" v-if="purchaseOrder.purchasedQuantity">
+			<view class="title">已采购数量：{{purchaseOrder.purchasedQuantity}}</view>
+		</view>
 		<view class="cu-form-group">
-			<view class="title">采购数量：{{purchaseOrder.quantity}}</view>
+			<view class="title">应采购数量：{{purchaseOrder.quantity}}</view>
 		</view>
 		<view class="detail">商品信息</view>
 		<view class="cu-form-group">

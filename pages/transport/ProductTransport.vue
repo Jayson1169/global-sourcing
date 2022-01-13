@@ -38,12 +38,9 @@
 			<view class="cu-form-group">
 				<view class="cu-form-title">已发数量：{{item.deliveredQuantity}}</view>
 			</view>
-			<!-- <view class="cu-form-group" v-for="express in item.expresses">
-				<view class="cu-form-title">已发物流：{{express.expressNumber}} {{express.expressCompany}}</text></view>
-			</view> -->
 			<view class="cu-form-group" v-for="express in item.expresses">
 				<view class="cu-form-title">已发物流：</view>
-				<input v-model="express.expressNumber+' '+express.expressCompany" disabled="true" style="color: #000000;"></input>
+				<input v-model="express.expressNumber+' '+express.expressCompany" disabled="true" @click="getExpressInfo(express)"></input>
 			</view>	
 		</view>
 		<view class="detail">发货明细</view>
@@ -72,9 +69,6 @@
 					</view>
 				</view>
 			</view>
-		</view>
-		<view class="cu-form-group" v-else>
-			<view class="cu-form-title">物流单号：{{item.expressNumbers[0]}}</view>
 		</view>
 	</view>
 </template>
@@ -108,16 +102,33 @@
 					}
 				})
 			},
-			sub() {	
-				this.$api.http.put('/saleOrder/deliverItem?itemId='+this.item.id+'&quantity='+this.item.expressQuantity+'&expressCompany='+this.item.expressCompany+'&expressNumber='+this.item.expressNumber, null).then(res => {
-					this.$api.msg.successToast('发送成功').then(res => {
-						uni.$emit('edit', res)
-						// uni.navigateBack()
-						uni.navigateTo({
-							url: './Transporter'
+			sub() {
+				let rules = [
+					{name: 'expressNumber', type: 'required', errmsg: '请输入物流单号'},
+					{name: 'expressCompany', type: 'required', errmsg: '请输入物流公司'},
+					{name: 'expressQuantity', type: 'required', errmsg: '请输入发货数量'},
+				]
+				let valLoginRes = this.$validate.validate(this.item, rules)
+				if (!valLoginRes.isOk) {
+					uni.showToast({
+						icon: 'none',
+						title: valLoginRes.errmsg
+					})
+				} else {
+					this.$api.http.put('/saleOrder/deliverItem?itemId='+this.item.id+'&quantity='+this.item.expressQuantity+'&expressCompany='+this.item.expressCompany+'&expressNumber='+this.item.expressNumber, null).then(res => {
+						this.$api.msg.successToast('发送成功').then(res => {
+							uni.$emit('edit', res)
+							uni.navigateTo({
+								url: './Transporter'
+							})
 						})
 					})
-					
+				}
+			},
+			getExpressInfo(express) {
+				uni.navigateTo({
+					// url: '../Web?expressNumber='+express.expressNumber
+					url: '../Web?expressNumber='+express.expressNumber
 				})
 			}
 		},

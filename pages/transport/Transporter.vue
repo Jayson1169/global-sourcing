@@ -175,11 +175,12 @@
 			// 		success: function(res) {
 			// 			if (res.confirm) {
 			// 				_this.$api.http.put('/saleOrder/deliver?id='
-			// 						+item.id+'&expressNumber='+res.content, null).then(res => {
-			// 					// item.delivered = true;
-			// 					this.$api.msg.successToast('发送成功').then(res => {
+			// 						+item.id+'&expressCompany=test'+'&expressNumber='+res.content, null).then(res => {
+			// 					_this.$api.msg.successToast('发送成功').then(res => {
 			// 						uni.reLaunch()
 			// 					})
+			// 				}, error => {
+			// 					_this.$api.msg.toast(error);
 			// 				})
 			// 			}
 			// 		}

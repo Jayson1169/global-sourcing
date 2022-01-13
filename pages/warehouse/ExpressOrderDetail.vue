@@ -10,7 +10,7 @@
 					<view class='goods_title'>{{item.product.name}}</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
 					<view class='goods_des'>
-						发货数量：{{item.deliveredQuantity}}
+						发货数量：{{item.quantity}}
 					</view>
 					<view class='goods_des' v-if="item.receivedQuantity">
 						接收数量：{{item.receivedQuantity}}
@@ -18,13 +18,35 @@
 				</view>
 			</view>
 		</view>
-		<view class="detail">物流信息</view>
-		<view class="cu-form-group">
-			<view class="title">物流单号：</view>
-			<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;"></input>
+		<view v-if="expressOrder.status == 'created'">
+			<view class="detail">物流信息</view>
+			<view class="cu-form-group">
+				<text :style="{color:'red'}">*</text>
+				<view class="title">物流单号：</view>
+				<input placeholder="请扫描或输入物流单号" v-model="expressOrder.expressNumber"></input>
+				<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
+			</view>
+			<view class="cu-form-group">
+				<text :style="{color:'red'}">*</text>
+				<view class="title">物流公司：</view>
+				<input placeholder="请输入物流公司" v-model="expressOrder.expressCompany"></input>
+			</view>
+			<view class="H50"></view>
+			<view class="o_btn">
+				<view class="flex flex-direction">
+					<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">添加物流单</button>
+				</view>
+			</view>
 		</view>
-		<view class="cu-form-group">
-			<view class="title">物流公司：{{expressOrder.expressCompany}}</view>
+		<view v-else>
+			<view class="detail">物流信息</view>
+			<view class="cu-form-group">
+				<view class="title">物流单号：</view>
+				<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">物流公司：{{expressOrder.expressCompany}}</view>
+			</view>
 		</view>
 	</view>
 </template>

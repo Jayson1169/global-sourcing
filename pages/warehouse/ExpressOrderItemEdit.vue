@@ -35,7 +35,7 @@
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">发货数量：</view>
-			<input type="number" placeholder="请输入发货数量" v-model="item.deliveredQuantity"></input>
+			<input type="number" placeholder="请输入发货数量" v-model="item.quantity"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="p_btn_group">
@@ -60,7 +60,7 @@
 						origin: '',
 						remark: '',
 					},
-					deliveredQuantity: ''
+					quantity: ''
 				},
 			}
 		},
@@ -69,11 +69,11 @@
 		},
 		methods: {
 			sub: function(e) {
-				if (this.item.deliveredQuantity > this.item.product.inventory.warehouseInventory && e == 'modify') {
+				if (this.item.quantity > this.item.product.inventory.warehouseInventory && e == 'modify') {
 					this.$api.msg.toast('库存不足')
 				} else {
 					let rules = [
-						{name: 'deliveredQuantity', required: true, type: 'required', errmsg: '请输入发货数量'}
+						{name: 'quantity', required: true, type: 'required', errmsg: '请输入发货数量'}
 					]
 					let valLoginRes = this.$validate.validate(this.item, rules)
 					if (!valLoginRes.isOk && e != 'delete') {
@@ -82,8 +82,8 @@
 							title: valLoginRes.errmsg
 						})
 					} else {
-						uni.navigateBack()
 						uni.$emit(e, this.item)
+						uni.navigateBack()
 					}	
 				}
 			}

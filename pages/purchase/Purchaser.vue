@@ -24,16 +24,16 @@
 			<view class="goods-box-single" @click="status_to_state[item.status] == 1?jumpToPurchaseUpload(item):jumpPurchaseDetail(item)">
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
-					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
+					<text class="attr-box">{{item.product.specification}}</text>
 					<!-- <text class="price" v-if="status_to_state[item.status] == 2 || status_to_state[item.status] == 3">{{item.purchasePrice / 100}}</text> -->
 					<text class="reason" v-if="item.status==='REJECTED'">拒绝理由：{{item.rejectReason}}</text>
 				</view>
 			</view>
 			<view class="price-box" v-if="status_to_state[item.status] != 1">
 				共
-				<text class="num">{{item.quantity}}</text>
+				<text class="num">{{item.purchasedQuantity}}</text>
 				件商品 实付款
-				<text class="price">{{item.quantity * item.purchasePrice / 100}}</text>
+				<text class="price">{{item.purchasedQuantity * item.purchasePrice / 100}}</text>
 			</view>
 			<view class="action-box b-t" v-if="status_to_state[item.status] == 1">
 				<button class="action-btn recom" @click="jumpToPurchaseUpload(item)">上传信息</button>

@@ -10,7 +10,7 @@
 					<view class='goods_title'>{{item.product.name}}</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
 					<view class='good_p'>
-						<view class='i'>x {{item.deliveredQuantity}}</view>
+						<view class='i'>x {{item.quantity}}</view>
 					</view>
 				</view>
 			</view>
@@ -19,7 +19,7 @@
 				<text>点击添加商品项</text>
 			</view>
 		</view>
-		<view class="detail">物流信息</view>
+	<!-- 	<view class="detail">物流信息</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">物流单号：</view>
@@ -30,7 +30,7 @@
 			<text :style="{color:'red'}">*</text>
 			<view class="title">物流公司：</view>
 			<input placeholder="请输入物流公司" v-model="expressOrder.expressCompany"></input>
-		</view>
+		</view> -->
 		<view class="H50"></view>
 		<view class="o_btn">
 			<view class="flex flex-direction">
@@ -74,9 +74,10 @@
 		methods: {
 			sub() { 
 				let rules = [
-					{name: 'expressNumber', type: 'required', errmsg: '请输入物流单号'},
-					{name: 'expressNumber', type: 'expressNumber', errmsg: '请正确输入物流单号'},
-					{name: 'expressCompany', type: 'required', errmsg: '请输入物流公司'},
+					// {name: 'items', type: 'required', errmsg: '请选择发货商品'},
+					// {name: 'expressNumber', type: 'required', errmsg: '请输入物流单号'},
+					// {name: 'expressNumber', type: 'expressNumber', errmsg: '请正确输入物流单号'},
+					// {name: 'expressCompany', type: 'required', errmsg: '请输入物流公司'},
 				]
 				let valLoginRes = this.$validate.validate(this.expressOrder, rules)
 				if (!valLoginRes.isOk) {
@@ -124,6 +125,7 @@
 				var items = this.expressOrder.items;
 				const jsonData = [];
 				for (var i = 0, lenI = items.length; i < lenI; ++i) {
+					if (!item.product.customsInfo.hsCode) continue;
 					const item = items[i]
 					// if (this.current.includes(item.id)) {
 						var data = {

@@ -22,14 +22,14 @@
 			<view class="goods-box-single" @click="status_to_state[item.status] == 1?jumpToPurchaseReceive(item):jumpPurchaseDetail(item)">
 				<view class="right">
 					<text class="title clamp">{{item.product.name}}</text>
-					<text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text>
+					<text class="attr-box">{{item.product.specification}}</text>
 				</view>
 			</view>
 			<view class="price-box">
 				共
-				<text class="num">{{item.quantity}}</text>
+				<text class="num">{{item.purchasedQuantity}}</text>
 				件商品 实付款
-				<text class="price">{{item.quantity * item.purchasePrice / 100}}</text>
+				<text class="price">{{item.purchasedQuantity * item.purchasePrice / 100}}</text>
 			</view>
 			<view class="action-box b-t" v-if="status_to_state[item.status] == 1">
 				<button class="action-btn recom" @click="jumpToPurchaseReceive(item)">接收商品</button>
