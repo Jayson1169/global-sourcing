@@ -5,7 +5,7 @@ function exportFile(fileData, documentName = '导出海关信息', info) {
 	PRIVATE_DOC: 应用私有文档目录常量
 	PUBLIC_DOCUMENTS: 程序公用文档目录常量
 	*/
-  plus.io.requestFileSystem(plus.io.PUBLIC_DOCUMENTS, function(fs) {
+  plus.io.requestFileSystem(plus.io.PUBLIC_DOWNLOADS, function(fs) {
 	let rootObj = fs.root
 	let fullPath = rootObj.fullPath
 	// let reader = rootObj.createReader();
@@ -41,8 +41,8 @@ function exportFile(fileData, documentName = '导出海关信息', info) {
 			  })
 			}
 			//  /storage/emulated/0指的就是系统路径
-			// let pathStr = fullPath.replace('/storage/emulated/0', '')
-			let pathStr = '/storage/emulated/0/Android'
+			let pathStr = fullPath.replace('/storage/emulated/0', '')
+			// let pathStr = '/storage/emulated/0'
 			writer.onwrite = (e) => {
 			  // 成功导出数据;
 			  uni.hideLoading()
@@ -53,7 +53,7 @@ function exportFile(fileData, documentName = '导出海关信息', info) {
 				})
 				console.log(`文件位置：${pathStr}/${documentName}/${year}年${month}月`)
 				// that.successTip = `文件位置：${pathStr}/${documentName}/${year}年${month}月`
-			  }, 1000)
+			  }, 5000)
 			}
 			// 写入内容;
 			writer.write(fileData)

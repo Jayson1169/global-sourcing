@@ -83,6 +83,7 @@
 		},
 		onLoad(option) {
 			this.purchaseOrder = JSON.parse(decodeURIComponent(option.purchaseOrder));
+			this.purchaseOrder.purchasedQuantity = null;
 		},
 		methods: {
 			getPhoto(val) {

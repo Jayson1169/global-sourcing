@@ -14,6 +14,7 @@ import selectlay from '@/components/select-lay.vue'
 import uView from '@/uni_modules/uview-ui'
 import { formatDateThis, getUnixTime } from '@/common/dateUtil.js'
 import { exportFile } from '@/common/exportFile.js'
+import logistics from '@/components/xinyu-logistics/xinyu-logistics.vue'
 
 Vue.use(uView)
 
@@ -22,6 +23,7 @@ Vue.component('empty', empty)
 Vue.component('upimg', upimg)
 Vue.component('myimg', myimg)
 Vue.component('selectlay', selectlay)
+Vue.component('logistics', logistics)
 
 Vue.config.productionTip = false
 

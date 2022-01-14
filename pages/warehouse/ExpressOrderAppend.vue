@@ -2,7 +2,7 @@
 	<view class="product">
 		<view class="detail">商品明细</view>
 		<view class='tag-e'>
-			<view class="goods" v-for="(item, index) of expressOrder.items" :key="index" @click="jumpExpressOrderItemEdit(item)">
+			<view class="goods" v-for="(item, index) of expressOrder.items" :key="index" @click="jumpExpressOrderItemEdit(item, index)">
 				<view>
 					<myimg :photo="item.product.image"></myimg>
 				</view>
@@ -47,8 +47,7 @@
 		data() {
 			return {
 				expressOrder: {
-					items: [],
-					expressNumber: ''
+					items: []
 				}
 			};
 		},
@@ -58,18 +57,23 @@
 			})
 			uni.$on('modify', (e) => {
 				this.expressOrder.items.some((item, i) => {
-					if (item.id == e.id) {
+					if (i == e.id) {
 						this.$set(this.expressOrder.items, i, e)  
 					}
 				})
 			})
 			uni.$on('delete', (e) => {
 				this.expressOrder.items.some((item, i) => {
-					if (item.id == e.id) {
+					if (i == e.id) {
 						this.expressOrder.items.splice(i, 1)
 					}
 				})
 			})
+		},
+		onUnload() {
+			uni.$off('append');
+			uni.$off('modify');
+			uni.$off('delete');
 		},
 		methods: {
 			sub() { 
@@ -88,6 +92,25 @@
 				} else {
 					this.$api.http.post('/expressOrder/insert', this.expressOrder).then(res => {
 						this.output();
+						// uni.openDocument({
+						// 	  filePath: '/Android/data/io.dcloud.HBuilder/downloads//导出海关信息/2022年1月/海关信息_2022-01-14 16:49:53',
+						// 	  showMenu: true,
+						// 	  success: function (res) {
+						// 		console.log('打开文档成功');
+						// 	  }
+						// });
+						// uni.getSavedFileList({
+						//   success: function (res) {
+						//     if (res.fileList.length > 0) {
+						//       uni.removeSavedFile({
+						//         filePath: res.fileList[0].filePath,
+						//         complete: function (res) {
+						//           console.log(res);
+						//         }
+						//       });
+						//     }
+						//   }
+						// });
 						uni.navigateTo({
 							url: './ExpressOrder'
 						});
@@ -115,7 +138,8 @@
 					url: './ExpressOrderItemAppend'
 				});
 			},
-			jumpExpressOrderItemEdit(item) {
+			jumpExpressOrderItemEdit(item, index) {
+				item.id = index;
 				uni.navigateTo({
 					url: './ExpressOrderItemEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});
@@ -125,7 +149,7 @@
 				var items = this.expressOrder.items;
 				const jsonData = [];
 				for (var i = 0, lenI = items.length; i < lenI; ++i) {
-					if (!item.product.customsInfo.hsCode) continue;
+					// if (!item.product.customsInfo.hsCode) continue;
 					const item = items[i]
 					// if (this.current.includes(item.id)) {
 						var data = {
@@ -172,7 +196,7 @@
 				</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
 				</head><body><table>${str}</table></body></html>`
 				// 下载模板
-				exportFile(template, "导出海关信息", this.expressOrder.expressNumber)
+				exportFile(template, "导出海关信息", "海关信息")
 			}
 		}
 	}

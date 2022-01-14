@@ -10,7 +10,7 @@
 					<view class='goods_title'>{{item.product.name}}</view>
 					<view class="goods_des">商品型号：{{item.product.specification}}</view>
 					<view class='goods_des'>
-						发货数量：{{item.deliveredQuantity}}
+						发货数量：{{item.quantity}}
 					</view>
 					<view class='goods_des' v-if="item.receivedQuantity">
 						接收数量：{{item.receivedQuantity}}
@@ -21,7 +21,7 @@
 		<view class="detail">物流信息</view>
 		<view class="cu-form-group">
 			<view class="title">物流单号：</view>
-			<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;"></input>
+			<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;" @click="jumpLogistics(expressOrder.expressNumber)"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">物流公司：{{expressOrder.expressCompany}}</view>
@@ -68,6 +68,11 @@
 							url: './ExpressOrder'
 						});
 					})
+				})
+			},
+			jumpLogistics(expressNumber) {
+				uni.navigateTo({
+					url: '../Logistics?expressNumber='+expressNumber
 				})
 			}
 		}

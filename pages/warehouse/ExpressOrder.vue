@@ -34,6 +34,9 @@
 					<text class="num">{{item.items.length}}</text>
 					类商品</text>
 				</view>
+				<view class="action-box b-t" v-if="item.status=='CREATED'">
+					<button class="action-btn recom" @click="jumpExpressOrderDetail(item)">上传单号</button>
+				</view>
 			</view>
 		</view>	
 		<view v-show="isLoadMore" v-if="expressOrderList.length != 0">
@@ -52,7 +55,7 @@
 			:safeAreaInsetBottom="true"
 		>
 			<u-tabbar-item text="采购管理" icon="shopping-cart" @click="click" ></u-tabbar-item>
-			<u-tabbar-item text="快递物流" icon="car" @click="click" ></u-tabbar-item>
+			<u-tabbar-item text="转运物流" icon="car" @click="click" ></u-tabbar-item>
 			<!-- <u-tabbar-item text="导出海关信息" icon="reload" @click="click" ></u-tabbar-item> -->
 		</u-tabbar>
 	</view>
@@ -68,9 +71,9 @@
 					size: '10'
 				},
 				tabCurrentIndex: 0,
-				navList: ['全部', '已发货', '已收货'],
-				status_to_state: {"DELIVERED": 1, "RECEIVED": 2},
-				status_to_state2: {"DELIVERED": "已发货", "RECEIVED": "已收货"},
+				navList: ['全部', '已创建', '已发货', '已收货'],
+				status_to_state: {"CREATED": 1,"DELIVERED": 2, "RECEIVED": 3},
+				status_to_state2: {"CREATED": "已创建", "DELIVERED": "已发货", "RECEIVED": "已收货"},
 				expressOrderList: [],
 				isLoadMore: false,
 				loadStatus: 'loading'
@@ -156,6 +159,11 @@
 				uni.navigateTo({
 					url: './ExpressOrderAppend'
 				});
+			},
+			onNavigationBarButtonTap(e) {
+				uni.redirectTo({
+					url: '/pages/Login'
+				})
 			}
 		},
 	}

@@ -51,8 +51,9 @@
 		},
 		onLoad(option) {
 			uni.$on('append', (e) => {
-				this.$api.http.post('/saleOrder/insertItem?saleOrderId='+this.order.id, e).then(res => {
+				this.$api.http.post('/saleOrder/insertItem?needPurchase=true&saleOrderId='+this.order.id, e).then(res => {
 					this.$api.msg.successToast('添加成功')
+					e.isItemUpdatable = true;
 					this.order.items = this.order.items.concat(e)
 					uni.$emit('edit', this.order)
 				})

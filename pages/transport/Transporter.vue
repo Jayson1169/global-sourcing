@@ -164,6 +164,11 @@
 			tabClick(index) {
 				this.tabCurrentIndex = index;
 			},
+			onNavigationBarButtonTap(e) {
+				uni.redirectTo({
+					url: '/pages/Login'
+				})
+			}
 			// send(item) {
 			// 	let _this = this;
 			// 	uni.showModal({

@@ -2,7 +2,7 @@
 	<view class="product">
 		<view class="detail">订单明细</view>
 		<view class='tag-e'>
-			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductItemEdit(item)">
+			<view class="goods" v-for="(item, index) of order.items" :key="index" @click="jumpProductItemEdit(item, index)">
 				<view>
 					<myimg :photo="item.product.image"></myimg>
 				</view>
@@ -98,7 +98,7 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					var param = this.canSend?"createPurchaseOrder=false":"createPurchaseOrder=true"
+					var param = this.canSend?"needPurchase=false":"needPurchase=true"
 					this.$api.http.post('/saleOrder/insert?'+param, this.order).then(res => {
 						this.$api.msg.successToast('添加成功').then(res => {
 							uni.navigateBack();
@@ -114,7 +114,8 @@
 					url: './ProductItemAppend'
 				});
 			},
-			jumpProductItemEdit(item) {
+			jumpProductItemEdit(item, index) {
+				item.id = index;
 				uni.navigateTo({
 					url: './ProductItemEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});

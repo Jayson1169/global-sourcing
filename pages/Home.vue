@@ -4,9 +4,9 @@
 			<view class="more">
 				<view class='mo'>
 					<view class='mo_01'>财务分析</view>
-					<navigator url="/pages/statistics/Statistics" hover-class="none"> 
+				<!-- 	<navigator url="/pages/statistics/Statistics" hover-class="none"> 
 						<view class='mo_02'>更多</view>
-					</navigator>
+					</navigator> -->
 				</view>
 			</view>
 			<view class="shuju">
@@ -88,6 +88,9 @@
 		onLoad() {  
 			this.getFinance();
 		},
+		onBackPress(options) {
+		    return true
+		},
 		methods: {
 			getFinance() {
 				var day = new Date();
@@ -104,6 +107,12 @@
 				var da = date.getDate().toString().padStart(2,'0');
 				var time = ye+'-'+mo+'-'+da;
 				return time;
+			},
+			// 按钮监听函数
+			onNavigationBarButtonTap(e) {
+				uni.redirectTo({
+					url: '/pages/Login'
+				})
 			}
 		}
 	}

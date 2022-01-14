@@ -30,7 +30,7 @@
 		</view>
 		<view class="detail">物流信息</view>
 		<view class="cu-form-group">
-			<view class="cu-form-title">发货数量：{{item.deliveredQuantity}}</view>
+			<view class="cu-form-title">发货数量：{{item.quantity}}</view>
 		</view>
 		<view class="detail">接收信息</view>
 		<view class="cu-form-group">

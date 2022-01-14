@@ -14,7 +14,6 @@
 			<view class="cu-form-title">商品条码：{{item.product.barcode}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.price">
-			<text :style="{color:'white'}">*</text>
 			<view class="cu-form-title">参考价格：{{item.product.price / 100}}</view>
 		</view>
 		<view class="cu-form-group">
@@ -47,7 +46,7 @@
 			</view>
 			<view class="cu-form-group" v-for="express in item.expresses">
 				<view class="cu-form-title">已发物流：</view>
-				<input v-model="express.expressNumber+' '+express.expressCompany" disabled="true" style="color: #000000;"></input>
+				<input v-model="express.expressNumber" disabled="true" style="color: #000000;" @click="jumpLogistics(express.expressNumber)"></input>
 			</view>	
 		</view>
 	</view>
@@ -82,6 +81,11 @@
 					current: 0,
 					urls: preview
 				});
+			},
+			jumpLogistics(expressNumber) {
+				uni.navigateTo({
+					url: '../Logistics?expressNumber='+expressNumber
+				})
 			}
 		},
 		onLoad(option) {

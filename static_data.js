@@ -5,7 +5,7 @@ const role_map = {"ADMIN": ["管理员", 0], "SALESPERSON": ["销售员", 1], "B
 const roleList = {
 				"ADMIN": '/pages/Home', 
 				"BUYER": '/pages/purchase/Purchaser',
-				"SALESPERSON": '/pages/order/Salesperson',
+				"SALESPERSON": '/pages/salesperson/Salesperson',
 				"WAREHOUSE_KEEPER": '/pages/warehouse/WarehouseKeeper',
 				"TRANSPORTER": '/pages/transport/Transporter',
 				"TREASURER": '/pages/statistics/Statistics'

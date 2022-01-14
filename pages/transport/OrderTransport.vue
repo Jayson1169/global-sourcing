@@ -19,19 +19,20 @@
 		</view>
 		<view class="detail">收货明细</view>
 		<view class="cu-form-group">
-			<view class="cu-form-title">收货信息：{{order.address}}</view>
+			<view class="cu-form-title">收货信息：</view>
+			<input disabled v-model="order.address"></input>
 		</view>
 		<view class="detail">发货明细</view>
 		<view class="cu-form-group" >
 			<text :style="{color:'red'}">*</text>
 			<view class="title">物流单号：</view>
-			<input placeholder="请扫描或输入物流单号" v-model="expressNumber"></input>
+			<input placeholder="请扫描或输入物流单号" v-model="order.expressNumber"></input>
 			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
 			<view class="title">物流公司：</view>
-			<input placeholder="请输入物流公司" v-model="expressCompany"></input>
+			<input placeholder="请输入物流公司" v-model="order.expressCompany"></input>
 		</view>
 		<view class="H50"></view>
 		<view class="o_btn">
@@ -79,9 +80,11 @@
 					})
 				} else {
 					this.$api.http.put('/saleOrder/deliver?id='
-							+this.order.id+'&expressCompany'+this.expressCompany+'&expressNumber='+this.expressNumber, null).then(res => {
+							+this.order.id+'&expressCompany='+this.order.expressCompany+'&expressNumber='+this.order.expressNumber, null).then(res => {
 						this.$api.msg.successToast('发送成功').then(res => {
-							uni.navigateBack();
+							uni.navigateTo({
+								url: './Transporter'
+							})
 						})
 					}, error => {
 						this.$api.msg.toast(error);

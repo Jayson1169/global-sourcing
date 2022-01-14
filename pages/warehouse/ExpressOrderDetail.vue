@@ -18,7 +18,7 @@
 				</view>
 			</view>
 		</view>
-		<view v-if="expressOrder.status == 'created'">
+		<view v-if="expressOrder.status=='CREATED'">
 			<view class="detail">物流信息</view>
 			<view class="cu-form-group">
 				<text :style="{color:'red'}">*</text>
@@ -34,7 +34,7 @@
 			<view class="H50"></view>
 			<view class="o_btn">
 				<view class="flex flex-direction">
-					<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">添加物流单</button>
+					<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">上传物流信息</button>
 				</view>
 			</view>
 		</view>
@@ -42,7 +42,7 @@
 			<view class="detail">物流信息</view>
 			<view class="cu-form-group">
 				<view class="title">物流单号：</view>
-				<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;"></input>
+				<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;" @click="jumpLogistics(expressOrder.expressNumber)"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">物流公司：{{expressOrder.expressCompany}}</view>
@@ -69,6 +69,35 @@
 				uni.navigateTo({
 					url: './ExpressOrderItemDetail?item='+encodeURIComponent(JSON.stringify(item))
 				});
+			},
+			sub() {
+				let rules = [
+					{name: 'expressNumber', type: 'required', errmsg: '请输入物流单号'},
+					{name: 'expressNumber', type: 'expressNumber', errmsg: '请正确输入物流单号'},
+					{name: 'expressCompany', type: 'required', errmsg: '请输入物流公司'},
+				]
+				let valLoginRes = this.$validate.validate(this.expressOrder, rules)
+				if (!valLoginRes.isOk) {
+					uni.showToast({
+						icon: 'none',
+						title: valLoginRes.errmsg
+					})
+				} else {
+					this.$api.http.put('/expressOrder/deliver', this.expressOrder).then(res => {
+						this.$api.msg.successToast('上传成功').then(res => {
+							uni.navigateTo({
+								url: './ExpressOrder'
+							});
+						})
+					}, error => {
+						this.$api.msg.toast(error);
+					})
+				}	
+			},
+			jumpLogistics(expressNumber) {
+				uni.navigateTo({
+					url: '../Logistics?expressNumber='+expressNumber
+				})
 			}
 		}
 	}
@@ -78,11 +107,8 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.detail {
-		padding: 10px 10px 10px 10px;
-	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

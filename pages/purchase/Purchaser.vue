@@ -148,15 +148,20 @@
 					})
 				}
 			},
-			onReachBottom() {
-				// 此处判断，上锁，防止重复请求
-				if (!this.isLoadMore) { 
-					this.isLoadMore = true
-					this.purchaseRequest.page += 1
-					this.getPurchaseOrderList()
-				}
+			onNavigationBarButtonTap(e) {
+				uni.redirectTo({
+					url: '/pages/Login'
+				})
 			}
 		},
+		onReachBottom() {
+			// 此处判断，上锁，防止重复请求
+			if (!this.isLoadMore) { 
+				this.isLoadMore = true
+				this.purchaseRequest.page += 1
+				this.getPurchaseOrderList()
+			}
+		}
 	}
 </script>
 

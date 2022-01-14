@@ -14,7 +14,7 @@
 			</view>
 		</view>
 		<empty v-if="expressOrderList.length === 0"></empty>
-		<view class="order-item" v-for="(item, index) in expressOrderList" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || tabCurrentIndex === 0">
+		<view class="order-item" v-for="(item, index) in expressOrderList" :key="index" v-if="status_to_state[item.status] === tabCurrentIndex || (tabCurrentIndex === 0 && item.status != 'CREATED')">
 			<view @click="item.status=='DELIVERED'?jumpExpressOrderReceive(item):jumpExpressOrderDetail(item)"> 
 				<view class="i-top b-b">
 					<text class="time">{{item.updateTime}}</text>
@@ -23,13 +23,13 @@
 				<scroll-view v-if="item.items.length > 1" class="goods-box-single" scroll-x>
 					<view class="right" v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex">
 						<text class="title">{{goodsItem.product.name}}</text>
-						<text class="attr-box">{{goodsItem.deliveredQuantity}}</text>
+						<text class="attr-box">{{goodsItem.quantity}}</text>
 					</view>
 				</scroll-view>
 				<view class="goods-box-single" v-if="item.items.length === 1" v-for="(goodsItem, goodsIndex) in item.items" :key="goodsIndex">
 					<view class="right">
 						<text class="title">{{goodsItem.product.name}}</text>
-						<text class="attr-box">{{goodsItem.deliveredQuantity}}</text>
+						<text class="attr-box">{{goodsItem.quantity}}</text>
 					</view>
 				</view>
 				<view class="price-box">
@@ -38,7 +38,7 @@
 					类商品</text>
 				</view>
 			</view>
-			<view class="action-box b-t" v-if="item.status != 'RECEIVED'">
+			<view class="action-box b-t" v-if="item.status == 'DELIVERED'">
 				<button class="action-btn recom" @click="jumpExpressOrderReceive(item)">接收物流</button>
 			</view>
 		</view>	
@@ -158,6 +158,11 @@
 						url: '../warehouse/ExpressOrderDetail?expressOrder='+encodeURIComponent(JSON.stringify(expressOrder))
 					});
 				}
+			},
+			onNavigationBarButtonTap(e) {
+				uni.redirectTo({
+					url: '/pages/Login'
+				})
 			}
 		}
 	}

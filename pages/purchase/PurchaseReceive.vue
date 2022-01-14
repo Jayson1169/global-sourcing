@@ -52,8 +52,8 @@
 			<view class="title">已接收数量：{{purchaseOrder.warehousedQuantity}}</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">接收数量：</view>
-			<input placeholder="请扫码确定接收数量" v-model="number" disabled></input>
+			<view class="title">本次接收数量：</view>
+			<input placeholder="请扫码确定本次接收数量" v-model="number" disabled></input>
 			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
 		</view>
 		<view class="H50"></view>
