@@ -25,8 +25,8 @@
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">参考价格：</view>
-			<input type="digit" placeholder="请输入参考价格" v-model="product.cprice" @input="checkPrice"></input>
+			<view class="title">参考价格￥：</view>
+			<input type="digit" placeholder="请输入参考价格￥" v-model="product.cprice" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -98,22 +98,28 @@
 		data() {
 			return {
 				product: {
-					image: null,
-					name: 'iPhone 13 Pro',
-					brand: 'Apple',
-					specification: 'MLT83CH/A',
-					barcode: '1111111111111',
-					manufacturer: '富士康',
-					origin: '中国',
-					remark: 'iPhone',
-					inventory: {
-						warehouseInventory: 0,
-						midwayInventory: 0,
-						hubInventory: 0
+					"image": null,
+					"name":"",
+					"brand":"",
+					"specification":"",
+					"barcode":"",
+					"manufacturer":"",
+					"origin":"",
+					"remark":"",
+					"inventory":{
+						"warehouseInventory":"0",
+						"midwayInventory":"0",
+						"hubInventory":"0",
 					},
-					customsInfo: {
-						hsCode: '',
-					}
+					"customsInfo":{
+						"hsCode":"",
+						"materialBeschaffenheit":"",
+						"brandArticleNo":"",
+						"brand":"",
+						"articleName":"",
+						"price":"",
+						"unitPrice":"",
+					},
 				}
 			}
 		},

@@ -21,8 +21,9 @@
 			</view>
 			<view class="goods-box-single" @click="status_to_state[item.status] == 1?jumpToPurchaseReceive(item):jumpPurchaseDetail(item)">
 				<view class="right">
-					<text class="title clamp">{{item.product.name}}</text>
-					<text class="attr-box">{{item.product.specification}}</text>
+					<text class="title clamp">名称：{{item.product.name}}</text>
+					<text class="attr-box">品牌：{{item.product.brand}}</text>
+					<text class="attr-box">型号：{{item.product.specification}}</text>
 				</view>
 			</view>
 			<view class="price-box">
@@ -194,6 +195,13 @@
 	page, .content{
 		background: #FFFFFF;
 	}
+	.search {
+		background: #FFFFFF;
+		display: flex;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 10px;
+	}
 	.navbar{
 		display: flex;
 		height: 40px;
@@ -269,11 +277,6 @@
 		.goods-box-single{
 			display: flex;
 			padding: 0upx 0;
-			.goods-img{
-				display: block;
-				width: 135upx;
-				height: 135upx;
-			}
 			.right{
 				flex: 1;
 				display: flex;
@@ -284,7 +287,7 @@
 					font-size: $font-base + 2upx;
 					color: $font-color-dark;
 					line-height: 1;
-					padding: 0upx 0upx;
+					padding: 0upx 0upx 10upx 0upx;
 				}
 				.attr-box{
 					font-size: $font-sm + 2upx;
@@ -302,6 +305,8 @@
 				}
 				.reason {
 					font-size: $font-sm + 2upx;
+					color: $font-color-light;
+					padding: 10upx 0upx;
 				}
 			}
 		}
@@ -357,5 +362,13 @@
 				}
 			}
 		}
+	}
+	.p_btn {
+		background: #FFFFFF;
+		padding: 0 10px 0px;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		z-index: 9999;
 	}
 </style>

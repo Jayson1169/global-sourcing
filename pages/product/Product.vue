@@ -11,7 +11,7 @@
 					<view class="list_r_01">品牌：{{item.brand}}</view>
 					<view class="list_r_01">型号：{{item.specification}}</view>
 					<view class="list_r_01">库存：{{item.inventory.warehouseInventory + item.inventory.hubInventory + item.inventory.midwayInventory}}</view>
-					<view class="list_r_01">价格：￥{{item.price}}</view>
+					<view class="list_r_01">价格：￥{{item.price / 100}}</view>
 				</view>
 			</view>
 		</block>

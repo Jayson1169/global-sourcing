@@ -48,7 +48,7 @@
 					items: [],
 					address: ''
 				},
-				needPurchase: false,
+				needPurchase: true,
 				disabled: false
 			};
 		},

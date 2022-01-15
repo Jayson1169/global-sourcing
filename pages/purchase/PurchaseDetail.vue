@@ -13,13 +13,17 @@
 			<view class="title">发票日期：{{purchaseOrder.invoiceDate}}</view>
 		</view>
 		<view class="cu-form-group" v-if="purchaseOrder.purchasePrice">
-			<view class="title">采购单价：{{purchaseOrder.purchasePrice / 100}}</view>
+			<view class="title">采购单价￥：{{purchaseOrder.purchasePrice / 100}}</view>
 		</view>
 		<view class="cu-form-group" v-if="purchaseOrder.purchasedQuantity">
 			<view class="title">已采购数量：{{purchaseOrder.purchasedQuantity}}</view>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">应采购数量：{{purchaseOrder.quantity}}</view>
+		</view>
+		<view class="detail" v-if="purchaseOrder.warehousedQuantity">接收明细</view>
+		<view class="cu-form-group" v-if="purchaseOrder.warehousedQuantity">
+			<view class="title">已接收数量：{{purchaseOrder.warehousedQuantity}}</view>
 		</view>
 		<view class="detail">商品信息</view>
 		<view class="cu-form-group">
@@ -60,7 +64,7 @@
 				<input v-model="purchaseOrder.buyer.phoneNumber" disabled="true" style="color: #000000;"></input>
 			</view>
 		</view>
-		<view v-if="purchaseOrder.status==='CONFIRMED'">
+		<view v-if="purchaseOrder.status==='CONFIRMED' || purchaseOrder.status==='WAREHOUSED'">
 			<view class="detail">仓管信息</view>
 			<view class="cu-form-group">
 				<view class="title">仓管账号：{{purchaseOrder.warehouseKeeper.username}}</view>

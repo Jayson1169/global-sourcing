@@ -22,22 +22,24 @@
 			<view class="cu-form-title">收货信息：</view>
 			<input disabled v-model="order.address"></input>
 		</view>
-		<view class="detail">发货明细</view>
-		<view class="cu-form-group" >
-			<text :style="{color:'red'}">*</text>
-			<view class="title">物流单号：</view>
-			<input placeholder="请扫描或输入物流单号" v-model="order.expressNumber"></input>
-			<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
-		</view>
-		<view class="cu-form-group">
-			<text :style="{color:'red'}">*</text>
-			<view class="title">物流公司：</view>
-			<input placeholder="请输入物流公司" v-model="order.expressCompany"></input>
-		</view>
-		<view class="H50"></view>
-		<view class="o_btn">
-			<view class="flex flex-direction">
-				<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">发送</button>
+		<view v-if="canSend">
+			<view class="detail">发货明细</view>
+			<view class="cu-form-group" >
+				<text :style="{color:'red'}">*</text>
+				<view class="title">物流单号：</view>
+				<input placeholder="请扫描或输入物流单号" v-model="order.expressNumber"></input>
+				<image src="../../imgs/scan.png" style="width: 80rpx; height: 80rpx;" @click="getScanCode"></image>
+			</view>
+			<view class="cu-form-group">
+				<text :style="{color:'red'}">*</text>
+				<view class="title">物流公司：</view>
+				<input placeholder="请输入物流公司" v-model="order.expressCompany"></input>
+			</view>
+			<view class="H50"></view>
+			<view class="o_btn">
+				<view class="flex flex-direction">
+					<button class="cu-btn bg-red margin-tb-sm lg" @click="sub()">发送</button>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -49,7 +51,8 @@
 			return {
 				order: {"id":5,"createTime":"2021-12-22 16:23:38","updateTime":"2021-12-22 16:23:38","salesperson":{"id":1,"createTime":"2021-12-14 20:16:26","updateTime":"2021-12-14 20:16:27","username":"admin","password":"$2a$10$P8UFgtFSeCz.57PbNf2sRuOz2qg8JFJx9.wfJdNsX/7BuNzGvWeg2","name":"admin","role":"ADMIN","phoneNumber":null},"address":{"id":5,"createTime":"2021-12-22 16:23:38","updateTime":"2021-12-22 16:23:38","name":"test","idNumber":"111111111111111111","phoneNumber":"11111111111","shipAddress":"test"},"items":[{"id":9,"createTime":"2021-12-22 16:23:38","updateTime":"2021-12-22 16:23:38","product":{"id":9,"createTime":"2021-12-22 16:23:38","updateTime":"2021-12-22 16:23:38","name":"iPhone 13 Pro","barcode":"1111111111111","specification":"MLT83CH/A","image":null,"manufacturer":"富士康","origin":"中国","remark":"iPhone"},"salePrice":2,"quantity":2}]},
 				expressCompany: '',
-				expressNumber: ''
+				expressNumber: '',
+				canSend: true
 			};
 		},
 		onLoad(option) {
@@ -57,6 +60,9 @@
 				this.order = e;
 			})
 			this.order = JSON.parse(decodeURIComponent(option.order));
+			this.order.items.some((item, i) => {
+				if (item.deliveredQuantity > 0) this.canSend = false;
+			})
 		},
 		onUnload() {
 			uni.$off('edit');

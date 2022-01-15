@@ -25,8 +25,8 @@
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">参考价格：</view>
-			<input type="digit" placeholder="请输入参考价格" v-model="product.cprice" @input="checkPrice"></input>
+			<view class="title">参考价格￥：</view>
+			<input type="digit" placeholder="请输入参考价格￥" v-model="product.cprice" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>

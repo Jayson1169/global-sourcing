@@ -142,17 +142,4 @@
 		width: 100%;
 		z-index: 9999;
 	}
-	.detail {
-		padding: 10px 10px 10px 10px;
-	}
-	.cu-form-group .title {
-		text-align: justify;
-		padding-right: 0upx;
-		font-size: 30upx;
-		position: relative;
-		height: 60upx;
-		line-height: 60upx;
-		/* add */
-		flex: 0 0 150upx;
-	}
 </style>

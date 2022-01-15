@@ -18,7 +18,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="detail">物流信息</view>
+		<view class="detail">物流明细</view>
 		<view class="cu-form-group">
 			<view class="title">物流单号：</view>
 			<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;" @click="jumpLogistics(expressOrder.expressNumber)"></input>

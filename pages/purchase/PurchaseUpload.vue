@@ -20,8 +20,8 @@
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">采购单价：</view>
-			<input type="digit" placeholder="请输入采购单价" v-model="purchaseOrder.price" @input="checkPrice"></input>
+			<view class="title">采购单价￥：</view>
+			<input type="digit" placeholder="请输入采购单价￥" v-model="purchaseOrder.price" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>

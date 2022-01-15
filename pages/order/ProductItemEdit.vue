@@ -14,7 +14,7 @@
 			<view class="cu-form-title">商品条码：{{item.product.barcode}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.price">
-			<view class="cu-form-title">参考价格：￥{{item.product.price / 100}}</view>
+			<view class="cu-form-title">参考价格￥：{{item.product.price / 100}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.image">
 			<view class="cu-form-title">商品图片：</view>
@@ -35,8 +35,8 @@
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">成交价格：</view>
-			<input type="digit" placeholder="请输入成交价格" v-model="item.price" @input="checkPrice"></input>
+			<view class="title">成交价格￥：</view>
+			<input type="digit" placeholder="请输入成交价格￥" v-model="item.price" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>

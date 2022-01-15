@@ -19,7 +19,7 @@
 			</view>
 		</view>
 		<view v-if="expressOrder.status=='CREATED'">
-			<view class="detail">物流信息</view>
+			<view class="detail">物流明细</view>
 			<view class="cu-form-group">
 				<text :style="{color:'red'}">*</text>
 				<view class="title">物流单号：</view>
@@ -39,7 +39,7 @@
 			</view>
 		</view>
 		<view v-else>
-			<view class="detail">物流信息</view>
+			<view class="detail">物流明细</view>
 			<view class="cu-form-group">
 				<view class="title">物流单号：</view>
 				<input v-model="expressOrder.expressNumber" disabled="true" style="color: #000000;" @click="jumpLogistics(expressOrder.expressNumber)"></input>

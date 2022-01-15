@@ -40,7 +40,7 @@
 			</view>
 			<view class="cu-form-group" v-for="express in item.expresses">
 				<view class="cu-form-title">已发物流：</view>
-				<input v-model="express.expressNumber+' '+express.expressCompany" disabled="true" @click="getExpressInfo(express)"></input>
+				<input v-model="express.expressNumber" disabled="true" style="color: #000000;" @click="jumpLogistics(express.expressNumber)"></input>
 			</view>	
 		</view>
 		<view class="detail">发货明细</view>
@@ -125,10 +125,9 @@
 					})
 				}
 			},
-			getExpressInfo(express) {
+			jumpLogistics(expressNumber) {
 				uni.navigateTo({
-					// url: '../Web?expressNumber='+express.expressNumber
-					url: '../Web?expressNumber='+express.expressNumber
+					url: '../Logistics?expressNumber='+expressNumber
 				})
 			}
 		},

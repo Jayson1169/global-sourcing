@@ -20,7 +20,7 @@
 		</view>
 		<view class="cu-form-group" v-if="item.product.price">
 			<text :style="{color:'white'}">*</text>
-			<view class="cu-form-title">参考价格：￥{{item.product.price / 100}}</view>
+			<view class="cu-form-title">参考价格￥：{{item.product.price / 100}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.image">
 			<text :style="{color:'white'}">*</text>
@@ -47,8 +47,8 @@
 		<view class="detail">销售明细</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
-			<view class="title">成交价格：</view>
-			<input type="digit" placeholder="请输入成交价格" v-model="item.price" @input="checkPrice"></input>
+			<view class="title">成交价格￥：</view>
+			<input type="digit" placeholder="请输入成交价格￥" v-model="item.price" @input="checkPrice"></input>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -147,15 +147,5 @@
 		bottom: 0;
 		width: 100%;
 		z-index: 9999;
-	}
-	.cu-form-group .title {
-		text-align: justify;
-		padding-right: 0upx;
-		font-size: 30upx;
-		position: relative;
-		height: 60upx;
-		line-height: 60upx;
-		/* add */
-		flex: 0 0 150upx;
 	}
 </style>

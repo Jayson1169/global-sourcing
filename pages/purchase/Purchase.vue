@@ -36,7 +36,7 @@
 				件商品 实付款
 				<text class="price">{{item.purchasedQuantity * item.purchasePrice / 100}}</text>
 			</view>
-			<view class="action-box b-t" v-if="status_to_state[item.status] != 4 && status_to_state[item.status] != 5">
+			<view class="action-box b-t" v-if="status_to_state[item.status] != 2 && status_to_state[item.status] != 4 && status_to_state[item.status] != 5">
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 1" @click="purchaserAssign(item)">立即分配</button>
 				<button class="action-btn recom" v-if="status_to_state[item.status] == 3" @click="jumpPurchaseDetail(item)">立即核验</button>							
 			</view>

@@ -199,7 +199,8 @@
 	.uni-select-lay {
 		position: relative;
 		// z-index: 11;
-		width: 100%;
+		// width: 100%;
+		width: 540upx;
 
 		.uni-select-input {
 			opacity: 0;
@@ -273,7 +274,7 @@
 
 			.uni-select-lay-input {
 				font-size: 30upx;
-				color: #555;
+				color: #333333;
 				display: block;
 				width: 98%;
 				overflow: hidden;
@@ -283,7 +284,7 @@
 				box-sizing: border-box;
 
 				&.active {
-					color: #555
+					color: #333333
 				}
 			}
 
