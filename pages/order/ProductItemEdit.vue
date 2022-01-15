@@ -14,8 +14,7 @@
 			<view class="cu-form-title">商品条码：{{item.product.barcode}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.price">
-			<text :style="{color:'white'}">*</text>
-			<view class="cu-form-title">参考价格：{{item.product.price / 100}}</view>
+			<view class="cu-form-title">参考价格：￥{{item.product.price / 100}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.image">
 			<view class="cu-form-title">商品图片：</view>
@@ -111,14 +110,14 @@
 	page {
 		background-color: #F7F6FB;
 	}
-	.cu-form-group .title {
-		text-align: justify;
-		padding-right: 0upx;
-		font-size: 30upx;
-		position: relative;
-		height: 60upx;
-		line-height: 60upx;
-		/* add */
-		flex: 0 0 150rpx;
-	}
+	// .cu-form-group .title {
+	// 	text-align: justify;
+	// 	padding-right: 0upx;
+	// 	font-size: 30upx;
+	// 	position: relative;
+	// 	height: 60upx;
+	// 	line-height: 60upx;
+	// 	/* add */
+	// 	flex: 0 0 150rpx;
+	// }
 </style>

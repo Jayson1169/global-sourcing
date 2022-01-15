@@ -7,9 +7,11 @@
 			<view class="list" @click="jumpProductModify(item)">
 				<view class="list_l"></view>
 				<view class="list_r">
-					<view>{{item.name}}</view>
-					<view class="list_r_01">{{item.brand}}</view>
-					<view class="list_r_01">{{item.specification}}</view>
+					<view>名称：{{item.name}}</view>
+					<view class="list_r_01">品牌：{{item.brand}}</view>
+					<view class="list_r_01">型号：{{item.specification}}</view>
+					<view class="list_r_01">库存：{{item.inventory.warehouseInventory + item.inventory.hubInventory + item.inventory.midwayInventory}}</view>
+					<view class="list_r_01">价格：￥{{item.price}}</view>
 				</view>
 			</view>
 		</block>
@@ -47,7 +49,6 @@
 		},
 		onShow() {
 			this.noClick = true;
-			this.getProductList();
 		},
 		onLoad() {
 			uni.$on('modify', (e) => {
@@ -64,6 +65,7 @@
 					}
 				})
 			})
+			this.getProductList();
 		},
 		methods: {
 			jumpProductAppend() {
@@ -81,9 +83,6 @@
 						})
 					}
 				})
-			},
-			num(index) {
-				this.c_index = index
 			},
 			getSearchProductList() {
 				this.$api.http.get('/product/search', this.searchRequest).then(res => {
@@ -121,7 +120,6 @@
 			}
 		},
 		onReachBottom() {
-			// 此处判断，上锁，防止重复请求
 			if (!this.isLoadMore) {
 				this.isLoadMore = true
 				if (this.isSearch) {

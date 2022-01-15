@@ -33,7 +33,7 @@
 			<view class="title">商品图片：</view>
 			<upimg @photo="getPhoto" :photo="product.image"></upimg>
 		</view>
-	<!-- 	<view class="cu-form-group">
+		<!-- <view class="cu-form-group">
 			<text :style="{color:'white'}">*</text>
 			<view class="title">生产厂家：</view>
 			<input placeholder="请输入生产厂家" v-model="product.manufacturer"></input>

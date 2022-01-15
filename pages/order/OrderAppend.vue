@@ -23,8 +23,8 @@
 		<view class="detail">收货明细</view>
 		<view class="cu-form-group">
 			<text :style="{color:'white'}">*</text>
-			<view class="title">直接发货：</view>
-			<switch @change="switchChange" :disabled="disabled" :checked="canSend"/>
+			<view class="title">是否采购：</view>
+			<switch @change="switchChange" :disabled="disabled" :checked="needPurchase"/>
 		</view>
 		<view class="cu-form-group">
 			<text :style="{color:'red'}">*</text>
@@ -48,7 +48,7 @@
 					items: [],
 					address: ''
 				},
-				canSend: false,
+				needPurchase: false,
 				disabled: false
 			};
 		},
@@ -79,7 +79,7 @@
 				this.disabled = false;
 				this.order.items.some((item, i) => {
 					if (item.product.inventory.midwayInventory + item.product.inventory.hubInventory < item.quantity) {
-						this.canSend = false;
+						this.needPurchase = true;
 						this.disabled = true;
 					}
 				})
@@ -98,7 +98,7 @@
 						title: valLoginRes.errmsg
 					})
 				} else {
-					var param = this.canSend?"needPurchase=false":"needPurchase=true"
+					var param = this.needPurchase?"needPurchase=false":"needPurchase=true"
 					this.$api.http.post('/saleOrder/insert?'+param, this.order).then(res => {
 						this.$api.msg.successToast('添加成功').then(res => {
 							uni.navigateBack();
@@ -115,14 +115,12 @@
 				});
 			},
 			jumpProductItemEdit(item, index) {
-				item.id = index;
 				uni.navigateTo({
 					url: './ProductItemEdit?item='+encodeURIComponent(JSON.stringify(item))
 				});
 			},
 			switchChange: function (e) {
-				// console.log('switch1 发生 change 事件，携带值为', e.target.value)
-				this.canSend = e.target.value
+				this.needPurchase = e.target.value
 			}
 		}
 	}
@@ -133,7 +131,7 @@
 		background-color: #F7F6FB;
 	}
 	.o_btn {
-		background: #F7F6FB;
+		background: #FFFFFF;
 		padding: 0 10px 0px;
 		position: fixed;
 		bottom: 0;

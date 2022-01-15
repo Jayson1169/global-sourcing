@@ -20,7 +20,7 @@
 		</view>
 		<view class="cu-form-group" v-if="item.product.price">
 			<text :style="{color:'white'}">*</text>
-			<view class="cu-form-title">参考价格：{{item.product.price / 100}}</view>
+			<view class="cu-form-title">参考价格：￥{{item.product.price / 100}}</view>
 		</view>
 		<view class="cu-form-group" v-if="item.product.image">
 			<text :style="{color:'white'}">*</text>
@@ -82,7 +82,8 @@
 							warehouseInventory: '',
 							midwayInventory: '',
 							hubInventory: ''
-						}
+						},
+						price: ''
 					},
 					price: '',
 					quantity: '',
@@ -111,7 +112,8 @@
 				}
 			},
 			sub() {
-				let productForm = this.item.product;
+				let productForm = this.item;
+				productForm.name = this.item.product.name;
 				productForm.price = this.item.price;
 				productForm.quantity = this.item.quantity;
 				let rules = [

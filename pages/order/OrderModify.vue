@@ -45,7 +45,7 @@
 				order: {
 					items: [],
 					address: '',
-					canSend: false
+					needPurchase: false
 				}
 			};
 		},

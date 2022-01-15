@@ -15,9 +15,9 @@
 			<view class="list" @click="jumpPasswordReset(item)">
 				<view class="list_l"></view>
 				<view class="list_r">
-					<view class="list_r_01">{{item.username}}<span class="hui">{{roleMap[item.role][0]}}</span></view>
-					<view class="list_r_02">{{item.name}}</view>
-					<view class="list_r_02">{{item.phoneNumber}}</view>
+					<view class="list_r_01">账号：{{item.username}}<span class="hui">{{roleMap[item.role][0]}}</span></view>
+					<view class="list_r_02">姓名：{{item.name}}</view>
+					<view class="list_r_02" v-if="item.phoneNumber">手机：{{item.phoneNumber}}</view>
 				</view>
 			</view>
 		</block>

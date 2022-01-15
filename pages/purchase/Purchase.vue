@@ -18,17 +18,15 @@
 		>
 			<view class="i-top b-b">
 				<text class="time">{{item.updateTime}}</text>
-				<text class="state" style="color: '#fa436a'">{{status_to_state2[item.status]}}</text>
+				<text class="state">{{status_to_state2[item.status]}}</text>
 				<text v-if="item.status==='REJECTED'" class="del-btn yticon icon-iconfontshanchu1"></text>
-				<text v-if="item.status==='REJECTED'" class="state" style="color: '#909399'">核验未通过</text>
+				<text v-if="item.status==='REJECTED'" class="state">核验未通过</text>
 			</view>
 			<view class="goods-box-single" @click="jumpPurchaseDetail(item)">
-				<!-- <image class="goods-img" :src="item.photo" mode="aspectFill" v-if="item.photo != null"></image> -->
 				<view class="right">
-					<text class="title clamp">{{item.product.name}}</text>
-					<text class="attr-box">{{item.product.specification}}</text>
-					<!-- <text class="attr-box">{{item.product.specification}} x {{item.quantity}}</text> -->
-					<!-- <text class="price" v-if="status_to_state[item.status] != 1 && status_to_state[item.status] != 2">{{item.purchasePrice / 100}}</text> -->
+					<text class="title clamp">名称：{{item.product.name}}</text>
+					<text class="attr-box">品牌：{{item.product.brand}}</text>
+					<text class="attr-box">型号：{{item.product.specification}}</text>
 					<text class="reason" v-if="item.status==='REJECTED'">拒绝理由：{{item.rejectReason}}</text>
 				</view>
 			</view>
@@ -261,11 +259,6 @@
 		.goods-box-single{
 			display: flex;
 			padding: 0upx 0;
-			.goods-img{
-				display: block;
-				width: 135upx;
-				height: 135upx;
-			}
 			.right{
 				flex: 1;
 				display: flex;
@@ -276,7 +269,7 @@
 					font-size: $font-base + 2upx;
 					color: $font-color-dark;
 					line-height: 1;
-					padding: 0upx 0upx;
+					padding: 0upx 0upx 10upx 0upx;
 				}
 				.attr-box{
 					font-size: $font-sm + 2upx;
@@ -294,6 +287,8 @@
 				}
 				.reason {
 					font-size: $font-sm + 2upx;
+					color: $font-color-light;
+					padding: 10upx 0upx;
 				}
 			}
 		}
